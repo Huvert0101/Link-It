@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="welcome.css">
+    <title>Welcome - Login</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome</h1>
+        <form method="POST" action="/login" id="form">
+            <input class="form-element" type="text" placeholder="Username" id="user" name="username" autocomplete="off" required>
+            <input class="form-element" type="password" placeholder="Password" id="pswd" name="password" autocomplete="off" required>
+            <div class="btn-container">
+                <input type="submit" value="Submit">
+            </div>
+            <div class="btn-container checkbox">
+                <input type="checkbox" name="chosed_login">
+                <span>Login</span>
+            </div>
+        </form>
+    </div>
+    <div class="guest-cont">
+        <button id="btn_guest">Login as Guest</button>
+    </div>
+</body>
+</html>

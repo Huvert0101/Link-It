@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Link - It</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="left">
+            <div class="display"></div>
+            <div class="messagebar">
+                <input type="text" id="input">
+                <i class='bx bx-plus bx-msg-ico' style='color:#ffffff' id="btn_add"></i>
+                <i class='bx bx-send bx-msg-ico' style='color:#ffffff' id="btn_send"></i>
+            </div>
+        </div>
+        <div class="right">
+            <select name="user" id="sendto"></select>
+            <p>Folders</p>
+            <div class="folders-cont">
+                <form id="formFolder">
+                    <input type="text" id="inputFolder">
+                </form>
+                <button id="addFolder">Add Folder</button>
+            </div>
+            <a href='/logout' class="logout"><i class='bx bx-power-off bottom-ico'></i></a>
+            <i class='bx bx-user-plus bottom-ico'></i>
+        </div>
+    </div>
+    <div class="uploadWrapper">
+        <h1>Upload</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data" id="form">
+        <input type="file" name="file" id="file">
+        <div class="uploadButtons">
+            <button id="closeUpload">Close</button>
+            <button id="send_file">Upload</button>
+        </div>
+        </form>
+    </div>
+    <div class="uploading-cont">
+        <h1>Uploading</h1>
+        <span id="porcentage">0%</span>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+    <script src="axios.min.js"></script>
+</body>
+</html>
