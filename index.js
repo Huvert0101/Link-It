@@ -184,7 +184,8 @@ const io = new Server(server);
 app.post('/upload', upload.single('file'), function(req, res, next){
     insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
     io.sockets.emit('getFiles', {
-        filePath: 'files/' + req.file.originalname,
+        message: 'files/' + req.file.originalname,
+        type: 'file',
         user: req.body.user
     });
     res.redirect("/");

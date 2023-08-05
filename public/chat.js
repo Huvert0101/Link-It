@@ -1,7 +1,6 @@
 const socket = io();
 let uploadBtn = document.getElementById("send_file");
 let closeUpload = document.getElementById("closeUpload");
-let form = document.getElementById("form");
 let inputFile = document.getElementById("file");
 let account = document.getElementById("account");
 let sendto = document.getElementById("sendto");
@@ -52,35 +51,37 @@ function getCookie(cname) {
 let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
-console.log(newUser)
 sendto.innerHTML = "<option value='"+newUser+"'>"+newUser+"</option>";
 
 socket.emit('getUser', { user: newUser });
+
+async function postFile (file) {
+  progressCont.style.display = "flex";
+  const data = new FormData();
+  data.append("file", file)
+  data.append("user", newUser);
+  data.append("folder", currentFolder)
+  await axios.post('/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }, onUploadProgress(e){
+      const porcentage = Math.round((e.loaded * 100)/e.total);
+      porcentageBar.innerText = porcentage + "%";
+      if(porcentage == 100){
+        porcentageBar.innerText = "0%";
+        progressCont.style.display = "none";
+      }
+    }
+  });
+}
 
 uploadBtn.onclick = async (event) => {
   event.preventDefault();
 
   for (let i = 0; i < inputFile.files.length; i++) {
     const file = inputFile.files[i];
-    const data = new FormData();
-    data.append("file", file)
-    data.append("user", newUser);
-    data.append("folder", currentFolder)
-    progressCont.style.display = "flex";
-    
+    postFile(file)  
     closeUpload.click();
-    await axios.post('/upload', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }, onUploadProgress(e){
-        const porcentage = Math.round((e.loaded * 100)/e.total);
-        porcentageBar.innerText = porcentage + "%";
-        if(porcentage == 100){
-          porcentageBar.innerText = "0%";
-          progressCont.style.display = "none";
-        }
-      }
-    });
   }
 
   inputFile.value = "";
@@ -106,11 +107,37 @@ dropArea.addEventListener('drop', (e) => {
   showFiles();
 })
 
+message.addEventListener('paste', (e) => {
+  const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    const file = item.getAsFile();
+    if(!file) return
+    let newFile;
+
+    switch (file.type) {
+      case 'application/pdf':
+        newFile = new File([file], "File"+Date.now()+".pdf", { type: file.type });
+        break;
+      case 'video/mp4':
+        newFile = new File([file], "File"+Date.now()+".mp4", { type: file.type });
+        break; 
+      case 'video/webm':
+        newFile = new File([file], "File"+Date.now()+".webm", { type: file.type });
+        break; 
+      default:
+        newFile = new File([file], "File"+Date.now()+".png", { type: file.type });
+        break;
+    }
+    postFile(newFile)
+  }
+})
+
 dropArea.addEventListener('click', () => inputFile.click())
 inputFile.onchange = () => showFiles();
 
 function addFolder() {
-  console.log('click')
   folderList.insertBefore(formFolder, folderList.lastChild)
   formFolder.style.display = 'block'
   inputFolder.focus();
@@ -127,32 +154,30 @@ folderList.onclick = (event)=>{
   if(lastFolder != undefined && lastFolder.classList.contains('currentFolder')) lastFolder.classList.remove("currentFolder");
   folderEl.classList.add("currentFolder");
   currentFolder = folder;
-  socket.emit('changedFolder', {
-    folder: currentFolder,
-    user: newUser
-  })
+  socket.emit('changedFolder', { folder: currentFolder, user: newUser })
   output.innerHTML = '';
   lastFolder = folderEl;
   btnBack.style.visibility = 'visible'
 }
+
 btnBack.onclick = () => {
   currentFolder = 'main';
   socket.emit('changedFolder', { folder: currentFolder, user: newUser })
   folderEl.classList.remove('currentFolder')
 }
+
 btn.addEventListener('click', ()=>{
   if(message.value.trim() == '') return;
+
   socket.emit('chat:message', {
     message: message.value,
     user: newUser,
     folder: currentFolder
   });
-  console.log(message.value)
   //userInput.value = newUser;
 });
-const interval = setInterval(() => {
-  output.scrollTop=output.scrollHeight;
-}, 50);
+
+const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
 setTimeout(() => clearInterval(interval), 1500);
 
 addEventListener('keydown', function(e){
@@ -167,10 +192,7 @@ addEventListener('keydown', function(e){
 
 formFolder.onsubmit = (e) => {
   e.preventDefault();
-  socket.emit('createFolder', {
-    user: newUser,
-    folderName: inputFolder.value
-  });
+  socket.emit('createFolder', { user: newUser, folderName: inputFolder.value });
   inputFolder.value = '';
   formFolder.style.display = 'none';
 }
@@ -201,23 +223,12 @@ socket.on('chat:message', (data) => {
 });
 
 socket.on('createdFolder', (data)=>{
-  if(data.user == newUser) folderList.innerHTML += `<div class='folder'>
+  if(data.user == newUser){ folderList.innerHTML += `<div class='folder'>
   <span class='folder-title' id='${data.folderName}'>${data.folderName}</span></div>`;
-  addBtnFolder()
+  addBtnFolder() }
 });
 
-socket.on('getFiles', (files)=>{
-  if(files.user == newUser){
-    let extension = files.filePath.split('.').pop();
-    if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg"){
-      output.innerHTML += `<img class='rounded-4'src='${files.filePath}'><br>`
-    }else{
-      output.innerHTML += `<a target='_blank' href='${files.filePath}'> ${files.filePath}</a><br>`
-    }
-    const interval2 = setInterval(() => output.scrollTop=output.scrollHeight, 50);
-    setTimeout(() => clearInterval(interval2), 1500);
-  }
-});
+socket.on('getFiles', (files)=>{ if(files.user == newUser) addToDom(files) });
 let cont = 0;
 let fetchedFolders = false;
 socket.on('getMessages', (data) => {
@@ -227,12 +238,9 @@ socket.on('getMessages', (data) => {
 
 socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
-  console.log(data)
   if(data[0].user == newUser && !fetchedFolders){
-    data.forEach(el =>{
-      console.log(el.folder)
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span></div>`;
-    });
+    data.forEach(el => 
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span></div>` );
     addBtnFolder()
   }
   fetchedFolders = true; // do stuff with it
