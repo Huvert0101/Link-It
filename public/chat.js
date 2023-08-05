@@ -2,7 +2,7 @@ const socket = io();
 let uploadBtn = document.getElementById("send_file");
 let closeUpload = document.getElementById("closeUpload");
 let inputFile = document.getElementById("file");
-let account = document.getElementById("account");
+//let account = document.getElementById("account");
 let sendto = document.getElementById("sendto");
 let uploadFile = document.querySelector(".uploadWrapper");
 let btnFile = document.getElementById("btn_add");
@@ -16,7 +16,6 @@ let btnBack = document.querySelector('.bx-arrow-back')
 let message = document.getElementById('input');
 let btn = document.getElementById('btn_send');
 let output = document.querySelector('.display');
-let folderName = document.getElementById("folderName");
 let folderList = document.querySelector(".folders-cont");
 let currentFolder = "main";
 // Front-end functions
