@@ -18,11 +18,14 @@
             </div>
         </div>
         <div class="right">
-            <select name="user" id="sendto"></select>
-            <p>Folders</p>
+            <div class="top-content">
+              <i class='bx bx-arrow-back' style='color:#ffffff'></i>
+              <span>Folders</span>
+              <select name="user" id="sendto"></select>
+            </div>
             <div class="folders-cont">
                 <form id="formFolder">
-                    <input type="text" id="inputFolder">
+                    <input type="text" id="inputFolder" autocomplete="off">
                 </form>
                 <button id="addFolder">Add Folder</button>
             </div>
@@ -32,13 +35,12 @@
     </div>
     <div class="uploadWrapper">
         <h1>Upload</h1>
-        <form action="/upload" method="POST" enctype="multipart/form-data" id="form">
-        <input type="file" name="file" id="file">
+        <input type="file" name="file" id="file" multiple>
+        <div class="dropArea">Drop Or Select Your Files Here</div>
         <div class="uploadButtons">
             <button id="closeUpload">Close</button>
             <button id="send_file">Upload</button>
         </div>
-        </form>
     </div>
     <div class="uploading-cont">
         <h1>Uploading</h1>

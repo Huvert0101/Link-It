@@ -81,7 +81,6 @@ body{
     background-color: #FFFFFF1A;
 }
 #sendto{
-    float: right;
     border: 1px solid white;
     background-color: transparent;
     color: white;
@@ -133,12 +132,15 @@ option{
     position: absolute;
     left: 39%;
     display: none;
-    top: 35%;
+    top: 30%;
     gap: 20px;
     flex-direction: column;
     background-color: #FFFFFF1A;
     padding: 20px;
     border-radius: 20px;
+}
+.uploadWrapper input{
+    display: none;
 }
 .uploadButtons{
     display: flex;
@@ -209,4 +211,45 @@ option{
 }
 .currentFolder{
     border: 1px solid white;
+}
+.top-content{
+    align-items: center;
+    width: 100%;
+    margin-top: -2px;
+    display: flex;
+    justify-content: space-between;
+}
+.top-content span{
+    position: relative;
+    left: 20px;
+    font-weight: bold;
+}
+.bx-arrow-back{
+    visibility: hidden;
+    transition: all ease 0.3s;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    font-size: 31px;
+}
+.bx-arrow-back:hover {
+    background-color: #FFFFFF1A;
+}
+.display a {
+    color: mediumslateblue;
+}
+.dropArea {
+    transition: all ease 0.3s;
+    text-align: center;
+    padding: 34px 52px;
+    border: 2px dashed white;
+    margin: 25px 0;
+    cursor: pointer;
+}
+.dropArea:hover{
+    background-color: #FFFFFF1A;
+}
+.fileItem{
+    text-align: left;
+    font-size: 16px;
 }
