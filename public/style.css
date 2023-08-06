@@ -9,7 +9,6 @@ body{
     height: 97vh;
     width: 98vw;
 }
-
 .main{
     margin: 20px;
     height: 100%;
@@ -73,7 +72,7 @@ body{
     transition: all ease 0.3s;
     cursor: pointer;
     height: 100%;
-    font-size: 40px;
+    font-size: 2.1em;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -117,7 +116,7 @@ option{
 .bottom-ico{
     transition: all ease 0.3s;
     margin-left: 5px;
-    font-size: 26px;
+    font-size: 1.3em;
     border: 2px solid white;
     border-radius: 50%;
     padding: 5px;
