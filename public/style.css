@@ -252,3 +252,82 @@ option{
     text-align: left;
     font-size: 16px;
 }
+.bx-menu{ display: none;}
+@media only screen and (max-width: 768px) {
+  .right{
+    background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0.85;
+    width: 70vw;
+    height: 100vh;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    z-index: 2;
+  }
+  .main{
+    margin: 0px;
+    padding: 0px;
+  }
+  .left{
+    width: 100%;
+  }
+  .display{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  body{
+    width: 100vw;
+    height: 100vh;
+  }
+  #input {
+    width: 79%;
+  }
+  .messagebar{
+    margin: auto;
+    width: 99%;
+    border-radius: 28px;
+    justify-content: start;
+  }
+  .bx-msg-ico{
+    font-size: 2em;
+    padding-left: 0px;
+    width: 9%;
+  }
+  .uploadWrapper{
+    left: 3.5%;
+  }
+  .uploadWrapper button{
+    font-size: 25px;
+    border-radius: 25px;
+  }
+  .uploading-cont{
+    left: 3.5%;
+  }
+  .bx-menu{
+    display: block;
+    font-size: 37px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+  .overlay{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.777);
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+  }
+  .bottom-ico{
+    font-size: 2em;
+  }
+  .folders-cont {
+    width: 100%;
+    height: 90%;
+  }
+}

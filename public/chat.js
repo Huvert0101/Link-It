@@ -2,7 +2,6 @@ const socket = io();
 let uploadBtn = document.getElementById("send_file");
 let closeUpload = document.getElementById("closeUpload");
 let inputFile = document.getElementById("file");
-//let account = document.getElementById("account");
 let sendto = document.getElementById("sendto");
 let uploadFile = document.querySelector(".uploadWrapper");
 let btnFile = document.getElementById("btn_add");
@@ -17,8 +16,19 @@ let message = document.getElementById('input');
 let btn = document.getElementById('btn_send');
 let output = document.querySelector('.display');
 let folderList = document.querySelector(".folders-cont");
+let btnMenu = document.querySelector('.bx-menu');
+const menu = document.querySelector('.right');
+let overlay = document.querySelector('.overlay');
 let currentFolder = "main";
 // Front-end functions
+btnMenu.onclick = () => {
+  overlay.style.display = 'block';
+  menu.style.display = 'block';
+}
+overlay.onclick = () => {
+  menu.style.display = 'none';
+  overlay.style.display = 'none';
+}
 closeUpload.onclick = (e)=>{
   e.preventDefault()
   uploadFile.style.display = "none";
