@@ -6,7 +6,7 @@ const DB_NAME = process.env.DB_NAME || 'linkit';
 const DB_PORT = process.env.DB_PORT || 3306;
 export const conn = createPool({
     user: DB_USER,
-    password: 'huvert01',
+    password: DB_PASSWORD,
     host: DB_HOST,
     port: DB_PORT,
     database: DB_NAME
