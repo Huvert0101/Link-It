@@ -87,7 +87,8 @@ async function postFile (file) {
 uploadBtn.onclick = async (event) => {
   event.preventDefault();
 
-  for (let i = 0; i < inputFile.files.length; i++) {
+  const fileLength = inputFile.files.length;
+  for (let i = 0; i < fileLength; i++) {
     const file = inputFile.files[i];
     postFile(file)  
     closeUpload.click();
@@ -186,8 +187,6 @@ btn.addEventListener('click', ()=>{
   //userInput.value = newUser;
 });
 
-const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
-setTimeout(() => clearInterval(interval), 1500);
 
 addEventListener('keydown', function(e){
   if(e.key == 'Enter' && message.value.trim() != ""){
@@ -217,7 +216,8 @@ function addToDom(data) {
     if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
     else output.innerHTML += `<p>${data.message}</p>` 
   }
-  output.scrollTop=output.scrollHeight;
+  const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
+  setTimeout(() => clearInterval(interval), 2500);
 }
 
 function addBtnFolder() {
