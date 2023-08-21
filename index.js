@@ -50,9 +50,7 @@ async function validRegister(usr, pswd){
 }
 async function createFolder(usr, folderName){
     const [length] = await conn.query("SELECT * FROM folders WHERE user = '" + usr + "' AND folder = '" + folderName + "'");
-    if(length.length > 0){
-        return false
-    }
+    if(length.length > 0) return false
     const [res] = await conn.query("INSERT INTO folders(user, folder) VALUES('"+usr+"', '"+folderName+"')");
     return res;
 }
@@ -60,21 +58,15 @@ async function delFol(usr, folderName){
     const [res] = await conn.query("DELETE FROM folders WHERE user ='" + usr + "' AND folder ='" + folderName + "'");
     //delete the messages form that folder as well
     const [res2] = await conn.query("DELETE FROM messages WHERE user ='" + usr + "' AND folder ='" + folderName + "'");
-    if(res && res2){
-        return "200";
-    }else{
-        return "500";
-    }
+    if(res && res2) return "200";
+    else return "500";
 }
 // Routes
 app.get('/welcome', (req, res)=>{
     let username = req.cookies.username;
     let password = req.cookies.password;
-    if(username != undefined && password != undefined){
-        res.sendFile(path.join(__dirname, "public", "index.html"));
-    }else{
-        res.sendFile(path.join(__dirname, "public", "welcome.html"));
-    }
+    if(username != undefined && password != undefined) res.sendFile(path.join(__dirname, "public", "index.html"));
+    else res.sendFile(path.join(__dirname, "public", "welcome.html"));
 });
 
 app.post('/login', (req, res)=>{
@@ -99,16 +91,13 @@ app.post('/login', (req, res)=>{
         });
     }else{
         Login(newUser, newPassword).then(result =>{
-            if(result.length < 1){
-                res.send("Usuario no encontrado intente con otras credenciales");
-            }
+            if(result.length < 1) res.send("Usuario no encontrado intente con otras credenciales");
             if(newUser == result[0].user && newPassword == result[0].password){
                 res.cookie("username", newUser,{maxAge: 1500000000});
                 res.cookie("password", newPassword, {maxAge: 1500000000});
                 res.redirect("/");
-            }else{
+            }else
                 res.send("User or password are incorrect");
-            }
         });
     }
 });
@@ -219,13 +208,8 @@ io.on('connection', (socket) => {
     });
     socket.on('createFolder', (data)=>{
         createFolder(data.user, data.folderName).then(result =>{
-            if(result){
-                io.sockets.emit("createdFolder", data);
-            }
+            if(result) io.sockets.emit("createdFolder", data);
         });
     });
-    socket.on('changedFolder', (data)=>{
-	console.log(data);
-        getMessagesFol(data.user, data.folder);
-    });
+    socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
 });

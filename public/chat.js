@@ -118,8 +118,9 @@ dropArea.addEventListener('drop', (e) => {
 
 message.addEventListener('paste', (e) => {
   const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+  const itemsLength = items.length;
 
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < itemsLength; i++) {
     const item = items[i];
     const file = item.getAsFile();
     if(!file) return
