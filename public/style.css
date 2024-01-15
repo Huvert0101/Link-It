@@ -188,6 +188,19 @@ option{
     transform: scale(1.005);
     background-color:#FFFFFF1A;
 }
+.folder:hover + .bx-dots-horizontal-rounded{
+    display: flex;
+}
+.bx-dots-horizontal-rounded {
+    display: none;
+    font-size: 21px;
+    align-items: center;
+    margin-right: 10px;
+    opacity: 0.9;
+}
+.bx-dots-horizontal-rounded:hover{
+    opacity: 1;
+}
 .logout{
     color: white;
 }
