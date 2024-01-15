@@ -106,8 +106,10 @@ option{
     transition: all ease 0.3s;
 }
 .folder:hover > .bx-dots-horizontal-rounded{
-    background-color: #FFFFFF1A;
     display: flex;
+}
+.folder:hover{
+    background-color: #ffffff1a;
 }
 .folder-title{
     text-align: center;
