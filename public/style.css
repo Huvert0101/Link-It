@@ -105,8 +105,9 @@ option{
     justify-content: center;
     transition: all ease 0.3s;
 }
-.folder:hover{
+.folder:hover + .bx-dots-horizontal-rounded{
     background-color: #FFFFFF1A;
+    display: flex;
 }
 .folder-title{
     text-align: center;
@@ -187,9 +188,6 @@ option{
 #addFolder:hover {
     transform: scale(1.005);
     background-color:#FFFFFF1A;
-}
-.folder:hover + .bx-dots-horizontal-rounded{
-    display: flex;
 }
 .bx-dots-horizontal-rounded {
     display: none;
