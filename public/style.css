@@ -108,6 +108,9 @@ option{
 .folder:hover > .bx-dots-horizontal-rounded{
     display: flex;
 }
+.folder:hover > .folder-title{
+    margin-right: 21px;
+}
 .folder:hover{
     background-color: #ffffff1a;
 }
@@ -195,7 +198,6 @@ option{
     display: none;
     font-size: 21px;
     align-items: center;
-    margin-right: 10px;
     opacity: 0.9;
 }
 .bx-dots-horizontal-rounded:hover{
