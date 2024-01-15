@@ -105,7 +105,7 @@ option{
     justify-content: center;
     transition: all ease 0.3s;
 }
-.folder:hover + .bx-dots-horizontal-rounded{
+.folder:hover > .bx-dots-horizontal-rounded{
     background-color: #FFFFFF1A;
     display: flex;
 }
