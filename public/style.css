@@ -109,7 +109,7 @@ option{
     display: flex;
 }
 .folder:hover > .folder-title{
-    margin-right: 21px;
+    margin-left: 21px;
 }
 .folder:hover{
     background-color: #ffffff1a;
