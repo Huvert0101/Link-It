@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "deploy": "npm start",
+    "deploy": "pm2 start index.js --name link-it",
     "dev": "nodemon index.js"
   },
   "author": "Huvert01",
