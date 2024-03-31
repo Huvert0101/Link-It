@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "deploy": "npm start",
     "dev": "nodemon index.js"
   },
   "author": "Huvert01",
