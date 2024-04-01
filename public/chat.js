@@ -41,6 +41,7 @@ btnFile.onclick = ()=>{
 }
 btnEditor.addEventListener("click", () => {
  alert("clickeddd!!");
+ console.log("clickedddddd");
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
  middlePane.style.opacity = 1;
