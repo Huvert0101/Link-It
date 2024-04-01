@@ -24,6 +24,7 @@ let closeEditor = document.querySelector(".bx-x");
 let inputMsgBar = document.getElementById("input");
 console.log(btnEditor);
 let middlePane = document.querySelector(".middle");
+let mainCont = document.querySelector(".main");
 let currentFolder = "main";
 // Front-end functions
 btnMenu.onclick = () => {
@@ -47,6 +48,8 @@ btnEditor.addEventListener("click", () => {
  middlePane.style.transform = "scale(1)";
  middlePane.style.opacity = 1;
  inputMsgBar.style.width = "88%";
+ menu.style.width = "35%";
+ mainCont.style.gap = "10px";
 });
 closeEditor.onclick = () => {
  middlePane.style.zIndex = -1;
@@ -54,6 +57,8 @@ closeEditor.onclick = () => {
  middlePane.style.opacity = 0;
  middlePane.style.position = "absolute"; 
  inputMsgBar.style.width = "91%";
+ menu.style.width = "25%";
+ mainCont.style.gap = "0px";
 }
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
