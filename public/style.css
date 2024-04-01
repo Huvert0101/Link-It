@@ -25,10 +25,10 @@ body{
     flex-direction: column;
 }
 .middle{
-    z-index: 1;
-    position: relative;
+    z-index: -2;
+    position: absolute;
     transition: all ease 0.1s;
-    opacity: 1;
+    opacity: 0;
     padding: 5px;
     width: 80%;
     border-radius: 20px;
