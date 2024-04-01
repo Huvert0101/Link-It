@@ -39,6 +39,7 @@ btnFile.onclick = ()=>{
   uploadFile.style.display = "flex";
 }
 toggleEditor.onclick = () => {
+  alert("clickeddd!!");
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
  middlePane.style.opacity = 1;
