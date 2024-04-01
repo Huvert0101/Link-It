@@ -30,14 +30,19 @@ body{
     transition: all ease 0.2s;
     opacity: 0;
     transform: scale(0);
-    padding: 5px;
+    padding-top: 5px;
     width: 80%;
     border-radius: 20px;
     height: 100%;
     background-color: white;
 }
+.bx-x{
+    text-align: end;
+    width: 98.5%;
+    font-size: 25px;
+}
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
-    height: 90%;
+    height: 88%;
 }
 .ql-toolbar.ql-snow {
     background-color: white;
