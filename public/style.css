@@ -33,6 +33,7 @@ body{
     width: 80%;
     border-radius: 20px;
     height: 100%;
+    overflow: hidden;
     background-color: white;
 }
 .top-tab{
@@ -41,8 +42,9 @@ body{
     width: 100%;
 }
 .bx-x{
-    width: 5%;
-    text-align: end;
+    display: flex;
+    width: 6%;
+    justify-content: center;
     font-size: 25px;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
