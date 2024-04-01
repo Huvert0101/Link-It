@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="LinkIt-logo-min-bg-dark.webp">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.snow.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
     <title>Link - It</title>
 </head>
@@ -20,6 +21,11 @@
         </div>
         <div class="middle">
             <h1>Here is an example of a text editor/document opened!</h1>
+            <div id="editor">
+                <p>Hello World!</p>
+                <p>Some initial <strong>bold</strong> text</p>
+                <p><br/></p>
+            </div>
         </div>
         <div class="right">
             <div class="top-content">
@@ -55,5 +61,11 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.js"></script>
+    <script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+    </script>
 </body>
 </html>
