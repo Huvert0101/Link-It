@@ -41,6 +41,7 @@ body{
 }
 .ql-toolbar.ql-snow {
     background-color: white;
+    padding: 0px;
 }
 .ql-snow * {
     background: white;
