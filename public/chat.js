@@ -53,6 +53,7 @@ closeEditor.onclick = () => {
  middlePane.style.transform = "scale(0)";
  middlePane.style.opacity = 0;
  middlePane.style.position = "absolute"; 
+ inputMsgBar.style.width = "91%";
 }
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
