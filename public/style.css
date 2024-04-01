@@ -27,7 +27,7 @@ body{
 .middle{
     z-index: -2;
     position: absolute;
-    transition: all ease 0.1s;
+    transition: all ease 0.2s;
     opacity: 0;
     padding: 5px;
     width: 80%;
