@@ -25,7 +25,6 @@ body{
     flex-direction: column;
 }
 .middle{
-    color: rgba(255, 255, 255, 0.65);
     padding: 20px;
     width: 80%;
     overflow-y: scroll;
@@ -35,6 +34,9 @@ body{
 }
 .ql-toolbar.ql-snow {
     background-color: white;
+}
+.ql-snow * {
+    background: white;
 }
 .right{
     color: white;
