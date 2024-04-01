@@ -30,7 +30,6 @@ body{
     transition: all ease 0.2s;
     opacity: 0;
     transform: scale(0);
-    padding-top: 5px;
     width: 80%;
     border-radius: 20px;
     height: 100%;
@@ -43,7 +42,6 @@ body{
 }
 .bx-x{
     text-align: end;
-    margin-right: 9px;
     font-size: 25px;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
