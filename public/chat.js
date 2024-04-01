@@ -42,6 +42,7 @@ btnFile.onclick = ()=>{
 btnEditor.addEventListener("click", () => {
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
+ middlePane.style.transform = "scale(1)";
  middlePane.style.opacity = 1;
 });
 // Drag and drop
