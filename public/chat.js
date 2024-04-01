@@ -47,10 +47,10 @@ btnEditor.addEventListener("click", () => {
  middlePane.style.opacity = 1;
 });
 closeEditor.onclick = () => {
- middlePane.style.position = "absolute"; 
  middlePane.style.zIndex = -1;
  middlePane.style.transform = "scale(0)";
  middlePane.style.opacity = 0;
+ middlePane.style.position = "absolute"; 
 }
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
