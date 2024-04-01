@@ -25,9 +25,12 @@ body{
     flex-direction: column;
 }
 .middle{
-    padding: 20px;
+    z-index: 1;
+    position: relative;
+    transition: all ease 0.1s;
+    opacity: 1;
+    padding: 5px;
     width: 80%;
-    overflow-y: scroll;
     border-radius: 20px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
