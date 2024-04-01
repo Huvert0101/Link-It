@@ -37,10 +37,13 @@ body{
     background-color: white;
 }
 .top-tab{
-    width: 98.5%;
+    display: flex;
+    justify-content: end;
+    width: 100%;
 }
 .bx-x{
     text-align: end;
+    margin-right: 9px;
     font-size: 25px;
 }
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
