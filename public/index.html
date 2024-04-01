@@ -64,7 +64,15 @@
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.js"></script>
     <script>
     const quill = new Quill('#editor', {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: {
+            container: '#toolbar', // Selector for toolbar container
+                handlers: {
+                    bold: customBoldHandler
+                }
+            }
+        }
     });
     </script>
 </body>
