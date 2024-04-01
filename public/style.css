@@ -33,6 +33,9 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
+.ql-toolbar.ql-snow {
+    background-color: white;
+}
 .right{
     color: white;
     border-radius: 20px;
