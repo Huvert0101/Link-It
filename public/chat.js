@@ -39,12 +39,12 @@ closeUpload.onclick = (e)=>{
 btnFile.onclick = ()=>{
   uploadFile.style.display = "flex";
 }
-btnEditor.onclick = () => {
-  alert("clickeddd!!");
+btnEditor.addEventListener("click", () => {
+ alert("clickeddd!!");
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
  middlePane.style.opacity = 1;
-}
+});
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
   uploadFile.style.display = "flex";
