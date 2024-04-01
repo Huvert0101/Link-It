@@ -47,7 +47,7 @@ btnEditor.addEventListener("click", () => {
  middlePane.style.zIndex = 1;
  middlePane.style.transform = "scale(1)";
  middlePane.style.opacity = 1;
- inputMsgBar.style.width = "88%";
+ inputMsgBar.style.width = "85%";
  menu.style.width = "35%";
  mainCont.style.gap = "10px";
 });
