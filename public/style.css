@@ -24,6 +24,15 @@ body{
     justify-content: space-between;
     flex-direction: column;
 }
+.middle{
+    color: rgba(255, 255, 255, 0.65);
+    padding: 20px;
+    width: 80%;
+    overflow-y: scroll;
+    border-radius: 20px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
 .right{
     color: white;
     border-radius: 20px;
