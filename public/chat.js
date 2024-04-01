@@ -19,7 +19,7 @@ let folderList = document.querySelector(".folders-cont");
 let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
-const toggleEditor = document.getElementById("toggleEditor");
+let toggleEditor = document.getElementById("toggleEditor");
 let middlePane = document.querySelector(".middle");
 let currentFolder = "main";
 // Front-end functions
