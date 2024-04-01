@@ -20,6 +20,7 @@ let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
 let btnEditor = document.getElementById("btnEditor");
+console.log(btnEditor);
 let middlePane = document.querySelector(".middle");
 let currentFolder = "main";
 // Front-end functions
