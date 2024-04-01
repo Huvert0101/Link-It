@@ -19,7 +19,7 @@ let folderList = document.querySelector(".folders-cont");
 let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
-let toggleEditor = document.getElementById("toggleEditor");
+let btnEditor = document.getElementById("btnEditor");
 let middlePane = document.querySelector(".middle");
 let currentFolder = "main";
 // Front-end functions
@@ -38,7 +38,7 @@ closeUpload.onclick = (e)=>{
 btnFile.onclick = ()=>{
   uploadFile.style.display = "flex";
 }
-toggleEditor.onclick = () => {
+btnEditor.onclick = () => {
   alert("clickeddd!!");
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
