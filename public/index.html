@@ -81,21 +81,38 @@
         });
         // Evento para detectar cambios en el input de tipo file
         inputDoc.onclick = () => {
-        const docxPath = "https://link-it-ns7k.onrender.com/files/RESUMEN_D2 (1).docx";
-        fetch(docxPath)
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => {
-                mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-                    .then(result => {
-                        tinymce.activeEditor.setContent(result.value);
+            const docxPath = "https://link-it-ns7k.onrender.com/files/RESUMEN_D2 (1).docx";
+            function loadDocxContent(url) {
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const formData = new FormData();
+                        formData.append('file', blob, 'document.docx');
+
+                        fetch('https://api.tiny.cloud/1/docconverter/', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Authorization': 'Bearer qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                console.error('Error al convertir el archivo DOCX:', data.error);
+                            } else {
+                                tinymce.activeEditor.setContent(data.body);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al convertir el archivo DOCX:', error);
+                        });
                     })
                     .catch(error => {
-                        console.error("Error al convertir el archivo DOCX:", error);
+                        console.error('Error al cargar el archivo DOCX:', error);
                     });
-            })
-            .catch(error => {
-                console.error("Error al cargar el archivo DOCX:", error);
-            });
+            }
+            loadDocxContent(docxPath);
         }
     </script>
 </body>
