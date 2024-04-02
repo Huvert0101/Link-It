@@ -11,6 +11,7 @@
 </head>
 <body>
     <button id="btnEditor">Toggle Editor</button>
+    <input type="file" id="inputDoc">
     <div class="main">
         <div class="left">
             <div class="display">
@@ -64,7 +65,9 @@
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
     <script>
+        const inputDoc = document.getElementById("inputDoc");
         tinymce.init({
         selector: "textarea",
         lisence_key: "gpl",  // Selector del elemento donde se mostrará el editor
@@ -75,6 +78,21 @@
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",
         content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
+        });
+        // Evento para detectar cambios en el input de tipo file
+        inputDoc.addEventListener("change", function() {
+            const file = this.files[0];
+            if (file) {
+                // Convertir el archivo DOCX a HTML
+                mammoth.convertToHtml({ path: URL.createObjectURL(file) })
+                    .then(function(result) {
+                        // Insertar el HTML en el editor TinyMCE
+                        tinymce.activeEditor.setContent(result.value);
+                    })
+                    .catch(function(error) {
+                        console.error("Error al convertir el archivo DOCX:", error);
+                    });
+            }
         });
     </script>
 </body>
