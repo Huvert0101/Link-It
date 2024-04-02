@@ -83,15 +83,15 @@
         inputDoc.onclick = () => {
         const docxPath = "https://link-it-ns7k.onrender.com/files/RESUMEN_D2 (1).docx";
         fetch(docxPath)
-            .then(response => response.blob())
-            .then(blob => {
-                const fileReader = new FileReader();
-                fileReader.onload = function() {
-                    const content = fileReader.result;
-                    console.log(content);
-                    tinymce.activeEditor.setContent(content);
-                };
-                fileReader.readAsDataURL(blob);
+            .then(response => response.arrayBuffer())
+            .then(arrayBuffer => {
+                mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
+                    .then(result => {
+                        tinymce.activeEditor.setContent(result.value);
+                    })
+                    .catch(error => {
+                        console.error("Error al convertir el archivo DOCX:", error);
+                    });
             })
             .catch(error => {
                 console.error("Error al cargar el archivo DOCX:", error);
