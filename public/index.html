@@ -80,6 +80,7 @@
         content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
         });
         // Evento para detectar cambios en el input de tipo file
+        inputDoc.onclick = () => {
         const docxPath = "https://snapdragon-invited-basket.glitch.me/files/RESUMEN_D2 (1).docx";
         fetch(docxPath)
             .then(response => response.blob())
@@ -95,6 +96,7 @@
             .catch(error => {
                 console.error("Error al cargar el archivo DOCX:", error);
             });
+        }
     </script>
 </body>
 </html>
