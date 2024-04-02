@@ -229,12 +229,17 @@ formFolder.onsubmit = (e) => {
   inputFolder.value = '';
   formFolder.style.display = 'none';
 }
+function loadDoc(filePath) {
+  console.log(filePath);
+}
 
 function addToDom(data) {
   if(data.type == "file") {
     let extension = data.message.split('.').pop();
     if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg")
       output.innerHTML += `<img class='rounded-4' src='${data.message}'><br>`
+    if(extension == "docx" || extension == "doc")
+      output.innerHTML += `<button onclick='loadDoc(${data.message})' name='${data.message}'>${data.message}<br>`
     else output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
   }else {
     let isLink = data.message.slice(0, 5);
