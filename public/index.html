@@ -87,6 +87,7 @@
                 const fileReader = new FileReader();
                 fileReader.onload = function() {
                     const content = fileReader.result;
+                    console.log(content);
                     tinymce.activeEditor.setContent(content);
                 };
                 fileReader.readAsDataURL(blob);
