@@ -25,11 +25,9 @@
             <div class="top-tab">
                 <i class='bx bx-x'></i>
             </div>
-            <div id="editor">
-                <p>Hello World!</p>
-                <p>Some initial <strong>bold</strong> text</p>
-                <p><br/></p>
-            </div>
+            <form method="post">
+                <textarea id="mytextarea">Hello, World!</textarea>
+            </form>
         </div>
         <div class="right">
             <div class="top-content">
@@ -65,29 +63,18 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
     <script>
-    const toolbarOptions = [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-        ['blockquote', 'code-block'],
-        ['link', 'image', 'video', 'formula'],
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-        [{ 'direction': 'rtl' }],                         // text direction
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-
-        ['clean']                                         // remove formatting button
-    ];
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: toolbarOptions 
-    }});
+        tinymce.init({
+        selector: "textarea",  // Selector del elemento donde se mostrará el editor
+        height: 500,           // Altura del editor
+        plugins: "advlist autolink lists link image charmap print preview anchor",
+        toolbar: "undo redo | formatselect | " +
+            "bold italic backcolor | alignleft aligncenter " +
+            "alignright alignjustify | bullist numlist outdent indent | " +
+            "removeformat | help",
+        content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
+        });
     </script>
 </body>
 </html>
