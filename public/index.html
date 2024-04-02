@@ -80,20 +80,20 @@
         content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
         });
         // Evento para detectar cambios en el input de tipo file
-        inputDoc.addEventListener("change", function() {
-            const file = this.files[0];
-            if (file) {
-                // Convertir el archivo DOCX a HTML
-                mammoth.convertToHtml({ path: URL.createObjectURL(file) })
-                    .then(function(result) {
-                        // Insertar el HTML en el editor TinyMCE
-                        tinymce.activeEditor.setContent(result.value);
-                    })
-                    .catch(function(error) {
-                        console.error("Error al convertir el archivo DOCX:", error);
-                    });
-            }
-        });
+        const docxPath = "https://snapdragon-invited-basket.glitch.me/files/RESUMEN_D2 (1).docx";
+        fetch(docxPath)
+            .then(response => response.blob())
+            .then(blob => {
+                const fileReader = new FileReader();
+                fileReader.onload = function() {
+                    const content = fileReader.result;
+                    tinymce.activeEditor.setContent(content);
+                };
+                fileReader.readAsDataURL(blob);
+            })
+            .catch(error => {
+                console.error("Error al cargar el archivo DOCX:", error);
+            });
     </script>
 </body>
 </html>
