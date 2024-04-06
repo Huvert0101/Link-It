@@ -89,6 +89,7 @@
 				.then(html=>{
 					debugger
 					//try html.toString/asZip/download/save
+                    console.log(html.toString());
                     tinymce.activeEditor.setContent(html);
 				})
             })
