@@ -69,7 +69,7 @@
     <script>
     let middlePane = document.querySelector(".middle");
     let inputMsgBar = document.getElementById("input");
-    const menu = document.querySelector('.right');
+    const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.querySelector(".bx-x");
     function openEditor(){
@@ -78,7 +78,7 @@
     middlePane.style.transform = "scale(1)";
     middlePane.style.opacity = 1;
     inputMsgBar.style.width = "87%";
-    menu.style.width = "35%";
+    right.style.width = "35%";
     mainCont.style.gap = "10px";
     }
     function closeEditor(){
@@ -87,7 +87,7 @@
     middlePane.style.opacity = 0;
     middlePane.style.position = "absolute"; 
     inputMsgBar.style.width = "91%";
-    menu.style.width = "25%";
+    right.style.width = "25%";
     mainCont.style.gap = "0px";
     }
     btnCloseEditor.onclick = () => closeEditor(); 
