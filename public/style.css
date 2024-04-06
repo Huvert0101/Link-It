@@ -62,6 +62,12 @@ body{
 .ql-snow * {
     background: white;
 }
+#editorContainer{
+    height: 100%;
+}
+.tox:not([dir=rtl]) {
+    height: 97%;
+}
 .right{
     color: white;
     border-radius: 20px;
