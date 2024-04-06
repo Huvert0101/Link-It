@@ -65,11 +65,8 @@ body{
 #editorContainer{
     height: 100%;
 }
-.tox:not([dir=rtl]) {
+.tox-tinymce{
     height: 97%;
-}
-#A{
-    background-color: white!important;
 }
 .right{
     color: white;
