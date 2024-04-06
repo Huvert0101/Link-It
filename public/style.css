@@ -68,6 +68,9 @@ body{
 .tox:not([dir=rtl]) {
     height: 97%;
 }
+#A{
+    background-color: white!important;
+}
 .right{
     color: white;
     border-radius: 20px;
