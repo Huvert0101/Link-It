@@ -42,7 +42,7 @@ closeUpload.onclick = (e)=>{
 btnFile.onclick = ()=>{
   uploadFile.style.display = "flex";
 }
-btnEditor.addEventListener("click", () => {
+function openEditor(){
  middlePane.style.position = "relative"; 
  middlePane.style.zIndex = 1;
  middlePane.style.transform = "scale(1)";
@@ -50,8 +50,8 @@ btnEditor.addEventListener("click", () => {
  inputMsgBar.style.width = "87%";
  menu.style.width = "35%";
  mainCont.style.gap = "10px";
-});
-closeEditor.onclick = () => {
+}
+function closeEditor(){
  middlePane.style.zIndex = -1;
  middlePane.style.transform = "scale(0)";
  middlePane.style.opacity = 0;
@@ -60,6 +60,19 @@ closeEditor.onclick = () => {
  menu.style.width = "25%";
  mainCont.style.gap = "0px";
 }
+btnEditor.addEventListener("click", () => openEditor);
+closeEditor.onclick = () => closeEditor(); 
+tinymce.init({
+  selector: "textarea",
+  lisence_key: "gpl",  // Selector del elemento donde se mostrará el editor
+  height: 500,           // Altura del editor
+  plugins: "advlist autolink lists link image charmap print preview anchor",
+  toolbar: "undo redo | formatselect | " +
+  "bold italic backcolor | alignleft aligncenter " +
+  "alignright alignjustify | bullist numlist outdent indent | " +
+  "removeformat | help",
+  content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
+  });
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
   uploadFile.style.display = "flex";
@@ -231,6 +244,26 @@ formFolder.onsubmit = (e) => {
 }
 function loadDoc(filePath) {
   console.log(filePath);
+  const docxPath = "https://link-it-ns7k.onrender.com/" + filePath;
+  openEditor();
+  fetch(docxPath)
+    .then(response => response.arrayBuffer())
+    .then(arrayBuffer => {
+      require("docx2html")(arrayBuffer,{container:document.querySelector("#mytextarea")})
+      .then(html=>{
+       debugger
+       //try html.toString/asZip/download/save
+       tinymce.activeEditor.setContent(html.toString());
+       const iframe = document.getElementById("mytextarea_ifr");
+       const iframeWindow = iframe.contentWindow;
+       iframeWindow.document.getElementById("A").style.background="white";
+       iframeWindow.document.querySelector("section").style.width="104%";
+       iframeWindow.document.querySelector("section").style.padding="0px";
+      })
+    })
+  .catch(error => {
+    console.error("Error al cargar el archivo DOCX:", error);
+  });
 }
 
 function addToDom(data) {

@@ -66,41 +66,5 @@
     <script src="axios.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="docConverter.js"></script>
-    <script>
-        const inputDoc = document.getElementById("inputDoc");
-        tinymce.init({
-        selector: "textarea",
-        lisence_key: "gpl",  // Selector del elemento donde se mostrará el editor
-        height: 500,           // Altura del editor
-        plugins: "advlist autolink lists link image charmap print preview anchor",
-        toolbar: "undo redo | formatselect | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
-        content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
-        });
-        // Evento para detectar cambios en el input de tipo file
-        inputDoc.onclick = () => {
-        const docxPath = "https://link-it-ns7k.onrender.com/files/RESUMEN_D2.docx";
-        fetch(docxPath)
-            .then(response => response.arrayBuffer())
-            .then(arrayBuffer => {
-                require("docx2html")(arrayBuffer,{container:document.querySelector("#mytextarea")})
-				.then(html=>{
-					debugger
-					//try html.toString/asZip/download/save
-                    tinymce.activeEditor.setContent(html.toString());
-                    const iframe = document.getElementById("mytextarea_ifr");
-                    const iframeWindow = iframe.contentWindow;
-                    iframeWindow.document.getElementById("A").style.background="white";
-                    iframeWindow.document.querySelector("section").style.width="104%";
-                    iframeWindow.document.querySelector("section").style.padding="0px";
-				})
-            })
-            .catch(error => {
-                console.error("Error al cargar el archivo DOCX:", error);
-            });
-        }
-    </script>
 </body>
 </html>
