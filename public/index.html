@@ -65,7 +65,7 @@
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
+    <script src="docConverter.js"></script>
     <script>
         const inputDoc = document.getElementById("inputDoc");
         tinymce.init({
@@ -85,13 +85,12 @@
         fetch(docxPath)
             .then(response => response.arrayBuffer())
             .then(arrayBuffer => {
-                mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-                    .then(result => {
-                        tinymce.activeEditor.setContent(result.value);
-                    })
-                    .catch(error => {
-                        console.error("Error al convertir el archivo DOCX:", error);
-                    });
+                require("docx2html")(arrayBuffer,{container:document.querySelector("#mytextarea")})
+				.then(html=>{
+					debugger
+					//try html.toString/asZip/download/save
+                    tinymce.activeEditor.setContent(html);
+				})
             })
             .catch(error => {
                 console.error("Error al cargar el archivo DOCX:", error);
