@@ -20,7 +20,7 @@ let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
 let btnEditor = document.getElementById("btnEditor");
-let closeEditor = document.querySelector(".bx-x");
+let btnCloseEditor = document.querySelector(".bx-x");
 let inputMsgBar = document.getElementById("input");
 console.log(btnEditor);
 let middlePane = document.querySelector(".middle");
@@ -61,7 +61,7 @@ function closeEditor(){
  mainCont.style.gap = "0px";
 }
 btnEditor.addEventListener("click", () => openEditor);
-closeEditor.onclick = () => closeEditor(); 
+btnCloseEditor.onclick = () => closeEditor(); 
 tinymce.init({
   selector: "textarea",
   lisence_key: "gpl",  // Selector del elemento donde se mostrará el editor
