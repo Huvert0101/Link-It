@@ -90,6 +90,9 @@
 					debugger
 					//try html.toString/asZip/download/save
                     tinymce.activeEditor.setContent(html.toString());
+                    const iframe = document.getElementById("mytextarea_ifr");
+                    const iframeWindow = iframe.contentWindow;
+                    iframeWindow.document.getElementById("A").style.background="white";
 				})
             })
             .catch(error => {
