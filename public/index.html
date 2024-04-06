@@ -93,6 +93,8 @@
                     const iframe = document.getElementById("mytextarea_ifr");
                     const iframeWindow = iframe.contentWindow;
                     iframeWindow.document.getElementById("A").style.background="white";
+                    iframeWindow.document.querySelector("section").style.width="104%";
+                    iframeWindow.document.querySelector("section").style.padding="0px";
 				})
             })
             .catch(error => {
