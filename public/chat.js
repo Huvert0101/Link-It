@@ -1,3 +1,4 @@
+import 'https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js';
 const socket = io();
 let uploadBtn = document.getElementById("send_file");
 let closeUpload = document.getElementById("closeUpload");
