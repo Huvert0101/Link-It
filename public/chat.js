@@ -214,11 +214,12 @@ formFolder.onsubmit = (e) => {
 function addToDom(data) {
   if(data.type == "file") {
     let extension = data.message.split('.').pop();
+    let msg = data.message.slice(0,6);
     if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg")
       output.innerHTML += `<img class='rounded-4' src='${data.message}'><br>`
     if(extension == "docx" || extension == "doc")
-      output.innerHTML += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${data.message}</button><br>`
-    else output.innerHTML += `<a target='_blank' href='${data.message}'><button class='fileBtn'>${data.message}</button></a><br>`
+      output.innerHTML += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button><br>`
+    else output.innerHTML += `<a target='_blank' href='${data.message}'><button class='fileBtn'>${msg}</button></a><br>`
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
