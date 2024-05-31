@@ -214,7 +214,7 @@ formFolder.onsubmit = (e) => {
 function addToDom(data) {
   if(data.type == "file") {
     let extension = data.message.split('.').pop();
-    let msg = data.message.slice(0,6);
+    let msg = data.message.substring(6);
     if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg")
       output.innerHTML += `<img class='rounded-4' src='${data.message}'><br>`
     if(extension == "docx" || extension == "doc")
