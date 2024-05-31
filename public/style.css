@@ -73,6 +73,7 @@ body{
     border: 1px solid white;
     color: white;
     padding: 5px 10px;
+    margin: 1px;
     border-radius: 10px;
 }
 .right{
