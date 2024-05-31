@@ -86,7 +86,7 @@ body{
     opacity: 0.5;
 }
 .display{
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     width: 100%;
     overflow-y: scroll;
