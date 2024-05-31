@@ -303,6 +303,12 @@ option{
     background-color: #FFFFFF1A;
 }
 .display a {
+    display: inline-block;
+    white-space: nowrap;
+    max-width: 451px;
+    color: mediumslateblue;
+    text-overflow: ellipsis;
+    overflow: hidden;
     color: mediumslateblue;
 }
 .dropArea {
