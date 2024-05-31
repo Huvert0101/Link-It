@@ -2,7 +2,8 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Cascadia Code', sans-serif;
+    box-sizing: border-box;
 }
 body{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
