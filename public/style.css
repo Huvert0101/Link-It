@@ -86,7 +86,7 @@ body{
     opacity: 0.5;
 }
 .display{
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.85);
     padding: 20px;
     width: 100%;
     overflow-y: scroll;
@@ -305,7 +305,7 @@ option{
 .display a {
     display: inline-block;
     white-space: nowrap;
-    max-width: 451px;
+    max-width: 511px;
     color: mediumslateblue;
     text-overflow: ellipsis;
     overflow: hidden;
