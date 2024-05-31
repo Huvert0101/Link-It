@@ -68,6 +68,13 @@ body{
 .tox-tinymce{
     height: 97%!important;
 }
+.fileBtn{
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
 .right{
     color: white;
     border-radius: 20px;
