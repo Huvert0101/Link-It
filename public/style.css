@@ -24,6 +24,13 @@ body{
 }
 .iframe-form{
     display: none;
+    top: 72px;
+    padding: 10px;
+    left: 50vw;
+    border-radius: 20px;
+    position: absolute;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .main{
     margin: 20px;
