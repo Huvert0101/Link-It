@@ -20,7 +20,7 @@ let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
 let btnIframe = document.querySelector(".bx-globe");
-let iframeForm = document.querySelector("iframe-form");
+let iframeForm = document.querySelector(".iframe-form");
 let currentFolder = "main";
 // Front-end functions
 btnMenu.onclick = () => {
