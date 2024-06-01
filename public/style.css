@@ -22,6 +22,9 @@ body{
     left: 50vw;
     background: rgba(0, 0, 0, 0.5);
 }
+.iframe-form{
+    display: none;
+}
 .main{
     margin: 20px;
     height: 100%;

@@ -19,11 +19,17 @@ let folderList = document.querySelector(".folders-cont");
 let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
+let btnIframe = document.querySelector(".bx-globe");
+let iframeForm = document.querySelector("iframe-form");
 let currentFolder = "main";
 // Front-end functions
 btnMenu.onclick = () => {
   overlay.style.display = 'block';
   menu.style.display = 'block';
+}
+btnIframe.onclick = () => {
+  iframeForm.style.display = "block";
+  
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
