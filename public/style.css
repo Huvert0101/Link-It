@@ -52,6 +52,7 @@ body{
 .iframeCont{
     width: 40%;
     height: 70%;
+    display: none;
     position: absolute;
     background: black;
     margin: auto;

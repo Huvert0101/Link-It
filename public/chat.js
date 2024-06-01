@@ -37,6 +37,7 @@ btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
   iframe.width = '100%';
+  iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeCont.style.display = "block";
 }
