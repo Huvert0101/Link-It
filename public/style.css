@@ -30,7 +30,6 @@ body{
     width: 400px;
     border-radius: 20px;
     position: absolute;
-    display: block;
     background-color: rgba(0, 0, 0, 0.5);
 }
 #iframe_url{
