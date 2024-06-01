@@ -21,6 +21,9 @@ const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
 let btnIframe = document.querySelector(".bx-globe");
 let iframeForm = document.querySelector(".iframe-form");
+let iframeUrl = document.getElementById("iframe_url");
+let iframeCont = document.querySelector(".iframeCont");
+let btnGo = document.getElementById("btnGo");
 let currentFolder = "main";
 // Front-end functions
 btnMenu.onclick = () => {
@@ -29,7 +32,13 @@ btnMenu.onclick = () => {
 }
 btnIframe.onclick = () => {
   iframeForm.style.display = "block";
-  
+}
+btnGo.onclick = () => {
+  var iframe = document.createElement('iframe');
+  iframe.src = iframeUrl.value;
+  iframe.width = '100%';
+  iframeCont.appendChild(iframe);
+  iframeCont.style.display = "block";
 }
 overlay.onclick = () => {
   menu.style.display = 'none';

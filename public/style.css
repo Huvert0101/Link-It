@@ -43,10 +43,20 @@ body{
 }
 #btnGo{
     padding: 10px;
+    cursor: pointer;
     background: none;
     border: 1px solid white;
     border-radius: 10px;
     color: white;
+}
+.iframe{
+    width: 40%;
+    height: 70%;
+    position: absolute;
+    background: black;
+    margin: auto;
+    left: 30vw;
+    top: 10vh;
 }
 .main{
     margin: 20px;
