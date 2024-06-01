@@ -1,5 +1,6 @@
 const socket = io();
 let uploadBtn = document.getElementById("send_file");
+let offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
 let closeUpload = document.getElementById("closeUpload");
 let inputFile = document.getElementById("file");
 let sendto = document.getElementById("sendto");
@@ -26,6 +27,43 @@ let iframeCont = document.querySelector(".iframeCont");
 let btnGo = document.getElementById("btnGo");
 let currentFolder = "main";
 // Front-end functions
+
+iframeCont.onmousedown = function(e) {
+        e.preventDefault();
+        
+        // Obtener la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Adjuntar los eventos para mover el div y soltarlo
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+    };
+
+    // Función que se ejecuta mientras se arrastra el div
+    function elementDrag(e) {
+        e.preventDefault();
+
+        // Calcular el nuevo desplazamiento del ratón
+        offsetX = mouseX - e.clientX;
+        offsetY = mouseY - e.clientY;
+
+        // Actualizar la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Establecer la nueva posición del div
+        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
+        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+    }
+
+    // Función que se ejecuta cuando se suelta el div
+    function closeDragElement() {
+        // Desconectar los eventos de movimiento y soltar
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
+
 btnMenu.onclick = () => {
   overlay.style.display = 'block';
   menu.style.display = 'block';
