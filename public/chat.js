@@ -70,6 +70,7 @@ btnMenu.onclick = () => {
 }
 btnIframe.onclick = () => {
   iframeForm.style.display = "block";
+  iframeUrl.focus();
 }
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
