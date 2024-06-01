@@ -42,6 +42,13 @@ body{
     border-radius: 10px;
     padding: 10px;
 }
+#btnGo{
+    padding: 10px;
+    background: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+}
 .main{
     margin: 20px;
     height: 100%;
