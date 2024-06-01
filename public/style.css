@@ -64,6 +64,15 @@ body{
     left: 30vw;
     top: 10vh;
 }
+#resizer {
+            width: 10px;
+            height: 10px;
+            background-color: darkblue;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            cursor: se-resize;
+        }
 .main{
     margin: 20px;
     height: 100%;

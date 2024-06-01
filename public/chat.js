@@ -1,6 +1,7 @@
 const socket = io();
 let uploadBtn = document.getElementById("send_file");
 let offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
+let startWidth, startHeight, startX, startY;
 let closeUpload = document.getElementById("closeUpload");
 let inputFile = document.getElementById("file");
 let sendto = document.getElementById("sendto");
@@ -25,6 +26,7 @@ let iframeForm = document.querySelector(".iframe-form");
 let iframeUrl = document.getElementById("iframe_url");
 let iframeCont = document.querySelector(".iframeCont");
 let btnGo = document.getElementById("btnGo");
+let resizer = document.getElementById("resizer");
 let currentFolder = "main";
 // Front-end functions
 
@@ -55,6 +57,36 @@ iframeCont.onmousedown = function(e) {
         // Establecer la nueva posición del div
         iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
         iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+    }
+
+    resizer.onmousedown = function(e) {
+        e.preventDefault();
+
+        // Obtener las dimensiones iniciales del div y la posición inicial del ratón
+        startWidth = parseInt(document.defaultView.getComputedStyle(iframeCont).width, 10);
+        startHeight = parseInt(document.defaultView.getComputedStyle(iframeCont).height, 10);
+        startX = e.clientX;
+        startY = e.clientY;
+
+        // Adjuntar los eventos para redimensionar el div y soltarlo
+        document.onmousemove = resizeElement;
+        document.onmouseup = stopResizeElement;
+    };
+
+    // Función que se ejecuta mientras se redimensiona el div
+    function resizeElement(e) {
+        e.preventDefault();
+
+        // Calcular las nuevas dimensiones del div
+        iframeCont.style.width = (startWidth + e.clientX - startX) + 'px';
+        iframeCont.style.height = (startHeight + e.clientY - startY) + 'px';
+    }
+
+    // Función que se ejecuta cuando se suelta el resizer
+    function stopResizeElement() {
+        // Desconectar los eventos de movimiento y soltar
+        document.onmousemove = null;
+        document.onmouseup = null;
     }
 
     // Función que se ejecuta cuando se suelta el div
