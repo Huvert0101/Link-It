@@ -26,11 +26,21 @@ body{
     display: none;
     top: 72px;
     padding: 10px;
-    left: 50vw;
+    left: 44vw;
+    width: 400px;
     border-radius: 20px;
     position: absolute;
     display: block;
     background-color: rgba(0, 0, 0, 0.5);
+}
+#iframe_url{
+    background: none;
+    color: white;
+    width: 87%;
+    outline: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
 }
 .main{
     margin: 20px;
