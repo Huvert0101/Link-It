@@ -85,6 +85,7 @@ btnCloseWindow.onclick = () => {
 btnMinWindow.onclick = () => {
   minWin = true;
   iframeCont.style.display = "none";
+  btnIframe.style.opacity = 0.7;
 }
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
