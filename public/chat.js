@@ -49,14 +49,6 @@ btnIframe.onclick = () => {
     iframeUrl.focus();
   }
 }
-btnCloseWindow.onclick = () => {
-  document.body.removeChild(iframeCont);
-}
-btnMinWindow.onclick = () => {
-  minWin = true;
-  iframeCont.style.display = "none";
-  btnIframe.style.opacity = 0.7;
-}
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
@@ -94,6 +86,14 @@ btnGo.onclick = () => {
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
   document.body.appendChild(iframeCont);
+  btnCloseWindowIcon.onclick = () => {
+    document.body.removeChild(iframeCont);
+  }
+  minWindowIcon.onclick = () => {
+    minWin = true;
+    iframeCont.style.display = "none";
+    btnIframe.style.opacity = 0.7;
+  }
 
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
