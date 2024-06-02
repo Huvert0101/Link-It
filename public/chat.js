@@ -109,6 +109,7 @@ btnGo.onclick = () => {
     iframeCont.style.display = "block";
   }
   newWindowIcon.onclick = () => {
+    iframeForm.style.display = "block";
   }
 windowTop.onmousedown = function(e) {
         e.preventDefault();
