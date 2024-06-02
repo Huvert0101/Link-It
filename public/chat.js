@@ -25,6 +25,7 @@ let btnIframe = document.querySelector(".bx-globe");
 let iframeForm = document.querySelector(".iframe-form");
 let iframeUrl = document.getElementById("iframe_url");
 let iframeCont = document.querySelector(".iframeCont");
+let windowTop = document.querySelector(".window-top");
 let btnGo = document.getElementById("btnGo");
 let resizer = document.getElementById("resizer");
 let btnCloseWindow = document.getElementById("btnCloseWindow");
@@ -33,7 +34,7 @@ let minWin = false;
 let currentFolder = "main";
 
 // Front-end functions
-iframeCont.onmousedown = function(e) {
+windowTop.onmousedown = function(e) {
         e.preventDefault();
         iframeCont.style.cursor = "grabbing";
         // Obtener la posición inicial del ratón
