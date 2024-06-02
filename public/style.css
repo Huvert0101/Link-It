@@ -33,7 +33,7 @@ body{
     background-color: rgba(0, 0, 0, 0.5);
 }
 .bx-globe{
-    opacity: 0.8;
+    opacity: 0.7;
 }
 #iframe_url{
     background: none;
@@ -64,6 +64,7 @@ body{
 .iframeCont{
     width: 40%;
     resize: both;
+    overflow: auto;
     z-index: 999999;
     height: 70%;
     display: none;
