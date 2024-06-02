@@ -49,6 +49,9 @@ body{
     border-radius: 10px;
     color: white;
 }
+.window-top{
+    display: flex;
+}
 #window-title{
     color: white;
 }
@@ -59,7 +62,7 @@ body{
     height: 70%;
     display: none;
     position: absolute;
-    padding-top: 25px;
+    padding-top: 5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     cursor: grab;
