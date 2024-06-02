@@ -80,7 +80,7 @@ btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
   iframe.onload = () => {
-    console.log(iframe.document);
+    console.log(iframe.contentDocument);
     //const iframeDoc = iframe.contentDocument;
     //const title = iframeDoc.title;
     //document.getElementById('window-title').innerText = title;
