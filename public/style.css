@@ -51,6 +51,7 @@ body{
 }
 .iframeCont{
     width: 40%;
+    resize: both;
     z-index: 999999;
     height: 70%;
     display: none;
