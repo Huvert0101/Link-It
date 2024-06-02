@@ -69,6 +69,15 @@ body{
     padding-left: 8px;
     align-items: center;
 }
+#newWindow{
+    padding: 2px;
+    border-radius: 50%;
+    color: white;
+    border: 1px solid white;
+    position: fixed;
+    transform: translate(305px, -47px);
+    font-size: 30px;
+}
 #window-title{
     text-overflow: ellipsis;
     word-wrap: break-word;
