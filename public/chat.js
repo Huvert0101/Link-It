@@ -93,6 +93,7 @@ iframeCont.onmousedown = function(e) {
     // Función que se ejecuta cuando se suelta el div
     function closeDragElement() {
         // Desconectar los eventos de movimiento y soltar
+        iframeCont.style.cursor = "grab";
         document.onmousemove = null;
         document.onmouseup = null;
     }
