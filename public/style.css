@@ -70,7 +70,10 @@ body{
     align-items: center;
 }
 #window-title{
+    text-overflow: ellipsis;
+    word-wrap: break-word;
     width: 92%;
+    overflow: hidden;
     color: white;
 }
 .iframeCont{
