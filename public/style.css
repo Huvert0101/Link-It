@@ -49,6 +49,9 @@ body{
     border-radius: 10px;
     color: white;
 }
+#window-title{
+    color: white;
+}
 .iframeCont{
     width: 40%;
     resize: both;
