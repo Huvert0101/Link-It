@@ -28,6 +28,8 @@ let iframeCont = document.querySelector(".iframeCont");
 let btnGo = document.getElementById("btnGo");
 let resizer = document.getElementById("resizer");
 let btnCloseWindow = document.getElementById("btnCloseWindow");
+let btnMinWindow = document.getElementById("minWindow");
+let minWin = false;
 let currentFolder = "main";
 
 // Front-end functions
@@ -69,11 +71,19 @@ btnMenu.onclick = () => {
   menu.style.display = 'block';
 }
 btnIframe.onclick = () => {
-  iframeForm.style.display = "block";
-  iframeUrl.focus();
+  if(minWin){
+    iframeCont.style.display = "block";
+  }else{
+    iframeForm.style.display = "block";
+    iframeUrl.focus();
+  }
 }
 btnCloseWindow.onclick = () => {
   document.body.removeChild(iframeCont);
+}
+btnMinWindow.onclick = () => {
+  minWin = true;
+  iframeCont.style.display = "none";
 }
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
