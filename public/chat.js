@@ -97,12 +97,12 @@ btnGo.onclick = () => {
     //const iframeDoc = iframe.contentDocument;
     //const title = iframeDoc.title;
     document.getElementById('window-title').innerText = iframe.src;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframeCont.appendChild(iframe);
+    iframeCont.style.display = "block";
+    iframeForm.style.display = "none";
   }
-  iframe.width = '100%';
-  iframe.height = '100%';
-  iframeCont.appendChild(iframe);
-  iframeCont.style.display = "block";
-  iframeForm.style.display = "none";
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
