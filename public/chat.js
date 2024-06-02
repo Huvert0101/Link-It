@@ -106,6 +106,8 @@ btnGo.onclick = () => {
   iframe.onload = () => {
     iframeCont.style.display = "block";
   }
+  newWindowIcon.onclick = () => {
+  }
 windowTop.onmousedown = function(e) {
         e.preventDefault();
         iframeCont.style.cursor = "grabbing";
@@ -138,8 +140,6 @@ windowTop.onmousedown = function(e) {
         document.onmousemove = null;
         document.onmouseup = null;
     }
-}
-btnNewWindow.onclick = () => {
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
