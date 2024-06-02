@@ -34,38 +34,6 @@ let minWin = false;
 let currentFolder = "main";
 
 // Front-end functions
-windowTop.onmousedown = function(e) {
-        e.preventDefault();
-        iframeCont.style.cursor = "grabbing";
-        // Obtener la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Adjuntar los eventos para mover el div y soltarlo
-        document.onmousemove = elementDrag;
-        document.onmouseup = closeDragElement;
-    };
-
-    // Función que se ejecuta mientras se arrastra el div
-    function elementDrag(e) {
-        e.preventDefault();
-        // Calcular el nuevo desplazamiento del ratón
-        offsetX = mouseX - e.clientX;
-        offsetY = mouseY - e.clientY;
-        // Actualizar la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Establecer la nueva posición del div
-        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
-        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
-    }
-
-    // Función que se ejecuta cuando se suelta el div
-    function closeDragElement() {
-        // Desconectar los eventos de movimiento y soltar
-        iframeCont.style.cursor = "grab";
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
 
 btnMenu.onclick = () => {
   overlay.style.display = 'block';
@@ -138,6 +106,38 @@ btnGo.onclick = () => {
   iframe.onload = () => {
     iframeCont.style.display = "block";
   }
+windowTop.onmousedown = function(e) {
+        e.preventDefault();
+        iframeCont.style.cursor = "grabbing";
+        // Obtener la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Adjuntar los eventos para mover el div y soltarlo
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+    };
+
+    // Función que se ejecuta mientras se arrastra el div
+    function elementDrag(e) {
+        e.preventDefault();
+        // Calcular el nuevo desplazamiento del ratón
+        offsetX = mouseX - e.clientX;
+        offsetY = mouseY - e.clientY;
+        // Actualizar la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Establecer la nueva posición del div
+        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
+        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+    }
+
+    // Función que se ejecuta cuando se suelta el div
+    function closeDragElement() {
+        // Desconectar los eventos de movimiento y soltar
+        iframeCont.style.cursor = "grab";
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
 }
 btnNewWindow.onclick = () => {
 }
