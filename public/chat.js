@@ -32,6 +32,7 @@ let currentFolder = "main";
 
 iframeCont.onmousedown = function(e) {
         e.preventDefault();
+        iframeCont.style.cursor = "grabbing";
         
         // Obtener la posición inicial del ratón
         mouseX = e.clientX;
