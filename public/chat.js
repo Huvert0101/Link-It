@@ -72,6 +72,7 @@ btnMenu.onclick = () => {
 }
 btnIframe.onclick = () => {
   if(minWin){
+    btnIframe.style.opacity = 0.7;
     iframeCont.style.display = "block";
   }else{
     iframeForm.style.display = "block";
