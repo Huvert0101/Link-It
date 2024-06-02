@@ -24,12 +24,12 @@ let overlay = document.querySelector('.overlay');
 let btnIframe = document.querySelector(".bx-globe");
 let iframeForm = document.querySelector(".iframe-form");
 let iframeUrl = document.getElementById("iframe_url");
-let iframeCont = document.querySelector(".iframeCont");
 let windowTop = document.querySelector(".window-top");
 let btnGo = document.getElementById("btnGo");
 let resizer = document.getElementById("resizer");
 let btnCloseWindow = document.getElementById("btnCloseWindow");
 let btnMinWindow = document.getElementById("minWindow");
+let btnNewWindow = document.getElementById("newWindow");
 let minWin = false;
 let currentFolder = "main";
 
@@ -90,8 +90,45 @@ btnMinWindow.onclick = () => {
   btnIframe.style.opacity = 0.7;
 }
 btnGo.onclick = () => {
+  const iframeCont = document.createElement("div");
+  iframeCont.className = "iframeCont";
+
+  // Crear el icono de nueva ventana
+  const newWindowIcon = document.createElement("i");
+  newWindowIcon.className = "bx bx-plus";
+  newWindowIcon.id = "newWindow";
+
+  // Crear la barra superior de la ventana
+  const windowTop = document.createElement("div");
+  windowTop.className = "window-top";
+
+  // Crear el título de la ventana
+  const windowTitle = document.createElement("span");
+  windowTitle.id = "window-title";
+  windowTitle.innerText = "Window Title";
+
+  // Crear el icono de minimizar
+  const minWindowIcon = document.createElement("i");
+  minWindowIcon.className = "bx bx-minus";
+  minWindowIcon.id = "minWindow";
+
+  // Crear el icono de cerrar
+  const btnCloseWindowIcon = document.createElement("i");
+  btnCloseWindowIcon.className = "bx bx-x";
+  btnCloseWindowIcon.id = "btnCloseWindow";
+
+  // Añadir el título y los iconos a la barra superior de la ventana
+  windowTop.appendChild(windowTitle);
+  windowTop.appendChild(minWindowIcon);
+  windowTop.appendChild(btnCloseWindowIcon);
+
+  // Añadir los elementos a iframeCont
+  iframeCont.appendChild(newWindowIcon);
+  iframeCont.appendChild(windowTop);
+
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
+  iframeUrl.value = '';
   document.getElementById('window-title').innerText = iframe.src;
   iframe.width = '100%';
   iframe.height = '100%';
@@ -100,6 +137,8 @@ btnGo.onclick = () => {
   iframe.onload = () => {
     iframeCont.style.display = "block";
   }
+}
+btnNewWindow.onclick = () => {
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
