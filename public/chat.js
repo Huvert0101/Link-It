@@ -125,6 +125,7 @@ btnGo.onclick = () => {
   // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
+  document.body.appendChild(iframeCont);
 
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
