@@ -35,10 +35,15 @@ body{
 .bx{
     cursor: pointer;
 }
+.bx-minus{
+    color: white;
+    font-size: 25px;
+}
 .bx-minus:hover{
     background-color: rgba(255, 255, 255, 0.67);
 }
 .bx-globe{
+    color: white;
     opacity: 0.7;
 }
 #iframe_url{
