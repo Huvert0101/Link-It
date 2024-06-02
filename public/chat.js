@@ -83,6 +83,7 @@ btnGo.onclick = () => {
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeCont.style.display = "block";
+  iframeForm.style.display = "none";
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
