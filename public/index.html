@@ -31,7 +31,7 @@
         </div>
         <div class="middle">
             <div class="top-tab">
-                <i class='bx bx-x'></i>
+                <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
             <form method="post" id="editorContainer">
                 <textarea id="mytextarea">Hello, World!</textarea>
@@ -78,7 +78,7 @@
     let inputMsgBar = document.getElementById("input");
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
-    let btnCloseEditor = document.querySelector(".bx-x");
+    let btnCloseEditor = document.getElementById("btnCloseEditor");
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
