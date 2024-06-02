@@ -32,6 +32,9 @@ body{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
 }
+.bx{
+    cursor: pointer;
+}
 .bx-globe{
     opacity: 0.7;
 }
