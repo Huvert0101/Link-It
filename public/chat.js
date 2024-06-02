@@ -27,17 +27,16 @@ let iframeUrl = document.getElementById("iframe_url");
 let iframeCont = document.querySelector(".iframeCont");
 let btnGo = document.getElementById("btnGo");
 let resizer = document.getElementById("resizer");
+let btnCloseWindow = document.getElementById("btnCloseWindow");
 let currentFolder = "main";
-// Front-end functions
 
+// Front-end functions
 iframeCont.onmousedown = function(e) {
         e.preventDefault();
         iframeCont.style.cursor = "grabbing";
-        
         // Obtener la posición inicial del ratón
         mouseX = e.clientX;
         mouseY = e.clientY;
-
         // Adjuntar los eventos para mover el div y soltarlo
         document.onmousemove = elementDrag;
         document.onmouseup = closeDragElement;
@@ -46,15 +45,12 @@ iframeCont.onmousedown = function(e) {
     // Función que se ejecuta mientras se arrastra el div
     function elementDrag(e) {
         e.preventDefault();
-
         // Calcular el nuevo desplazamiento del ratón
         offsetX = mouseX - e.clientX;
         offsetY = mouseY - e.clientY;
-
         // Actualizar la posición inicial del ratón
         mouseX = e.clientX;
         mouseY = e.clientY;
-
         // Establecer la nueva posición del div
         iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
         iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
@@ -75,6 +71,9 @@ btnMenu.onclick = () => {
 btnIframe.onclick = () => {
   iframeForm.style.display = "block";
   iframeUrl.focus();
+}
+btnCloseWindow.onclick = () => {
+  document.body.remove(iframeCont);
 }
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
