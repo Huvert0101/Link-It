@@ -87,6 +87,7 @@ btnGo.onclick = () => {
   iframeCont.appendChild(windowTop);
   document.body.appendChild(iframeCont);
   btnCloseWindowIcon.onclick = () => {
+    minWin = true;
     document.body.removeChild(iframeCont);
   }
   minWindowIcon.onclick = () => {
