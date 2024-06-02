@@ -79,9 +79,11 @@ btnIframe.onclick = () => {
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
-  const iframeDoc = iframe.contentDocument;
-  const title = iframeDoc.title;
-  document.getElementById('window-title').innerText = title;
+  iframe.onload = () => {
+    const iframeDoc = iframe.contentDocument;
+    const title = iframeDoc.title;
+    document.getElementById('window-title').innerText = title;
+  }
   iframe.width = '100%';
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
