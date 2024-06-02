@@ -73,7 +73,7 @@ btnIframe.onclick = () => {
   iframeUrl.focus();
 }
 btnCloseWindow.onclick = () => {
-  document.body.remove(iframeCont);
+  document.body.removeChild(iframeCont);
 }
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
