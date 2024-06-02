@@ -60,36 +60,6 @@ iframeCont.onmousedown = function(e) {
         iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
     }
 
-    resizer.onmousedown = function(e) {
-        e.preventDefault();
-
-        // Obtener las dimensiones iniciales del div y la posición inicial del ratón
-        startWidth = parseInt(document.defaultView.getComputedStyle(iframeCont).width, 10);
-        startHeight = parseInt(document.defaultView.getComputedStyle(iframeCont).height, 10);
-        startX = e.clientX;
-        startY = e.clientY;
-
-        // Adjuntar los eventos para redimensionar el div y soltarlo
-        document.onmousemove = resizeElement;
-        document.onmouseup = stopResizeElement;
-    };
-
-    // Función que se ejecuta mientras se redimensiona el div
-    function resizeElement(e) {
-        e.preventDefault();
-
-        // Calcular las nuevas dimensiones del div
-        iframeCont.style.width = (startWidth + e.clientX - startX) + 'px';
-        iframeCont.style.height = (startHeight + e.clientY - startY) + 'px';
-    }
-
-    // Función que se ejecuta cuando se suelta el resizer
-    function stopResizeElement() {
-        // Desconectar los eventos de movimiento y soltar
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
-
     // Función que se ejecuta cuando se suelta el div
     function closeDragElement() {
         // Desconectar los eventos de movimiento y soltar
