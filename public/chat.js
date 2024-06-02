@@ -89,6 +89,7 @@ btnGo.onclick = () => {
   btnCloseWindowIcon.onclick = () => {
     minWin = false;
     document.body.removeChild(iframeCont);
+    btnIframe.style.opacity = 0.7;
   }
   minWindowIcon.onclick = () => {
     minWin = true;
