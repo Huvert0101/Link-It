@@ -92,16 +92,13 @@ btnMinWindow.onclick = () => {
 btnGo.onclick = () => {
   var iframe = document.createElement('iframe');
   iframe.src = iframeUrl.value;
+  document.getElementById('window-title').innerText = iframe.src;
+  iframe.width = '100%';
+  iframe.height = '100%';
+  iframeCont.appendChild(iframe);
+  iframeForm.style.display = "none";
   iframe.onload = () => {
-    console.log(iframe.body);
-    //const iframeDoc = iframe.contentDocument;
-    //const title = iframeDoc.title;
-    document.getElementById('window-title').innerText = iframe.src;
-    iframe.width = '100%';
-    iframe.height = '100%';
-    iframeCont.appendChild(iframe);
     iframeCont.style.display = "block";
-    iframeForm.style.display = "none";
   }
 }
 overlay.onclick = () => {
