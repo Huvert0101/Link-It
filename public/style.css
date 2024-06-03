@@ -17,10 +17,17 @@ body{
     color: rgba(255, 255, 255, 0.95);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-bottom-right-radius: 25px;
-    padding: 1px 30px;
+    padding: 2px 30px;
     left: 50vw;
     background: rgba(0, 0, 0, 0.5);
+}
+.bxs-music{
+    color: white;
+    opacity: 0.7;
 }
 .iframe-form{
     display: none;
@@ -68,6 +75,12 @@ body{
     display: flex;
     padding-left: 8px;
     align-items: center;
+}
+#btnProfile{
+    background: none;
+    padding: 2px 10px;
+    border: none;
+    color: rgba(255, 255, 255, 0.95);
 }
 #newWindow{
     padding: 2px;
