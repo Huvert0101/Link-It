@@ -187,11 +187,11 @@ body{
 }  
 
 @-webkit-keyframes bodong{  
-  0%{height:5px; background:bule;}  
-  30%{height:15px; background:bule;}  
-  60%{height:20px; background:bule;}  
-  80%{height:15px; background:bule;}  
-  100%{height:5px; background:bule;}  
+  0%{height:5px; background:white;}  
+  30%{height:15px; background:white;}  
+  60%{height:20px; background:white;}  
+  80%{height:15px; background:white;}  
+  100%{height:5px; background:white;}  
 }
 .top-tab{
     display: flex;
