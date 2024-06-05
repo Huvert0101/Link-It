@@ -149,6 +149,7 @@ body{
     padding: 15px;
     background-color: black;
     opacity: 0.5;
+    margin: 0 5px;
 }
 .top-tab{
     display: flex;
