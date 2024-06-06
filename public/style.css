@@ -160,6 +160,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 .playlist{
     width: 100%;
@@ -170,6 +171,7 @@ body{
     width: 40px;
     height: 50px;
     position: relative;
+    margin-bottom: 60px;
 }
 #waves span{  
   width:10px;  
