@@ -213,8 +213,11 @@ body{
 .playlist button{
     width: 90%;
     background: none;
+    text-align: start;
     color: white;
     padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
 }
 .top-tab{
     display: flex;
