@@ -218,6 +218,10 @@ body{
     padding: 5px 10px;
     border: none;
     border-radius: 10px;
+    transition: all ease 0.3s;
+}
+.playlist button:hover{
+    background-color: #ffffff1a;
 }
 .top-tab{
     display: flex;
