@@ -155,8 +155,8 @@ body{
     position: relative;
 }
 #waves span{  
-  width:5px;  
-  height: 5px;  
+  width:10px;  
+  height: 15px;  
   bottom:0px;
   position:absolute;  
   background:white;  
