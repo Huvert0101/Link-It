@@ -159,7 +159,7 @@ body{
   height: 5px;  
   bottom:0px;
   position:absolute;  
-  background:red;  
+  background:white;  
   -webkit-animation: bodong 0.5s infinite  ease;  
 }  
 
