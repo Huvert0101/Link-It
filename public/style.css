@@ -174,10 +174,9 @@ body{
     background: none;
 }
 .currentSong input[type="range"]::-webkit-slider-runnable-track {
-  background: #053a5f;
   height: 2px;
   border-radius: 10px;
-    background: none;
+  background: none;
 }
 #waves{
     scale: 2;
