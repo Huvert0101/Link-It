@@ -195,11 +195,11 @@ body{
   -webkit-animation-delay:.6s;  
 }  
 #waves span:nth-child(4){  
-  left:35px;  
+  left:30px;  
   -webkit-animation-delay:.8s;  
 }  
 #waves span:nth-child(5){  
-  left:42px;  
+  left:40px;  
   -webkit-animation-delay:1s;  
 }  
 
