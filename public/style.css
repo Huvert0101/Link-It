@@ -186,20 +186,20 @@ body{
 }  
 
 #waves span:nth-child(2){  
-  left:7px;  
+  left:9px;  
   -webkit-animation-delay:.4s;  
 
 }  
 #waves span:nth-child(3){  
-  left:14px;  
+  left:16px;  
   -webkit-animation-delay:.6s;  
 }  
 #waves span:nth-child(4){  
-  left:21px;  
+  left:23px;  
   -webkit-animation-delay:.8s;  
 }  
 #waves span:nth-child(5){  
-  left:28px;  
+  left:30px;  
   -webkit-animation-delay:1s;  
 }  
 
