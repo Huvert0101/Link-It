@@ -213,6 +213,7 @@ body{
 .playlist button{
     width: 90%;
     background: none;
+    color: white;
     padding: 5px 10px;
 }
 .top-tab{
