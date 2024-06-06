@@ -169,7 +169,10 @@ body{
 .currentSong i{
     font-size: 40px;
 }
-.currentSong[type="range"]::-webkit-slider-runnable-track {
+.currentSong input[type="range"]{
+    width: 100%;
+}
+.currentSong input[type="range"]::-webkit-slider-runnable-track {
   background: #053a5f;
   height: 0.5rem;
 }
