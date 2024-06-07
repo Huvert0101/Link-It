@@ -155,7 +155,7 @@ body{
     background-color: black;
     opacity: 0.5;
     margin: 0 5px;
-    transition: all ease 0.3s;
+    transition: all ease 0.1s;
 }
 .player{
     width: 100%;
