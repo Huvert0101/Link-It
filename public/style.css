@@ -510,6 +510,10 @@ option{
     position: relative;
     font-weight: bold;
 }
+.bx-group{
+    color: white;
+    font-size: 24px;
+}
 .bx-arrow-back{
     visibility: hidden;
     transition: all ease 0.3s;
