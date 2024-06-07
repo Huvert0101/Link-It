@@ -171,6 +171,7 @@ body{
 }
 .currentSong input[type="range"]{
     width: 100%;
+    -webkit-appearance: none;
     background: none;
 }
 .currentSong input[type="range"]::-webkit-slider-runnable-track {
