@@ -327,7 +327,7 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: start;
 }
 #input{
-    width: 91%;
+    flex: 0.99;
     height: 100%;
     border-radius: 20px;
     border: none;
@@ -340,8 +340,7 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     align-items: center;
     text-align: center;
-    width: 4%;
-    padding-left: 6px;
+    width: 32px;
     transition: all ease 0.3s;
     cursor: pointer;
     height: 100%;
@@ -351,17 +350,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .bx-msg-ico:hover{
     background-color: #FFFFFF1A;
-}
-#sendto{
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
-    border-radius: 50px;
-    padding-left: 6px;
-    padding-right: 6px;
-}
-option{
-    background-color: #764536;
 }
 .folders-cont{
     width: 100%;
