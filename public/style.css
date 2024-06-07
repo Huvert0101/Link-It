@@ -185,6 +185,7 @@ input[type="range"]::-webkit-slider-thumb {
    background-color: #5cd5eb;
    height: 2rem;
    width: 1rem;    
+   border-radius: 50px;
 }
 #waves{
     scale: 2;
