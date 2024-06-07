@@ -171,6 +171,7 @@ body{
     justify-content: center;
     width: 100%;
     flex-direction: column;
+    align-items: center;
 }
 .currentSong i{
     font-size: 40px;
