@@ -56,9 +56,11 @@ btnPlayer.onclick = () => {
   if(minPlugin){
     plugin.style.display = "flex";
     minPlugin = false;
+    btnPlayer.style.opacity = 1;
   }else{
     plugin.style.display = "none";
     minPlugin = true;
+    btnPlayer.style.opacity = 0.7;
   }
 }
 btnGo.onclick = () => {
