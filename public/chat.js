@@ -30,6 +30,7 @@ let resizer = document.getElementById("resizer");
 let btnCloseWindow = document.getElementById("btnCloseWindow");
 let btnMinWindow = document.getElementById("minWindow");
 let btnNewWindow = document.getElementById("newWindow");
+let btnProfile = document.querySelector(".btnProfile");
 let minWin = false;
 let currentFolder = "main";
 
@@ -179,7 +180,8 @@ function getCookie(cname) {
 let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
-sendto.innerHTML = "<option value='"+newUser+"'>"+newUser+"</option>";
+sendto.innerHTML = "<option value='undefined'>This feature will no longer be available</option>";
+btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
 
