@@ -54,11 +54,15 @@ btnIframe.onclick = () => {
 }
 btnPlayer.onclick = () => {
   if(minPlugin){
-    plugin.style.display = "flex";
+    plugin.style.scale = 1;
+    plugin.style.position = "relative";
+    plugin.style.zIndex = 5;
     minPlugin = false;
     btnPlayer.style.opacity = 1;
   }else{
-    plugin.style.display = "none";
+    plugin.style.scale = 0;
+    plugin.style.position = "absolute";
+    plugin.style.zIndex = -2;
     minPlugin = true;
     btnPlayer.style.opacity = 0.7;
   }

@@ -145,7 +145,9 @@ body{
 .plugin{
     align-items: center;
     flex-direction: column;
-    display: none;
+    scale: 0;
+    z-index: -2;
+    position: absolute;
     color: white;
     border-radius: 20px;
     width: 31%;
@@ -153,6 +155,7 @@ body{
     background-color: black;
     opacity: 0.5;
     margin: 0 5px;
+    transition: all ease 0.3s;
 }
 .player{
     width: 100%;
