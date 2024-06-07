@@ -175,8 +175,16 @@ body{
 }
 .currentSong input[type="range"]::-webkit-slider-runnable-track {
   height: 3px;
-  border-radius: 10px;
+  border-radius: 30px;
   background: red;
+}
+input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -12px; /* Centers thumb on the track */
+   background-color: #5cd5eb;
+   height: 2rem;
+   width: 1rem;    
 }
 #waves{
     scale: 2;
