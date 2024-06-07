@@ -30,7 +30,10 @@ let btnCloseWindow = document.getElementById("btnCloseWindow");
 let btnMinWindow = document.getElementById("minWindow");
 let btnNewWindow = document.getElementById("newWindow");
 let btnProfile = document.querySelector(".btnProfile");
+let btnPlayer = document.querySelector(".bxs-music");
+let plugin = document.querySelector(".plugin");
 let minWin = false;
+let minPlugin = true;
 let currentFolder = "main";
 
 // Front-end functions
@@ -47,6 +50,15 @@ btnIframe.onclick = () => {
     iframeForm.style.display = "block";
     btnIframe.style.opacity = 1;
     iframeUrl.focus();
+  }
+}
+btnPlayer.onclick = () => {
+  if(minPlugin){
+    plugin.style.display = "flex";
+    minPlugin = false;
+  }else{
+    plugin.style.display = "none";
+    minPlugin = true;
   }
 }
 btnGo.onclick = () => {
