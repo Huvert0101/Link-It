@@ -4,7 +4,6 @@ let offsetX = 0, offsetY = 0, mouseX = 0, mouseY = 0;
 let startWidth, startHeight, startX, startY;
 let closeUpload = document.getElementById("closeUpload");
 let inputFile = document.getElementById("file");
-let sendto = document.getElementById("sendto");
 let uploadFile = document.querySelector(".uploadWrapper");
 let btnFile = document.getElementById("btn_add");
 let dropArea = document.querySelector(".dropArea");
@@ -180,7 +179,6 @@ function getCookie(cname) {
 let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
-sendto.innerHTML = "<option value='undefined'>This feature will no longer be available</option>";
 btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
