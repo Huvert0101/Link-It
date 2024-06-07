@@ -166,6 +166,10 @@ body{
     width: 100%;
     height: 70%;
 }
+.currentSong{
+    display: flex;
+    justify-content: center;
+}
 .currentSong i{
     font-size: 40px;
 }
