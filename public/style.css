@@ -169,6 +169,7 @@ body{
 .currentSong{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .currentSong i{
     font-size: 40px;
