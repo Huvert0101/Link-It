@@ -64,7 +64,7 @@ btnPlayer.onclick = () => {
     plugin.style.zIndex = -2;
     setTimeout(() => {
       plugin.style.position = "absolute";
-    }, 200);
+    }, 100);
     minPlugin = true;
     btnPlayer.style.opacity = 0.7;
   }
