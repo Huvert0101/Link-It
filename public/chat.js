@@ -76,6 +76,9 @@ btnPlayer.onclick = async () => {
           const audio = new Audio("https://link-it-ns7k.onrender.com/files/" + song);
           audio.play();
           currentSongTitle.innerText = song;
+          button.classList.add("active-song");
+          btnPlayStop.classList.remove("bx-play");
+          btnPlayStop.classList.add("bx-stop");
         }
         playlist.appendChild(button);
       })

@@ -182,6 +182,7 @@ body{
 }
 .currentSong i{
     font-size: 40px;
+    transition: all ease 0.3s;
 }
 .currentSong input[type="range"]{
     width: 100%;
@@ -260,6 +261,9 @@ input[type="range"]::-webkit-slider-thumb {
     transition: all ease 0.3s;
 }
 .playlist button:hover{
+    background-color: #ffffff1a;
+}
+.active-song{
     background-color: #ffffff1a;
 }
 .top-tab{
