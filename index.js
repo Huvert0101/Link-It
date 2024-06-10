@@ -65,7 +65,7 @@ async function delFol(usr, folderName){
 
 function getMp3Files(musicFolder) {
     return new Promise((resolve, reject) => {
-        fs.readdir(folderPath, (err, files) => {
+        fs.readdir(musicFolder, (err, files) => {
             if (err) {
                 reject(`Error al leer la carpeta: ${err}`);
                 return;
