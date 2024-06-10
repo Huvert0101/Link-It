@@ -136,6 +136,8 @@ app.post('/delFol', jsonParser, (req, res)=>{
 app.get('/getMusic', async (req, res) => {
     try {
         const mp3Files = await getMp3Files(path.join(__dirname, 'files'));
+        console.log("hellou");
+        console.log(mp3Files);
         res.json(mp3Files);
     } catch (err) {
         res.status(500).json({ error: err });
