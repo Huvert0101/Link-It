@@ -33,6 +33,7 @@ let btnProfile = document.querySelector(".btnProfile");
 let btnPlayer = document.querySelector(".bxs-music");
 let plugin = document.querySelector(".plugin");
 let playlist = document.querySelector(".playlist");
+let currentSongTitle = document.getElementById("currentSongTitle");
 let minWin = false;
 let minPlugin = true;
 let playerLoaded = false;
@@ -74,6 +75,7 @@ btnPlayer.onclick = async () => {
         button.onclick = () => {
           const audio = new Audio("https://link-it-ns7k.onrender.com/files/" + song);
           audio.play();
+          currentSongTitle.innerText = song;
         }
         playlist.appendChild(button);
       })
