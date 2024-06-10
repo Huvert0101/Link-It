@@ -61,6 +61,22 @@ async function delFol(usr, folderName){
     if(res && res2) return "200";
     else return "500";
 }
+
+function getMp3Files(musicFolder) {
+    return new Promise((resolve, reject) => {
+        fs.readdir(folderPath, (err, files) => {
+            if (err) {
+                reject(`Error al leer la carpeta: ${err}`);
+                return;
+            }
+
+            // Filtra los archivos para quedarse solo con los .mp3
+            const mp3Files = files.filter(file => path.extname(file).toLowerCase() === '.mp3');
+            resolve(mp3Files);
+        });
+    });
+}
+
 // Routes
 app.get('/welcome', (req, res)=>{
     let username = req.cookies.username;
@@ -116,6 +132,14 @@ app.post('/delFol', jsonParser, (req, res)=>{
             res.sendStatus(500);
         }
     })
+})
+app.get('/getMusic', async (req, res) => {
+    try {
+        const mp3Files = await getMp3Files(path.join(__dirname, 'files'));
+        res.json(mp3Files);
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
 })
 // Extension Routes
 app.post('/test',jsonParser, (req, res)=>{

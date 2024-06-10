@@ -32,8 +32,10 @@ let btnNewWindow = document.getElementById("newWindow");
 let btnProfile = document.querySelector(".btnProfile");
 let btnPlayer = document.querySelector(".bxs-music");
 let plugin = document.querySelector(".plugin");
+let playlist = document.querySelector(".playlist");
 let minWin = false;
 let minPlugin = true;
+let playerLoaded = false;
 let currentFolder = "main";
 
 // Front-end functions
@@ -52,13 +54,26 @@ btnIframe.onclick = () => {
     iframeUrl.focus();
   }
 }
-btnPlayer.onclick = () => {
+btnPlayer.onclick = async () => {
   if(minPlugin){
     plugin.style.scale = 1;
     plugin.style.position = "relative";
     plugin.style.zIndex = 5;
     minPlugin = false;
     btnPlayer.style.opacity = 1;
+    if(!playerLoaded){
+      playerLoaded = true;
+      const response = await fetch('https://https://link-it-ns7k.onrender.com/getMusic');
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const mp3Files = await response.json();
+      mp3Files.forEach(song => {
+        const button = document.createElement("button");
+        button.textContent = song;
+        playlist.appendChild(button);
+      })
+    }
   }else{
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
