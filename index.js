@@ -135,8 +135,8 @@ app.post('/delFol', jsonParser, (req, res)=>{
     })
 })
 app.get('/getMusic', async (req, res) => {
+    const musicPath = path.join(__dirname, 'files');
     try {
-        const musicPath = path.join(__dirname, 'files');
         const mp3Files = await getMp3Files(path.join(__dirname, 'files'));
         console.log(musicPath);
         console.log("hellou");
