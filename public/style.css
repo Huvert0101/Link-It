@@ -264,7 +264,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #ffffff1a;
 }
 .active-song{
-    background-color: #ffffff1a;
+    background-color: #ffffff1a!important;
 }
 .top-tab{
     display: flex;

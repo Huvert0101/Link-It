@@ -78,7 +78,7 @@ btnPlayer.onclick = async () => {
           currentSongTitle.innerText = song;
           button.classList.add("active-song");
           btnPlayStop.classList.remove("bx-play");
-          btnPlayStop.classList.add("bx-stop");
+          btnPlayStop.classList.add("bx-pause");
         }
         playlist.appendChild(button);
       })
