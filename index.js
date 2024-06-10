@@ -140,6 +140,7 @@ app.get('/getMusic', async (req, res) => {
         console.log(mp3Files);
         res.json(mp3Files);
     } catch (err) {
+        console.log("puto");
         res.status(500).json({ error: err });
     }
 })
