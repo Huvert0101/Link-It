@@ -63,7 +63,7 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 1;
     if(!playerLoaded){
       playerLoaded = true;
-      const response = await fetch('https://https://link-it-ns7k.onrender.com/getMusic');
+      const response = await fetch('https://link-it-ns7k.onrender.com/getMusic');
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
