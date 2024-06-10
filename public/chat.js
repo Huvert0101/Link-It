@@ -71,6 +71,10 @@ btnPlayer.onclick = async () => {
       mp3Files.forEach(song => {
         const button = document.createElement("button");
         button.textContent = song;
+        button.onclick = () => {
+          const audio = new Audio("https://link-it-ns7k.onrender.com/files/" + song);
+          audio.play();
+        }
         playlist.appendChild(button);
       })
     }
