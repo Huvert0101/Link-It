@@ -21,7 +21,7 @@ body{
     align-items: center;
     justify-content: center;
     border-bottom-right-radius: 25px;
-    padding: 0px 30px;
+    padding: 0px 30px 2px;
     left: 50vw;
     background: rgba(0, 0, 0, 0.5);
 }
@@ -80,6 +80,7 @@ body{
     background: none;
     padding: 0px 10px;
     border: none;
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.95);
 }
 #newWindow{
