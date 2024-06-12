@@ -330,7 +330,7 @@ folderList.onclick = (event)=>{
   if(folder == 'inputFolder' || folder == '') return
   if(folder == 'addFolder'){ addFolder(); return}
   folderEl = document.getElementById(folder);
-  if(lastFolder != undefined && lastFolder.classList.contains('currentFolder')) lastFolder.classList.remove("currentFolder");
+  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   //folderEl.classList.add("currentFolder");
   currentFolder = folder;
