@@ -343,7 +343,7 @@ folderList.onclick = (event)=>{
 btnBack.onclick = () => {
   currentFolder = 'main';
   socket.emit('changedFolder', { folder: currentFolder, user: newUser })
-  folderEl.classList.remove('currentFolder');
+  folderEl.parentElement.classList.remove('currentFolder');
   btnBack.style.visibility = 'hidden'
 }
 
