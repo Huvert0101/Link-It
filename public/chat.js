@@ -331,7 +331,8 @@ folderList.onclick = (event)=>{
   if(folder == 'addFolder'){ addFolder(); return}
   folderEl = document.getElementById(folder);
   if(lastFolder != undefined && lastFolder.classList.contains('currentFolder')) lastFolder.classList.remove("currentFolder");
-  folderEl.classList.add("currentFolder");
+  folderEl.parentElement.classList.add("currentFolder");
+  //folderEl.classList.add("currentFolder");
   currentFolder = folder;
   socket.emit('changedFolder', { folder: currentFolder, user: newUser })
   output.innerHTML = '';
