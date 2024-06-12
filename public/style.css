@@ -453,6 +453,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: 100%;
 }
 #addFolder{
+    border-radius: 7px;
     padding: 10px 20px;
     cursor: pointer;
     transition: all ease 0.3s;
@@ -496,6 +497,7 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 10px;
 }
 .currentFolder{
+    border-radius: 9px;
     border: 1px solid white;
 }
 .top-content{
