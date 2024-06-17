@@ -69,7 +69,9 @@ btnPlayer.onclick = async () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const mp3Files = await response.json();
+      let songs = [];
       mp3Files.forEach(song => {
+        songs.push(song);
         const button = document.createElement("button");
         button.textContent = song;
         button.onclick = () => {
@@ -82,6 +84,7 @@ btnPlayer.onclick = async () => {
         }
         playlist.appendChild(button);
       })
+      console.log(songs);
     }
   }else{
     plugin.style.scale = 0;
@@ -332,7 +335,6 @@ folderList.onclick = (event)=>{
   folderEl = document.getElementById(folder);
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
-  //folderEl.classList.add("currentFolder");
   currentFolder = folder;
   socket.emit('changedFolder', { folder: currentFolder, user: newUser })
   output.innerHTML = '';
@@ -357,7 +359,6 @@ btn.addEventListener('click', ()=>{
   });
   //userInput.value = newUser;
 });
-
 
 addEventListener('keydown', function(e){
   if(e.key == 'Enter' && message.value.trim() != ""){
