@@ -34,6 +34,7 @@ let btnPlayer = document.querySelector(".bxs-music");
 let plugin = document.querySelector(".plugin");
 let playlist = document.querySelector(".playlist");
 let currentSongTitle = document.getElementById("currentSongTitle");
+const URL = "https://www-linkit-2baa3535.koyeb.app";
 let minWin = false;
 let minPlugin = true;
 let playerLoaded = false;
@@ -64,7 +65,7 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 1;
     if(!playerLoaded){
       playerLoaded = true;
-      const response = await fetch('https://link-it-ns7k.onrender.com/getMusic');
+      const response = await fetch(URL+'/getMusic');
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
@@ -75,7 +76,7 @@ btnPlayer.onclick = async () => {
         const button = document.createElement("button");
         button.textContent = song;
         button.onclick = () => {
-          const audio = new Audio("https://link-it-ns7k.onrender.com/files/" + song);
+          const audio = new Audio(URL+"/files/" + song);
           audio.play();
           currentSongTitle.innerText = song;
           button.classList.add("active-song");
@@ -248,11 +249,6 @@ async function postFile (file) {
       }
     }
   });
-  await axios.post('http://cloud-linkit.rf.gd/upload-client.php', data,{
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
 }
 
 uploadBtn.onclick = async (event) => {
