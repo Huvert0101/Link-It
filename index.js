@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
         cb("", file.originalname);
     }
 });
-const upload = multer({ storage: storage })
+const upload = multer({limits: { fileSize: 5 * 1024 * 1024 * 1024 }, storage: storage })
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +24,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-var jsonParser = bodyParser.json({ limit: '5000mb' })
+var jsonParser = bodyParser.json({ limit: '50000mb' })
 // SQL
 async function insertMessage(message, type, user, folder){
     await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
