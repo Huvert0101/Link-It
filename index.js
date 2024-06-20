@@ -24,7 +24,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json({ limit: '5000mb' })
 // SQL
 async function insertMessage(message, type, user, folder){
     await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
