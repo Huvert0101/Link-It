@@ -79,12 +79,16 @@ btnPlayer.onclick = async () => {
           songs.push(song);
           const button = document.createElement("button");
           button.textContent = song;
+          button.setAttribute("id", song);
           button.onclick = () => {
             audio = new Audio(URL+"/files/" + song);
             audio.play();
             audio.addEventListener('ended', function() {
-              alert('El audio ha terminado.');
               button.classList.remove("active-song");
+              let songInd = songs.indexOf(song);
+              let nextSong = songs[songInd++];
+              let tmpBtn = document.getElementById(nextSong);
+              tmpBtn.click();
             });
             currentSongTitle.innerText = song;
             button.classList.add("active-song");
