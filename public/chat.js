@@ -93,9 +93,9 @@ btnPlayer.onclick = async () => {
           playlist.appendChild(button);
         })
         console.log(songs);
-
       }else{
-        playlist.innerHTML = "<p>No se encontro musica :c";
+        currentSongTitle.innerText = "No Song"
+        playlist.innerHTML = "<p>No music has been found :c</p>";
       }
     }
   }else{
