@@ -70,6 +70,7 @@ btnPlayer.onclick = async () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const mp3Files = await response.json();
+      console.log(mp3Files);
       if(mp3Files){
         let songs = [];
         let audio = null;
