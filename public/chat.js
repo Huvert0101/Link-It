@@ -74,6 +74,7 @@ btnPlayer.onclick = async () => {
       if(mp3Files.length > 0){
         let songs = [];
         let audio = null;
+        currentSongTitle.innerText = "Select a song";
         mp3Files.forEach(song => {
           songs.push(song);
           const button = document.createElement("button");
@@ -83,7 +84,7 @@ btnPlayer.onclick = async () => {
             audio.play();
             audio.addEventListener('ended', function() {
               alert('El audio ha terminado.');
-              // Aquí puedes agregar cualquier otra acción que quieras realizar cuando termine el audio.
+              button.classList.remove("active-song");
             });
             currentSongTitle.innerText = song;
             button.classList.add("active-song");
