@@ -95,7 +95,7 @@ btnPlayer.onclick = async () => {
         console.log(songs);
       }else{
         currentSongTitle.innerText = "No Song";
-        playlist.innerHTML = "<p>No music has been found :c</p>";
+        playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
     }
   }else{
