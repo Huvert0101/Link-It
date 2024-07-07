@@ -70,22 +70,32 @@ btnPlayer.onclick = async () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const mp3Files = await response.json();
-      let songs = [];
-      mp3Files.forEach(song => {
-        songs.push(song);
-        const button = document.createElement("button");
-        button.textContent = song;
-        button.onclick = () => {
-          const audio = new Audio(URL+"/files/" + song);
-          audio.play();
-          currentSongTitle.innerText = song;
-          button.classList.add("active-song");
-          btnPlayStop.classList.remove("bx-play");
-          btnPlayStop.classList.add("bx-pause");
-        }
-        playlist.appendChild(button);
-      })
-      console.log(songs);
+      if(mp3Files){
+        let songs = [];
+        let audio = null;
+        mp3Files.forEach(song => {
+          songs.push(song);
+          const button = document.createElement("button");
+          button.textContent = song;
+          button.onclick = () => {
+            audio = new Audio(URL+"/files/" + song);
+            audio.play();
+            audio.addEventListener('ended', function() {
+              alert('El audio ha terminado.');
+              // Aquí puedes agregar cualquier otra acción que quieras realizar cuando termine el audio.
+            });
+            currentSongTitle.innerText = song;
+            button.classList.add("active-song");
+            btnPlayStop.classList.remove("bx-play");
+            btnPlayStop.classList.add("bx-pause");
+          }
+          playlist.appendChild(button);
+        })
+        console.log(songs);
+
+      }else{
+        playlist.innerHTML = "<p>No se encontro musica :c";
+      }
     }
   }else{
     plugin.style.scale = 0;
