@@ -71,7 +71,7 @@ btnPlayer.onclick = async () => {
       }
       const mp3Files = await response.json();
       console.log(mp3Files);
-      if(mp3Files){
+      if(mp3Files.length > 0){
         let songs = [];
         let audio = null;
         mp3Files.forEach(song => {
