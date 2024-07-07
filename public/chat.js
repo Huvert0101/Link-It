@@ -86,8 +86,10 @@ btnPlayer.onclick = async () => {
             audio.addEventListener('ended', function() {
               button.classList.remove("active-song");
               let songInd = songs.indexOf(song);
-              let nextSong = songs[songInd++];
+              songInd = songInd + 1;
+              let nextSong = songs[songInd];
               let tmpBtn = document.getElementById(nextSong);
+              console.log(tmpBtn);
               tmpBtn.click();
             });
             currentSongTitle.innerText = song;
