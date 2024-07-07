@@ -94,7 +94,7 @@ btnPlayer.onclick = async () => {
         })
         console.log(songs);
       }else{
-        currentSongTitle.innerText = "No Song"
+        currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c</p>";
       }
     }
