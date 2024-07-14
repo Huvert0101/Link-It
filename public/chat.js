@@ -228,7 +228,10 @@ btnAddFriend.onclick = () => {
   console.log(data);
   fetch(URL+"addfriend", {
     method: "post",
-    body: data 
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data) 
   });
 }
 overlay.onclick = () => {
