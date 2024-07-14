@@ -225,7 +225,7 @@ btnAddFriend.onclick = () => {
   let data = {
     friendUser: searchBar.value
   } 
-  fetch(URL+"/addfriend", {
+  fetch(URL+"addfriend", {
     method: "post",
     body: data 
   });
