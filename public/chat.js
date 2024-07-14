@@ -37,6 +37,8 @@ let currentSongTitle = document.getElementById("currentSongTitle");
 let friendsCont = document.querySelector(".friends-cont");
 let btnFriends = document.getElementById("btnFriends");
 let rightPanelTitle = document.getElementById("rightPanelTitle");
+let btnAddFriend = document.getElementById("btnAddFriend");
+let searchBar = document.getElementById("searchBar");
 const URL = "https://www-linkit-2baa3535.koyeb.app";
 let minWin = false;
 let minPlugin = true;
@@ -218,6 +220,15 @@ btnFriends.onclick = () => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
+}
+btnAddFriend.onclick = () => {
+  let friendUser = searchBar.value;
+  let formData = new FormData();
+  formData.append("friendUser", friendUser);
+  fetch(URL+"/addfriend", {
+    method: "post",
+    body: formData
+  });
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
