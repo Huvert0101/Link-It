@@ -245,7 +245,10 @@ input[type="range"]::-webkit-slider-thumb {
 #waves span:nth-child(5){  
   left:40px;  
   -webkit-animation-delay:1s;  
-}  
+} 
+.friends-cont{
+    display: none;
+}
 
 @-webkit-keyframes bodong{  
   0%{height:15px; background:white;}  

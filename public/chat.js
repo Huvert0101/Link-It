@@ -34,6 +34,7 @@ let btnPlayer = document.querySelector(".bxs-music");
 let plugin = document.querySelector(".plugin");
 let playlist = document.querySelector(".playlist");
 let currentSongTitle = document.getElementById("currentSongTitle");
+let friendsCont = document.querySelector(".friends-cont");
 let btnFriends = document.getElementById("btnFriends");
 let rightPanelTitle = document.getElementById("rightPanelTitle");
 const URL = "https://www-linkit-2baa3535.koyeb.app";
@@ -215,7 +216,8 @@ windowTop.onmousedown = function(e) {
 }
 btnFriends.onclick = () => {
   rightPanelTitle.innerText = "Friends";
-  folderList.innerHTML = "";
+  folderList.style.display = "none";
+  friendsCont.style.display = "flex";
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
