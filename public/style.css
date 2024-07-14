@@ -254,6 +254,14 @@ input[type="range"]::-webkit-slider-thumb {
     gap: 15px;
     justify-content: center;
 }
+#searchBar{
+    background: none;
+    border: 1px solid white;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    padding: 5px 10px;
+    color: white;
+}
 
 @-webkit-keyframes bodong{  
   0%{height:15px; background:white;}  
