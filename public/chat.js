@@ -221,15 +221,15 @@ btnFriends.onclick = () => {
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
 }
-btnAddFriend.onclick = () => {
-  let data = {
-    friendUser: searchBar.value
-  } 
-  fetch(URL+"/addfriend", {
-    method: "post",
-    body: data 
-  });
-}
+//btnAddFriend.onclick = () => {
+//  let data = {
+//    friendUser: searchBar.value
+//  } 
+//  fetch(URL+"/addfriend", {
+//    method: "post",
+//    body: data 
+//  });
+//}
 overlay.onclick = () => {
   menu.style.display = 'none';
   overlay.style.display = 'none';

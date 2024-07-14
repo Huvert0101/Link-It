@@ -149,9 +149,9 @@ app.get('/getMusic', async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
-app.post('/addfriend', jsonParser, (req, res) => {
-    console.log(req.body.friendUser);
-})
+//app.post('/addfriend', jsonParser, (req, res) => {
+//   console.log(req.body.friendUser);
+//})
 // Extension Routes
 app.post('/test',jsonParser, (req, res)=>{
     console.log("request")
