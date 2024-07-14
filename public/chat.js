@@ -222,12 +222,12 @@ btnFriends.onclick = () => {
   friendsCont.style.display = "flex";
 }
 btnAddFriend.onclick = () => {
-  let friendUser = searchBar.value;
-  let formData = new FormData();
-  formData.append("friendUser", friendUser);
+  let data = {
+    friendUser: searchBar.value
+  } 
   fetch(URL+"/addfriend", {
     method: "post",
-    body: formData
+    body: data 
   });
 }
 overlay.onclick = () => {
