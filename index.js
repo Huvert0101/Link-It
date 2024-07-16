@@ -33,12 +33,10 @@ async function Register(user, paswd){
     const [res] = await conn.query("INSERT INTO users(user, password) VALUES('" + user + "', '" + paswd + "')");
     return res;
 }
-
 async function Login(usr, pswd){
     const [res] = await conn.query("SELECT * FROM users WHERE user = '" + usr + "' AND password = '" + pswd + "'");
     return res;
 }
-
 async function validRegister(usr, pswd){
     try {
      const [res] = await conn.query("SELECT * FROM users WHERE user = '" + usr + "'");
@@ -47,7 +45,6 @@ async function validRegister(usr, pswd){
      console.log("Errrror:" + error)   
      return
     }
-    
 }
 async function createFolder(usr, folderName){
     const [length] = await conn.query("SELECT * FROM folders WHERE user = '" + usr + "' AND folder = '" + folderName + "'");
@@ -122,6 +119,10 @@ app.post('/login', (req, res)=>{
         });
     }
 });
+async function getFoldersFriends(user){
+    const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder LIKE 'friend%'");
+    return res;
+}
 app.get('/logout', (req, res)=>{
     res.clearCookie("username");
     res.clearCookie("password");
@@ -161,6 +162,7 @@ app.post('/addfriend', jsonParser, async(req, res) => {
    console.log(exists);
    if(exists){
     createFolder(user,folderName);
+    console.log(getFoldersFriends(user));
    }else{
     res.sendStatus(404);
    }
@@ -236,7 +238,7 @@ async function getMessagesFol(user, folder){//maybe parameter: folder
     io.sockets.emit('getMessagesFol', res);
 }
 async function getFolders(user){
-    const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"'");
+    const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder NOT LIKE 'friend%'");
     return res;
 }
 //websockets

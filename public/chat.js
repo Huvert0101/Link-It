@@ -274,7 +274,7 @@ btnAddFriend.onclick = () => {
     body: JSON.stringify(data) 
   }).then(res => {
     if(res.status == 404){
-      console.log("User doesn't exists :c");
+      alert("User doesn't exists :c");
     }
   });
 }
