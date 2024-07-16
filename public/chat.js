@@ -221,19 +221,6 @@ btnFriends.onclick = () => {
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
 }
-btnAddFriend.onclick = () => {
-  let data = {
-    friendUser: searchBar.value
-  } 
-  console.log(data);
-  fetch(URL+"addfriend", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data) 
-  });
-}
 overlay.onclick = () => {
   menu.style.display = 'none';
   overlay.style.display = 'none';
@@ -272,6 +259,25 @@ const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
+
+btnAddFriend.onclick = () => {
+  let data = {
+    friendUser: searchBar.value,
+    user: newUser 
+  } 
+  console.log(data);
+  fetch(URL+"addfriend", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data) 
+  }).then(res => {
+    if(res.status == 404){
+      console.log("User doesn't exists :c");
+    }
+  });
+}
 
 async function postFile (file) {
   progressCont.style.display = "flex";

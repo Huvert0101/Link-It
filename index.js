@@ -64,11 +64,8 @@ async function delFol(usr, folderName){
 }
 async function validUser(usr){
     const [res] = await conn.query("SELECT user FROM users WHERE user ='"+usr+"'");
-    if(res.length > 0){
-        console.log("Usuario existe");
-    }else{
-        console.log("Usuario no existe");
-    }
+    if(res.length > 0) return true;
+    else return false;
 }
 
 function getMp3Files(musicFolder) {
@@ -78,7 +75,6 @@ function getMp3Files(musicFolder) {
                 reject(`Error al leer la carpeta: ${err}`);
                 return;
             }
-
             // Filtra los archivos para quedarse solo con los .mp3
             const mp3Files = files.filter(file => path.extname(file).toLowerCase() === '.mp3');
             resolve(mp3Files);
@@ -158,8 +154,15 @@ app.get('/getMusic', async (req, res) => {
     }
 });
 app.post('/addfriend', jsonParser, (req, res) => {
-   console.log(req.body.friendUser);
-   validUser(req.body.friendUser);
+   let friend = req.body.friendUser;
+   let user = req.body.user;
+   let folderName = 'friend'+user+friend;
+   const exists = validUser(friend);
+   if(exists){
+    createFolder(user,folderName);
+   }else{
+    res.sendStatus(404);
+   }
 })
 // Extension Routes
 app.post('/test',jsonParser, (req, res)=>{
