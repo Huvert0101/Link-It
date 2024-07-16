@@ -158,6 +158,7 @@ app.post('/addfriend', jsonParser, (req, res) => {
    let user = req.body.user;
    let folderName = 'friend'+user+friend;
    const exists = validUser(friend);
+   console.log(exists);
    if(exists){
     createFolder(user,folderName);
    }else{
