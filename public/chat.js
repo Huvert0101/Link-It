@@ -228,9 +228,7 @@ btnFriends.onclick = () => {
       "Content-Type": "application/json"
     }
   }).then(res => {
-    res.forEach(friend=> {
-      console.log(friend);
-    });
+    console.log(res);
   })
 }
 overlay.onclick = () => {
