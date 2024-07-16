@@ -220,6 +220,18 @@ btnFriends.onclick = () => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
+  let data = { user: newUser}
+  fetch(URL+'getFriends',{
+    method: 'post',
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => {
+    res.forEach(friend=> {
+      console.log(friend);
+    });
+  })
 }
 overlay.onclick = () => {
   menu.style.display = 'none';

@@ -167,6 +167,9 @@ app.post('/addfriend', jsonParser, async(req, res) => {
     res.sendStatus(404);
    }
 })
+app.post('/getFriends', async(req,res) => {
+    res.json(await getFoldersFriends(req.body.user));
+})
 // Extension Routes
 app.post('/test',jsonParser, (req, res)=>{
     console.log("request")
