@@ -233,7 +233,7 @@ btnFriends.onclick = async() => {
   }
   const friends = await response.json();
   friends.forEach(friend=> {
-    folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friend.folder}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
+    friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friend.folder}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
   });
   console.log(friends); // Aquí puedes manejar los datos como necesites
 }
