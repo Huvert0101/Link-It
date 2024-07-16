@@ -17,6 +17,7 @@ let message = document.getElementById('input');
 let btn = document.getElementById('btn_send');
 let output = document.querySelector('.display');
 let folderList = document.querySelector(".folders-cont");
+let friendList = document.querySelector(".friends-cont");
 let btnMenu = document.querySelector('.bx-menu');
 const menu = document.querySelector('.right');
 let overlay = document.querySelector('.overlay');
@@ -231,6 +232,9 @@ btnFriends.onclick = async() => {
     throw new Error('Network response was not ok ' + response.statusText);
   }
   const friends = await response.json();
+  friends.forEach(friend=> {
+    folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friend.folder}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
+  });
   console.log(friends); // Aquí puedes manejar los datos como necesites
 }
 overlay.onclick = () => {
