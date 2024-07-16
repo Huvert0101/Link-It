@@ -153,11 +153,11 @@ app.get('/getMusic', async (req, res) => {
         res.status(500).json({ error: err });
     }
 });
-app.post('/addfriend', jsonParser, (req, res) => {
+app.post('/addfriend', jsonParser, async(req, res) => {
    let friend = req.body.friendUser;
    let user = req.body.user;
    let folderName = 'friend'+user+friend;
-   const exists = validUser(friend);
+   const exists = await validUser(friend);
    console.log(exists);
    if(exists){
     createFolder(user,folderName);
