@@ -220,13 +220,12 @@ btnFriends.onclick = async() => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
-  let data = { user: newUser}
   const response = await fetch(URL+'getFriends', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ user: user })
+    body: JSON.stringify({ user: newUser})
   });
   if (!response.ok) {
     throw new Error('Network response was not ok ' + response.statusText);
