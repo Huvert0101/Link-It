@@ -217,28 +217,6 @@ windowTop.onmousedown = function(e) {
         document.onmouseup = null;
     }
 }
-btnFriends.onclick = async() => {
-  rightPanelTitle.innerText = "Friends";
-  folderList.style.display = "none";
-  friendsCont.style.display = "flex";
-  const response = await fetch(URL+'getFriends', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ user: newUser})
-  });
-  if (!response.ok) {
-    throw new Error('Network response was not ok ' + response.statusText);
-  }
-  const friends = await response.json();
-  friends.forEach(friend=> {
-    let friendName = friend.folder.slice(0,6);
-    friendName = friendName.replace(newUser, '');
-    friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friendName}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
-  });
-  console.log(friends); // Aquí puedes manejar los datos como necesites
-}
 overlay.onclick = () => {
   menu.style.display = 'none';
   overlay.style.display = 'none';
@@ -277,6 +255,29 @@ const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
+
+btnFriends.onclick = async() => {
+  rightPanelTitle.innerText = "Friends";
+  folderList.style.display = "none";
+  friendsCont.style.display = "flex";
+  const response = await fetch(URL+'getFriends', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user: newUser})
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok ' + response.statusText);
+  }
+  const friends = await response.json();
+  friends.forEach(friend=> {
+    let friendName = friend.folder.slice(0,6);
+    friendName = friendName.replace(newUser, '');
+    friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friendName}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
+  });
+  console.log(friends); // Aquí puedes manejar los datos como necesites
+}
 
 btnAddFriend.onclick = () => {
   let data = {
