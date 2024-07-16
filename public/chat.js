@@ -216,20 +216,23 @@ windowTop.onmousedown = function(e) {
         document.onmouseup = null;
     }
 }
-btnFriends.onclick = () => {
+btnFriends.onclick = async() => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
   let data = { user: newUser}
-  fetch(URL+'getFriends',{
-    method: 'post',
-    body: JSON.stringify(data),
+  const response = await fetch(URL+'getFriends', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(res => {
-    console.log(res.json());
-  })
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ user: user })
+  });
+  if (!response.ok) {
+    throw new Error('Network response was not ok ' + response.statusText);
+  }
+  const friends = await response.json();
+  console.log(friends); // Aquí puedes manejar los datos como necesites
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
