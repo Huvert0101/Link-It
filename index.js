@@ -62,6 +62,14 @@ async function delFol(usr, folderName){
     if(res && res2) return "200";
     else return "500";
 }
+async function validUser(usr){
+    const [res] = await conn.query("SELECT user FROM users WHERE user ='"+usr+"'");
+    if(res.length > 0){
+        console.log("Usuario existe");
+    }else{
+        console.log("Usuario no existe");
+    }
+}
 
 function getMp3Files(musicFolder) {
     return new Promise((resolve, reject) => {
@@ -151,6 +159,7 @@ app.get('/getMusic', async (req, res) => {
 });
 app.post('/addfriend', jsonParser, (req, res) => {
    console.log(req.body.friendUser);
+   validUser(req.body.friendUser);
 })
 // Extension Routes
 app.post('/test',jsonParser, (req, res)=>{
