@@ -272,7 +272,7 @@ btnFriends.onclick = async() => {
   }
   const friends = await response.json();
   friends.forEach(friend=> {
-    let friendName = friend.folder.slice(0,6);
+    let friendName = friend.folder.slice(6,0);
     friendName = friendName.replace(newUser, '');
     friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friendName}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
   });
