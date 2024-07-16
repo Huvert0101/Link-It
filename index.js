@@ -167,7 +167,7 @@ app.post('/addfriend', jsonParser, async(req, res) => {
     res.sendStatus(404);
    }
 })
-app.post('/getFriends', async(req,res) => {
+app.post('/getFriends',jsonParser, async(req,res) => {
     console.log(req.body.user);
     console.log(await getFoldersFriends(req.body.user));
     res.json(await getFoldersFriends(req.body.user));
