@@ -253,6 +253,24 @@ let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
+btnAddFriend.onclick = () => {
+  let data = {
+    friendUser: searchBar.value,
+    user: newUser 
+  } 
+  console.log(data);
+  fetch(URL+"addfriend", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data) 
+  }).then(res => {
+    if(res.status == 404){
+      alert("User doesn't exists :c");
+    }
+  });
+}
 
 socket.emit('getUser', { user: newUser });
 
@@ -279,24 +297,6 @@ btnFriends.onclick = async() => {
   console.log(friends); // Aquí puedes manejar los datos como necesites
 }
 
-btnAddFriend.onclick = () => {
-  let data = {
-    friendUser: searchBar.value,
-    user: newUser 
-  } 
-  console.log(data);
-  fetch(URL+"addfriend", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data) 
-  }).then(res => {
-    if(res.status == 404){
-      alert("User doesn't exists :c");
-    }
-  });
-}
 
 async function postFile (file) {
   progressCont.style.display = "flex";
