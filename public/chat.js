@@ -253,9 +253,6 @@ let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
-btnAddFriend.onclick = () => {
-  console.log("putitos");
-}
 
 socket.emit('getUser', { user: newUser });
 
@@ -279,6 +276,25 @@ btnFriends.onclick = async() => {
     friendName = friendName.replace(newUser, '');
     friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friendName}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
   });
+  btnAddFriend.onclick = () => {
+    console.log("putitos");
+    let data = {
+      friendUser: searchBar.value,
+      user: newUser 
+    } 
+    console.log(data);
+    fetch(URL+"addfriend", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data) 
+    }).then(res => {
+      if(res.status == 404){
+        alert("User doesn't exists :c");
+      }
+    });
+  }
   console.log(friends); // Aquí puedes manejar los datos como necesites
 }
 
