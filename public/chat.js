@@ -420,6 +420,19 @@ folderList.onclick = (event)=>{
   lastFolder = folderEl;
   btnBack.style.visibility = 'visible'
 }
+friendList.onclick = (event)=>{
+  let folder = event.target.id;
+  if(folder == 'inputFolder' || folder == '') return
+  if(folder == 'addFolder'){ addFolder(); return}
+  folderEl = document.getElementById(folder);
+  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
+  folderEl.parentElement.classList.add("currentFolder");
+  currentFolder = folder;
+  socket.emit('changedFolder', { folder: currentFolder, user: newUser })
+  output.innerHTML = '';
+  lastFolder = folderEl;
+  btnBack.style.visibility = 'visible'
+}
 
 btnBack.onclick = () => {
   currentFolder = 'main';
