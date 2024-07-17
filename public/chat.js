@@ -274,7 +274,22 @@ btnFriends.onclick = async() => {
   friends.forEach(friend=> {
     let friendName = friend.folder.replace('friend', '');
     friendName = friendName.replace(newUser, '');
-    friendList.innerHTML += `<div class='folder'><span class='folder-title' id='${friend.folder}'>${friendName}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>`;
+    const folderDiv = document.createElement('div');
+    folderDiv.className = 'folder';
+
+    const folderTitle = document.createElement('span');
+    folderTitle.className = 'folder-title';
+    folderTitle.id = friend.folder;
+    folderTitle.textContent = friendName;
+
+    const icon = document.createElement('i');
+    icon.className = 'bx bx-dots-horizontal-rounded';
+    icon.style.color = '#ffffff';
+
+    // Hacer append a los elementos
+    folderDiv.appendChild(folderTitle);
+    folderDiv.appendChild(icon);
+    friendList.appendChild(folderDiv);
   });
   btnAddFriend.onclick = () => {
     console.log("putitos");
