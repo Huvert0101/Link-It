@@ -254,22 +254,7 @@ if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 btnAddFriend.onclick = () => {
-  let data = {
-    friendUser: searchBar.value,
-    user: newUser 
-  } 
-  console.log(data);
-  fetch(URL+"addfriend", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data) 
-  }).then(res => {
-    if(res.status == 404){
-      alert("User doesn't exists :c");
-    }
-  });
+  console.log("putitos");
 }
 
 socket.emit('getUser', { user: newUser });
