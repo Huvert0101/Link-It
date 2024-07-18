@@ -240,8 +240,13 @@ async function getMessages(user, folder){//maybe parameter: folder
     io.sockets.emit('getMessages', res);
 }
 async function getMessagesFol(user, folder){//maybe parameter: folder
-    const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"'");
-    io.sockets.emit('getMessagesFol', res);
+    if(user == ''){
+        const [res] = await conn.query("SELECT * FROM messages WHERE folder = '"+folder+"'");
+        io.sockets.emit('getMessagesFol', res);
+    }else{
+        const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"'");
+        io.sockets.emit('getMessagesFol', res);
+    }
 }
 async function getFolders(user){
     const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder NOT LIKE 'friend%'");

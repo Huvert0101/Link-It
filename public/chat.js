@@ -430,7 +430,7 @@ friendList.onclick = (event)=>{
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
-  socket.emit('changedFolder', { folder: currentFolder, user: newUser })
+  socket.emit('changedFolder', { folder: currentFolder, user: ''})
   output.innerHTML = '';
   lastFolder = folderEl;
   btnBack.style.visibility = 'visible'
