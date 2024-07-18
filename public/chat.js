@@ -425,6 +425,7 @@ friendList.onclick = (event)=>{
   if(folder == 'inputFolder' || folder == '') return
   if(folder == 'addFolder'){ addFolder(); return}
   if(folder == 'searchBar') return;
+  if(folder == 'btnAddFriend') return;
   folderEl = document.getElementById(folder);
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
