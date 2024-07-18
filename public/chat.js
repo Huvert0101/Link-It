@@ -497,6 +497,7 @@ function addBtnFolder() {
 socket.on('chat:message', (data) => {
   setTimeout(() => output.scrollTop=output.scrollHeight, 50);
   message.value = '';
+  if(data.folder.startsWith("friend") && data.folder == currentFolder) addToDom(data);
   if(data.user == newUser && data.folder == currentFolder) addToDom(data)
 });
 
