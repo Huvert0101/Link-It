@@ -262,14 +262,9 @@ io.on('connection', (socket) => {
             io.sockets.emit('getFolders', result);
         });
         socket.on('chat:message', (data) => {
-            if(data.folder.startsWith("friend")){
-                socket.broadcast.emit('chat:messagefriend', data);
-                insertMessage(data.message, "text", data.user, data.folder);
-            }else{
-                io.sockets.emit('chat:message', data);
-                console.log(data);
-                insertMessage(data.message, "text", data.user, data.folder);
-            }
+            io.sockets.emit('chat:message', data);
+            console.log(data);
+            insertMessage(data.message, "text", data.user, data.folder);
         });
     });
     socket.on('createFolder', (data)=>{
