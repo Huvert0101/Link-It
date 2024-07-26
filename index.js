@@ -263,7 +263,7 @@ io.on('connection', (socket) => {
         });
         socket.on('chat:message', (data) => {
             if(data.folder.startsWith("friend")){
-                io.sockets.broadcast.emit('chat:messagefriend', data);
+                socket.broadcast.emit('chat:messagefriend', data);
                 insertMessage(data.message, "text", data.user, data.folder);
             }else{
                 io.sockets.emit('chat:message', data);
