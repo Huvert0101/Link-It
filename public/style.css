@@ -277,6 +277,9 @@ input[type="range"]::-webkit-slider-thumb {
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
 }
+#btnFolders{
+    display: none;
+}
 
 @-webkit-keyframes bodong{  
   0%{height:15px; background:white;}  

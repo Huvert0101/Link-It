@@ -40,6 +40,7 @@ let btnFriends = document.getElementById("btnFriends");
 let rightPanelTitle = document.getElementById("rightPanelTitle");
 let btnAddFriend = document.getElementById("btnAddFriend");
 let searchBar = document.getElementById("searchBar");
+let btnFolders = document.getElementById("btnFolders");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -257,6 +258,7 @@ btnProfile.innerHTML = newUser;
 socket.emit('getUser', { user: newUser });
 
 btnFriends.onclick = async() => {
+  btnFolders.style.display = "block";
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
@@ -311,6 +313,9 @@ btnFriends.onclick = async() => {
     });
   }
   console.log(friends); // Aquí puedes manejar los datos como necesites
+}
+btnFolders.onclick = () => {
+  btnFriends.style.display = "block";
 }
 
 
