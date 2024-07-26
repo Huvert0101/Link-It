@@ -263,6 +263,7 @@ btnFriends.onclick = async() => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
+  friendsCont.innerHTML = '';
   const response = await fetch(URL+'getFriends', {
     method: 'POST',
     headers: {
