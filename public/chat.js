@@ -320,6 +320,10 @@ btnFolders.onclick = () => {
   btnFriends.style.display = "block";
   btnFolders.style.display = "none";
   socket.emit('getFolders', {user: newUser})
+  rightPanelTitle.innerText = "Folders";
+  folderList.style.display = "flex";
+  friendsCont.style.display = "none";
+
 }
 
 
