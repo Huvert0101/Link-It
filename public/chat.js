@@ -259,6 +259,7 @@ socket.emit('getUser', { user: newUser });
 
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
+  btnFriends.style.display = "none";
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
@@ -316,6 +317,7 @@ btnFriends.onclick = async() => {
 }
 btnFolders.onclick = () => {
   btnFriends.style.display = "block";
+  btnFolders.style.display = "none";
 }
 
 
