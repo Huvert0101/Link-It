@@ -279,6 +279,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 #btnFolders{
     display: none;
+    font-size: 23px;
 }
 
 @-webkit-keyframes bodong{  
