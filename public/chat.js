@@ -319,6 +319,7 @@ btnFriends.onclick = async() => {
 btnFolders.onclick = () => {
   btnFriends.style.display = "block";
   btnFolders.style.display = "none";
+  socket.emit('getFolders', {user: newUser})
 }
 
 

@@ -272,6 +272,9 @@ io.on('connection', (socket) => {
             if(result) io.sockets.emit("createdFolder", data);
         });
     });
+    socket.on('getFolders', (data) => getFolders(data.user).then(result => {
+        io.sockets.emit('getFolders', result)
+    }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
 });
 
