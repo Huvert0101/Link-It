@@ -52,10 +52,15 @@ body{
     width: 165px;
     border-radius: 10px;
     height: 135px;
+    cursor: pointer;
 }
 #selectBg{
-    width: 100%;
-    margin-top: 20px;
+    display: block;
+    width: 97%;
+    border-radius: 10px;
+    height: 30px;
+    margin: 0 auto;
+    margin-top: 25px;
 }
 .iframe-form{
     display: none;
