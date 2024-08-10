@@ -39,12 +39,19 @@ body{
     width: 530px;
     height: 250px;
 }
+.backgrounds{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
 #defaultBg{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
 }
 .bg-item{
-    width: 150px;
-    height: 130px;
+    width: 160px;
+    border-radius: 10px;
+    height: 135px;
 }
 .iframe-form{
     display: none;
