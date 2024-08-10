@@ -32,7 +32,7 @@ body{
 .customizeCont{
     margin-top: 33px;
     background-color: rgba(0, 0, 0, 0.5);
-    argin-left: 36.5%;
+    margin-left: 36.5%;
     position: absolute;
     border-radius: 20px;
     display: none;
