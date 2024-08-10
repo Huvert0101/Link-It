@@ -41,6 +41,8 @@ let rightPanelTitle = document.getElementById("rightPanelTitle");
 let btnAddFriend = document.getElementById("btnAddFriend");
 let searchBar = document.getElementById("searchBar");
 let btnFolders = document.getElementById("btnFolders");
+let btnCustomize = document.getElementById("btnCustomize");
+let customizeCont = document.querySelector(".customizeCont");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -328,6 +330,9 @@ btnFolders.onclick = () => {
 
 }
 
+btnCustomize.onclick = () => {
+  customizeCont.style.display = "flex";
+}
 
 async function postFile (file) {
   progressCont.style.display = "flex";

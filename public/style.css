@@ -29,6 +29,11 @@ body{
  color: white;
  opacity: 0.7;
 }
+.customizeCont{
+    display: none;
+    width: 300px;
+    height: 250px;
+}
 .iframe-form{
     display: none;
     top: 72px;
