@@ -43,6 +43,7 @@ let searchBar = document.getElementById("searchBar");
 let btnFolders = document.getElementById("btnFolders");
 let btnCustomize = document.getElementById("btnCustomize");
 let customizeCont = document.querySelector(".customizeCont");
+let secodndaryBg = document.getElementById("secondaryBg");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -329,9 +330,11 @@ btnFolders.onclick = () => {
   friendsCont.style.display = "none";
 
 }
-
 btnCustomize.onclick = () => {
   customizeCont.style.display = "inline";
+}
+secodndaryBg.onclick = () => {
+  document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
 }
 
 async function postFile (file) {
