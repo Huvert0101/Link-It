@@ -42,6 +42,10 @@ body{
 #defaultBg{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
 }
+.bg-item{
+    width: 150px;
+    height: 130px;
+}
 .iframe-form{
     display: none;
     top: 72px;
