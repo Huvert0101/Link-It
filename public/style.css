@@ -30,9 +30,9 @@ body{
  opacity: 0.7;
 }
 .customizeCont{
-    margin-top: 34px;
+    margin-top: 33px;
     background-color: rgba(0, 0, 0, 0.5);
-    margin-left: 40%;
+    argin-left: 36.5%;
     position: absolute;
     border-radius: 20px;
     display: none;
