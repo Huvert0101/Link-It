@@ -41,7 +41,7 @@ body{
 }
 .backgrounds{
     display: flex;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     margin-top: 30px;
 }
@@ -49,7 +49,7 @@ body{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
 }
 .bg-item{
-    width: 160px;
+    width: 165px;
     border-radius: 10px;
     height: 135px;
 }
