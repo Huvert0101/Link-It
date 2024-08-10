@@ -39,6 +39,9 @@ body{
     width: 530px;
     height: 250px;
 }
+#defaultBg{
+    background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
+}
 .iframe-form{
     display: none;
     top: 72px;
