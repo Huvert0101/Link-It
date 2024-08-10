@@ -57,7 +57,7 @@ body{
 #uploadBg{
     display: none;
 }
-#dropBg{
+.dropBg{
     transition: all ease 0.3s;
     text-align: center;
     padding: 34px 52px;
