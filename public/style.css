@@ -54,6 +54,16 @@ body{
     height: 135px;
     cursor: pointer;
 }
+#uploadBg{
+    display: none;
+}
+#dropBg{
+    transition: all ease 0.3s;
+    text-align: center;
+    padding: 34px 52px;
+    border: 2px dashed white;
+    margin: 25px 0;
+}
 #selectBg{
     display: block;
     width: 97%;
