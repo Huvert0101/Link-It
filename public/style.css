@@ -59,10 +59,11 @@ body{
 }
 .dropBg{
     transition: all ease 0.3s;
-    text-align: center;
-    padding: 34px 52px;
     border: 2px dashed white;
-    margin: 25px 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #selectBg{
     display: block;
