@@ -53,6 +53,10 @@ body{
     border-radius: 10px;
     height: 135px;
 }
+#selectBg{
+    width: 100%;
+    margin-top: 20px;
+}
 .iframe-form{
     display: none;
     top: 72px;
