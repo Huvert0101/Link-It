@@ -25,9 +25,9 @@ body{
     left: 50vw;
     background: rgba(0, 0, 0, 0.5);
 }
-.bxs-music{
-    color: white;
-    opacity: 0.7;
+.notch-icon{
+ color: white;
+ opacity: 0.7;
 }
 .iframe-form{
     display: none;
@@ -49,10 +49,6 @@ body{
 #btnCloseWindow{ color: white}
 .bx-minus:hover{
     background-color: rgba(255, 255, 255, 0.67);
-}
-.bx-globe{
-    color: white;
-    opacity: 0.7;
 }
 #iframe_url{
     background: none;
