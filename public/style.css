@@ -30,8 +30,13 @@ body{
  opacity: 0.7;
 }
 .customizeCont{
+    margin-top: 34px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-left: 40%;
+    background: red;
+    position: absolute;
     display: none;
-    width: 300px;
+    width: 530px;
     height: 250px;
 }
 .iframe-form{

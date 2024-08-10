@@ -331,7 +331,7 @@ btnFolders.onclick = () => {
 }
 
 btnCustomize.onclick = () => {
-  customizeCont.style.display = "flex";
+  customizeCont.style.display = "inline";
 }
 
 async function postFile (file) {
