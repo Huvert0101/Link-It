@@ -44,6 +44,7 @@ let btnFolders = document.getElementById("btnFolders");
 let btnCustomize = document.getElementById("btnCustomize");
 let customizeCont = document.querySelector(".customizeCont");
 let secodndaryBg = document.getElementById("secondaryBg");
+let selectBg = document.getElementById("selectBg");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -335,6 +336,9 @@ btnCustomize.onclick = () => {
 }
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
+}
+selectBg.onclick = () => {
+  customizeCont.style.display = "none";
 }
 
 async function postFile (file) {
