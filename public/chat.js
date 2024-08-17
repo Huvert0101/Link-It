@@ -341,9 +341,6 @@ btnCustomize.onclick = () => {
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
 }
-selectBg.onclick = () => {
-  customizeCont.style.display = "none";
-}
 
 async function postFile (file) {
   progressCont.style.display = "flex";
@@ -373,6 +370,18 @@ async function postBg(file){
     body: data,
     headers: {'Content-Type': 'multipart/form-data'}
   });
+}
+selectBg.onclick = (event) => {
+  event.preventDefault();
+  const fileLength = fileSelectBg.files.length;
+  if(fileLength > 0){
+    for (let i = 0; i < fileLength; i++) {
+      const file = inputFile.files[i];
+      postBg(file)  
+    }
+  }else{
+    customizeCont.style.display = "none";
+  }
 }
 
 uploadBtn.onclick = async (event) => {
