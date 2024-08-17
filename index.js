@@ -238,10 +238,10 @@ app.post('/upload', upload.single('file'), function(req, res, next){
     });
     res.redirect("/");
 })
-app.post('/uploadBg', upload.single('bg_src', function(req, res, next){
+app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
     res.redirect("/");
-}))
+})
 async function getMessages(user, folder){//maybe parameter: folder
     const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' ORDER BY id DESC LIMIT 13");
     io.sockets.emit('getMessages', res);
