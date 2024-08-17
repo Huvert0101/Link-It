@@ -365,7 +365,7 @@ async function postBg(file){
   const data = new FormData();
   data.append("bg_src", file);
   data.append("user", newUser);
-  fetch('/uploadBg', {
+  fetch(URL+'uploadBg', {
     method: 'post',
     body: data
   });
