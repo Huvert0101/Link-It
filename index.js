@@ -29,6 +29,9 @@ var jsonParser = bodyParser.json({ limit: '50000mb' })
 async function insertMessage(message, type, user, folder){
     await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
 }
+async function insertBg(user, bg_src){
+    await conn.query("INSERT INTO backgrounds(user,bg_src) VALUES('"+ user +"', '"+bg_src +"')");
+}
 async function Register(user, paswd){
     const [res] = await conn.query("INSERT INTO users(user, password) VALUES('" + user + "', '" + paswd + "')");
     return res;
@@ -235,6 +238,9 @@ app.post('/upload', upload.single('file'), function(req, res, next){
     });
     res.redirect("/");
 })
+app.post('/uploadBg', upload.single('file', function(req, res, next){
+    insertBg(req.body.user, 'files/' + req.file.originalname);
+}))
 async function getMessages(user, folder){//maybe parameter: folder
     const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' ORDER BY id DESC LIMIT 13");
     io.sockets.emit('getMessages', res);

@@ -57,7 +57,7 @@ body{
     height: 135px;
     cursor: pointer;
 }
-#uploadBg{
+#fileSelectBg{
     display: none;
 }
 .dropBg{

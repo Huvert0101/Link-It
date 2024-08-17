@@ -45,6 +45,8 @@ let btnCustomize = document.getElementById("btnCustomize");
 let customizeCont = document.querySelector(".customizeCont");
 let secodndaryBg = document.getElementById("secondaryBg");
 let selectBg = document.getElementById("selectBg");
+let dropBg = document.querySelector(".dropBg");
+let fileSelectBg = document.getElementById("fileSelectBg");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -78,6 +80,8 @@ btnPlayer.onclick = async () => {
       playerLoaded = true;
       const response = await fetch(URL+'/getMusic');
       if (!response.ok) {
+        currentSongTitle.innerText = "No Song";
+        playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
         throw new Error(`Error: ${response.statusText}`);
       }
       const mp3Files = await response.json();
@@ -360,6 +364,16 @@ async function postFile (file) {
     }
   });
 }
+async function postBg(file){
+  const data = new FormData();
+  data.append("bg_src", file);
+  data.append("user", newUser);
+  fetch('/uploadBg', {
+    method: 'post',
+    body: data,
+    headers: {'Content-Type': 'multipart/form-data'}
+  });
+}
 
 uploadBtn.onclick = async (event) => {
   event.preventDefault();
@@ -421,7 +435,7 @@ message.addEventListener('paste', (e) => {
     postFile(newFile)
   }
 })
-
+dropBg.addEventListener('click', () => fileSelectBg.click());
 dropArea.addEventListener('click', () => inputFile.click())
 inputFile.onchange = () => showFiles();
 
