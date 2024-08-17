@@ -365,10 +365,13 @@ async function postBg(file){
   const data = new FormData();
   data.append("bg_src", file);
   data.append("user", newUser);
-  fetch(URL+'uploadBg', {
-    method: 'post',
-    body: data
-  });
+  await axios.post('/uploadBg', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }, onUploadProgress(e){
+      const porcentage = Math.round((e.loaded * 100)/e.total);
+    }
+  })
 }
 selectBg.onclick = (event) => {
   event.preventDefault();
