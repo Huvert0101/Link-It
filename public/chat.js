@@ -378,7 +378,7 @@ selectBg.onclick = async(event) => {
   const fileLength = fileSelectBg.files.length;
   if(fileLength > 0){
     for (let i = 0; i < fileLength; i++) {
-      const file = inputFile.files[i];
+      const file = fileSelectBg.files[i];
       await postBg(file)  
     }
   }else{
