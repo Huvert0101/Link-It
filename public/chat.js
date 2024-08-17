@@ -367,8 +367,7 @@ async function postBg(file){
   data.append("user", newUser);
   fetch('/uploadBg', {
     method: 'post',
-    body: data,
-    headers: {'Content-Type': 'multipart/form-data'}
+    body: data
   });
 }
 selectBg.onclick = (event) => {
