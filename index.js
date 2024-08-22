@@ -242,7 +242,7 @@ app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
     res.redirect("/");
 })
-app.post('/getBackgrounds', (req, res) => {
+app.post('/getBackgrounds',jsonParser,(req, res) => {
     console.log(req.body.user);
     //res.json(await getBackgrounds(req.body.user))
 })

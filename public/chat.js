@@ -337,11 +337,11 @@ btnFolders.onclick = () => {
 }
 btnCustomize.onclick = () => {
   customizeCont.style.display = "inline";
-  const data = new FormData();
-  data.append("user", newUser);
+  let data = {user: newUser}
   fetch(URL+"getBackgrounds",{
     method: 'post',
-    body: data
+    body: JSON.stringify(data),
+    headers: {"Content-Type": "application/json"}
   })
 }
 secodndaryBg.onclick = () => {
