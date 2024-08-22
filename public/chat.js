@@ -47,6 +47,7 @@ let secodndaryBg = document.getElementById("secondaryBg");
 let selectBg = document.getElementById("selectBg");
 let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
+let backgroundsCont = document.querySelector(".backgrounds");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -342,7 +343,11 @@ btnCustomize.onclick = () => {
     method: 'post',
     body: JSON.stringify(data),
     headers: {"Content-Type": "application/json"}
-  }).then(res => console.log(res.json()));
+  }).then(res => {
+    res.json().forEach(bg=> {
+     console.log(bg) 
+    });
+  });
 }
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
