@@ -337,6 +337,12 @@ btnFolders.onclick = () => {
 }
 btnCustomize.onclick = () => {
   customizeCont.style.display = "inline";
+  const data = new FormData();
+  data.append("user", newUser);
+  fetch(URL+"getBackgrounds",{
+    method: 'post',
+    body: data
+  })
 }
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
