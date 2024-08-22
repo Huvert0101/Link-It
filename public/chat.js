@@ -342,7 +342,7 @@ btnCustomize.onclick = () => {
     method: 'post',
     body: JSON.stringify(data),
     headers: {"Content-Type": "application/json"}
-  }).then(res => console.log(res));
+  }).then(res => console.log(res.json()));
 }
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
