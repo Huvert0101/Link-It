@@ -242,6 +242,10 @@ app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
     res.redirect("/");
 })
+app.post('/getBackgrounds', (req, res) => {
+    console.log(req.body.user);
+    //res.json(await getBackgrounds(req.body.user))
+})
 async function getMessages(user, folder){//maybe parameter: folder
     const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' ORDER BY id DESC LIMIT 13");
     io.sockets.emit('getMessages', res);
