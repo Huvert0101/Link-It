@@ -82,7 +82,8 @@ function getMp3Files(musicFolder) {
     });
 }
 async function getBackgrounds(user){
-    return [res] = await conn.query("SELECT bg_src from backgrounds WHERE user = '"+user+"'");
+    const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user = '"+user+"'");
+    return res
 }
 
 // Routes
