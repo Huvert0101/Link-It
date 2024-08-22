@@ -344,7 +344,9 @@ btnCustomize.onclick = () => {
     body: JSON.stringify(data),
     headers: {"Content-Type": "application/json"}
   }).then(res => {
-    res.json().forEach(bg=> {
+    let bgs = res.json();
+    console.log(bgs);
+    bgs.forEach(bg=> {
      console.log(bg) 
     });
   });
