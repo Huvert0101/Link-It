@@ -349,6 +349,9 @@ btnCustomize.onclick = () => {
       bgImg.setAttribute("class","bg-item");
       bgImg.src = bg.bg_src;
       backgroundsCont.appendChild(bgImg);
+      bgImg.onclick = () => {
+        document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
+      }
       console.log(bg);
     })
   }) 
