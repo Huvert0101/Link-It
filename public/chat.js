@@ -345,6 +345,10 @@ btnCustomize.onclick = () => {
     headers: {"Content-Type": "application/json"}
   }).then(res =>res.json()).then(bgs=>{
     bgs.forEach(bg => {
+      const bg = document.createElement("div");
+      bg.setAttribute("class","bg-item");
+      bg.src = bg.bg_src;
+      backgroundsCont.appendChild(bg);
       console.log(bg);
     })
   }) 
