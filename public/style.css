@@ -43,12 +43,12 @@ body{
     height: 250px;
 }
 .backgrounds{
-    padding-left: 98%;
+    padding-left: 1.5%;
     padding-right: 10px;
     overflow-x: scroll;
     display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: start;
     margin-top: 30px;
 }
 #defaultBg{
