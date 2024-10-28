@@ -272,9 +272,9 @@ async function getFolders(user){
     const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder NOT LIKE 'friend%'");
     return res;
 }
-app.post('/getFolderFilesFromCloud', jsonParser, (req,res)=>{
+app.post('/getFolderFilesFromCloud', jsonParser, async(req,res)=>{
     console.log(req.body);
-    const filesFromCloud = getFolderFilesFromCloud(req.body.user, req.body.folder);
+    const filesFromCloud = await getFolderFilesFromCloud(req.body.user, req.body.folder);
     console.log(filesFromCloud);
     res.json(filesFromCloud)
 })
