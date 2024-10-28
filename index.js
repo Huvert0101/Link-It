@@ -2,7 +2,8 @@ import path from 'path'
 import fs from 'fs'
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
-import bodyParser, { json } from 'body-parser';
+import bodyParser from 'body-parser';
+const {json} = bodyParser;
 import cors from 'cors';
 const storage = multer.diskStorage({
     destination: 'public/files/',
