@@ -271,8 +271,9 @@ async function getFolders(user){
     const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder NOT LIKE 'friend%'");
     return res;
 }
-app.post('/getFolderFilesFromCloud', jsonParser,(req,res)=>{
+app.post('/getFolderFilesFromCloud', jsonParser, (req,res)=>{
     console.log(req.body);
+    res.json({res:"hello"})
 })
 //websockets
 io.on('connection', (socket) => {
