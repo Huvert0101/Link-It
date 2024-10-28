@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+import bodyParser, { json } from 'body-parser';
 import cors from 'cors';
 const storage = multer.diskStorage({
     destination: 'public/files/',
@@ -263,10 +263,17 @@ async function getMessagesFol(user, folder){//maybe parameter: folder
         io.sockets.emit('getMessagesFol', res);
     }
 }
+async function getFolderFilesFromCloud(user, folder){
+    const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' AND type='file'");
+    return res
+}
 async function getFolders(user){
     const [res] = await conn.query("SELECT * FROM folders WHERE user = '"+user+"' AND folder NOT LIKE 'friend%'");
     return res;
 }
+app.post('/getFolderFilesFromCloud', jsonParser,(req,res)=>{
+    console.log(req.body);
+})
 //websockets
 io.on('connection', (socket) => {
     console.log("Socket connected!")
