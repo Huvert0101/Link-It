@@ -274,7 +274,7 @@ async function getFolders(user){
 }
 app.post('/getFolderFilesFromCloud', jsonParser, (req,res)=>{
     console.log(req.body);
-    res.json({res:"hello"})
+    res.json(getFolderFilesFromCloud(req.body.user, req.body.folder))
 })
 //websockets
 io.on('connection', (socket) => {
