@@ -48,6 +48,7 @@ let selectBg = document.getElementById("selectBg");
 let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
 let backgroundsCont = document.querySelector(".backgrounds");
+let btnCreateDoc = document.querySelector(".bxs-file-doc")
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -132,6 +133,103 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 0.7;
   }
 }
+function createIframeWindow(site){
+  const iframeCont = document.createElement("div");
+  iframeCont.className = "iframeCont";
+
+  // Crear el icono de nueva ventana
+  const newWindowIcon = document.createElement("i");
+  newWindowIcon.className = "bx bx-plus";
+  newWindowIcon.id = "newWindow";
+
+  // Crear la barra superior de la ventana
+  const windowTop = document.createElement("div");
+  windowTop.className = "window-top";
+
+  // Crear el título de la ventana
+  const windowTitle = document.createElement("span");
+  windowTitle.id = "window-title";
+  windowTitle.innerText = "Window Title";
+
+  // Crear el icono de minimizar
+  const minWindowIcon = document.createElement("i");
+  minWindowIcon.className = "bx bx-minus";
+  minWindowIcon.id = "minWindow";
+
+  // Crear el icono de cerrar
+  const btnCloseWindowIcon = document.createElement("i");
+  btnCloseWindowIcon.className = "bx bx-x";
+  btnCloseWindowIcon.id = "btnCloseWindow";
+
+  // Añadir el título y los iconos a la barra superior de la ventana
+  windowTop.appendChild(windowTitle);
+  windowTop.appendChild(minWindowIcon);
+  windowTop.appendChild(btnCloseWindowIcon);
+
+  // Añadir los elementos a iframeCont
+  iframeCont.appendChild(newWindowIcon);
+  iframeCont.appendChild(windowTop);
+  document.body.appendChild(iframeCont);
+  btnCloseWindowIcon.onclick = () => {
+    minWin = false;
+    document.body.removeChild(iframeCont);
+    btnIframe.style.opacity = 0.7;
+  }
+  minWindowIcon.onclick = () => {
+    minWin = true;
+    iframeCont.style.display = "none";
+    btnIframe.style.opacity = 0.7;
+  }
+
+  var iframe = document.createElement('iframe');
+  iframe.src = site;
+  iframeUrl.value = '';
+  document.getElementById('window-title').innerText = iframe.src;
+  iframe.width = '100%';
+  iframe.height = '100%';
+  iframeCont.appendChild(iframe);
+  iframeForm.style.display = "none";
+  iframe.onload = () => {
+    iframeCont.style.display = "block";
+  }
+  newWindowIcon.onclick = () => {
+    iframeForm.style.display = "block";
+  }
+windowTop.onmousedown = function(e) {
+        e.preventDefault();
+        iframeCont.style.cursor = "grabbing";
+        // Obtener la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Adjuntar los eventos para mover el div y soltarlo
+        document.onmousemove = elementDrag;
+        document.onmouseup = closeDragElement;
+    };
+
+    // Función que se ejecuta mientras se arrastra el div
+    function elementDrag(e) {
+        e.preventDefault();
+        // Calcular el nuevo desplazamiento del ratón
+        offsetX = mouseX - e.clientX;
+        offsetY = mouseY - e.clientY;
+        // Actualizar la posición inicial del ratón
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Establecer la nueva posición del div
+        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
+        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+    }
+
+    // Función que se ejecuta cuando se suelta el div
+    function closeDragElement() {
+        // Desconectar los eventos de movimiento y soltar
+        iframeCont.style.cursor = "grab";
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
+
+}
+btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.google.com/document/d/1zpN_7GcudpTKwtS2ELPP2bBFf773QkIep8bP-xatFFA/edit?tab=t.0");
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
