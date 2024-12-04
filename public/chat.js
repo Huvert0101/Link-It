@@ -229,7 +229,7 @@ windowTop.onmousedown = function(e) {
     }
 
 }
-btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.google.com/document/d/1zpN_7GcudpTKwtS2ELPP2bBFf773QkIep8bP-xatFFA/edit?tab=t.0");
+btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.google.com/document/u/1/create?usp=dot_new");
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
