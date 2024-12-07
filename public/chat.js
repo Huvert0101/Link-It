@@ -229,7 +229,11 @@ windowTop.onmousedown = function(e) {
     }
 
 }
-btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.new");
+btnCreateDoc.onclick = ()=> {
+  resp = fetch("https://docs.new");
+  console.log(resp);
+  createIframeWindow("https://docs.new")
+};
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
