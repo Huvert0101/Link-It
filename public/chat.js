@@ -48,7 +48,7 @@ let selectBg = document.getElementById("selectBg");
 let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
 let backgroundsCont = document.querySelector(".backgrounds");
-let btnCreateDoc = document.querySelector(".bxs-file-doc")
+let btnCreateDoc = document.querySelector(".bx-file-blank")
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -229,7 +229,7 @@ windowTop.onmousedown = function(e) {
     }
 
 }
-btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.google.com/document/u/1/create?usp=dot_new");
+btnCreateDoc.onclick = ()=> createIframeWindow("https://docs.new");
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
