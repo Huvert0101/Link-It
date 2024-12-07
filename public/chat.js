@@ -230,8 +230,9 @@ windowTop.onmousedown = function(e) {
 
 }
 btnCreateDoc.onclick = ()=> {
-  resp = fetch("https://docs.new");
-  console.log(resp);
+  fetch('https://docs.new', { mode: 'no-cors' })
+  .then(response => console.log(response))
+  .catch(error => console.error(error));
   createIframeWindow("https://docs.new")
 };
 btnGo.onclick = () => {
