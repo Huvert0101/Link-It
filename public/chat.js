@@ -229,6 +229,12 @@ windowTop.onmousedown = function(e) {
     }
 
 }
+        const docSpace = DocSpace.SDK.initFrame({
+            frameId: "benito",
+            showMenu: true,
+        })
+        docFrame = DocSpace.SDK.frames["benito"];
+        console.log(docFrame);
 btnCreateDoc.onclick = ()=> {
   fetch('https://docs.new', { mode: 'no-cors' })
   .then(response => console.log(response))
