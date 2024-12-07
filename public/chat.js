@@ -229,7 +229,7 @@ windowTop.onmousedown = function(e) {
     }
 
 }
-        const docSpace = DocSpace.SDK.initFrame({
+        const docSpace = window.DocSpace.SDK.initFrame({
             frameId: "benito",
             showMenu: true,
         })
