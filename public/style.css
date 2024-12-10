@@ -190,8 +190,17 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     width: 80%;
     border-radius: 20px;
     height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: white;
+}
+#example{
+    position: absolute;
+    scale: 0.7;
+    top: -226px;
+    left: -127px;
+}
+.fr-toolbar.fr-sticky-on{
+    width: 100%!important;
 }
 .bx-hover:hover{
     opacity: 0.9;
@@ -362,6 +371,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: 100%;
 }
 .bx-x{
+    z-index: 9;
     display: flex;
     width: 6%;
     height: 5%;
