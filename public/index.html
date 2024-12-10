@@ -12,7 +12,6 @@
     <title>Link - It</title>
 </head>
 <body>
-    <div id="example"></div>
     <div class="notch"><i class='bx bx-image notch-icon bx-hover' id="btnCustomize"></i><button class="btnProfile">Guest01</button><i class='bx bx-hover bx-globe notch-icon'></i><i class='bx bx-hover bxs-music notch-icon'></i><i class='bx bx-file-blank notch-icon' style='color:#ffffff'></i></div>
     <div class="customizeCont">
         <div class="backgrounds">
@@ -41,9 +40,10 @@
             <div class="top-tab">
                 <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
-            <form method="post" id="editorContainer">
+            <div id="example"></div>
+            <!-- <form method="post" id="editorContainer">
                 <textarea id="mytextarea">Hello, World!</textarea>
-            </form>
+            </form> -->
         </div>
         <div class="plugin">
             <div class="player">
@@ -108,8 +108,6 @@
     <script src="axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
     <script type="text/javascript" src="froala_editor.pkgd.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="docConverter.js"></script>
     <script>
     let middlePane = document.querySelector(".middle");
     let inputMsgBar = document.getElementById("input");
@@ -117,6 +115,7 @@
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
     var editor = new FroalaEditor('#example',{documentReady:true});
+    console.log(editor);
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
@@ -159,20 +158,6 @@
                         console.log("mammoth: ",html);
                         editor.html.set(html);
                         });
-                    
-                    require("docx2html")(arrayBuffer,{container:document.querySelector("#mytextarea")})
-                    .then(html=>{
-                        debugger
-                        //try html.toString/asZip/download/save
-                        console.log(html.toString());
-                        editor.html.set(html.toString());
-                        tinymce.activeEditor.setContent(html.toString());
-                        const iframe = document.getElementById("mytextarea_ifr");
-                        const iframeWindow = iframe.contentWindow;
-                        iframeWindow.document.getElementById("A").style.background="white";
-                        iframeWindow.document.querySelector("section").style.width="104%";
-                        iframeWindow.document.querySelector("section").style.padding="0px";
-                    })
                 })
                 .catch(error => {
                     console.error("Error al cargar el archivo DOCX:", error);
