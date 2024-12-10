@@ -134,17 +134,6 @@
     mainCont.style.gap = "0px";
     }
     btnCloseEditor.onclick = () => closeEditor(); 
-        tinymce.init({
-        selector: "textarea",
-        lisence_key: "gpl",  // Selector del elemento donde se mostrará el editor
-        height: 500,           // Altura del editor
-        plugins: "advlist autolink lists link image charmap print preview anchor",
-        toolbar: "undo redo | formatselect | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
-        content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
-        });
         function loadDoc(filePath){
             const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
             openEditor();
