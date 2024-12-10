@@ -106,7 +106,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
-    <script type="text/javascript" src="froala_editor.pkgd.min.js"></script> <script>var editor = new FroalaEditor('#example',{documentReady:true});</script>
+    <script type="text/javascript" src="froala_editor.pkgd.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="docConverter.js"></script>
     <script>
@@ -115,6 +115,7 @@
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
+    var editor = new FroalaEditor('#example',{documentReady:true});
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
@@ -146,7 +147,7 @@
         content_style: "body { font-family: Arial, sans-serif; font-size: 14px }"
         });
         function loadDoc(filePath){
-            const docxPath = "https://link-it-ns7k.onrender.com/" + filePath;
+            const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
             openEditor();
             fetch(docxPath)
                 .then(response => response.arrayBuffer())
@@ -155,6 +156,7 @@
                     .then(html=>{
                         debugger
                         //try html.toString/asZip/download/save
+                        editor.html.set(html.toString());
                         tinymce.activeEditor.setContent(html.toString());
                         const iframe = document.getElementById("mytextarea_ifr");
                         const iframeWindow = iframe.contentWindow;
