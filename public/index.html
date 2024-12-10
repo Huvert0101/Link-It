@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="LinkIt-min-bg-dark.webp">
+    <link href="https://editor-latest.s3.amazonaws.com/v3/css/froala_editor.pkgd.min.css?v=1.0.0" rel="stylesheet" type="text/css"/>
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.snow.css" rel="stylesheet" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="style.css">
     <title>Link - It</title>
 </head>
 <body>
-    <div id="ds-frame">Fallback text</div>
+    <div id="example"></div>
     <div class="notch"><i class='bx bx-image notch-icon bx-hover' id="btnCustomize"></i><button class="btnProfile">Guest01</button><i class='bx bx-hover bx-globe notch-icon'></i><i class='bx bx-hover bxs-music notch-icon'></i><i class='bx bx-file-blank notch-icon' style='color:#ffffff'></i></div>
     <div class="customizeCont">
         <div class="backgrounds">
@@ -105,7 +106,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
-    <script src="https://linkit.onlyoffice.com/static/scripts/sdk/1.0.1/api.js?src=https%3A%2F%2Flinkit.onlyoffice.com&mode=editor&width=200%25&height=100%25&frameId=ds-frame&init=true&id=1554187&requestToken=S0FyYmxoMXpFZXdmaDQ0aHFESHFKcXVqN3hhMlM3RU13blR4d0hUL2tubz0_IjkyMTE3OWMxLTZkNTQtNDgxYS05YmQ5LTk0MjI3MzllMzNmZCI"></script>
+    <script type="text/javascript" src="https://editor-latest.s3.amazonaws.com/v3/js/froala_editor.pkgd.min.js?v=1.0.0"></script> <script>var editor = new FroalaEditor('#example',{documentReady:true});</script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="docConverter.js"></script>
     <script>
