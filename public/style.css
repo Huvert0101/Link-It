@@ -11,6 +11,9 @@ body{
     height: 97vh;
     width: 98vw;
 }
+a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
+    display: none;
+}
 .notch{
     position: absolute;
     top: 0px;

@@ -115,7 +115,6 @@
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
     var editor = new FroalaEditor('#example',{documentReady:true});
-    console.log(editor);
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
@@ -155,7 +154,6 @@
                     mammoth.convertToHtml({ arrayBuffer:  arrayBuffer})
                     .then((result) => {
                         const html = result.value; // HTML generado
-                        console.log("mammoth: ",html);
                         editor.html.set(html);
                         });
                 })
