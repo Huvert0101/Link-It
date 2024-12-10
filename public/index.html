@@ -106,6 +106,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
     <script type="text/javascript" src="froala_editor.pkgd.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/qcsiibivkeq50se9dw6jsmlmm7e7q5mryus0xjzo24gj16z0/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="docConverter.js"></script>
@@ -152,10 +153,18 @@
             fetch(docxPath)
                 .then(response => response.arrayBuffer())
                 .then(arrayBuffer => {
+                    mammoth.convertToHtml({ arrayBuffer:  arrayBuffer})
+                    .then((result) => {
+                        const html = result.value; // HTML generado
+                        console.log("mammoth: ",html);
+                        editor.html.set(html);
+                        });
+                    
                     require("docx2html")(arrayBuffer,{container:document.querySelector("#mytextarea")})
                     .then(html=>{
                         debugger
                         //try html.toString/asZip/download/save
+                        console.log(html.toString());
                         editor.html.set(html.toString());
                         tinymce.activeEditor.setContent(html.toString());
                         const iframe = document.getElementById("mytextarea_ifr");
