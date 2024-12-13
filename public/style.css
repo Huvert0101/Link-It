@@ -194,10 +194,11 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     background-color: white;
 }
 #example{
+    transform-origin: top;
     position: absolute;
     scale: 0.7;
-    top: -226px;
-    left: -127px;
+    top: 0px;
+    left: -128px;
 }
 .fr-toolbar.fr-sticky-on{
     width: 100%!important;
