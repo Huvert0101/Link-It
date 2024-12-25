@@ -175,12 +175,12 @@
     };
 
     btnCloseEditor.onclick = async() => closeEditor(); 
-        async function loadDoc(filePath){
-            const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
-            openEditor();
-            const document = await convertFromUrl(docxPath).toString();
-            editor.html.set(document);
-        }
+    async function loadDoc(filePath){
+        const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
+        openEditor();
+        const document = await convertFromUrl(docxPath);
+        editor.html.set(document);
+    }
     </script>
 </body>
 </html>
