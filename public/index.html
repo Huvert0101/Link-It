@@ -135,37 +135,40 @@
     }
     const convertFromUrl = async (fileUrl) => {
     const apiKey = "5a52377cc719a4d510ec5c6636c8a233"; // Reemplaza con tu API Key de Convertio
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // Proxy CORS
+
     try {
         // Paso 1: Iniciar la conversión con la URL
-        const response = await axios.post("https://api.convertio.co/convert", {
+        const response = await axios.post(`${proxyUrl}https://api.convertio.co/convert`, {
         apikey: apiKey,
         input: "url",
         file: fileUrl,
         filename: "archivo.docx",
         outputformat: "html",
         });
+
         console.log("Conversión iniciada:", response.data);
+
         // Extraer el ID de la conversión
         const conversionId = response.data.data.id;
 
         // Paso 2: Monitorear el estado de la conversión
         let statusResponse;
         do {
-        statusResponse = await axios.get(
-            `https://api.convertio.co/convert/${conversionId}/status`
-        );
+        statusResponse = await axios.get(`${proxyUrl}https://api.convertio.co/convert/${conversionId}/status`);
         console.log("Estado:", statusResponse.data.data.step);
         await new Promise((resolve) => setTimeout(resolve, 3000)); // Esperar 3 segundos
         } while (statusResponse.data.data.step !== "finish");
 
         // Paso 3: Obtener el contenido convertido como un string HTML
         const downloadUrl = statusResponse.data.data.output.url;
-        const convertedFile = await axios.get(downloadUrl);
+        const convertedFile = await axios.get(`${proxyUrl}${downloadUrl}`);
         
         // El contenido convertido estará en convertedFile.data
         const htmlContent = convertedFile.data;
         console.log("Contenido convertido (HTML):", htmlContent);
         return htmlContent
+
     } catch (error) {
         console.error("Error durante la conversión:", error.response?.data || error);
     }
