@@ -133,22 +133,49 @@
     right.style.width = "25%";
     mainCont.style.gap = "0px";
     }
+    const convertFromUrl = async (fileUrl) => {
+    const apiKey = "5a52377cc719a4d510ec5c6636c8a233"; // Reemplaza con tu API Key de Convertio
+    try {
+        // Paso 1: Iniciar la conversión con la URL
+        const response = await axios.post("https://api.convertio.co/convert", {
+        apikey: apiKey,
+        input: "url",
+        file: fileUrl,
+        filename: "archivo.docx",
+        outputformat: "html",
+        });
+        console.log("Conversión iniciada:", response.data);
+        // Extraer el ID de la conversión
+        const conversionId = response.data.data.id;
+
+        // Paso 2: Monitorear el estado de la conversión
+        let statusResponse;
+        do {
+        statusResponse = await axios.get(
+            `https://api.convertio.co/convert/${conversionId}/status`
+        );
+        console.log("Estado:", statusResponse.data.data.step);
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Esperar 3 segundos
+        } while (statusResponse.data.data.step !== "finish");
+
+        // Paso 3: Obtener el contenido convertido como un string HTML
+        const downloadUrl = statusResponse.data.data.output.url;
+        const convertedFile = await axios.get(downloadUrl);
+        
+        // El contenido convertido estará en convertedFile.data
+        const htmlContent = convertedFile.data;
+        console.log("Contenido convertido (HTML):", htmlContent);
+        return htmlContent
+    } catch (error) {
+        console.error("Error durante la conversión:", error.response?.data || error);
+    }
+    };
+
     btnCloseEditor.onclick = () => closeEditor(); 
         function loadDoc(filePath){
             const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
             openEditor();
-            fetch(docxPath)
-                .then(response => response.arrayBuffer())
-                .then(arrayBuffer => {
-                    mammoth.convertToHtml({ arrayBuffer:  arrayBuffer})
-                    .then((result) => {
-                        const html = result.value; // HTML generado
-                        editor.html.set(html);
-                        });
-                })
-                .catch(error => {
-                    console.error("Error al cargar el archivo DOCX:", error);
-                });
+            editor.html.set(convertFromUrl(docxPath));
         }
     </script>
 </body>
