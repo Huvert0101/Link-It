@@ -178,7 +178,8 @@
         async function loadDoc(filePath){
             const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
             openEditor();
-            editor.html.set(await convertFromUrl(docxPath).toString());
+            const document = await convertFromUrl(docxPath).toString();
+            editor.html.set(document);
         }
     </script>
 </body>
