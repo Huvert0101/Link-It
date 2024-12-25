@@ -12,6 +12,7 @@
 	font-family: 'Lato';
 	width: fit-content;
 	margin-left: auto;
+    display: contents;
 	margin-right: auto;
 }
 
@@ -65,6 +66,9 @@
 	margin-top: 28px;
 	margin-bottom: 28px;
 	height: 100%;
+    position: absolute;
+    left: -174px;
+    transform-origin: top;
 }
 
 .editor-container_document-editor .editor-container__editor .ck.ck-editor__editable {
