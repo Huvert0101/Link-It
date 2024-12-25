@@ -176,7 +176,7 @@
         console.error("Error durante la conversión:", error.response?.data || error);
     }
     };
-
+    var newEditor;
     const {
 	DecoupledEditor,Alignment,Autoformat,AutoImage,AutoLink,Autosave,BalloonToolbar,Bold,CKBox,CloudServices,Code,
 	Essentials,FindAndReplace,FontBackgroundColor,FontColor,FontFamily,FontSize,Heading,
@@ -313,6 +313,7 @@
     DecoupledEditor.create(document.querySelector('#editor'), editorConfig).then(editor => {
         document.querySelector('#editor-toolbar').appendChild(editor.ui.view.toolbar.element);
         document.querySelector('#editor-menu-bar').appendChild(editor.ui.view.menuBarView.element);
+        newEditor = editor;
         return editor;
     });
     function configUpdateAlert(config) {
@@ -352,7 +353,7 @@
         const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
         openEditor();
         const document = await convertFromUrl(docxPath);
-        editor.setData(document);
+        newEditor.setData(document);
     }
     </script>
 </body>
