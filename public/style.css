@@ -68,6 +68,7 @@
 	height: 100%;
     position: absolute;
     left: -174px;
+    scale: 0.72;
     transform-origin: top;
 }
 
