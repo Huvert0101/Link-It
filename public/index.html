@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="LinkIt-min-bg-dark.webp">
-    <link href="froala_editor.pkgd.min.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0-rc.4/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css" crossorigin>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="style.css">
     <title>Link - It</title>
@@ -40,10 +39,15 @@
             <div class="top-tab">
                 <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
-            <div id="example"></div>
-            <!-- <form method="post" id="editorContainer">
-                <textarea id="mytextarea">Hello, World!</textarea>
-            </form> -->
+            <div class="main-container">
+                <div class="editor-container editor-container_document-editor" id="editor-container">
+                    <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
+                    <div class="editor-container__toolbar" id="editor-toolbar"></div>
+                    <div class="editor-container__editor-wrapper">
+                        <div class="editor-container__editor"><div id="editor"></div></div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="plugin">
             <div class="player">
@@ -106,15 +110,14 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="chat.js"></script>
     <script src="axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
-    <script type="text/javascript" src="froala_editor.pkgd.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.umd.js" crossorigin></script>
+	<script src="https://cdn.ckbox.io/ckbox/2.6.1/ckbox.js" crossorigin></script>
     <script>
     let middlePane = document.querySelector(".middle");
     let inputMsgBar = document.getElementById("input");
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
-    var editor = new FroalaEditor('#example',{documentReady:true});
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
@@ -174,12 +177,182 @@
     }
     };
 
+    const {
+	DecoupledEditor,Alignment,Autoformat,AutoImage,AutoLink,Autosave,BalloonToolbar,Bold,CKBox,CloudServices,Code,
+	Essentials,FindAndReplace,FontBackgroundColor,FontColor,FontFamily,FontSize,Heading,
+	Highlight,HorizontalLine,ImageBlock,ImageCaption,ImageInline,ImageInsert,ImageInsertViaUrl,ImageResize,ImageStyle,
+	ImageTextAlternative,ImageToolbar,ImageUpload,Indent,IndentBlock,Italic,Link,LinkImage,List,ListProperties,
+	PageBreak,Paragraph,PasteFromOffice,PictureEditing,RemoveFormat,SpecialCharacters,SpecialCharactersArrows,
+	SpecialCharactersCurrency,SpecialCharactersEssentials,SpecialCharactersLatin,SpecialCharactersMathematical,
+	SpecialCharactersText,Strikethrough,Subscript,Superscript,Table,TableCaption,TableCellProperties,TableColumnResize,
+	TableProperties,TableToolbar,TextTransformation,TodoList,Underline
+    } = window.CKEDITOR;
+    const LICENSE_KEY =
+        'eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3MzYzODA3OTksImp0aSI6ImVlYjZkYWI5LWM1ODQtNGU2NC04NDhjLTBkZTk2OTFjNjE4NCIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6Ijg2MjYzYWU0In0.iAjcd1x6NgVVNPF1f8JzKbnzYKHrs6YOLh6k-ZqtsGgf54Sivhz0zJ_52s6EFzb93R7rTxGsolSdSVdF6wZL6w';
+    const CLOUD_SERVICES_TOKEN_URL =
+        'https://aj7p3_cr5dif.cke-cs.com/token/dev/3dbc89bc6e1217ef7ca3999c2f578c6afa3a648de9d91fa8ebbc2a4aaa3d?limit=10';
+    const editorConfig = {
+        toolbar: {
+            items: [
+                'heading','|','fontSize','fontFamily','fontColor','fontBackgroundColor','|','bold','italic','underline',
+                '|','link','insertImage','insertTable','highlight','|','alignment','|','bulletedList',
+                'numberedList','todoList','outdent','indent'
+            ],
+            shouldNotGroupWhenFull: false
+        },
+        plugins: [
+            Alignment,Autoformat,AutoImage,AutoLink,Autosave,BalloonToolbar,Bold,CKBox,CloudServices,Code,Essentials,
+            FindAndReplace,FontBackgroundColor,FontColor,FontFamily,FontSize,Heading,Highlight,HorizontalLine,
+            ImageBlock,ImageCaption,ImageInline,ImageInsert,ImageInsertViaUrl,ImageResize,ImageStyle,ImageTextAlternative,
+            ImageToolbar,ImageUpload,Indent,IndentBlock,Italic,Link,LinkImage,List,ListProperties,PageBreak,Paragraph,
+            PasteFromOffice,PictureEditing,RemoveFormat,SpecialCharacters,SpecialCharactersArrows,SpecialCharactersCurrency,
+            SpecialCharactersEssentials,SpecialCharactersLatin,SpecialCharactersMathematical,SpecialCharactersText,Strikethrough,
+            Subscript,Superscript,Table,TableCaption,TableCellProperties,TableColumnResize,
+            TableProperties,TableToolbar,TextTransformation,TodoList,Underline
+        ],
+        balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
+        cloudServices: {
+            tokenUrl: CLOUD_SERVICES_TOKEN_URL
+        },
+        fontFamily: {
+            supportAllValues: true
+        },
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        heading: {
+            options: [
+                {
+                    model: 'paragraph',
+                    title: 'Paragraph',
+                    class: 'ck-heading_paragraph'
+                },
+                {
+                    model: 'heading1',
+                    view: 'h1',
+                    title: 'Heading 1',
+                    class: 'ck-heading_heading1'
+                },
+                {
+                    model: 'heading2',
+                    view: 'h2',
+                    title: 'Heading 2',
+                    class: 'ck-heading_heading2'
+                },
+                {
+                    model: 'heading3',
+                    view: 'h3',
+                    title: 'Heading 3',
+                    class: 'ck-heading_heading3'
+                },
+                {
+                    model: 'heading4',
+                    view: 'h4',
+                    title: 'Heading 4',
+                    class: 'ck-heading_heading4'
+                },
+                {
+                    model: 'heading5',
+                    view: 'h5',
+                    title: 'Heading 5',
+                    class: 'ck-heading_heading5'
+                },
+                {
+                    model: 'heading6',
+                    view: 'h6',
+                    title: 'Heading 6',
+                    class: 'ck-heading_heading6'
+                }
+            ]
+        },
+        image: {
+            toolbar: [
+                'toggleImageCaption',
+                'imageTextAlternative',
+                '|',
+                'imageStyle:inline',
+                'imageStyle:wrapText',
+                'imageStyle:breakText',
+                '|',
+                'resizeImage'
+            ]
+        },
+        initialData:
+            '<h2>Congratulations on setting up CKEditor 5! 🎉</h2>\n<p>\n\tYou\'ve successfully created a CKEditor 5 project. This powerful text editor\n\twill enhance your application, enabling rich text editing capabilities that\n\tare customizable and easy to use.\n</p>\n<h3>What\'s next?</h3>\n<ol>\n\t<li>\n\t\t<strong>Integrate into your app</strong>: time to bring the editing into\n\t\tyour application. Take the code you created and add to your application.\n\t</li>\n\t<li>\n\t\t<strong>Explore features:</strong> Experiment with different plugins and\n\t\ttoolbar options to discover what works best for your needs.\n\t</li>\n\t<li>\n\t\t<strong>Customize your editor:</strong> Tailor the editor\'s\n\t\tconfiguration to match your application\'s style and requirements. Or\n\t\teven write your plugin!\n\t</li>\n</ol>\n<p>\n\tKeep experimenting, and don\'t hesitate to push the boundaries of what you\n\tcan achieve with CKEditor 5. Your feedback is invaluable to us as we strive\n\tto improve and evolve. Happy editing!\n</p>\n<h3>Helpful resources</h3>\n<ul>\n\t<li>📝 <a href="https://portal.ckeditor.com/checkout?plan=free">Trial sign up</a>,</li>\n\t<li>📕 <a href="https://ckeditor.com/docs/ckeditor5/latest/installation/index.html">Documentation</a>,</li>\n\t<li>⭐️ <a href="https://github.com/ckeditor/ckeditor5">GitHub</a> (star us if you can!),</li>\n\t<li>🏠 <a href="https://ckeditor.com">CKEditor Homepage</a>,</li>\n\t<li>🧑‍💻 <a href="https://ckeditor.com/ckeditor-5/demo/">CKEditor 5 Demos</a>,</li>\n</ul>\n<h3>Need help?</h3>\n<p>\n\tSee this text, but the editor is not starting up? Check the browser\'s\n\tconsole for clues and guidance. It may be related to an incorrect license\n\tkey if you use premium features or another feature-related requirement. If\n\tyou cannot make it work, file a GitHub issue, and we will help as soon as\n\tpossible!\n</p>\n',
+        licenseKey: LICENSE_KEY,
+        link: {
+            addTargetToExternalLinks: true,
+            defaultProtocol: 'https://',
+            decorators: {
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        menuBar: {
+            isVisible: true
+        },
+        placeholder: 'Type or paste your content here!',
+        table: {
+            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+        }
+    };
+    configUpdateAlert(editorConfig);
+    DecoupledEditor.create(document.querySelector('#editor'), editorConfig).then(editor => {
+        document.querySelector('#editor-toolbar').appendChild(editor.ui.view.toolbar.element);
+        document.querySelector('#editor-menu-bar').appendChild(editor.ui.view.menuBarView.element);
+        return editor;
+    });
+    function configUpdateAlert(config) {
+        if (configUpdateAlert.configUpdateAlertShown) {
+            return;
+        }
+        const isModifiedByUser = (currentValue, forbiddenValue) => {
+            if (currentValue === forbiddenValue) {
+                return false;
+            }
+
+            if (currentValue === undefined) {
+                return false;
+            }
+
+            return true;
+        };
+        const valuesToUpdate = [];
+        configUpdateAlert.configUpdateAlertShown = true;
+        if (!isModifiedByUser(config.cloudServices?.tokenUrl, '<YOUR_CLOUD_SERVICES_TOKEN_URL>')) {
+            valuesToUpdate.push('CLOUD_SERVICES_TOKEN_URL');
+        }
+        if (valuesToUpdate.length) {
+            window.alert(
+                [
+                    'Please update the following values in your editor config',
+                    'to receive full access to Premium Features:',
+                    '',
+                    ...valuesToUpdate.map(value => ` - ${value}`)
+                ].join('\n')
+            );
+        }
+    }
+
     btnCloseEditor.onclick = async() => closeEditor(); 
     async function loadDoc(filePath){
         const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
         openEditor();
         const document = await convertFromUrl(docxPath);
-        editor.html.set(document);
+        editor.setData(document);
     }
     </script>
 </body>
