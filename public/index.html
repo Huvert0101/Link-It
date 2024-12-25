@@ -114,12 +114,7 @@
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
-    var editor = new FroalaEditor('#example',{documentReady:true,enter: FroalaEditor.ENTER_P, // Controla cómo se manejan los saltos de línea
-  pasteDeniedAttrs: null, // No elimina atributos CSS o de etiquetas
-  htmlAllowedAttrs: null,// Permite todos los atributos
-  htmlAllowedTags: null, // Permite todas las etiquetas
-  toolbarInline: false, // Opcional: para evitar problemas de edición in-line
-  });
+    var editor = new FroalaEditor('#example',{documentReady:true});
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
