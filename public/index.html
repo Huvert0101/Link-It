@@ -114,7 +114,15 @@
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
-    var editor = new FroalaEditor('#example',{documentReady:true, fullPage:true});
+    var editor = new FroalaEditor('#example',{documentReady:true,enter: FroalaEditor.ENTER_P, // Controla cómo se manejan los saltos de línea
+  pasteDeniedTags: [], // No elimina ninguna etiqueta HTML al pegar
+  pasteDeniedAttrs: [], // No elimina atributos CSS o de etiquetas
+  htmlAllowedAttrs: ['*'], // Permite todos los atributos
+  htmlAllowedTags: ['*'], // Permite todas las etiquetas
+  fullPage: true, // Permite cargar el HTML completo, incluyendo `<html>` y `<body>`
+  toolbarInline: false, // Opcional: para evitar problemas de edición in-line
+  iframe: false, // Configura si usar un iframe (por defecto, no)
+  iframeStyle: ''});
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
