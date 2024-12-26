@@ -221,6 +221,9 @@
                 }
             ]
         },
+        dataProcessor: {
+            htmlFilter: (html) => html // Devuelve el HTML tal cual sin procesar
+        },
         balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
         cloudServices: {
             tokenUrl: CLOUD_SERVICES_TOKEN_URL
