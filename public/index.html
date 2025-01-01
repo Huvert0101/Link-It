@@ -6,6 +6,8 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="shortcut icon" type="image/x-icon" href="LinkIt-min-bg-dark.webp">
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/medium-editor.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/medium-editor/5.23.3/css/themes/default.min.css">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="style.css">
     <title>Link - It</title>
@@ -39,6 +41,7 @@
             <div class="top-tab">
                 <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
+            <div id="editable" class="editable">¡Escribe aquí! Medium Editor</div>
             <div class="main-container">
                 <div class="editor-container editor-container_document-editor" id="editor-container">
                     <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
@@ -149,7 +152,6 @@
         filename: "archivo.docx",
         outputformat: "html",
         });
-
         console.log("Conversión iniciada:", response.data);
 
         // Extraer el ID de la conversión
@@ -177,6 +179,14 @@
     }
     };
     var newEditor;
+    const mEditor = new MediumEditor('#editable', {
+    toolbar: {
+      buttons: ['bold', 'italic', 'underline', 'anchor']
+    },
+    placeholder: {
+      text: 'Escribe algo increíble...'
+    }});
+
     const {
 	DecoupledEditor,Alignment,Autoformat,AutoImage,AutoLink,Autosave,BalloonToolbar,Bold,CKBox,CloudServices,Code,
 	Essentials,FindAndReplace,FontBackgroundColor,FontColor,FontFamily,FontSize,Heading,
@@ -324,11 +334,9 @@
             if (currentValue === forbiddenValue) {
                 return false;
             }
-
             if (currentValue === undefined) {
                 return false;
             }
-
             return true;
         };
         const valuesToUpdate = [];
@@ -347,7 +355,6 @@
             );
         }
     }
-
     btnCloseEditor.onclick = async() => closeEditor(); 
     async function loadDoc(filePath){
         const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
