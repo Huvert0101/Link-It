@@ -210,17 +210,6 @@
             Subscript,Superscript,Table,TableCaption,TableCellProperties,TableColumnResize,
             TableProperties,TableToolbar,TextTransformation,TodoList,Underline
         ],
-        removePlugins: [ 'Styles', 'PasteFromOffice', 'Autoformat' ], // Evita que quite estilos
-        htmlSupport: {
-            allow: [
-                {
-                    name: /.*/, // Permite cualquier etiqueta
-                    attributes: true, // Permite todos los atributos
-                    classes: true, // Permite todas las clases
-                    styles: true // Permite todos los estilos en línea
-                }
-            ]
-        },
         balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
         cloudServices: {
             tokenUrl: CLOUD_SERVICES_TOKEN_URL
