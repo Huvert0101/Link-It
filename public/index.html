@@ -122,6 +122,7 @@
     const right = document.querySelector('.right');
     let mainCont = document.querySelector(".main");
     let btnCloseEditor = document.getElementById("btnCloseEditor");
+    let contentEdit = document.querySelector(".editable");
     function openEditor(){
     middlePane.style.position = "relative"; 
     middlePane.style.zIndex = 1;
@@ -362,6 +363,7 @@
         openEditor();
         const document = await convertFromUrl(docxPath);
         newEditor.setData(document);
+        contentEdit.innerHTML = document;
     }
     </script>
 </body>
