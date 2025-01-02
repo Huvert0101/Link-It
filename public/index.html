@@ -42,7 +42,7 @@
                 <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
             <div id="editable" class="editable">¡Escribe aquí! Medium Editor</div>
-            <div class="main-container">
+            <!--<div class="main-container">
                 <div class="editor-container editor-container_document-editor" id="editor-container">
                     <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
                     <div class="editor-container__toolbar" id="editor-toolbar"></div>
@@ -50,7 +50,7 @@
                         <div class="editor-container__editor"><div id="editor"></div></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="plugin">
             <div class="player">
@@ -362,7 +362,7 @@
         const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
         openEditor();
         const document = await convertFromUrl(docxPath);
-        newEditor.setData(document);
+        //newEditor.setData(document);
         contentEdit.innerHTML = document;
     }
     </script>
