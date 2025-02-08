@@ -80,7 +80,7 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 1;
     if(!playerLoaded){
       playerLoaded = true;
-      const response = await fetch(URL+'/getMusic');
+      const response = await fetch(URL+'getMusic');
       if (!response.ok) {
         currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
