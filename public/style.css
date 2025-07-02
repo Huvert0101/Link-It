@@ -298,6 +298,9 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 .bx-hover:hover{
     opacity: 0.9!important;
 }
+.bx-hover:active{
+    opacity: 1;
+}
 .plugin{
     align-items: center;
     flex-direction: column;
