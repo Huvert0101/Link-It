@@ -520,7 +520,7 @@ selectBg.onclick = async(event) => {
     for (let i = 0; i < fileLength; i++) {
       const file = fileSelectBg.files[i];
       await postBg(file) 
-      fileSelectBg.files = null; 
+      fileSelectBg.files.length = 0; 
     }
   }else{
     customizeCont.style.display = "none";
