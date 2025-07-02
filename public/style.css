@@ -299,7 +299,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     opacity: 0.9!important;
 }
 .bx-hover:active{
-    opacity: 1;
+    opacity: 1!important;
 }
 .plugin{
     align-items: center;
