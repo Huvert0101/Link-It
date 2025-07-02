@@ -505,10 +505,10 @@ async function postBg(file){
           console.log("hola w");
           bgImg.src = "files/"+file.name;
           backgroundsCont.appendChild(bgImg);
+          bgImg.onclick = () => {
+            document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
+          }
         }, 3000);
-        bgImg.onclick = () => {
-          document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
-        }
       }
     }
   })
