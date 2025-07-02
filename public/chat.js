@@ -502,6 +502,7 @@ async function postBg(file){
         bgImg.setAttribute("class","bg-item");
         bgImg.setAttribute("draggable","false");
         setTimeout(() => {
+          console.log("hola w");
           bgImg.src = "files/"+file.name;
           backgroundsCont.appendChild(bgImg);
         }, 3000);
