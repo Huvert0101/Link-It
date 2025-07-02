@@ -496,6 +496,7 @@ async function postBg(file){
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage == 100){
+        fileSelectBg.value = '';
         console.log("bg succesfully uploaded")
         console.log(file.name);
         const bgImg = document.createElement("img");
@@ -520,7 +521,6 @@ selectBg.onclick = async(event) => {
     for (let i = 0; i < fileLength; i++) {
       const file = fileSelectBg.files[i];
       await postBg(file) 
-      fileSelectBg.value = '';
       console.log(fileSelectBg.files.length);
     }
   }else{
