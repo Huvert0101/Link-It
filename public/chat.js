@@ -445,7 +445,7 @@ btnCustomize.onclick = () => {
     customizeCont.style.setProperty("display", "inline", "important");
   }else{
     btnCustomize.style.opacity = 0.7;
-    customizeCont.style.setProperty("display", "inline", "important");
+    customizeCont.style.setProperty("display", "none", "important");
   }
   if(!fetchedBgs){
     let data = {user: newUser}
