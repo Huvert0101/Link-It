@@ -467,7 +467,7 @@ secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
 }
 
-async function postFile (file) {
+async function postFile(file) {
   progressCont.style.display = "flex";
   const data = new FormData();
   data.append("file", file)
@@ -502,7 +502,9 @@ async function postBg(file){
         bgImg.setAttribute("class","bg-item");
         bgImg.setAttribute("draggable","false");
         bgImg.src = "files/"+file.name;
-        backgroundsCont.appendChild(bgImg);
+        setTimeout(() => {
+          backgroundsCont.appendChild(bgImg);
+        }, 2000);
         bgImg.onclick = () => {
           document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
         }
@@ -516,7 +518,8 @@ selectBg.onclick = async(event) => {
   if(fileLength > 0){
     for (let i = 0; i < fileLength; i++) {
       const file = fileSelectBg.files[i];
-      await postBg(file)  
+      await postBg(file) 
+      fileSelectBg.files = null; 
     }
   }else{
     customizeCont.style.display = "none";
