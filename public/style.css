@@ -137,9 +137,9 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 .backgrounds{
     padding-left: 1.5%;
     padding-right: 10px;
-    overflow-x: scroll;
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
     justify-content: start;
     margin-top: 30px;
 }
@@ -341,6 +341,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 .currentSong input[type="range"]{
     width: 100%;
     -webkit-appearance: none;
+    appearance: none;
     background: none;
 }
 .currentSong input[type="range"]::-webkit-slider-runnable-track {
@@ -370,30 +371,36 @@ input[type="range"]::-webkit-slider-thumb {
   bottom:0px;
   position:absolute;  
   background:white;  
-  -webkit-animation: bodong 0.5s infinite  ease;  
+  -webkit-animation: bodong 0.5s infinite  ease;
+  animation: bodong 0.5s infinite ease;
 }  
 
 #waves span:first-child{  
   left:0px;  
-  -webkit-animation-delay:.3s;  
+  -webkit-animation-delay:.3s; 
+  animation-delay: .3s;
 }  
 
 #waves span:nth-child(2){  
   left:10px;  
-  -webkit-animation-delay:.4s;  
+  -webkit-animation-delay:.4s;
+  animation-delay: .4s;
 
 }  
 #waves span:nth-child(3){  
   left:20px;  
-  -webkit-animation-delay:.6s;  
+  -webkit-animation-delay:.6s;
+  animation-delay: .6s;
 }  
 #waves span:nth-child(4){  
   left:30px;  
-  -webkit-animation-delay:.8s;  
+  -webkit-animation-delay:.8s;
+  animation-delay: .8s;
 }  
 #waves span:nth-child(5){  
   left:40px;  
-  -webkit-animation-delay:1s;  
+  -webkit-animation-delay:1s;
+  animation-delay: 1s;
 } 
 .friends-cont{
     display: none;
@@ -431,7 +438,7 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 23px;
 }
 
-@-webkit-keyframes bodong{  
+@keyframes bodong{  
   0%{height:15px; background:white;}  
   30%{height:35px; background:white;}  
   60%{height:40px; background:white;}  
