@@ -227,7 +227,6 @@ windowTop.onmousedown = function(e) {
         document.onmousemove = null;
         document.onmouseup = null;
     }
-
 }
 btnCreateDoc.onclick = ()=> {
   fetch('https://docs.new', { mode: 'no-cors' })
@@ -450,6 +449,7 @@ btnCustomize.onclick = () => {
     bgs.forEach(bg => {
       const bgImg = document.createElement("img");
       bgImg.setAttribute("class","bg-item");
+      bgImg.setAttribute("draggable","false");
       bgImg.src = bg.bg_src;
       backgroundsCont.appendChild(bgImg);
       bgImg.onclick = () => {
