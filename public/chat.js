@@ -521,6 +521,8 @@ selectBg.onclick = async(event) => {
       const file = fileSelectBg.files[i];
       await postBg(file) 
       fileSelectBg.files.length = 0; 
+      fileLength = 0;
+      console.log(fileSelectBg.files.length);
     }
   }else{
     customizeCont.style.display = "none";
