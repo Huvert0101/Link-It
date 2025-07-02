@@ -440,6 +440,11 @@ btnFolders.onclick = () => {
 }
 let fetchedBgs = false;
 btnCustomize.onclick = () => {
+  if(btnCustomize.style.opacity != 1){
+    btnCustomize.style.opacity = 1;
+  }else{
+    btnCustomize.style.opacity = 0.7;
+  }
   customizeCont.style.display = "inline";
   if(!fetchedBgs){
     let data = {user: newUser}
@@ -466,7 +471,6 @@ btnCustomize.onclick = () => {
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
 }
-
 async function postFile(file) {
   progressCont.style.display = "flex";
   const data = new FormData();
