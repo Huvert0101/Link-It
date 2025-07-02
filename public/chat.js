@@ -491,6 +491,9 @@ async function postBg(file){
       'Content-Type': 'multipart/form-data'
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
+      if(porcentage == 100){
+        console.log("bg succesfully uploaded")
+      }
     }
   })
 }
