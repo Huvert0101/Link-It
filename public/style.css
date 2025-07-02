@@ -123,6 +123,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
  opacity: 0.7;
 }
 .customizeCont{
+    z-index: 6;
     margin-top: 33px;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
