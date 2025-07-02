@@ -438,26 +438,30 @@ btnFolders.onclick = () => {
   friendsCont.style.display = "none";
 
 }
+let fetchedBgs = false;
 btnCustomize.onclick = () => {
   customizeCont.style.display = "inline";
-  let data = {user: newUser}
-  fetch(URL+"getBackgrounds",{
-    method: 'post',
-    body: JSON.stringify(data),
-    headers: {"Content-Type": "application/json"}
-  }).then(res =>res.json()).then(bgs=>{
-    bgs.forEach(bg => {
-      const bgImg = document.createElement("img");
-      bgImg.setAttribute("class","bg-item");
-      bgImg.setAttribute("draggable","false");
-      bgImg.src = bg.bg_src;
-      backgroundsCont.appendChild(bgImg);
-      bgImg.onclick = () => {
-        document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
-      }
-      console.log(bg);
-    })
-  }) 
+  if(!fetchedBgs){
+    let data = {user: newUser}
+    fetch(URL+"getBackgrounds",{
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {"Content-Type": "application/json"}
+    }).then(res =>res.json()).then(bgs=>{
+      bgs.forEach(bg => {
+        const bgImg = document.createElement("img");
+        bgImg.setAttribute("class","bg-item");
+        bgImg.setAttribute("draggable","false");
+        bgImg.src = bg.bg_src;
+        backgroundsCont.appendChild(bgImg);
+        bgImg.onclick = () => {
+          document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
+        }
+        console.log(bg);
+      })
+      fetchedBgs = true;
+    }) 
+  }
 }
 secodndaryBg.onclick = () => {
   document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
@@ -493,6 +497,15 @@ async function postBg(file){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage == 100){
         console.log("bg succesfully uploaded")
+        const bgImg = document.createElement("img");
+        bgImg.setAttribute("class","bg-item");
+        bgImg.setAttribute("draggable","false");
+        bgImg.src = file.bg_src;
+        backgroundsCont.appendChild(bgImg);
+        bgImg.onclick = () => {
+          document.body.style.backgroundImage = "url('" + file.bg_src + "')";
+        }
+        console.log(file);
       }
     }
   })

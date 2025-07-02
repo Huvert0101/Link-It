@@ -142,6 +142,8 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     flex-wrap: wrap;
     justify-content: start;
     margin-top: 30px;
+    overflow-y: scroll;
+    max-height: 427px;
 }
 #defaultBg{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
