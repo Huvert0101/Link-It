@@ -442,9 +442,10 @@ let fetchedBgs = false;
 btnCustomize.onclick = () => {
   if(btnCustomize.style.opacity != 1){
     btnCustomize.style.opacity = 1;
+    customizeCont.style.display = "inline!important";
   }else{
     btnCustomize.style.opacity = 0.7;
-    customizeCont.style.display = "none";
+    customizeCont.style.display = "none!important";
   }
   customizeCont.style.display = "inline";
   if(!fetchedBgs){
