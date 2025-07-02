@@ -501,8 +501,8 @@ async function postBg(file){
         const bgImg = document.createElement("img");
         bgImg.setAttribute("class","bg-item");
         bgImg.setAttribute("draggable","false");
-        bgImg.src = "files/"+file.name;
         setTimeout(() => {
+          bgImg.src = "files/"+file.name;
           backgroundsCont.appendChild(bgImg);
         }, 3000);
         bgImg.onclick = () => {
