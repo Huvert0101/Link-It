@@ -296,7 +296,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     width: 100%!important;
 }
 .bx-hover:hover{
-    opacity: 0.9;
+    opacity: 0.9!important;
 }
 .plugin{
     align-items: center;
