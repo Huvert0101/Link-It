@@ -497,14 +497,14 @@ async function postBg(file){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage == 100){
         console.log("bg succesfully uploaded")
-        console.log(file);
+        console.log(file.name);
         const bgImg = document.createElement("img");
         bgImg.setAttribute("class","bg-item");
         bgImg.setAttribute("draggable","false");
-        bgImg.src = file;
+        bgImg.src = "files/"+file.name;
         backgroundsCont.appendChild(bgImg);
         bgImg.onclick = () => {
-          document.body.style.backgroundImage = "url('" + file + "')";
+          document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
         }
       }
     }
