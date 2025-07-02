@@ -504,7 +504,7 @@ async function postBg(file){
         bgImg.src = "files/"+file.name;
         setTimeout(() => {
           backgroundsCont.appendChild(bgImg);
-        }, 2000);
+        }, 3000);
         bgImg.onclick = () => {
           document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
         }
