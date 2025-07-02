@@ -444,6 +444,7 @@ btnCustomize.onclick = () => {
     btnCustomize.style.opacity = 1;
   }else{
     btnCustomize.style.opacity = 0.7;
+    customizeCont.style.display = "none";
   }
   customizeCont.style.display = "inline";
   if(!fetchedBgs){
@@ -529,6 +530,7 @@ selectBg.onclick = async(event) => {
     }
   }else{
     customizeCont.style.display = "none";
+    btnCustomize.style.opacity = 0.7;
   }
 }
 
