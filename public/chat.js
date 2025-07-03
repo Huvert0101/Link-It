@@ -115,6 +115,9 @@ btnPlayer.onclick = async () => {
             btnPlayStop.classList.remove("bx-play");
             btnPlayStop.classList.add("bx-pause");
           }
+          btnPlayStop.onclick = () => {
+            console.log("clicked");
+          }
           playlist.appendChild(button);
         })
         console.log(songs);
