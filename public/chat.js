@@ -120,7 +120,7 @@ btnPlayer.onclick = async () => {
             if(btnPlayStop.classList.contains("bx-pause")){
               audio.pause();
               btnPlayStop.classList.add("bx-play");
-              btnPlayStop.classList.remove("bx-puse");
+              btnPlayStop.classList.remove("bx-pause");
             }else{
               audio.play();
               btnPlayStop.classList.add("bx-pause");
