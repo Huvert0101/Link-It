@@ -649,6 +649,8 @@ input[type="range"]::-webkit-slider-thumb {
     left: 39%;
     top: 35%;
     z-index: 10;
+    flex-direction: column;
+    align-items: center;
     color: white;
     padding: 20px;
     background-color: #FFFFFF1A;
@@ -656,7 +658,6 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .uploading-cont span{
     text-align: center;
-    margin-top: 20px;
     display: inline-block;
     width: 100%;
 }

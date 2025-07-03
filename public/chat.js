@@ -507,12 +507,12 @@ async function postBg(file){
       if(porcentage == 90){
         setTimeout(() => {
           porcentageBar.innerText = porcentage + "%";
-        }, 2000);
+        }, 1300);
       }
-      if(porcentage > 95){
+      if(porcentage > 93){
         setTimeout(() => {
           porcentageBar.innerText = porcentage + "%";
-        }, 3000);
+        }, 3400);
 
       }
       if(porcentage == 100){
