@@ -492,6 +492,7 @@ async function postFile(file) {
   });
 }
 async function postBg(file){
+  progressCont.style.display = "flex";
   const data = new FormData();
   data.append("bg_src", file);
   data.append("user", newUser);
@@ -500,6 +501,7 @@ async function postBg(file){
       'Content-Type': 'multipart/form-data'
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
+      porcentageBar.innerText = porcentage + "%";
       if(porcentage == 100){
         console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
@@ -507,13 +509,14 @@ async function postBg(file){
       }
     }
   });
+  progressCont.style.display = "none";
   const bgImg = document.createElement("img");
   bgImg.setAttribute("class","bg-item");
   bgImg.setAttribute("draggable","false");
-    console.log("hola w");
-    bgImg.src = "files/"+file.name;
-    backgroundsCont.appendChild(bgImg);
-    bgImg.onclick = () => {
+  console.log("hola w");
+  bgImg.src = "files/"+file.name;
+  backgroundsCont.appendChild(bgImg);
+  bgImg.onclick = () => {
     document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
   }
 }
