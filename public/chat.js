@@ -503,15 +503,23 @@ async function postBg(file){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage <90){
         porcentageBar.innerText = porcentage + "%";
-      }else{
+      }
+      if(porcentage == 90){
         setTimeout(() => {
           porcentageBar.innerText = porcentage + "%";
         }, 2000);
+      }
+      if(porcentage > 95){
+        setTimeout(() => {
+          porcentageBar.innerText = porcentage + "%";
+        }, 3000);
+
       }
       if(porcentage == 100){
         console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
         console.log(file.name);
+      
       }
     }
   });
