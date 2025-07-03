@@ -485,11 +485,12 @@ async function postFile(file) {
       const porcentage = Math.round((e.loaded * 100)/e.total);
       porcentageBar.innerText = porcentage + "%";
       if(porcentage == 100){
-        porcentageBar.innerText = "0%";
-        progressCont.style.display = "none";
+        console.log("File succesfully sended");
       }
     }
   });
+  porcentageBar.innerText = "0%";
+  progressCont.style.display = "none";
 }
 async function postBg(file){
   progressCont.style.display = "flex";
@@ -509,20 +510,19 @@ async function postBg(file){
           porcentageBar.innerText = porcentage + "%";
         }, 1300);
       }
-      if(porcentage > 93){
+      if(porcentage == 95){
         setTimeout(() => {
           porcentageBar.innerText = porcentage + "%";
         }, 3400);
-
       }
       if(porcentage == 100){
         console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
         console.log(file.name);
-      
       }
     }
   });
+  porcentageBar.innerText = "0%";
   progressCont.style.display = "none";
   const bgImg = document.createElement("img");
   bgImg.setAttribute("class","bg-item");
