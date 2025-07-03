@@ -117,6 +117,11 @@ btnPlayer.onclick = async () => {
           }
           btnPlayStop.onclick = () => {
             console.log("clicked");
+            if(btnPlayStop.className == "bx-pause"){
+              audio.pause();
+            }else{
+              audio.play();
+            }
           }
           playlist.appendChild(button);
         })
