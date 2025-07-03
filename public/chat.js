@@ -501,23 +501,21 @@ async function postBg(file){
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage == 100){
+        console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
-        console.log("bg succesfully uploaded")
         console.log(file.name);
-        const bgImg = document.createElement("img");
-        bgImg.setAttribute("class","bg-item");
-        bgImg.setAttribute("draggable","false");
-        setTimeout(() => {
-          console.log("hola w");
-          bgImg.src = "files/"+file.name;
-          backgroundsCont.appendChild(bgImg);
-          bgImg.onclick = () => {
-            document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
-          }
-        }, 3000);
       }
     }
-  })
+  });
+  const bgImg = document.createElement("img");
+  bgImg.setAttribute("class","bg-item");
+  bgImg.setAttribute("draggable","false");
+    console.log("hola w");
+    bgImg.src = "files/"+file.name;
+    backgroundsCont.appendChild(bgImg);
+    bgImg.onclick = () => {
+    document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
+  }
 }
 selectBg.onclick = async(event) => {
   event.preventDefault();
