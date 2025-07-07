@@ -49,6 +49,7 @@ let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
 let backgroundsCont = document.querySelector(".backgrounds");
 let btnCreateDoc = document.querySelector(".bx-file-blank")
+let waves = document.getElementById("waves");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -121,6 +122,7 @@ btnPlayer.onclick = async () => {
               audio.pause();
               btnPlayStop.classList.add("bx-play");
               btnPlayStop.classList.remove("bx-pause");
+              waves.classList.add("pausedAnim");
             }else{
               audio.play();
               btnPlayStop.classList.add("bx-pause");
