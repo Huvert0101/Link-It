@@ -123,6 +123,9 @@ btnPlayer.onclick = async () => {
               btnPlayStop.classList.add("bx-play");
               btnPlayStop.classList.remove("bx-pause");
               waves.classList.add("pausedAnim");
+              document.querySelectorAll('#waves').forEach(el => {
+                el.classList.add('pausedAnim');
+              });
             }else{
               audio.play();
               btnPlayStop.classList.add("bx-pause");
