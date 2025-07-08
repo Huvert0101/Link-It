@@ -52,6 +52,7 @@ let btnCreateDoc = document.querySelector(".bx-file-blank")
 let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
+let btnPrevSong = document.querySelector(".bx-skip-pervious");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -123,6 +124,17 @@ btnPlayer.onclick = async () => {
                 button.classList.remove("active-song");
                 let songInd = songs.indexOf(song);
                 songInd = songInd + 1;
+                let nextSong = songs[songInd] || songs[0];
+                console.log(nextSong);
+                let tmpBtn = document.getElementById(nextSong);
+                console.log(tmpBtn);
+                tmpBtn.click();
+            }
+            btnPrevSong.onclick = () => {
+                audio.pause();
+                button.classList.remove("active-song");
+                let songInd = songs.indexOf(song);
+                songInd = songInd - 1;
                 let nextSong = songs[songInd] || songs[0];
                 console.log(nextSong);
                 let tmpBtn = document.getElementById(nextSong);
