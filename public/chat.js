@@ -102,6 +102,9 @@ btnPlayer.onclick = async () => {
           button.onclick = () => {
             audio = new Audio(URL+"/files/" + song);
             audio.play();
+            audio.addEventListener("loadedmetadata", () => {
+              progress.max = audio.duration;
+            });
             audio.addEventListener("timeupdate", () => {
               songProgress.value = audio.currentTime;
             });
@@ -131,9 +134,6 @@ btnPlayer.onclick = async () => {
               });
             }else{
               audio.play();
-              setInterval(() => {
-                songProgress.value = songProgress.value + 5; 
-              }, 500);
               btnPlayStop.classList.add("bx-pause");
               btnPlayStop.classList.remove("bx-play");
               waves.querySelectorAll('span').forEach(el => {
