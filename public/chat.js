@@ -118,6 +118,16 @@ btnPlayer.onclick = async () => {
               console.log(tmpBtn);
               tmpBtn.click();
             });
+            btnNextSong.onclick = () => {
+                button.classList.remove("active-song");
+                let songInd = songs.indexOf(song);
+                songInd = songInd + 1;
+                let nextSong = songs[songInd] || songs[0];
+                console.log(nextSong);
+                let tmpBtn = document.getElementById(nextSong);
+                console.log(tmpBtn);
+                tmpBtn.click();
+            }
             currentSongTitle.innerText = song;
             button.classList.add("active-song");
             btnPlayStop.classList.remove("bx-play");
@@ -141,18 +151,8 @@ btnPlayer.onclick = async () => {
               });
             }
           }
-          btnNextSong.onclick = () => {
-              button.classList.remove("active-song");
-              let songInd = songs.indexOf(song);
-              songInd = songInd + 1;
-              let nextSong = songs[songInd] || songs[0];
-              console.log(nextSong);
-              let tmpBtn = document.getElementById(nextSong);
-              console.log(tmpBtn);
-              tmpBtn.click();
-          }
           playlist.appendChild(button);
-        })
+        });
         console.log(songs);
       }else{
         currentSongTitle.innerText = "No Song";
