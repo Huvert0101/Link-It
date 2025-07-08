@@ -102,6 +102,9 @@ btnPlayer.onclick = async () => {
           button.onclick = () => {
             audio = new Audio(URL+"/files/" + song);
             audio.play();
+            audio.addEventListener("timeupdate", () => {
+              songProgress.value = audio.currentTime;
+            });
             audio.addEventListener('ended', function() {
               button.classList.remove("active-song");
               let songInd = songs.indexOf(song);
