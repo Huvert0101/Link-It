@@ -51,6 +51,7 @@ let backgroundsCont = document.querySelector(".backgrounds");
 let btnCreateDoc = document.querySelector(".bx-file-blank")
 let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
+let nextSong = document.querySelector(".bx-skip-next");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -58,7 +59,6 @@ let playerLoaded = false;
 let currentFolder = "main";
 
 // Front-end functions
-
 btnMenu.onclick = () => {
   overlay.style.display = 'block';
   menu.style.display = 'block';
@@ -140,6 +140,16 @@ btnPlayer.onclick = async () => {
                 el.classList.remove('pausedAnim');
               });
             }
+          }
+          nextSong.onclick = () => {
+              button.classList.remove("active-song");
+              let songInd = songs.indexOf(song);
+              songInd = songInd + 1;
+              let nextSong = songs[songInd] || songs[0];
+              console.log(nextSong);
+              let tmpBtn = document.getElementById(nextSong);
+              console.log(tmpBtn);
+              tmpBtn.click();
           }
           playlist.appendChild(button);
         })
