@@ -49,6 +49,7 @@ let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
 let backgroundsCont = document.querySelector(".backgrounds");
 let btnCreateDoc = document.querySelector(".bx-file-blank")
+let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
 const URL = window.location;
 let minWin = false;
@@ -127,6 +128,9 @@ btnPlayer.onclick = async () => {
               });
             }else{
               audio.play();
+              setInterval(() => {
+                songProgress.value = songProgress.value + 5; 
+              }, 500);
               btnPlayStop.classList.add("bx-pause");
               btnPlayStop.classList.remove("bx-play");
               waves.querySelectorAll('span').forEach(el => {
