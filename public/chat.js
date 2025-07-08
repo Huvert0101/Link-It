@@ -51,7 +51,7 @@ let backgroundsCont = document.querySelector(".backgrounds");
 let btnCreateDoc = document.querySelector(".bx-file-blank")
 let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
-let nextSong = document.querySelector(".bx-skip-next");
+let btnNextSong = document.querySelector(".bx-skip-next");
 const URL = window.location;
 let minWin = false;
 let minPlugin = true;
@@ -141,7 +141,7 @@ btnPlayer.onclick = async () => {
               });
             }
           }
-          nextSong.onclick = () => {
+          btnNextSong.onclick = () => {
               button.classList.remove("active-song");
               let songInd = songs.indexOf(song);
               songInd = songInd + 1;
