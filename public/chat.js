@@ -119,6 +119,7 @@ btnPlayer.onclick = async () => {
               tmpBtn.click();
             });
             btnNextSong.onclick = () => {
+                audio.pause();
                 button.classList.remove("active-song");
                 let songInd = songs.indexOf(song);
                 songInd = songInd + 1;
