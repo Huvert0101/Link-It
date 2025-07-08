@@ -339,12 +339,8 @@ btnGo.onclick = () => {
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeForm.style.display = "none";
-  iframe.onload = () => {
-    iframeCont.style.display = "block";
-  }
-  newWindowIcon.onclick = () => {
-    iframeForm.style.display = "block";
-  }
+  iframe.onload = () => iframeCont.style.display = "block";
+  newWindowIcon.onclick = () => iframeForm.style.display = "block";
 windowTop.onmousedown = function(e) {
         e.preventDefault();
         iframeCont.style.cursor = "grabbing";
@@ -355,7 +351,6 @@ windowTop.onmousedown = function(e) {
         document.onmousemove = elementDrag;
         document.onmouseup = closeDragElement;
     };
-
     // Función que se ejecuta mientras se arrastra el div
     function elementDrag(e) {
         e.preventDefault();
@@ -386,9 +381,7 @@ closeUpload.onclick = (e)=>{
   e.preventDefault()
   uploadFile.style.display = "none";
 }
-btnFile.onclick = ()=>{
-  uploadFile.style.display = "flex";
-}
+btnFile.onclick = ()=> uploadFile.style.display = "flex";
 // Drag and drop
 document.body.addEventListener("dragenter", ()=>{
   uploadFile.style.display = "flex";
@@ -747,7 +740,7 @@ function addToDom(data) {
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
-    else output.innerHTML += `<p>${data.message}</p>` 
+    else output.innerHTML += `<p style='word-wrap: wrap'>${data.message}</p>` 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
   setTimeout(() => clearInterval(interval), 2500);
