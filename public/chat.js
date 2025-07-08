@@ -740,7 +740,7 @@ function addToDom(data) {
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
-    else output.innerHTML += `<p style='word-wrap: wrap'>${data.message}</p>` 
+    else output.innerHTML += `<p style='word-break: break-all'>${data.message}</p>` 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
   setTimeout(() => clearInterval(interval), 2500);
