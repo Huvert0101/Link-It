@@ -103,7 +103,7 @@ btnPlayer.onclick = async () => {
             audio = new Audio(URL+"/files/" + song);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
-              progress.max = audio.duration;
+              songProgress.max = audio.duration;
             });
             audio.addEventListener("timeupdate", () => {
               songProgress.value = audio.currentTime;
