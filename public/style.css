@@ -176,6 +176,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     margin-top: 25px;
 }
 .iframe-form{
+    z-index: 6;
     display: none;
     top: 72px;
     padding: 10px;

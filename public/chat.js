@@ -135,7 +135,7 @@ btnPlayer.onclick = async () => {
                 button.classList.remove("active-song");
                 let songInd = songs.indexOf(song);
                 songInd = songInd - 1;
-                let nextSong = songs[songInd] || songs[0];
+                let nextSong = songs[songInd] || songs[songs.length-1];
                 console.log(nextSong);
                 let tmpBtn = document.getElementById(nextSong);
                 console.log(tmpBtn);
