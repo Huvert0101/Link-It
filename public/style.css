@@ -715,6 +715,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .top-content{
     align-items: center;
+    cursor: grab;
     width: 100%;
     margin-top: -2px;
     display: flex;
