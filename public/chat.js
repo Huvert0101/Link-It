@@ -53,6 +53,7 @@ let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
 let btnPrevSong = document.querySelector(".bx-skip-previous");
+let folersPluginPos = "right";
 const URL = window.location;
 let ventanaActiva = null;
 let minWin = false;
