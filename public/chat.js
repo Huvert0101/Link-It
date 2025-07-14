@@ -287,6 +287,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       const rect = ventanaActiva.getBoundingClientRect();
       ventanaActiva.style.width = rect.width + 'px';
       ventanaActiva.style.height = rect.height + 'px';
+      if (getComputedStyle(ventanaActiva).position !== 'absolute') {
+        ventanaActiva.style.position = 'absolute';
+        ventanaActiva.style.left = rect.left + window.scrollX + 'px';
+        ventanaActiva.style.top = rect.top + window.scrollY + 'px';
+      }
       ventanaActiva.style.position = "absolute";
       //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
