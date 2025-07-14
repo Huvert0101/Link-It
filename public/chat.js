@@ -293,7 +293,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
         ventanaActiva.style.left = rect.left + window.scrollX + 'px';
         ventanaActiva.style.top = rect.top + window.scrollY + 'px';
       }
-      if(ventanaActiva.classList.contains("top-content")){
+      if(ventanaActiva.classList.contains("right")){
         if(foldersPluginPos == "right"){
           const nuevoDiv = document.createElement('div');
           // Copiar width y height
