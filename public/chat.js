@@ -282,7 +282,9 @@ windowTop.onmousedown = function(e) {
 // EVENTS TO DRAGGABLE PLUGINS
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
+      console.log("draggins");
       ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
+      ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
       document.body.style.cursor = 'grabbing';
@@ -292,6 +294,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   // Mover solo el div activo
   document.addEventListener('mousemove', (e) => {
     if (ventanaActiva) {
+      console.log("trying dragging");
       ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
@@ -300,6 +303,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   // Detener movimiento
   document.addEventListener('mouseup', () => {
     ventanaActiva = null;
+    console.log("No more dragging");
     document.body.style.cursor = 'default';
   });
 
