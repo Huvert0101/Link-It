@@ -54,6 +54,7 @@ let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
 let btnPrevSong = document.querySelector(".bx-skip-previous");
 const URL = window.location;
+let ventanaActiva = null;
 let minWin = false;
 let minPlugin = true;
 let playerLoaded = false;
@@ -277,6 +278,32 @@ windowTop.onmousedown = function(e) {
         document.onmouseup = null;
     }
 }
+
+// EVENTS TO DRAGGABLE PLUGINS
+document.querySelectorAll('.draggablePlugin').forEach(barra => {
+    barra.addEventListener('mousedown', (e) => {
+      ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
+      offsetX = e.clientX - ventanaActiva.offsetLeft;
+      offsetY = e.clientY - ventanaActiva.offsetTop;
+      document.body.style.cursor = 'grabbing';
+    });
+  });
+
+  // Mover solo el div activo
+  document.addEventListener('mousemove', (e) => {
+    if (ventanaActiva) {
+      ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
+      ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
+    }
+  });
+
+  // Detener movimiento
+  document.addEventListener('mouseup', () => {
+    ventanaActiva = null;
+    document.body.style.cursor = 'default';
+  });
+
+
 btnCreateDoc.onclick = ()=> {
   fetch('https://docs.new', { mode: 'no-cors' })
   .then(response => console.log(response))
