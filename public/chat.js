@@ -284,7 +284,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
       ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
-      ventanaActiva.style.position = "absolute";
+      //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
       document.body.style.cursor = 'grabbing';
