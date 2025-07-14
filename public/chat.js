@@ -293,6 +293,19 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
         ventanaActiva.style.left = rect.left + window.scrollX + 'px';
         ventanaActiva.style.top = rect.top + window.scrollY + 'px';
       }
+      if(ventanaActiva.classList.contains("top-content")){
+        if(foldersPluginPos == "right"){
+          const nuevoDiv = document.createElement('div');
+          // Copiar width y height
+          nuevoDiv.style.width = rect.width + 'px';
+          nuevoDiv.style.height = rect.height + 'px';
+          // (Opcional) darle estilo para que lo veas
+          nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
+          nuevoDiv.style.border = '1px dashed blue';
+          // Insertarlo como último hijo del contenedor .main
+          document.querySelector('.main').appendChild(nuevoDiv);
+        }
+      }
       ventanaActiva.style.position = "absolute";
       //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
