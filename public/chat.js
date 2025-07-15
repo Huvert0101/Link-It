@@ -303,7 +303,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
           nuevoDiv.style.border = '1px dashed blue';
           // Insertarlo como último hijo del contenedor .main
-          document.querySelector('.main').appendChild(nuevoDiv);
+          //document.querySelector('.main').appendChild(nuevoDiv);
         }
       }
       ventanaActiva.style.position = "absolute";
