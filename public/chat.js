@@ -307,10 +307,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
         }
       }
       ventanaActiva.style.position = "absolute";
+      ventanaActiva.style.setProperty('position', 'absolute', 'important');
       //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
-      document.body.style.cursor = 'grabbing';
+      document.body.style.setProperty('cursor','grabbing','!important');
     });
   });
 
@@ -325,8 +326,10 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
 
   // Detener movimiento
   document.addEventListener('mouseup', () => {
+    ventanaActiva.style.position = "relative";
     ventanaActiva = null;
     console.log("No more dragging");
+
     document.body.style.cursor = 'default';
   });
 
