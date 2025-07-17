@@ -307,11 +307,10 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
         }
       }
       ventanaActiva.style.position = "absolute";
-      ventanaActiva.style.setProperty('position', 'absolute', 'important');
       //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
-      document.body.style.setProperty('cursor','grabbing','!important');
+      document.body.style.setProperty('cursor','grabbing','important');
     });
   });
 
