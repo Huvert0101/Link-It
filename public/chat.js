@@ -333,17 +333,19 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   });
   // Detener movimiento
   document.addEventListener('mouseup', () => {
-    ventanaActiva.style.position = "relative";
-    ventanaActiva.style.left = 0;
-    ventanaActiva.style.top = 0;
-    if(nuevoDiv.classList.contains('hovering')){
-      console.log("soltado dentro del div");
-      document.querySelector('.main').prepend(ventanaActiva);
+    if(ventanaActiva){
+      ventanaActiva.style.position = "relative";
+      ventanaActiva.style.left = 0;
+      ventanaActiva.style.top = 0;
+      if(nuevoDiv.classList.contains('hovering')){
+        console.log("soltado dentro del div");
+        document.querySelector('.main').prepend(ventanaActiva);
+      }
+      nuevoDiv.remove();
+      ventanaActiva = null;
+      console.log("No more dragging");
+      //barra.style.setProperty('cursor','grab','important');
     }
-    nuevoDiv.remove();
-    ventanaActiva = null;
-    console.log("No more dragging");
-    //barra.style.setProperty('cursor','grab','important');
   });
 
 
