@@ -323,17 +323,25 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
   });
+  nuevoDiv.addEventListener('mouseenter', ()=>{
+    nuevoDiv.classList.add("hovering");
 
+  });
+  nuevoDiv.addEventListener('mouseleave', ()=>{
+    nuevoDiv.classList.remove('hovering');
+  });
   // Detener movimiento
   document.addEventListener('mouseup', () => {
     ventanaActiva.style.position = "relative";
     ventanaActiva.style.left = 0;
     ventanaActiva.style.top = 0;
-    ventanaActiva = null;
+    if(nuevoDiv.classList.contains('hovering')){
+      document.querySelector('.main').prepend(ventanaActiva);
+    }
     nuevoDiv.remove();
+    ventanaActiva = null;
     console.log("No more dragging");
-
-    document.body.style.cursor = 'default';
+    barra.style.setProperty('cursor','grab','important');
   });
 
 
