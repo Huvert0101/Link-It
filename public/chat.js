@@ -323,11 +323,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
   });
-  nuevoDiv.addEventListener('mouseenter', ()=>{
+  nuevoDiv.addEventListener('mouseenter', (e)=>{
     nuevoDiv.classList.add("hovering");
 
   });
-  nuevoDiv.addEventListener('mouseleave', ()=>{
+  nuevoDiv.addEventListener('mouseleave', (e)=>{
     nuevoDiv.classList.remove('hovering');
   });
   // Detener movimiento
