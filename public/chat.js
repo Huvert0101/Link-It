@@ -305,9 +305,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           nuevoDiv.style.border = '1px dashed blue';
           nuevoDiv.addEventListener('mouseenter', (e)=>{
             nuevoDiv.classList.add("hovering");
+            console.log("mouse entro en el div");
           });
           nuevoDiv.addEventListener('mouseleave', (e)=>{
             nuevoDiv.classList.remove('hovering');
+            console.log("mouse salio del div");
           });
           // Insertarlo como último hijo del contenedor .main
           document.querySelector('.main').prepend(nuevoDiv);
@@ -335,12 +337,13 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     ventanaActiva.style.left = 0;
     ventanaActiva.style.top = 0;
     if(nuevoDiv.classList.contains('hovering')){
+      console.log("soltado dentro del div");
       document.querySelector('.main').prepend(ventanaActiva);
     }
     nuevoDiv.remove();
     ventanaActiva = null;
     console.log("No more dragging");
-    barra.style.setProperty('cursor','grab','important');
+    //barra.style.setProperty('cursor','grab','important');
   });
 
 
