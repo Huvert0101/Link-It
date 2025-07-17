@@ -328,7 +328,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   document.addEventListener('mouseup', () => {
     ventanaActiva.style.position = "relative";
     ventanaActiva.style.left = 0;
-    ventanaActiva.style.right = 0;
+    ventanaActiva.style.top = 0;
     ventanaActiva = null;
     nuevoDiv.remove();
     console.log("No more dragging");
