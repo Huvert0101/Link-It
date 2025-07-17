@@ -303,6 +303,12 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           // (Opcional) darle estilo para que lo veas
           nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
           nuevoDiv.style.border = '1px dashed blue';
+          nuevoDiv.addEventListener('mouseenter', (e)=>{
+            nuevoDiv.classList.add("hovering");
+          });
+          nuevoDiv.addEventListener('mouseleave', (e)=>{
+            nuevoDiv.classList.remove('hovering');
+          });
           // Insertarlo como último hijo del contenedor .main
           document.querySelector('.main').prepend(nuevoDiv);
         }
@@ -322,13 +328,6 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
-  });
-  nuevoDiv.addEventListener('mouseenter', (e)=>{
-    nuevoDiv.classList.add("hovering");
-
-  });
-  nuevoDiv.addEventListener('mouseleave', (e)=>{
-    nuevoDiv.classList.remove('hovering');
   });
   // Detener movimiento
   document.addEventListener('mouseup', () => {
