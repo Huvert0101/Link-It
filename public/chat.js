@@ -330,7 +330,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     ventanaActiva.style.left = 0;
     ventanaActiva.style.right = 0;
     ventanaActiva = null;
-    document.querySelector('.main').remove(nuevoDiv);
+    nuevoDiv.remove();
     console.log("No more dragging");
 
     document.body.style.cursor = 'default';
