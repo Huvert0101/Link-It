@@ -281,6 +281,7 @@ windowTop.onmousedown = function(e) {
 }
 
 // EVENTS TO DRAGGABLE PLUGINS
+let nuevoDiv = null;
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
@@ -295,7 +296,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       }
       if(ventanaActiva.classList.contains("right")){
         if(foldersPluginPos == "right"){
-          const nuevoDiv = document.createElement('div');
+          nuevoDiv = document.createElement('div');
           // Copiar width y height
           nuevoDiv.style.width = rect.width + 'px';
           nuevoDiv.style.height = rect.height + 'px';
@@ -310,7 +311,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
-      document.body.style.setProperty('cursor','grabbing','important');
+      barra.style.setProperty('cursor','grabbing','important');
     });
   });
 
@@ -329,6 +330,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     ventanaActiva.style.left = 0;
     ventanaActiva.style.right = 0;
     ventanaActiva = null;
+    document.querySelector('.main').remove(nuevoDiv);
     console.log("No more dragging");
 
     document.body.style.cursor = 'default';
