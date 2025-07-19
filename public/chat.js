@@ -284,16 +284,16 @@ windowTop.onmousedown = function(e) {
 let nuevoDiv = null;
 function checkCollision(element1, element2) {
   if (!element1 || !element2) return false;
-
+  console.log("checking collision");
   const rect1 = element1.getBoundingClientRect();
   const rect2 = element2.getBoundingClientRect();
 
   // Comprueba si los rectángulos se superponen
   return !(
-    rect1.right < rect2.left ||
-    rect1.left > rect2.right ||
-    rect1.bottom < rect2.top ||
-    rect1.top > rect2.bottom
+    rect1.right <= rect2.left ||
+    rect1.left >= rect2.right ||
+    rect1.bottom <= rect2.top ||
+    rect1.top >= rect2.bottom
   );
 }
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
