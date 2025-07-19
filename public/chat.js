@@ -375,7 +375,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       const currentMouseY = e.clientY;
       if(isMouseInsideElement(currentMouseX,currentMouseY,nuevoDiv)){
         console.log("soltado dentro del div");
-        document.querySelector('.main').prepend(ventanaActiva);
+        if(foldersPluginPos == "left"){
+          document.querySelector('.main').prepend(ventanaActiva);
+        }else{
+          document.querySelector('.main').appendChild(ventanaActiva);
+        }
       }
       nuevoDiv.remove();
       ventanaActiva = null;
