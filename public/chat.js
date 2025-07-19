@@ -311,7 +311,9 @@ function isMouseInsideElement(mouseX, mouseY, element) {
            mouseY >= rect.top &&
            mouseY <= rect.bottom;
 }
+tempBarra = null;
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
+    tempBarra = barra;
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
       ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
@@ -366,7 +368,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   });
   // Detener movimiento
   document.addEventListener('mouseup', (e) => {
-    barra.style.setProperty('cursor','grab','important');
+    tempBarra.style.setProperty('cursor','grab','important');
     if(ventanaActiva){
       ventanaActiva.style.position = "relative";
       ventanaActiva.style.left = 0;
