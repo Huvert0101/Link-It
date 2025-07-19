@@ -317,6 +317,9 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
       ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
+      if(ventanaActiva.classList.contains("top-content")){
+        ventanaActiva = ventanaActiva.parentElement;
+      }
       const rect = ventanaActiva.getBoundingClientRect();
       ventanaActiva.style.width = rect.width + 'px';
       ventanaActiva.style.height = rect.height + 'px';
