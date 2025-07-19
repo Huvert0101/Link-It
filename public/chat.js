@@ -347,6 +347,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           nuevoDiv.style.border = '1px dashed blue';
           // Insertarlo como último hijo del contenedor .main
           document.querySelector('.main').appendChild(nuevoDiv);
+          foldersPluginPos = "right";
         }
       }
       ventanaActiva.style.position = "absolute";
