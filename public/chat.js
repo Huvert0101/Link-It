@@ -300,6 +300,19 @@ function checkCollision(element1, element2) {
     rect1.top > rect2.bottom
   );
 }
+function isMouseInsideElement(mouseX, mouseY, element) {
+    if (!element) {
+        return false;
+    }
+
+    const rect = element.getBoundingClientRect();
+
+    // Comprueba si las coordenadas del mouse están dentro del rectángulo del elemento
+    return mouseX >= rect.left &&
+           mouseX <= rect.right &&
+           mouseY >= rect.top &&
+           mouseY <= rect.bottom;
+}
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
@@ -355,7 +368,9 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       ventanaActiva.style.position = "relative";
       ventanaActiva.style.left = 0;
       ventanaActiva.style.top = 0;
-      if(checkCollision(ventanaActiva, nuevoDiv)){
+      const currentMouseX = e.clientX;
+      const currentMouseY = e.clientY;
+      if(isMouseInsideElement(currentMouseX,currentMouseY,nuevoDiv)){
         console.log("soltado dentro del div");
         document.querySelector('.main').prepend(ventanaActiva);
       }
