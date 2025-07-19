@@ -289,6 +289,8 @@ function checkCollision(element1, element2) {
   console.log("checking collision");
   const rect1 = element1.getBoundingClientRect();
   const rect2 = element2.getBoundingClientRect();
+  console.log("rect1", rect1);
+  console.log("rect2", rect2);
 
   // Comprueba si los rectángulos se superponen
   return !(
