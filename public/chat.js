@@ -304,9 +304,7 @@ function isMouseInsideElement(mouseX, mouseY, element) {
     if (!element) {
         return false;
     }
-
     const rect = element.getBoundingClientRect();
-
     // Comprueba si las coordenadas del mouse están dentro del rectángulo del elemento
     return mouseX >= rect.left &&
            mouseX <= rect.right &&
@@ -368,6 +366,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   });
   // Detener movimiento
   document.addEventListener('mouseup', (e) => {
+    barra.style.setProperty('cursor','grab','important');
     if(ventanaActiva){
       ventanaActiva.style.position = "relative";
       ventanaActiva.style.left = 0;
@@ -385,7 +384,6 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       nuevoDiv.remove();
       ventanaActiva = null;
       console.log("No more dragging");
-      //barra.style.setProperty('cursor','grab','important');
     }
   });
 
