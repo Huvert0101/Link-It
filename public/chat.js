@@ -282,6 +282,20 @@ windowTop.onmousedown = function(e) {
 
 // EVENTS TO DRAGGABLE PLUGINS
 let nuevoDiv = null;
+function checkCollision(element1, element2) {
+  if (!element1 || !element2) return false;
+
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  // Comprueba si los rectángulos se superponen
+  return !(
+    rect1.right < rect2.left ||
+    rect1.left > rect2.right ||
+    rect1.bottom < rect2.top ||
+    rect1.top > rect2.bottom
+  );
+}
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
     barra.addEventListener('mousedown', (e) => {
       console.log("draggins");
@@ -337,7 +351,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       ventanaActiva.style.position = "relative";
       ventanaActiva.style.left = 0;
       ventanaActiva.style.top = 0;
-      if(nuevoDiv.classList.contains('hovering')){
+      if(checkCollision(ventanaActiva, nuevoDiv)){
         console.log("soltado dentro del div");
         document.querySelector('.main').prepend(ventanaActiva);
       }
