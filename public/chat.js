@@ -363,7 +363,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     }
   });
   // Detener movimiento
-  document.addEventListener('mouseup', () => {
+  document.addEventListener('mouseup', (e) => {
     if(ventanaActiva){
       ventanaActiva.style.position = "relative";
       ventanaActiva.style.left = 0;
