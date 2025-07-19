@@ -721,14 +721,6 @@ input[type="range"]::-webkit-slider-thumb {
     display: flex;
     justify-content: space-between;
 }
-.draggablePlugin{
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    width: 100%;
-    height: 8%;
-}
 .top-content span{
     position: relative;
     font-weight: bold;
