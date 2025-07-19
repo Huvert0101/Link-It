@@ -334,16 +334,19 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           // (Opcional) darle estilo para que lo veas
           nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
           nuevoDiv.style.border = '1px dashed blue';
-          nuevoDiv.addEventListener('mouseenter', (e)=>{
-            nuevoDiv.classList.add("hovering");
-            console.log("mouse entro en el div");
-          });
-          nuevoDiv.addEventListener('mouseleave', (e)=>{
-            nuevoDiv.classList.remove('hovering');
-            console.log("mouse salio del div");
-          });
           // Insertarlo como último hijo del contenedor .main
           document.querySelector('.main').prepend(nuevoDiv);
+          foldersPluginPos = "left";
+        }else{
+          nuevoDiv = document.createElement('div');
+          // Copiar width y height
+          nuevoDiv.style.width = rect.width + 'px';
+          nuevoDiv.style.height = rect.height + 'px';
+          // (Opcional) darle estilo para que lo veas
+          nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
+          nuevoDiv.style.border = '1px dashed blue';
+          // Insertarlo como último hijo del contenedor .main
+          document.querySelector('.main').appendChild(nuevoDiv);
         }
       }
       ventanaActiva.style.position = "absolute";
