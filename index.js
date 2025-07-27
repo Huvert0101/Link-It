@@ -236,25 +236,13 @@ const server = app.listen(app.get('port'), ()=> {
 });
 import {Server} from 'socket.io'
 const io = new Server(server);
-app.post('/upload', upload.single('file'), async function(req, res, next){
+app.post('/upload', upload.single('file'), function(req, res, next){
     insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
     io.sockets.emit('getFiles', {
         message: 'files/' + req.file.originalname,
         type: 'file',
         user: req.body.user
     });
-    try {
-        const form = new FormData();
-        form.append('archivo', fs.createReadStream(req.file.path));
-        // Cambia esta URL al dominio o IP real donde está el servidor PHP
-        const phpServerUrl = 'https://linkit.ct.ws/upload.php';
-        await axios.post(phpServerUrl, form, {
-            headers: form.getHeaders()
-        });
-        console.log('Archivo también subido al servidor PHP');
-    } catch (error) {
-        console.error('Error al subir al servidor PHP:', error.message);
-    }
     res.redirect("/");
 });
 app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
