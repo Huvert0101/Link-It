@@ -3,8 +3,6 @@ import fs from 'fs'
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import FormData from 'form-data';
-import axios from 'axios';
 const {json} = bodyParser;
 import cors from 'cors';
 const storage = multer.diskStorage({
