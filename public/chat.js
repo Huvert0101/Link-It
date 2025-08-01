@@ -647,22 +647,6 @@ async function postFile(file) {
       }
     }
   });
-
-  console.log("Enviando archivo al servidor PHP externo (linkit.ct.ws/upload.php)...");
-  const dataForPhp = new FormData();
-  dataForPhp.append("archivo", file); // El PHP espera 'file'
-  await axios.post('https://linkit.ct.ws/upload.php', dataForPhp, { // <--- URL COMPLETA
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    },
-    onUploadProgress(e) {
-      const porcentage = Math.round((e.loaded * 100) / e.total);
-      porcentageBar.innerText = `PHP: ${porcentage}%`; // Indicador de progreso para el servidor PHP
-      if (porcentage === 100) {
-        console.log("Archivo enviado con éxito al servidor PHP externo.");
-      }
-    }
-  });
   porcentageBar.innerText = "0%";
   progressCont.style.display = "none";
 }
