@@ -103,20 +103,18 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     display: none!important;
 }
 .notch{
+    border-radius: 10px;
     position: absolute;
-    top: 0px;
-    border-bottom-left-radius: 25px;
-    color: rgba(255, 255, 255, 0.95);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    top: 3px;
+    width: 92%;
+    color: rgb(0 0 0 / 95%);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom-right-radius: 25px;
-    padding: 0px 30px 2px;
+    padding: 6px 30px;
     transform: translate(-50%);
-    left: 50%;
-    background: rgba(0, 0, 0, 0.5);
+    left: 49%;
+    background: rgb(0 0 0 / 79%);
 }
 .notch-icon{
  color: white;
