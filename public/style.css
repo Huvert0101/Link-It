@@ -790,6 +790,9 @@ input[type="range"]::-webkit-slider-thumb {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
   }
+  .display a{
+    max-width: 90vw;
+  }
   body{
     width: 100vw;
     height: 100vh;
