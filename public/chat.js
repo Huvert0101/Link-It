@@ -406,6 +406,7 @@ btnCreateDoc.onclick = ()=> {
     inputMsgBar.style.width = "91%";
     right.style.width = "25%";
     mainCont.style.gap = "0px";
+    return;
   };
   btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
@@ -415,7 +416,6 @@ btnCreateDoc.onclick = ()=> {
   inputMsgBar.style.width = "87%";
   right.style.width = "35%";
   mainCont.style.gap = "10px";
-
 };
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
@@ -612,7 +612,6 @@ btnFolders.onclick = () => {
   rightPanelTitle.innerText = "Folders";
   folderList.style.display = "flex";
   friendsCont.style.display = "none";
-
 }
 let fetchedBgs = false;
 btnCustomize.onclick = () => {
