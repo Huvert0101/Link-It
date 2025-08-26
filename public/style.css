@@ -292,6 +292,14 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     top: 0px;
     left: 0px;
 }
+.fr-toolbar{
+    display: flex;
+    flex-wrap: wrap;
+}
+fr-btn-grp{
+    display: flex;
+    margin: 0!important;
+}
 .fr-toolbar.fr-sticky-on{
     width: 100%!important;
 }
