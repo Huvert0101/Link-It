@@ -53,6 +53,8 @@ let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
 let btnPrevSong = document.querySelector(".bx-skip-previous");
+let middlePane = document.querySelector(".middle");
+const right = document.querySelector('.right');
 let foldersPluginPos = "right";
 const URL = window.location;
 let ventanaActiva = null;
@@ -392,12 +394,15 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
     }
   });
 
-
 btnCreateDoc.onclick = ()=> {
-  fetch('https://docs.new', { mode: 'no-cors' })
-  .then(response => console.log(response))
-  .catch(error => console.error(error));
-  createIframeWindow("https://docs.new")
+  middlePane.style.position = "relative"; 
+  middlePane.style.zIndex = 1;
+  middlePane.style.transform = "scale(1)";
+  middlePane.style.opacity = 1;
+  inputMsgBar.style.width = "87%";
+  right.style.width = "35%";
+  mainCont.style.gap = "10px";
+
 };
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
