@@ -46,7 +46,10 @@
             <div class="top-tab">
                 <i id="btnCloseEditor" class='bx bx-x'></i>
             </div>
-            <div id="editor" class="editabless">Loading! please wait...</div>
+            <div id="editor" class="editabless">
+                <div id="editor-toolbar"></div>
+                <div id="editor-menu-bar"></div>Loading! please wait...
+            </div>
         </div>
         <div class="plugin">
             <div class="player">
@@ -310,7 +313,7 @@
             }
         },
         menuBar: {
-            isVisible: false 
+            isVisible: true 
         },
         placeholder: 'Type or paste your content here!',
         table: {
