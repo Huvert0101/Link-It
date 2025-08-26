@@ -285,11 +285,12 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     background-color: white;
 }
 #example{
+    width: 100%;
     transform-origin: top;
     position: absolute;
-    scale: 0.7;
+    scale: 1;
     top: 0px;
-    left: -128px;
+    left: 0px;
 }
 .fr-toolbar.fr-sticky-on{
     width: 100%!important;
