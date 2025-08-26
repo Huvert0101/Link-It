@@ -54,6 +54,8 @@ let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
 let btnPrevSong = document.querySelector(".bx-skip-previous");
 let middlePane = document.querySelector(".middle");
+let inputMsgBar = document.getElementById("input");
+let mainCont = document.querySelector(".main");
 const right = document.querySelector('.right');
 let foldersPluginPos = "right";
 const URL = window.location;
@@ -395,6 +397,17 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   });
 
 btnCreateDoc.onclick = ()=> {
+  if(btnCreateDoc.classList.contains("clicked")){
+    btnCreateDoc.classList.remove("clicked");
+    middlePane.style.zIndex = -1;
+    middlePane.style.transform = "scale(0)";
+    middlePane.style.opacity = 0;
+    middlePane.style.position = "absolute"; 
+    inputMsgBar.style.width = "91%";
+    right.style.width = "25%";
+    mainCont.style.gap = "0px";
+  };
+  btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
   middlePane.style.zIndex = 1;
   middlePane.style.transform = "scale(1)";
