@@ -435,6 +435,9 @@ btnGo.onclick = () => {
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
 
+  const windowAction = document.createElement("button");
+  windowAction.id = "windowAction";
+
   // Crear el icono de minimizar
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
@@ -447,8 +450,9 @@ btnGo.onclick = () => {
 
   // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
-  windowTop.appendChild(minWindowIcon);
-  windowTop.appendChild(btnCloseWindowIcon);
+  windowTop.appendChild(windowAction);
+  //windowTop.appendChild(minWindowIcon);
+  //windowTop.appendChild(btnCloseWindowIcon);
 
   // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
