@@ -273,6 +273,10 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     left: 30vw;
     top: 10vh;
 }
+.iframeCont::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent; /* Hace el riel invisible */
+}
 .main{
     margin: 20px;
     height: 100%;
