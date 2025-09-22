@@ -238,6 +238,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     word-wrap: break-word;
     width: 92%;
     overflow: hidden;
+    white-space: nowrap;
     color: white;
 }
 .iframeCont{
