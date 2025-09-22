@@ -212,6 +212,9 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     border-radius: 10px;
     color: white;
 }
+iframe{
+    border-width: 0;
+}
 .window-top{
     gap: 4px;
     justify-content: space-between;
