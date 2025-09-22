@@ -235,6 +235,32 @@ function createIframeWindow(site){
     iframeCont.style.display = "none";
     btnIframe.style.opacity = 0.7;
   }
+  let timer;
+  let clicks = 0;
+  const windowAction= document.getElementById('windowAction');
+  windowAction.addEventListener('click', function() {
+      clicks++;
+      if (clicks === 1) {
+          // Inicia un temporizador para esperar un posible segundo clic
+          timer = setTimeout(() => {
+              console.log('¡Clic simple!');
+              minWin = true;
+              iframeCont.style.display = "none";
+              btnIframe.style.opacity = 0.7;
+              // Aquí pones la acción para el clic simple
+              clicks = 0; // Resetea el contador
+          }, 300); // 300ms es un tiempo común para diferenciar
+      } else {
+          // Si el temporizador no ha terminado, es un doble clic
+          clearTimeout(timer);
+          minWin = false;
+          document.body.removeChild(iframeCont);
+          btnIframe.style.opacity = 0.7;
+          console.log('¡Doble clic!');
+          // Aquí pones la acción para el doble clic
+          clicks = 0;
+      }
+  });
 
   var iframe = document.createElement('iframe');
   iframe.src = site;
