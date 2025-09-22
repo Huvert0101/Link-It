@@ -252,6 +252,10 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    transition: all ease 0.2s;
+}
+#windowAction:hover{
+    background-color: #121212;
 }
 .iframeCont{
     width: 40%;
