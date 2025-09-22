@@ -213,8 +213,10 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     color: white;
 }
 .window-top{
+    gap: 4px;
+    margin-right: 5px;
+    justify-content: space-between;
     display: flex;
-    padding-left: 8px;
     align-items: center;
 }
 .btnProfile{
@@ -234,12 +236,22 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
     font-size: 30px;
 }
 #window-title{
+    padding: 4px;
+    border-radius: 10px;
+    background: black;
     text-overflow: ellipsis;
     word-wrap: break-word;
-    width: 92%;
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
     color: white;
+}
+#windowAction{
+    border: none;
+    background: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 .iframeCont{
     width: 40%;
