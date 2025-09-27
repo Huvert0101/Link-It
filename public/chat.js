@@ -450,7 +450,7 @@ btnGo.onclick = () => {
               btnIframe.style.opacity = 0.7;
               // Aquí pones la acción para el clic simple
               clicks = 0; // Resetea el contador
-          }, 300); // 300ms es un tiempo común para diferenciar
+          }, 250); // 300ms es un tiempo común para diferenciar
       } else {
           // Si el temporizador no ha terminado, es un doble clic
           clearTimeout(timer);
