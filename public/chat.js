@@ -762,8 +762,8 @@ uploadBtn.onclick = async (event) => {
   for (let i = 0; i < fileLength; i++) {
     const file = inputFile.files[i];
     console.log(file);
-    await postFile(file); 
     closeUpload.click();
+    await postFile(file); 
   }
 
   inputFile.value = "";
