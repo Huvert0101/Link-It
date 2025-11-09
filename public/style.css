@@ -644,12 +644,13 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #FFFFFF1A;
 }
 .uploadWrapper{
+    transform: translate(-50%, -50%);
     z-index: 99;
     color: white;
     position: absolute;
-    left: 39%;
+    left: 50%;
     display: none;
-    top: 30%;
+    top: 37%;
     gap: 20px;
     flex-direction: column;
     padding: 20px;
