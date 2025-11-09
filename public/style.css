@@ -845,7 +845,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: 9%;
   }
   .uploadWrapper{
-    left: 3.5%;
+    left: 50%;
   }
   .uploadWrapper button{
     font-size: 25px;
