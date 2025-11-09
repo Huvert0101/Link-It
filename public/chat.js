@@ -57,6 +57,7 @@ let middlePane = document.querySelector(".middle");
 let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
 const right = document.querySelector('.right');
+let fileSended = false;
 let foldersPluginPos = "right";
 const URL = window.location;
 let ventanaActiva = null;
@@ -690,6 +691,7 @@ async function postFile(file) {
       porcentageBar.innerText = porcentage + "%";
       if(porcentage == 100){
         console.log("File succesfully sended");
+        fileSended = true;
       }
     }
   });
@@ -760,7 +762,12 @@ uploadBtn.onclick = async (event) => {
   for (let i = 0; i < fileLength; i++) {
     const file = inputFile.files[i];
     console.log(file);
-    postFile(file); 
+    if(fileSended || i==0){
+      fileSended = false;
+      postFile(file); 
+    }else{
+      i--;
+    }
     closeUpload.click();
   }
 
