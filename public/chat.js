@@ -100,6 +100,7 @@ btnPlayer.onclick = async () => {
         let songs = [];
         let audio = null;
         currentSongTitle.innerText = "Select a song";
+        playlist.innerHTML = "";
         mp3Files.forEach(song => {
           songs.push(song);
           const button = document.createElement("button");
