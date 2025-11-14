@@ -87,7 +87,6 @@ btnPlayer.onclick = async () => {
     plugin.style.zIndex = 5;
     minPlugin = false;
     btnPlayer.style.opacity = 1;
-    if(!playerLoaded){
       playerLoaded = true;
       const response = await fetch(URL+'getMusic');
       if (!response.ok) {
@@ -177,7 +176,6 @@ btnPlayer.onclick = async () => {
         currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
-    }
   }else{
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
