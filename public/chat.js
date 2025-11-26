@@ -120,9 +120,7 @@ btnPlayer.onclick = async () => {
               let songInd = songs.indexOf(song);
               songInd = songInd + 1;
               let nextSong = songs[songInd] || songs[0];
-              console.log(nextSong);
               let tmpBtn = document.getElementById(nextSong);
-              console.log(tmpBtn);
               tmpBtn.click();
             });
             btnNextSong.onclick = () => {
@@ -131,9 +129,7 @@ btnPlayer.onclick = async () => {
                 let songInd = songs.indexOf(song);
                 songInd = songInd + 1;
                 let nextSong = songs[songInd] || songs[0];
-                console.log(nextSong);
                 let tmpBtn = document.getElementById(nextSong);
-                console.log(tmpBtn);
                 tmpBtn.click();
             }
             btnPrevSong.onclick = () => {
@@ -144,7 +140,6 @@ btnPlayer.onclick = async () => {
                 let nextSong = songs[songInd] || songs[songs.length-1];
                 console.log(nextSong);
                 let tmpBtn = document.getElementById(nextSong);
-                console.log(tmpBtn);
                 tmpBtn.click();
             }
             currentSongTitle.innerText = song;
@@ -153,26 +148,20 @@ btnPlayer.onclick = async () => {
             btnPlayStop.classList.add("bx-pause");
           }
           btnPlayStop.onclick = () => {
-            console.log("clicked");
             if(btnPlayStop.classList.contains("bx-pause")){
               audio.pause();
               btnPlayStop.classList.add("bx-play");
               btnPlayStop.classList.remove("bx-pause");
-              waves.querySelectorAll('span').forEach(el => {
-                el.classList.add('pausedAnim');
-              });
+              waves.querySelectorAll('span').forEach(el => { el.classList.add('pausedAnim'); });
             }else{
               audio.play();
               btnPlayStop.classList.add("bx-pause");
               btnPlayStop.classList.remove("bx-play");
-              waves.querySelectorAll('span').forEach(el => {
-                el.classList.remove('pausedAnim');
-              });
+              waves.querySelectorAll('span').forEach(el => { el.classList.remove('pausedAnim'); });
             }
           }
           playlist.appendChild(button);
         });
-        console.log(songs);
       }else{
         currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
@@ -180,9 +169,7 @@ btnPlayer.onclick = async () => {
   }else{
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
-    setTimeout(() => {
-      plugin.style.position = "absolute";
-    }, 100);
+    setTimeout(() => { plugin.style.position = "absolute"; }, 100);
     minPlugin = true;
     btnPlayer.style.opacity = 0.7;
   }
@@ -190,36 +177,29 @@ btnPlayer.onclick = async () => {
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
-
   // Crear el icono de nueva ventana
   const newWindowIcon = document.createElement("i");
   newWindowIcon.className = "bx bx-plus";
   newWindowIcon.id = "newWindow";
-
   // Crear la barra superior de la ventana
   const windowTop = document.createElement("div");
   windowTop.className = "window-top";
-
   // Crear el título de la ventana
   const windowTitle = document.createElement("span");
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
-
   // Crear el icono de minimizar
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
   minWindowIcon.id = "minWindow";
-
   // Crear el icono de cerrar
   const btnCloseWindowIcon = document.createElement("i");
   btnCloseWindowIcon.className = "bx bx-x";
   btnCloseWindowIcon.id = "btnCloseWindow";
-
   // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
   windowTop.appendChild(minWindowIcon);
   windowTop.appendChild(btnCloseWindowIcon);
-
   // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
@@ -243,51 +223,44 @@ function createIframeWindow(site){
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeForm.style.display = "none";
-  iframe.onload = () => {
-    iframeCont.style.display = "block";
-  }
-  newWindowIcon.onclick = () => {
-    iframeForm.style.display = "block";
-  }
-windowTop.onmousedown = function(e) {
-        e.preventDefault();
-        iframeCont.style.cursor = "grabbing";
-        // Obtener la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Adjuntar los eventos para mover el div y soltarlo
-        document.onmousemove = elementDrag;
-        document.onmouseup = closeDragElement;
-    };
+  iframe.onload = () => { iframeCont.style.display = "block"; }
+  newWindowIcon.onclick = () => { iframeForm.style.display = "block"; }
+  windowTop.onmousedown = function(e) {
+    e.preventDefault();
+    iframeCont.style.cursor = "grabbing";
+    // Obtener la posición inicial del ratón
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Adjuntar los eventos para mover el div y soltarlo
+    document.onmousemove = elementDrag;
+    document.onmouseup = closeDragElement;
+  };
 
-    // Función que se ejecuta mientras se arrastra el div
-    function elementDrag(e) {
-        e.preventDefault();
-        // Calcular el nuevo desplazamiento del ratón
-        offsetX = mouseX - e.clientX;
-        offsetY = mouseY - e.clientY;
-        // Actualizar la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Establecer la nueva posición del div
-        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
-        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
-    }
-
-    // Función que se ejecuta cuando se suelta el div
-    function closeDragElement() {
-        // Desconectar los eventos de movimiento y soltar
-        iframeCont.style.cursor = "grab";
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
+  // Función que se ejecuta mientras se arrastra el div
+  function elementDrag(e) {
+    e.preventDefault();
+    // Calcular el nuevo desplazamiento del ratón
+    offsetX = mouseX - e.clientX;
+    offsetY = mouseY - e.clientY;
+    // Actualizar la posición inicial del ratón
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Establecer la nueva posición del div
+    iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
+    iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+  }
+  // Función que se ejecuta cuando se suelta el div
+  function closeDragElement() {
+    // Desconectar los eventos de movimiento y soltar
+    iframeCont.style.cursor = "grab";
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
 }
 
 // EVENTS TO DRAGGABLE PLUGINS
 let nuevoDiv = null;
 function checkCollision(element1, element2) {
-  console.log(element1);
-  console.log(element2);
   if (!element1 || !element2) return false;
   console.log("checking collision");
   const rect1 = element1.getBoundingClientRect();
@@ -304,9 +277,7 @@ function checkCollision(element1, element2) {
   );
 }
 function isMouseInsideElement(mouseX, mouseY, element) {
-    if (!element) {
-        return false;
-    }
+    if (!element) return false;
     const rect = element.getBoundingClientRect();
     // Comprueba si las coordenadas del mouse están dentro del rectángulo del elemento
     return mouseX >= rect.left &&
@@ -382,16 +353,11 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
       const currentMouseX = e.clientX;
       const currentMouseY = e.clientY;
       if(isMouseInsideElement(currentMouseX,currentMouseY,nuevoDiv)){
-        console.log("soltado dentro del div");
-        if(foldersPluginPos == "left"){
-          document.querySelector('.main').prepend(ventanaActiva);
-        }else{
-          document.querySelector('.main').appendChild(ventanaActiva);
-        }
+        if(foldersPluginPos == "left") document.querySelector('.main').prepend(ventanaActiva);
+        else document.querySelector('.main').appendChild(ventanaActiva);
       }
       nuevoDiv.remove();
       ventanaActiva = null;
-      console.log("No more dragging");
     }
   });
 
@@ -419,21 +385,17 @@ btnCreateDoc.onclick = ()=> {
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
-
   // Crear el icono de nueva ventana
   const newWindowIcon = document.createElement("i");
   newWindowIcon.className = "bx bx-plus";
   newWindowIcon.id = "newWindow";
-
   // Crear la barra superior de la ventana
   const windowTop = document.createElement("div");
   windowTop.className = "window-top";
-
   // Crear el título de la ventana
   const windowTitle = document.createElement("span");
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
-
   const windowAction = document.createElement("button");
   windowAction.id = "windowAction";
   let timer;
@@ -441,23 +403,17 @@ btnGo.onclick = () => {
   windowAction.addEventListener('click', function() {
       clicks++;
       if (clicks === 1) {
-          // Inicia un temporizador para esperar un posible segundo clic
           timer = setTimeout(() => {
-              console.log('¡Clic simple!');
               minWin = true;
               iframeCont.style.display = "none";
               btnIframe.style.opacity = 0.7;
-              // Aquí pones la acción para el clic simple
               clicks = 0; // Resetea el contador
           }, 250); // 300ms es un tiempo común para diferenciar
       } else {
-          // Si el temporizador no ha terminado, es un doble clic
           clearTimeout(timer);
           minWin = false;
           document.body.removeChild(iframeCont);
           btnIframe.style.opacity = 0.7;
-          console.log('¡Doble clic!');
-          // Aquí pones la acción para el doble clic
           clicks = 0;
       }
   });
@@ -526,7 +482,6 @@ windowTop.onmousedown = function(e) {
         iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
         iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
     }
-
     // Función que se ejecuta cuando se suelta el div
     function closeDragElement() {
         // Desconectar los eventos de movimiento y soltar
@@ -544,10 +499,7 @@ closeUpload.onclick = (e)=>{
   uploadFile.style.display = "none";
 }
 btnFile.onclick = ()=> uploadFile.style.display = "flex";
-// Drag and drop
-document.body.addEventListener("dragenter", ()=>{
-  uploadFile.style.display = "flex";
-});
+document.body.addEventListener("dragenter", ()=> uploadFile.style.display = "flex");
 
 // Back-end functions
 function getCookie(cname) {
@@ -555,12 +507,8 @@ function getCookie(cname) {
   let ca = document.cookie.split(';');
   for(let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
   }
   return '';
 }
@@ -588,9 +536,7 @@ btnFriends.onclick = async() => {
     },
     body: JSON.stringify({ user: newUser})
   });
-  if (!response.ok) {
-    throw new Error('Network response was not ok ' + response.statusText);
-  }
+  if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
   const friends = await response.json();
   friends.forEach(friend=> {
     let friendName = friend.folder.replace('friend', '');
