@@ -80,6 +80,7 @@ btnIframe.onclick = () => {
     iframeUrl.focus();
   }
 }
+let songs = [];
 btnPlayer.onclick = async () => {
   if(minPlugin){
     plugin.style.scale = 1;
@@ -97,7 +98,6 @@ btnPlayer.onclick = async () => {
       const mp3Files = await response.json();
       console.log(mp3Files);
       if(mp3Files.length > 0){
-        let songs = [];
         let audio = null;
         currentSongTitle.innerText = "Select a song";
         playlist.innerHTML = "";
@@ -526,9 +526,7 @@ btnFriends.onclick = async() => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
-  while (friendsCont.children.length > 1) {
-    div.removeChild(div.children[1]);
-  }
+  while (friendsCont.children.length > 1) div.removeChild(div.children[1]);
   const response = await fetch(URL+'getFriends', {
     method: 'POST',
     headers: {
@@ -559,12 +557,10 @@ btnFriends.onclick = async() => {
     friendList.appendChild(folderDiv);
   });
   btnAddFriend.onclick = () => {
-    console.log("putitos");
     let data = {
       friendUser: searchBar.value,
       user: newUser 
     } 
-    console.log(data);
     fetch(URL+"addfriend", {
       method: "post",
       headers: {
@@ -572,12 +568,9 @@ btnFriends.onclick = async() => {
       },
       body: JSON.stringify(data) 
     }).then(res => {
-      if(res.status == 404){
-        alert("User doesn't exists :c");
-      }
+      if(res.status == 404) alert("User doesn't exists :c");
     });
   }
-  console.log(friends); // Aquí puedes manejar los datos como necesites
 }
 btnFolders.onclick = () => {
   btnFriends.style.display = "block";
@@ -609,18 +602,13 @@ btnCustomize.onclick = () => {
         bgImg.setAttribute("draggable","false");
         bgImg.src = bg.bg_src;
         backgroundsCont.appendChild(bgImg);
-        bgImg.onclick = () => {
-          document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
-        }
-        console.log(bg);
-      })
+        bgImg.onclick = () => document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
+      });
       fetchedBgs = true;
-    }) 
+    }); 
   }
 }
-secodndaryBg.onclick = () => {
-  document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
-}
+secodndaryBg.onclick = () => document.body.style.backgroundImage = "url('" + secodndaryBg.src + "')";
 async function postFile(file) {
   progressCont.style.display = "flex";
   const data = new FormData();
@@ -633,7 +621,6 @@ async function postFile(file) {
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       porcentageBar.innerText = porcentage + "%";
-      if(porcentage == 100) console.log("File succesfully sended");
     }
   });
   porcentageBar.innerText = "0%";
@@ -649,9 +636,7 @@ async function postBg(file){
       'Content-Type': 'multipart/form-data'
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
-      if(porcentage <90){
-        porcentageBar.innerText = porcentage + "%";
-      }
+      if(porcentage <90) porcentageBar.innerText = porcentage + "%";
       if(porcentage == 90){
         setTimeout(() => {
           porcentageBar.innerText = porcentage + "%";
@@ -665,7 +650,6 @@ async function postBg(file){
       if(porcentage == 100){
         console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
-        console.log(file.name);
       }
     }
   });
@@ -677,9 +661,7 @@ async function postBg(file){
   console.log("hola w");
   bgImg.src = "files/"+file.name;
   backgroundsCont.appendChild(bgImg);
-  bgImg.onclick = () => {
-    document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
-  }
+  bgImg.onclick = () => document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
 }
 selectBg.onclick = async(event) => {
   event.preventDefault();
@@ -688,7 +670,6 @@ selectBg.onclick = async(event) => {
     for (let i = 0; i < fileLength; i++) {
       const file = fileSelectBg.files[i];
       await postBg(file) 
-      console.log(fileSelectBg.files.length);
     }
   }else{
     customizeCont.style.display = "none";
@@ -698,15 +679,12 @@ selectBg.onclick = async(event) => {
 
 uploadBtn.onclick = async (event) => {
   event.preventDefault();
-
   const fileLength = inputFile.files.length;
   for (let i = 0; i < fileLength; i++) {
     const file = inputFile.files[i];
-    console.log(file);
     closeUpload.click();
     await postFile(file); 
   }
-
   inputFile.value = "";
   dropArea.innerHTML = '';
   dropArea.innerText = 'Drop Or Select Your Files Here';
