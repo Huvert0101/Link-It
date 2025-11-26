@@ -107,7 +107,7 @@ btnPlayer.onclick = async () => {
           button.textContent = song;
           button.setAttribute("id", song);
           button.onclick = () => {
-            if(!audio.paused && audio != null) audio.pause();
+            if(audio != null && !audio.paused) audio.pause();
             audio = new Audio(URL+"/files/" + song);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
