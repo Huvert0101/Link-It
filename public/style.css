@@ -806,9 +806,9 @@ input[type="range"]::-webkit-slider-thumb {
 }
 #genVolumeBar{
     appearance: none;
-    height: 5px;
-    width: 70px;
-    border-radius: 29px;
+    height: 3px;
+    width: 50px;
+    border-radius: 50%;
 }
 #genVolumeBar::-webkit-slider-thumb {
    -webkit-appearance: none; /* Override default look */
