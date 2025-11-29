@@ -82,6 +82,7 @@ btnIframe.onclick = () => {
 }
 let songs = [];
 let audio = null;
+let lastPlayerBtn = null;
 btnPlayer.onclick = async () => {
   if(minPlugin){
     plugin.style.scale = 1;
@@ -113,6 +114,11 @@ btnPlayer.onclick = async () => {
             audio.addEventListener("loadedmetadata", () => {
               songProgress.max = audio.duration;
             });
+            if(lastPlayerBtn != button && lastPlayerBtn != null){
+              lastPlayerBtn.classList.remove("active-song");
+              lastPlayerBtn = button;
+            }
+            if(lastPlayerBtn == null) lastPlayerBtn = button;
             audio.addEventListener("timeupdate", () => {
               songProgress.value = audio.currentTime;
             });
