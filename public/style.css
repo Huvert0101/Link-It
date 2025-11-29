@@ -813,7 +813,9 @@ input[type="range"]::-webkit-slider-thumb {
 #genVolumeBar::-webkit-slider-thumb {
    -webkit-appearance: none; /* Override default look */
    appearance: none;
-   margin-top: -6px; /* Centers thumb on the track */
+   width: 6px;
+   height: 6px;
+   margin-top: 0px; /* Centers thumb on the track */
 }
 @media only screen and (max-width: 768px) {
   .right{
