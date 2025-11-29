@@ -185,7 +185,7 @@ btnPlayer.onclick = async () => {
 }
 genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
-  audio.volume = newVolume;
+  if(audio!=null) audio.volume = newVolume;
 });
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
