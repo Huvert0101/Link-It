@@ -798,6 +798,23 @@ input[type="range"]::-webkit-slider-thumb {
     font-size: 16px;
 }
 .bx-menu{ display: none;}
+.volumeManager{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#genVolumeBar{
+    appearance: none;
+    height: 5px;
+    width: 70px;
+    border-radius: 29px;
+}
+#genVolumeBar::-webkit-slider-thumb {
+   -webkit-appearance: none; /* Override default look */
+   appearance: none;
+   margin-top: -6px; /* Centers thumb on the track */
+}
 @media only screen and (max-width: 768px) {
   .right{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
