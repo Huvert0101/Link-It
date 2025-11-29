@@ -64,6 +64,7 @@ let minWin = false;
 let minPlugin = true;
 let playerLoaded = false;
 let currentFolder = "main";
+let genVolumeBar = document.getElementById("genVolumeBar");
 
 // Front-end functions
 btnMenu.onclick = () => {
@@ -181,6 +182,13 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 0.7;
   }
 }
+genVolumeBar.addEventListener('input', function() {
+  const newVolume = parseFloat(genVolumeBar.value);
+  const mediaElements = document.querySelectorAll('audio, video');
+  mediaElements.forEach(media => {
+  media.volume = newVolume;
+  });
+});
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
