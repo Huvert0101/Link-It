@@ -111,6 +111,7 @@ btnPlayer.onclick = async () => {
           button.onclick = () => {
             if(audio != null && !audio.paused) audio.pause();
             audio = new Audio(URL+"/files/" + song);
+            audio.volume = parseFloat(genVolumeBar.value);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
               songProgress.max = audio.duration;
@@ -185,7 +186,6 @@ btnPlayer.onclick = async () => {
 genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
   audio.volume = newVolume;
-  console.log(newVolume);
 });
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
