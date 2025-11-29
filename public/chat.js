@@ -184,10 +184,8 @@ btnPlayer.onclick = async () => {
 }
 genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
-  const mediaElements = document.querySelectorAll('audio, video');
-  mediaElements.forEach(media => {
-  media.volume = newVolume;
-  });
+  audio.volume = newVolume;
+  console.log(newVolume);
 });
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
