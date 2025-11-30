@@ -77,7 +77,10 @@ function getMp3Files(musicFolder) {
                 return;
             }
             // Filtra los archivos para quedarse solo con los .mp3
-            const mp3Files = files.filter(file => path.extname(file).toLowerCase() === '.mp3');
+            const mp3Files = files.filter(file =>{
+                const extension = path.extname(file).toLowerCase();
+                return extension === '.mp3' || extension === '.flac';
+            });
             resolve(mp3Files);
         });
     });
@@ -151,14 +154,8 @@ app.get('/getMusic', async (req, res) => {
     const musicPath = path.join(__dirname, 'public', 'files');
     try {
         const mp3Files = await getMp3Files(musicPath);
-        console.log(musicPath);
-        console.log("hellou");
-        console.log(mp3Files);
         res.json(mp3Files);
     } catch (err) {
-        console.log("puto");
-        console.log(musicPath);
-        console.log(err);
         res.status(500).json({ error: err });
     }
 });
