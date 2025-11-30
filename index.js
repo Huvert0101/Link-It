@@ -236,7 +236,8 @@ app.post('/upload', upload.single('file'), function(req, res, next){
     io.sockets.emit('getFiles', {
         message: 'files/' + req.file.originalname,
         type: 'file',
-        user: req.body.user
+        user: req.body.user,
+        folder:req.body.folder
     });
     res.redirect("/");
 });

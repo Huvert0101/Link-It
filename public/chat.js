@@ -861,7 +861,7 @@ socket.on('createdFolder', (data)=>{
   addBtnFolder() }
 });
 
-socket.on('getFiles', (files)=>{ if(files.user == newUser) addToDom(files) });
+socket.on('getFiles', (files)=>{ if(files.user == newUser && files.folder==currentFolder) addToDom(files) });
 let cont = 0;
 let fetchedFolders = false;
 socket.on('getMessages', (data) => {
