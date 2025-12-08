@@ -472,36 +472,35 @@ btnGo.onclick = () => {
   iframeForm.style.display = "none";
   iframe.onload = () => iframeCont.style.display = "block";
   newWindowIcon.onclick = () => iframeForm.style.display = "block";
-windowTop.onmousedown = function(e) {
-        e.preventDefault();
-        iframeCont.style.cursor = "grabbing";
-        // Obtener la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Adjuntar los eventos para mover el div y soltarlo
-        document.onmousemove = elementDrag;
-        document.onmouseup = closeDragElement;
-    };
-    // Función que se ejecuta mientras se arrastra el div
-    function elementDrag(e) {
-        e.preventDefault();
-        // Calcular el nuevo desplazamiento del ratón
-        offsetX = mouseX - e.clientX;
-        offsetY = mouseY - e.clientY;
-        // Actualizar la posición inicial del ratón
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        // Establecer la nueva posición del div
-        iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
-        iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
-    }
-    // Función que se ejecuta cuando se suelta el div
-    function closeDragElement() {
-        // Desconectar los eventos de movimiento y soltar
-        iframeCont.style.cursor = "grab";
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
+  windowTop.onmousedown = function(e) {
+    e.preventDefault();
+    iframeCont.style.cursor = "grabbing";
+    // Obtener la posición inicial del ratón
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Adjuntar los eventos para mover el div y soltarlo
+    document.onmousemove = elementDrag;
+    document.onmouseup = closeDragElement;
+  };
+  // Función que se ejecuta mientras se arrastra el div
+  function elementDrag(e) {
+    e.preventDefault();
+    // Calcular el nuevo desplazamiento del ratón
+    offsetX = mouseX - e.clientX;
+    offsetY = mouseY - e.clientY;
+    // Actualizar la posición inicial del ratón
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    // Establecer la nueva posición del div
+    iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
+    iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
+  }
+  function closeDragElement() {
+    // Desconectar los eventos de movimiento y soltar
+    iframeCont.style.cursor = "grab";
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
@@ -554,17 +553,13 @@ btnFriends.onclick = async() => {
     friendName = friendName.replace(newUser, '');
     const folderDiv = document.createElement('div');
     folderDiv.className = 'folder';
-
     const folderTitle = document.createElement('span');
     folderTitle.className = 'folder-title';
     folderTitle.id = friend.folder;
     folderTitle.textContent = friendName;
-
     const icon = document.createElement('i');
     icon.className = 'bx bx-dots-horizontal-rounded';
     icon.style.color = '#ffffff';
-
-    // Hacer append a los elementos
     folderDiv.appendChild(folderTitle);
     folderDiv.appendChild(icon);
     friendList.appendChild(folderDiv);
@@ -636,6 +631,11 @@ async function postFile(file) {
       porcentageBar.innerText = porcentage + "%";
     }
   });
+  await axios.post('https://huvert01.pythonanywhere.com/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
   porcentageBar.innerText = "0%";
   progressCont.style.display = "none";
 }
@@ -701,7 +701,6 @@ uploadBtn.onclick = async (event) => {
   inputFile.value = "";
   dropArea.innerHTML = '';
   dropArea.innerText = 'Drop Or Select Your Files Here';
-  //userInput.value = newUser;
 }
 
 dropArea.addEventListener('dragover', (e) => e.preventDefault());
@@ -798,13 +797,11 @@ btnBack.onclick = () => {
 
 btn.addEventListener('click', ()=>{
   if(message.value.trim() == '') return;
-
   socket.emit('chat:message', {
     message: message.value,
     user: newUser,
     folder: currentFolder
   });
-  //userInput.value = newUser;
 });
 
 addEventListener('keydown', function(e){
