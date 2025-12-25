@@ -847,7 +847,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="console.log('3 puntitos')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>` );
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><button>Delete</button></div></div>` );
     addBtnFolder()
   }
   fetchedFolders = true; // do stuff with it
@@ -858,7 +858,10 @@ socket.on('getMessagesFol', (data)=>{
   if(data.length == 0) return;
   if(data[0].folder == currentFolder && !output.hasChildNodes()) data.forEach(el => addToDom(el))
 });
-
+function displayFolderMenu(folder){
+  folderMenuCont = folder+"MenuCont";
+  console.log(folderMenuCont);
+}
 async function delFol(folder){
   const data = {folderName: folder, user: newUser};
   await axios.post('/delFol', data).then((res)=>{
