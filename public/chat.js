@@ -876,7 +876,7 @@ async function delFol(folder){
     if(res.status == 200){
       let folderEl = document.getElementById(folder);
       let delEl = document.getElementById(folder + "1");
-      folderEl.remove();
+      folderEl.parentElement.remove();
       delEl.remove();
     }else console.log(res);
   });
