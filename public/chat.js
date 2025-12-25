@@ -847,7 +847,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><button>Delete</button></div></div>` );
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><button>Delete</button></div></div>`);
     addBtnFolder()
   }
   fetchedFolders = true; // do stuff with it
@@ -860,6 +860,8 @@ socket.on('getMessagesFol', (data)=>{
 });
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
+  folderMenuContEl = document.querySelector("."+folderMenuCont);
+  folderMenuContEl.style.setProperty("display", "flex", "important");
   console.log(folderMenuCont);
 }
 async function delFol(folder){

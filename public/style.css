@@ -609,6 +609,7 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: center;
 }
 .folder{
+    position: relative;
     cursor: pointer;
     display: flex;
     width: 100%;
@@ -817,6 +818,11 @@ input[type="range"]::-webkit-slider-thumb {
    width: 11px;
    height: 11px;
    margin-top: 0.5px; /* Centers thumb on the track */
+}
+.folderMenuCont{
+    position: absolute;
+    right: 0;
+    display: none;
 }
 @media only screen and (max-width: 768px) {
   .right{
