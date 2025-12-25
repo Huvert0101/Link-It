@@ -861,7 +861,13 @@ socket.on('getMessagesFol', (data)=>{
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
   folderMenuContEl = document.querySelector("."+folderMenuCont);
-  folderMenuContEl.style.setProperty("display", "flex", "important");
+  if(folderMenuContEl.classList.contains("activeMenu")){
+    folderMenuContEl.classList.remove("activeMenu");
+    folderMenuContEl.style.setProperty("display", "none", "important");
+  }else{
+    folderMenuContEl.classList.add("activeMenu");
+    folderMenuContEl.style.setProperty("display", "flex", "important");
+  }
   console.log(folderMenuCont);
 }
 async function delFol(folder){
