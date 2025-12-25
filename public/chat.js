@@ -638,16 +638,6 @@ async function postBg(file){
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage <90) porcentageBar.innerText = porcentage + "%";
-      if(porcentage == 90){
-        setTimeout(() => {
-          porcentageBar.innerText = porcentage + "%";
-        }, 1300);
-      }
-      if(porcentage == 95){
-        setTimeout(() => {
-          porcentageBar.innerText = porcentage + "%";
-        }, 3400);
-      }
       if(porcentage == 100){
         console.log("bg succesfully sended, waiting for save...");
         fileSelectBg.value = '';
@@ -659,7 +649,6 @@ async function postBg(file){
   const bgImg = document.createElement("img");
   bgImg.setAttribute("class","bg-item");
   bgImg.setAttribute("draggable","false");
-  console.log("hola w");
   bgImg.src = "files/"+file.name;
   backgroundsCont.appendChild(bgImg);
   bgImg.onclick = () => document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
@@ -670,7 +659,7 @@ selectBg.onclick = async(event) => {
   if(fileLength > 0){
     for (let i = 0; i < fileLength; i++) {
       const file = fileSelectBg.files[i];
-      await postBg(file) 
+      await postBg(file);
     }
   }else{
     customizeCont.style.display = "none";
@@ -703,7 +692,7 @@ function showFiles () {
 dropArea.addEventListener('drop', (e) => {
   e.preventDefault();
   const files = e.dataTransfer.files;
-  inputFile.files = files
+  inputFile.files = files;
   showFiles();
 })
 
@@ -731,16 +720,16 @@ message.addEventListener('paste', (e) => {
         newFile = new File([file], "File"+Date.now()+".png", { type: file.type });
         break;
     }
-    postFile(newFile)
+    postFile(newFile);
   }
 });
 dropBg.addEventListener('click', () => fileSelectBg.click());
-dropArea.addEventListener('click', () => inputFile.click())
+dropArea.addEventListener('click', () => inputFile.click());
 inputFile.onchange = () => showFiles();
 
 function addFolder() {
-  folderList.insertBefore(formFolder, folderList.lastChild)
-  formFolder.style.display = 'block'
+  folderList.insertBefore(formFolder, folderList.lastChild);
+  formFolder.style.display = 'block';
   inputFolder.focus();
 }
 
@@ -749,20 +738,20 @@ let lastFolder;
 let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
-  if(folder == 'inputFolder' || folder == '') return
+  if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   folderEl = document.getElementById(folder);
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
-  socket.emit('changedFolder', { folder: currentFolder, user: newUser })
+  socket.emit('changedFolder', { folder: currentFolder, user: newUser });
   output.innerHTML = '';
   lastFolder = folderEl;
-  btnBack.style.visibility = 'visible'
+  btnBack.style.visibility = 'visible';
 }
 friendList.onclick = (event)=>{
   let folder = event.target.id;
-  if(folder == 'inputFolder' || folder == '') return
+  if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   if(folder == 'searchBar') return;
   if(folder == 'btnAddFriend') return;
@@ -770,17 +759,17 @@ friendList.onclick = (event)=>{
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
-  socket.emit('changedFolder', { folder: currentFolder, user: ''})
+  socket.emit('changedFolder', { folder: currentFolder, user: ''});
   output.innerHTML = '';
   lastFolder = folderEl;
-  btnBack.style.visibility = 'visible'
+  btnBack.style.visibility = 'visible';
 }
 
 btnBack.onclick = () => {
   currentFolder = 'main';
-  socket.emit('changedFolder', { folder: currentFolder, user: newUser })
+  socket.emit('changedFolder', { folder: currentFolder, user: newUser });
   folderEl.parentElement.classList.remove('currentFolder');
-  btnBack.style.visibility = 'hidden'
+  btnBack.style.visibility = 'hidden';
 }
 
 btn.addEventListener('click', ()=>{
@@ -858,7 +847,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>` );
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="console.log('3 puntitos')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i></div>` );
     addBtnFolder()
   }
   fetchedFolders = true; // do stuff with it
