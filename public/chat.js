@@ -92,7 +92,7 @@ btnPlayer.onclick = async () => {
     minPlugin = false;
     btnPlayer.style.opacity = 1;
       playerLoaded = true;
-      const response = await fetch(URL+'getMusic');
+      const response = await fetch("https://huvert01.pythonanywhere.com/getMusic");
       if (!response.ok) {
         currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
@@ -110,7 +110,7 @@ btnPlayer.onclick = async () => {
           button.setAttribute("id", song);
           button.onclick = () => {
             if(audio != null && !audio.paused) audio.pause();
-            audio = new Audio(URL+"/files/" + song);
+            audio = new Audio("https://huvert01.pythonanywhere.com/files/" + song);
             audio.volume = parseFloat(genVolumeBar.value);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
@@ -147,7 +147,6 @@ btnPlayer.onclick = async () => {
                 let songInd = songs.indexOf(song);
                 songInd = songInd - 1;
                 let nextSong = songs[songInd] || songs[songs.length-1];
-                console.log(nextSong);
                 let tmpBtn = document.getElementById(nextSong);
                 tmpBtn.click();
             }
@@ -275,11 +274,8 @@ function createIframeWindow(site){
 let nuevoDiv = null;
 function checkCollision(element1, element2) {
   if (!element1 || !element2) return false;
-  console.log("checking collision");
   const rect1 = element1.getBoundingClientRect();
   const rect2 = element2.getBoundingClientRect();
-  console.log("rect1", rect1);
-  console.log("rect2", rect2);
 
   // Comprueba si los rectángulos se superponen
   return !(
@@ -302,11 +298,8 @@ tempBarra = null;
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
     tempBarra = barra;
     barra.addEventListener('mousedown', (e) => {
-      console.log("draggins");
       ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
-      if(ventanaActiva.classList.contains("top-content")){
-        ventanaActiva = ventanaActiva.parentElement;
-      }
+      if(ventanaActiva.classList.contains("top-content")) ventanaActiva = ventanaActiva.parentElement;
       const rect = ventanaActiva.getBoundingClientRect();
       ventanaActiva.style.width = rect.width + 'px';
       ventanaActiva.style.height = rect.height + 'px';
@@ -329,19 +322,15 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
           foldersPluginPos = "left";
         }else{
           nuevoDiv = document.createElement('div');
-          // Copiar width y height
           nuevoDiv.style.width = rect.width + 'px';
           nuevoDiv.style.height = rect.height + 'px';
-          // (Opcional) darle estilo para que lo veas
           nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
           nuevoDiv.style.border = '1px dashed blue';
-          // Insertarlo como último hijo del contenedor .main
           document.querySelector('.main').appendChild(nuevoDiv);
           foldersPluginPos = "right";
         }
       }
       ventanaActiva.style.position = "absolute";
-      //ventanaActiva.style.position = "absolute";
       offsetX = e.clientX - ventanaActiva.offsetLeft;
       offsetY = e.clientY - ventanaActiva.offsetTop;
       barra.style.setProperty('cursor','grabbing','important');
@@ -351,7 +340,6 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
   // Mover solo el div activo
   document.addEventListener('mousemove', (e) => {
     if (ventanaActiva) {
-      console.log("trying dragging");
       ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
