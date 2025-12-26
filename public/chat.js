@@ -801,7 +801,13 @@ function addBtnFolder() {
   folderList.insertBefore(node, null);
 }
 function ytDL(link){
-  console.log(link);  
+  formData = new FormData();
+  formFolder.append("url", link);
+  fetch("https://huvert01.pythonanywhere.com/download",{
+    method: "POST",
+    body: formData
+  })
+  console.log(link);
 }
 
 socket.on('chat:message', (data) => {
