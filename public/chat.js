@@ -802,7 +802,7 @@ function addBtnFolder() {
 }
 function ytDL(link){
   formData = new FormData();
-  formFolder.append("url", link);
+  formData.append("url", link);
   fetch("https://huvert01.pythonanywhere.com/download",{
     method: "POST",
     body: formData
