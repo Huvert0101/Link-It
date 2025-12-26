@@ -753,6 +753,9 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: space-between;
 }
 .top-content span{
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none;      /* IE 10 y Edge antiguo */
+    user-select: none;
     position: relative;
     font-weight: bold;
 }
@@ -823,11 +826,23 @@ input[type="range"]::-webkit-slider-thumb {
    margin-top: 0.5px; /* Centers thumb on the track */
 }
 .folderMenuCont{
+    align-items: center;
+    border-radius: 10px;
+    padding: 2px;
+    border: 1px solid white;
+    z-index: 9;
+    background: black;
     position: absolute;
     right: -42px;
     top: 27px;
     display: none;
     flex-direction: column;
+}
+.bx-trash{
+    font-size: 27px;
+}
+.bx-forward-big{
+    font-size: 27px;
 }
 @media only screen and (max-width: 768px) {
   .right{
