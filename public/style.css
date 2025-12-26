@@ -774,11 +774,15 @@ input[type="range"]::-webkit-slider-thumb {
 .display a {
     display: inline-block;
     white-space: nowrap;
+    width: 100%;
     max-width: 49vw;
     color: mediumslateblue;
     text-overflow: ellipsis;
     overflow: hidden;
     color: mediumslateblue;
+}
+.display a:hover{
+    background-color: #ffffff1a;
 }
 .dropArea {
     transition: all ease 0.3s;
