@@ -192,30 +192,23 @@ genVolumeBar.addEventListener('input', function() {
 function createIframeWindow(site){
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
-  // Crear el icono de nueva ventana
   const newWindowIcon = document.createElement("i");
   newWindowIcon.className = "bx bx-plus";
   newWindowIcon.id = "newWindow";
-  // Crear la barra superior de la ventana
   const windowTop = document.createElement("div");
   windowTop.className = "window-top";
-  // Crear el título de la ventana
   const windowTitle = document.createElement("span");
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
-  // Crear el icono de minimizar
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
   minWindowIcon.id = "minWindow";
-  // Crear el icono de cerrar
   const btnCloseWindowIcon = document.createElement("i");
   btnCloseWindowIcon.className = "bx bx-x";
   btnCloseWindowIcon.id = "btnCloseWindow";
-  // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
   windowTop.appendChild(minWindowIcon);
   windowTop.appendChild(btnCloseWindowIcon);
-  // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
   document.body.appendChild(iframeCont);
@@ -266,7 +259,6 @@ function createIframeWindow(site){
   }
   // Función que se ejecuta cuando se suelta el div
   function closeDragElement() {
-    // Desconectar los eventos de movimiento y soltar
     iframeCont.style.cursor = "grab";
     document.onmousemove = null;
     document.onmouseup = null;
@@ -279,7 +271,6 @@ function checkCollision(element1, element2) {
   if (!element1 || !element2) return false;
   const rect1 = element1.getBoundingClientRect();
   const rect2 = element2.getBoundingClientRect();
-
   // Comprueba si los rectángulos se superponen
   return !(
     rect1.right < rect2.left ||
@@ -342,7 +333,7 @@ document.querySelectorAll('.draggablePlugin').forEach(barra => {
 
   // Mover solo el div activo
   document.addEventListener('mousemove', (e) => {
-    if (ventanaActiva) {
+    if(ventanaActiva) {
       ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
       ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
     }
@@ -389,14 +380,11 @@ btnCreateDoc.onclick = ()=> {
 btnGo.onclick = () => {
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
-  // Crear el icono de nueva ventana
   const newWindowIcon = document.createElement("i");
   newWindowIcon.className = "bx bx-plus";
   newWindowIcon.id = "newWindow";
-  // Crear la barra superior de la ventana
   const windowTop = document.createElement("div");
   windowTop.className = "window-top";
-  // Crear el título de la ventana
   const windowTitle = document.createElement("span");
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
@@ -421,21 +409,17 @@ btnGo.onclick = () => {
       clicks = 0;
     }
   });
-
   // Crear el icono de minimizar
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
   minWindowIcon.id = "minWindow";
-
   // Crear el icono de cerrar
   const btnCloseWindowIcon = document.createElement("i");
   btnCloseWindowIcon.className = "bx bx-x";
   btnCloseWindowIcon.id = "btnCloseWindow";
-
   // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
   windowTop.appendChild(windowAction);
-
   // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
@@ -572,7 +556,7 @@ btnFriends.onclick = async() => {
 btnFolders.onclick = () => {
   btnFriends.style.display = "block";
   btnFolders.style.display = "none";
-  socket.emit('getFolders', {user: newUser})
+  socket.emit('getFolders', {user: newUser});
   rightPanelTitle.innerText = "Folders";
   folderList.style.display = "flex";
   friendsCont.style.display = "none";
@@ -609,9 +593,9 @@ secodndaryBg.onclick = () => document.body.style.backgroundImage = "url('" + sec
 async function postFile(file) {
   progressCont.style.display = "flex";
   const data = new FormData();
-  data.append("file", file)
+  data.append("file", file);
   data.append("user", newUser);
-  data.append("folder", currentFolder)
+  data.append("folder", currentFolder);
   await axios.post('/upload', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -819,7 +803,7 @@ function addToDom(data) {
 
 function addBtnFolder() {
   let node = document.getElementById('addFolder');
-  folderList.insertBefore(node, null)
+  folderList.insertBefore(node, null);
 }
 
 socket.on('chat:message', (data) => {
@@ -849,7 +833,7 @@ socket.on('getFolders', (data)=>{
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
       folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class="bx bx-trash-x"></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
-    addBtnFolder()
+    addBtnFolder();
   }
   fetchedFolders = true; // do stuff with it
 });
