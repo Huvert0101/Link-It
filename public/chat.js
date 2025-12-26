@@ -58,6 +58,7 @@ let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
 const right = document.querySelector('.right');
 let foldersPluginPos = "right";
+let leftPanel = document.querySelector(".left");
 const URL = window.location;
 let ventanaActiva = null;
 let minWin = false;
@@ -86,6 +87,7 @@ let audio = null;
 let lastPlayerBtn = null;
 btnPlayer.onclick = async () => {
   if(minPlugin){
+    leftPanel.style.width = "59%";
     plugin.style.scale = 1;
     plugin.style.position = "relative";
     plugin.style.zIndex = 5;
@@ -133,13 +135,13 @@ btnPlayer.onclick = async () => {
               tmpBtn.click();
             });
             btnNextSong.onclick = () => {
-                audio.pause();
-                button.classList.remove("active-song");
-                let songInd = songs.indexOf(song);
-                songInd = songInd + 1;
-                let nextSong = songs[songInd] || songs[0];
-                let tmpBtn = document.getElementById(nextSong);
-                tmpBtn.click();
+              audio.pause();
+              button.classList.remove("active-song");
+              let songInd = songs.indexOf(song);
+              songInd = songInd + 1;
+              let nextSong = songs[songInd] || songs[0];
+              let tmpBtn = document.getElementById(nextSong);
+              tmpBtn.click();
             }
             btnPrevSong.onclick = () => {
                 audio.pause();
@@ -175,6 +177,7 @@ btnPlayer.onclick = async () => {
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
   }else{
+    leftPanel.style.width = "73%";
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
     setTimeout(() => { plugin.style.position = "absolute"; }, 100);
@@ -402,21 +405,21 @@ btnGo.onclick = () => {
   let timer;
   let clicks = 0;
   windowAction.addEventListener('click', function() {
-      clicks++;
-      if (clicks === 1) {
-          timer = setTimeout(() => {
-              minWin = true;
-              iframeCont.style.display = "none";
-              btnIframe.style.opacity = 0.7;
-              clicks = 0; // Resetea el contador
-          }, 250); // 300ms es un tiempo común para diferenciar
-      } else {
-          clearTimeout(timer);
-          minWin = false;
-          document.body.removeChild(iframeCont);
-          btnIframe.style.opacity = 0.7;
-          clicks = 0;
-      }
+    clicks++;
+    if (clicks === 1) {
+      timer = setTimeout(() => {
+        minWin = true;
+        iframeCont.style.display = "none";
+        btnIframe.style.opacity = 0.7;
+        clicks = 0; // Resetea el contador
+      }, 250); // 300ms es un tiempo común para diferenciar
+    } else {
+      clearTimeout(timer);
+      minWin = false;
+      document.body.removeChild(iframeCont);
+      btnIframe.style.opacity = 0.7;
+      clicks = 0;
+    }
   });
 
   // Crear el icono de minimizar
@@ -432,8 +435,6 @@ btnGo.onclick = () => {
   // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
   windowTop.appendChild(windowAction);
-  //windowTop.appendChild(minWindowIcon);
-  //windowTop.appendChild(btnCloseWindowIcon);
 
   // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
@@ -847,7 +848,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class="bx bx-trash-x"/><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class="bx bx-trash-x"></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
     addBtnFolder()
   }
   fetchedFolders = true; // do stuff with it
