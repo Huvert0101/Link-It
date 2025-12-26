@@ -833,7 +833,7 @@ input[type="range"]::-webkit-slider-thumb {
     z-index: 9;
     background: black;
     position: absolute;
-    right: -42px;
+    right: -30px;
     top: 27px;
     display: none;
     flex-direction: column;
