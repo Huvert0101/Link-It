@@ -775,7 +775,6 @@ input[type="range"]::-webkit-slider-thumb {
     display: inline-block;
     white-space: nowrap;
     width: 100%;
-    max-width: 49vw;
     color: mediumslateblue;
     text-overflow: ellipsis;
     overflow: hidden;
