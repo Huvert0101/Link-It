@@ -806,7 +806,19 @@ function ytDL(link){
   fetch("https://huvert01.pythonanywhere.com/download",{
     method: "POST",
     body: formData
+  }).then(response => {
+    if (response.ok) return response.blob(); // Recibimos el archivo como un binario (blob)
+    throw new Error('Error en la descarga');
+  }).then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "musica.mp3"; // Nombre sugerido
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   })
+  .catch(error => console.error("Hubo un fallo:", error));
   console.log(link);
 }
 
