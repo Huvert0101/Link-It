@@ -177,10 +177,9 @@ btnPlayer.onclick = async () => {
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
   }else{
-    leftPanel.style.width = "73%";
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
-    setTimeout(() => { plugin.style.position = "absolute"; }, 100);
+    setTimeout(() => { plugin.style.position = "absolute"; leftPanel.style.width = "73%";}, 100);
     minPlugin = true;
     btnPlayer.style.opacity = 0.7;
   }
@@ -409,18 +408,14 @@ btnGo.onclick = () => {
       clicks = 0;
     }
   });
-  // Crear el icono de minimizar
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
   minWindowIcon.id = "minWindow";
-  // Crear el icono de cerrar
   const btnCloseWindowIcon = document.createElement("i");
   btnCloseWindowIcon.className = "bx bx-x";
   btnCloseWindowIcon.id = "btnCloseWindow";
-  // Añadir el título y los iconos a la barra superior de la ventana
   windowTop.appendChild(windowTitle);
   windowTop.appendChild(windowAction);
-  // Añadir los elementos a iframeCont
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
   document.body.appendChild(iframeCont);
@@ -832,7 +827,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class="bx bx-trash-x"></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class='bx bx-trash-x'></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
     addBtnFolder();
   }
   fetchedFolders = true; // do stuff with it
