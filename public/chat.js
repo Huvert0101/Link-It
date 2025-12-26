@@ -789,7 +789,7 @@ function addToDom(data) {
     else output.innerHTML += `<a target='_blank' href='${data.message}'><button class='fileBtn'>${msg}</button></a><br>`
   }else {
     let isLink = data.message.slice(0, 5);
-    if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><br>`
+    if(isLink == "https" || isLink == "https:") output.innerHTML += `<a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><button>Download mp3</button></div><br>`
     else output.innerHTML += `<p style='word-break: break-all'>${data.message}</p>` 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
@@ -827,7 +827,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class='bx  bx-trash' style='color:#ffffff'></i><i class='bx  bx-forward-big' style='color:#ffffff'></i> </div></div>`);
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class='bx  bx-trash' style='color:#ffffff'></i><i class='bx  bx-forward-big' style='color:#ffffff'></i></div></div>`);
     addBtnFolder();
   }
   fetchedFolders = true; // do stuff with it
