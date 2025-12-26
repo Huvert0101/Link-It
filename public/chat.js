@@ -827,7 +827,7 @@ socket.on('getFolders', (data)=>{
   if(data.length == 0){ addBtnFolder(); return}
   if(data[0].user == newUser && !fetchedFolders){
     data.forEach(el => 
-      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class='bx bx-trash-x'></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
+      folderList.innerHTML += `<div class='folder'><span class='folder-title' id='${el.folder}'>${el.folder}</span><i onclick="displayFolderMenu('${el.folder}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${el.folder}MenuCont'><i onclick="delFol('${el.folder}')" class='bx  bx-trash' style='color:#ffffff'></i><button onclick="delFol('${el.folder}')">Delete</button><button>Share</button></div></div>`);
     addBtnFolder();
   }
   fetchedFolders = true; // do stuff with it
