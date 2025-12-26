@@ -846,7 +846,11 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .msgMenuCont {
   position: absolute;
+  display: none;
   right: 0;
+}
+.linkCont:hover > .msgMenuCont{
+    display: flex;
 }
 .linkCont {
   display: flex;

@@ -806,7 +806,7 @@ socket.on('chat:message', (data) => {
   message.value = '';
   console.log(data);
   if(data.folder.startsWith("friend") && data.folder == currentFolder) {addToDom(data)}
-  else{ if(data.user == newUser && data.folder == currentFolder) addToDom(data)}
+  else{if(data.user == newUser && data.folder == currentFolder) addToDom(data)}
 });
 
 socket.on('createdFolder', (data)=>{
