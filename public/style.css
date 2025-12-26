@@ -826,23 +826,31 @@ input[type="range"]::-webkit-slider-thumb {
    margin-top: 0.5px; /* Centers thumb on the track */
 }
 .folderMenuCont{
-    align-items: center;
-    border-radius: 10px;
-    padding: 2px;
-    border: 1px solid white;
-    z-index: 9;
-    background: black;
-    position: absolute;
-    right: -30px;
-    top: 27px;
-    display: none;
-    flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 2px;
+  border: 1px solid white;
+  z-index: 9;
+  background: black;
+  position: absolute;
+  right: -30px;
+  top: 27px;
+  display: none;
+  flex-direction: column;
 }
 .bx-trash{
-    font-size: 27px;
+  font-size: 27px;
 }
 .bx-forward-big{
-    font-size: 27px;
+  font-size: 27px;
+}
+.msgMenuCont {
+  position: absolute;
+  right: 0;
+}
+.linkCont {
+  display: flex;
+  position: relative;
 }
 @media only screen and (max-width: 768px) {
   .right{
