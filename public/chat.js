@@ -789,7 +789,7 @@ function addToDom(data) {
     else output.innerHTML += `<a target='_blank' href='${data.message}'><button class='fileBtn'>${msg}</button></a><br>`;
   }else {
     let isLink = data.message.slice(0, 5);
-    if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><button onclick="ytDL('${data.message}')">Download mp3</button></div></div>`;
+    if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a>/div>`;
     else output.innerHTML += `<p style='word-break: break-all'>${data.message}</p>` 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
