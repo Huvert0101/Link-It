@@ -576,7 +576,7 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: start;
 }
 #input{
-    flex: 0.99;
+    flex: 0.993;
     height: 100%;
     border-radius: 20px;
     border: none;
@@ -584,6 +584,9 @@ input[type="range"]::-webkit-slider-thumb {
     color: white;
     padding-left: 20px;
     outline: none;
+}
+#btn_send{
+    font-size: 39px;
 }
 .bx-msg-ico{
     display: flex;
