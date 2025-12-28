@@ -63,6 +63,11 @@ async function delFol(usr, folderName){
     if(res && res2) return "200";
     else return "500";
 }
+async function delMessage(usr, folderName,  msg){
+    const [res2] = await conn.query("DELETE FROM messages WHERE msessage='" + msg+ "' user ='" + usr + "' AND folder ='" + folderName + "'");
+    if(res2) return "200";
+    else return "500";
+}
 async function validUser(usr){
     const [res] = await conn.query("SELECT user FROM users WHERE user ='"+usr+"'");
     if(res.length > 0) return true;
@@ -143,6 +148,18 @@ app.post('/delFol', jsonParser, (req, res)=>{
     const folName = req.body.folderName;
     const user = req.body.user;
     delFol(user, folName).then(res2 =>{
+        if(res2 == 200){
+            res.sendStatus(200);
+        }else{
+            res.sendStatus(500);
+        }
+    })
+});
+app.post('delMessage', jsonParser, (req,res)=>  {
+    const folName = req.body.folderName;
+    const user = req.body.user;
+    const msg = req.body.msg;
+    delMessage(user, folName, msg).then(res2 =>{
         if(res2 == 200){
             res.sendStatus(200);
         }else{

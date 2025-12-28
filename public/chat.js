@@ -789,7 +789,7 @@ function addToDom(data) {
     else output.innerHTML += `<a target='_blank' href='${data.message}'><button class='fileBtn'>${msg}</button></a><br>`;
   }else {
     let isLink = data.message.slice(0, 5);
-    if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a></div>`;
+    if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont><i onclick="delMessage('${data.message}','${data.folder}')" class="bx bx-trash"></i></div></div>`;
     else output.innerHTML += `<p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p>` 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
@@ -879,6 +879,15 @@ async function delFol(folder){
       let delEl = document.getElementById(folder + "1");
       folderEl.parentElement.remove();
       delEl.remove();
+    }else console.log(res);
+  });
+}
+
+async function delMessage(msg,folder){
+  const data = {folderName: folder, user: newUser, msg: msg};
+  await axios.post('/delMessage', data).then((res)=>{
+    if(res.status == 200){
+      alert("Message Deleted");
     }else console.log(res);
   });
 }
