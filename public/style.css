@@ -865,6 +865,9 @@ input[type="range"]::-webkit-slider-thumb {
 @media only screen and (max-width: 768px) {
   .notch{
     z-index: 1;
+    top: 0px;
+    border-radius: none;
+    width: 100%;
   }
   .right{
     background-image: linear-gradient(to right, #ed6ea0 0%, #ec8c69 100%);
