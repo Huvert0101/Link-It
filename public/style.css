@@ -763,7 +763,7 @@ input[type="range"]::-webkit-slider-thumb {
     color: white;
     font-size: 24px;
 }
-.bx-arrow-back{
+.bx-chevron-left{
     visibility: hidden;
     transition: all ease 0.3s;
     border-radius: 50%;
