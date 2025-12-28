@@ -887,7 +887,6 @@ async function delMessage(msg,folder){
   const data = {folderName: folder, user: newUser, msg: msg};
   await axios.post('/delMessage', data).then((res)=>{
     if(res.status == 200){
-      alert("Message Deleted");
       const link = document.querySelector(`a[href*='${msg}']`);
       if (link) link.remove();
       const parrafos = document.querySelectorAll('p');
