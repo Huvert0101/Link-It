@@ -790,7 +790,7 @@ function addToDom(data) {
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash'></i></div></div>`;
-    else output.innerHTML += `<p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p>` 
+    else output.innerHTML += `<div class='linkCont'><p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash'></i></div></div>`; 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
   setTimeout(() => clearInterval(interval), 2500);
