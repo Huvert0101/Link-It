@@ -155,7 +155,7 @@ app.post('/delFol', jsonParser, (req, res)=>{
         }
     })
 });
-app.post('delMessage', jsonParser, (req,res)=>  {
+app.post('/delMessage', jsonParser, (req,res)=>  {
     const folName = req.body.folderName;
     const user = req.body.user;
     const msg = req.body.msg;
