@@ -64,7 +64,7 @@ async function delFol(usr, folderName){
     else return "500";
 }
 async function delMessage(usr, folderName,  msg){
-    const [res2] = await conn.query("DELETE FROM messages WHERE msessage='" + msg+ "' user ='" + usr + "' AND folder ='" + folderName + "'");
+    const [res2] = await conn.query("DELETE FROM messages WHERE msessage='" + msg+ "' AND user ='" + usr + "' AND folder ='" + folderName + "'");
     if(res2) return "200";
     else return "500";
 }
