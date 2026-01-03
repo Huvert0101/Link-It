@@ -203,14 +203,15 @@ btnPlayer.onclick = async () => {
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
   }else{
-    if(window.innerWidth < 600){
-      leftPanel.style.display = "flex";
-    }
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
     setTimeout(() => { plugin.style.position = "absolute"; leftPanel.style.width = "73%";}, 100);
     minPlugin = true;
     btnPlayer.style.opacity = 0.7;
+    if(window.innerWidth < 600){
+      leftPanel.style.display = "flex";
+      plugin.style.position = "absolute"; leftPanel.style.width = "100%";
+    }
   }
 }
 songProgress.onchange = () => audio.currentTime = songProgress.value;
