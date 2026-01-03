@@ -100,6 +100,8 @@ btnPlayer.onclick = async () => {
   if(minPlugin){
     if(window.innerWidth < 600){
       leftPanel.style.display = "none";
+      plugin.style.width = "l00%";
+      plugin.style.height = "90%";
     }else{
       leftPanel.style.width = "59%";
     }
