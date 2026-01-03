@@ -86,10 +86,10 @@ btnIframe.onclick = () => {
 loopedSong = false;
 btnLoopSong.onclick = () =>{
   if(loopedSong){
-    btnLoopSong.style.backgroundColor = "none";
+    btnLoopSong.style.setProperty('background-color', 'transparent', 'important');
     loopedSong = false;
   }else{
-    btnLoopSong.style.backgroundColor = "#ffffff1a";
+    btnLoopSong.style.setProperty('background-color', '#ffffff1a', 'important');
     loopedSong = true;
   }
 }
