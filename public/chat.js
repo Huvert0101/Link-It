@@ -48,7 +48,7 @@ let selectBg = document.getElementById("selectBg");
 let dropBg = document.querySelector(".dropBg");
 let fileSelectBg = document.getElementById("fileSelectBg");
 let backgroundsCont = document.querySelector(".backgrounds");
-let btnCreateDoc = document.querySelector(".bx-file-blank")
+let btnCreateDoc = document.querySelector(".bx-file-blank");
 let songProgress = document.getElementById("songProgress");
 let waves = document.getElementById("waves");
 let btnNextSong = document.querySelector(".bx-skip-next");
@@ -57,6 +57,7 @@ let middlePane = document.querySelector(".middle");
 let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
 const right = document.querySelector('.right');
+let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
@@ -80,6 +81,16 @@ btnIframe.onclick = () => {
     iframeForm.style.display = "block";
     btnIframe.style.opacity = 1;
     iframeUrl.focus();
+  }
+}
+loopedSong = false;
+btnLoopSong.onclick = () =>{
+  if(loopedSong){
+    btnLoopSong.style.backgroundColor = "none";
+    loopedSong = false;
+  }else{
+    btnLoopSong.style.backgroundColor = "#ffffff1a";
+    loopedSong = true;
   }
 }
 let songs = [];
@@ -127,12 +138,21 @@ btnPlayer.onclick = async () => {
               songProgress.value = audio.currentTime;
             });
             audio.addEventListener('ended', function() {
-              button.classList.remove("active-song");
-              let songInd = songs.indexOf(song);
-              songInd = songInd + 1;
-              let nextSong = songs[songInd] || songs[0];
-              let tmpBtn = document.getElementById(nextSong);
-              tmpBtn.click();
+              if(loopedSong){
+                let songInd = songs.indexOf(song);
+                songInd = songInd + 0;
+                let nextSong = songs[songInd] || songs[0];
+                let tmpBtn = document.getElementById(nextSong);
+                tmpBtn.click();
+
+              }else{
+                button.classList.remove("active-song");
+                let songInd = songs.indexOf(song);
+                songInd = songInd + 1;
+                let nextSong = songs[songInd] || songs[0];
+                let tmpBtn = document.getElementById(nextSong);
+                tmpBtn.click();
+              }
             });
             btnNextSong.onclick = () => {
               audio.pause();
@@ -184,10 +204,7 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 0.7;
   }
 }
-songProgress.onchange = () =>{
-  audio.currentTime = songProgress.value;
-  console.log("adelantando musica");
-}
+songProgress.onchange = () => audio.currentTime = songProgress.value;
 genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
   if(audio!=null) audio.volume = newVolume;

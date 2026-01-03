@@ -862,6 +862,15 @@ input[type="range"]::-webkit-slider-thumb {
 .linkCont:hover{
     background-color: rgba(255, 255, 255, 0.1);
 }
+.controls{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.bx-rotate-ccw{
+    font-size: 30px;
+}
 @media only screen and (max-width: 768px) {
   .notch{
     z-index: 1;
