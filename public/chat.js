@@ -204,7 +204,7 @@ btnPlayer.onclick = async () => {
       }
   }else{
     if(window.innerWidth < 600){
-      leftPanel.style.display = "block";
+      leftPanel.style.display = "flex";
     }
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
