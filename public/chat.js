@@ -98,7 +98,11 @@ let audio = null;
 let lastPlayerBtn = null;
 btnPlayer.onclick = async () => {
   if(minPlugin){
-    leftPanel.style.width = "59%";
+    if(window.innerWidth < 600){
+      leftPanel.style.display = "none";
+    }else{
+      leftPanel.style.width = "59%";
+    }
     plugin.style.scale = 1;
     plugin.style.position = "relative";
     plugin.style.zIndex = 5;
