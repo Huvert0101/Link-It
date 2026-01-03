@@ -869,6 +869,7 @@ input[type="range"]::-webkit-slider-thumb {
     justify-content: center;
 }
 .bx-rotate-ccw{
+    border-radius: 50%;
     font-size: 30px;
 }
 @media only screen and (max-width: 768px) {
