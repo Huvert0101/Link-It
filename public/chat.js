@@ -185,6 +185,7 @@ btnPlayer.onclick = async () => {
   }
 }
 songProgress.onchange = () =>{
+  audio.currentTime = songProgress.value;
   console.log("adelantando musica");
 }
 genVolumeBar.addEventListener('input', function() {
