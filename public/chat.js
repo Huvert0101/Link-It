@@ -210,7 +210,7 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 0.7;
     if(window.innerWidth < 600){
       leftPanel.style.display = "flex";
-      plugin.style.position = "absolute"; leftPanel.style.width = "100%";
+      setTimeout(() => { plugin.style.position = "absolute"; leftPanel.style.width = "100%";}, 100);
     }
   }
 }
