@@ -203,6 +203,9 @@ btnPlayer.onclick = async () => {
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
   }else{
+    if(window.innerWidth < 600){
+      leftPanel.style.display = "block";
+    }
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
     setTimeout(() => { plugin.style.position = "absolute"; leftPanel.style.width = "73%";}, 100);
