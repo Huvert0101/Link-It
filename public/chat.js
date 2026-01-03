@@ -184,6 +184,9 @@ btnPlayer.onclick = async () => {
     btnPlayer.style.opacity = 0.7;
   }
 }
+songProgress.onchange = () =>{
+  console.log("adelantando musica");
+}
 genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
   if(audio!=null) audio.volume = newVolume;
