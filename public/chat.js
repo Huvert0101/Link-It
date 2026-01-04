@@ -623,17 +623,17 @@ async function postFile(file) {
   data.append("file", file);
   data.append("user", newUser);
   data.append("folder", currentFolder);
+  await axios.post('http://187.195.245.15/upload', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
   await axios.post('/upload', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       porcentageBar.innerText = porcentage + "%";
-    }
-  });
-  await axios.post('http://187.195.245.15/upload', data, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
     }
   });
   porcentageBar.innerText = "0%";
