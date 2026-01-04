@@ -61,6 +61,7 @@ let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
+const API_URL = "http://187.195.245.15";
 let ventanaActiva = null;
 let minWin = false;
 let minPlugin = true;
@@ -630,7 +631,7 @@ async function postFile(file) {
       porcentageBar.innerText = porcentage + "%";
     }
   });
-  await axios.post('https://huvert01.pythonanywhere.com/upload', data, {
+  await axios.post('http://187.195.245.15/upload', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
