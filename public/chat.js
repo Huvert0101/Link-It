@@ -61,7 +61,7 @@ let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
-const API_URL = "http://187.195.245.15";
+const API_URL = "https://huvert01.pythonanywhere.com";
 let ventanaActiva = null;
 let minWin = false;
 let minPlugin = true;
@@ -112,7 +112,7 @@ btnPlayer.onclick = async () => {
     minPlugin = false;
     btnPlayer.style.opacity = 1;
       playerLoaded = true;
-      const response = await fetch("https://huvert01.pythonanywhere.com/getMusic");
+      const response = await fetch(API_URL+"/getMusic");
       if (!response.ok) {
         currentSongTitle.innerText = "No Song";
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
@@ -130,7 +130,7 @@ btnPlayer.onclick = async () => {
           button.setAttribute("id", song);
           button.onclick = () => {
             if(audio != null && !audio.paused) audio.pause();
-            audio = new Audio("https://huvert01.pythonanywhere.com/files/" + song);
+            audio = new Audio(API_URL+"/files/" + song);
             audio.volume = parseFloat(genVolumeBar.value);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
@@ -623,7 +623,7 @@ async function postFile(file) {
   data.append("file", file);
   data.append("user", newUser);
   data.append("folder", currentFolder);
-  await axios.post('http://187.195.245.15/upload', data, {
+  await axios.post(API_URL+'/upload', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
@@ -835,7 +835,7 @@ function addBtnFolder() {
 function ytDL(link){
   formData = new FormData();
   formData.append("url", link);
-  fetch("https://huvert01.pythonanywhere.com/download",{
+  fetch(API_URL+"/download",{
     method: "POST",
     body: formData
   }).then(response => {
