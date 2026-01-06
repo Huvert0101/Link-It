@@ -9,6 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import express from 'express'
 import { conn } from './db.js'
+import FormData from 'form-data';
 const app = express();
 //settings
 app.use(cors());
