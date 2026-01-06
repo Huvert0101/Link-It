@@ -97,25 +97,21 @@ async function getBackgrounds(user){
 }
 
 const uploadProxy = createProxyMiddleware({
-  target: 'http://linkit1.duckdns.org/upload',
+  // 1. Target solo el dominio (sin /upload al final)
+  target: 'http://linkit1.duckdns.org', 
   changeOrigin: true,
   pathRewrite: {
-    '^/api': '/upload', // Cambia /api por /upload para el servidor destino
+    '^/api': '/upload', // Transforma /api en /upload
   },
-  // Aumentar el límite de tamaño si el archivo es pesado
+  // IMPORTANTE: Para archivos, NO uses JSON.stringify en onProxyReq
+  // ya que los archivos NO son JSON, son binarios (Buffer/Stream)
   onProxyReq: (proxyReq, req, res) => {
-    // Si usas algún middleware de body-parser antes, esto es vital
-    if (req.body && Object.keys(req.body).length) {
-      const bodyData = JSON.stringify(req.body);
-      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
-      proxyReq.write(bodyData);
-    }
+    // Si no has usado body-parser antes, no necesitas re-escribir el body aquí.
+    // El proxy pasará el stream del archivo automáticamente.
   },
-  // Configuración para evitar timeouts en archivos grandes
-  proxyTimeout: 60000, // 1 minuto
-  timeout: 60000,
+  proxyTimeout: 600000, // 10 minutos (mejor para archivos)
+  timeout: 600000,
 });
-
 // El frontend hará el POST a: https://tu-servidor.com/api
 app.use('/api', uploadProxy);
 
