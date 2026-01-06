@@ -623,7 +623,7 @@ async function postFile(file) {
   data.append("file", file);
   data.append("user", newUser);
   data.append("folder", currentFolder);
-  await axios.post(API_URL+'/upload', data, {
+  await axios.post('/api', data, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }

@@ -3,6 +3,7 @@ import fs from 'fs'
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 const {json} = bodyParser;
 import cors from 'cors';
 const storage = multer.diskStorage({
@@ -94,6 +95,19 @@ async function getBackgrounds(user){
     const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user = '"+user+"'");
     return res
 }
+
+const apiProxy = createProxyMiddleware({
+  target: 'http://linkit1.duckdns.org/upload', // La URL original (HTTP)
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api': '', // Limpia el prefijo antes de enviarlo al destino
+  },
+  // Esto asegura que si el destino devuelve una redirección, no rompa el flujo
+  followRedirects: true,
+});
+
+// El cliente llamará a: https://tu-servidor-seguro.com/api-externa/data
+app.use('/api', apiProxy);
 
 // Routes
 app.get('/welcome', (req, res)=>{
