@@ -13,6 +13,7 @@ import { conn } from './db.js'
 const app = express();
 //settings
 app.use(cors());
+app.use('/api',cors())
 app.use('/api', createProxyMiddleware({
   target: 'http://linkit1.duckdns.org/',
   changeOrigin: true,
