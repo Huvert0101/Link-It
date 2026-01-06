@@ -624,14 +624,7 @@ async function postFile(file) {
   data.append("user", newUser);
   data.append("folder", currentFolder);
   await axios.post('/api', data, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-  await axios.post('/upload', data, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }, onUploadProgress(e){
+    onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       porcentageBar.innerText = porcentage + "%";
     }
