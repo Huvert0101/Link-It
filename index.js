@@ -28,8 +28,6 @@ app.use('/api', createProxyMiddleware({
   }
 }));
 
-// Aplicar el proxy específicamente en /api
-app.use('/api', uploadProxy);
 
 //static files;
 const {json} = bodyParser;
