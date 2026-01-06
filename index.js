@@ -5,13 +5,6 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import cors from 'cors';
-const storage = multer.diskStorage({
-    destination: 'public/files/',
-    filename: function(req, file, cb){
-        cb("", file.originalname);
-    }
-});
-const upload = multer({limits: { fileSize: 5 * 1024 * 1024 * 1024 }, storage: storage })
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,6 +35,14 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 var jsonParser = bodyParser.json({ limit: '50000mb' })
+
+const storage = multer.diskStorage({
+    destination: 'public/files/',
+    filename: function(req, file, cb){
+        cb("", file.originalname);
+    }
+});
+const upload = multer({limits: { fileSize: 5 * 1024 * 1024 * 1024 }, storage: storage })
 // SQL
 async function insertMessage(message, type, user, folder){
     await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
