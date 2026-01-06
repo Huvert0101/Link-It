@@ -882,7 +882,7 @@ input[type="range"]::-webkit-slider-thumb {
 @media only screen and (max-width: 768px) {
   .notch{
     z-index: 1;
-    scale: 1.07;
+    scale: 1.09;
     top: 0px;
     border-radius: 0px;
     left: 53%;
@@ -977,6 +977,7 @@ input[type="range"]::-webkit-slider-thumb {
   }
   .plugin{
     width: 100%;
+    z-index: 1!important;
     margin-top: 5vh;
   }
 }
