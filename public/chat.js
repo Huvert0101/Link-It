@@ -623,7 +623,7 @@ async function postFile(file) {
   data.append("file", file);
   data.append("user", newUser);
   data.append("folder", currentFolder);
-  await axios.post('/api', data, {
+  await axios.post('/upload', data, {
     onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       porcentageBar.innerText = porcentage + "%";

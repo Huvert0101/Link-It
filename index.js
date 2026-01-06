@@ -3,7 +3,6 @@ import fs from 'fs'
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import cors from 'cors';
 import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -13,19 +12,6 @@ import { conn } from './db.js'
 const app = express();
 //settings
 app.use(cors());
-app.use('/api',cors())
-app.use('/api', createProxyMiddleware({
-  target: 'http://linkit1.duckdns.org/',
-  changeOrigin: true,
-  pathRewrite: {
-    '^/api': '/upload'
-  },
-  logLevel:'debug',
-  secure: false,
-  // Importante: Dile al proxy que no intente parsear el body
-  onProxyReq: (proxyReq, req, res) => {
-  }
-}));
 
 app.set('port', process.env.PORT || 3000);
 //static files;
@@ -41,7 +27,8 @@ const storage = multer.diskStorage({
         cb("", file.originalname);
     }
 });
-const upload = multer({limits: { fileSize: 5 * 1024 * 1024 * 1024 }, storage: storage })
+//const upload = multer({limits: { fileSize: 5 * 1024 * 1024 * 1024 }, storage: storage })
+const upload = multer({ storage: multer.memoryStorage() });
 // SQL
 async function insertMessage(message, type, user, folder){
     await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
@@ -265,16 +252,38 @@ const server = app.listen(app.get('port'), ()=> {
 });
 import {Server} from 'socket.io'
 const io = new Server(server);
-//app.post('/upload', upload.single('file'), function(req, res, next){
-//    insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
-//    io.sockets.emit('getFiles', {
-//        message: 'files/' + req.file.originalname,
-//        type: 'file',
-//        user: req.body.user,
-//        folder:req.body.folder
-//    });
-//    res.redirect("/");
-//});
+app.post('/upload', upload.single('file'), async function(req, res, next){
+    insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
+    io.sockets.emit('getFiles', {
+        message: 'files/' + req.file.originalname,
+        type: 'file',
+        user: req.body.user,
+        folder:req.body.folder
+    });
+    try {
+        if (!req.file) {
+            return res.status(400).send('No se subió ningún archivo.');
+        }
+        // Crear el formulario para reenviar al servidor remoto
+        const form = new FormData();
+        form.append('file', req.file.buffer, {
+            filename: req.file.originalname,
+            contentType: req.file.mimetype,
+        });
+        console.log('Reenviando archivo a MX Linux...');
+        // Petición de Servidor a Servidor
+        const response = await axios.post('http://linkit1.duckdns.org/upload', form, {
+            headers: {
+                ...form.getHeaders(),
+            },
+        });
+        res.status(response.status).send(response.data);
+        } catch (error) {
+            console.error('Error en el proxy:', error.message);
+            res.status(500).send('Error al reenviar el archivo al servidor remoto.');
+        }
+        res.redirect("/");
+    });
 app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
     res.redirect("/");
