@@ -97,7 +97,7 @@ async function getBackgrounds(user){
 }
 
 const uploadProxy = createProxyMiddleware({
-  target: 'http://linkit1.duckdns.org',
+  target: 'http://linkit1.duckdns.org/upload',
   changeOrigin: true,
   pathRewrite: {
     '^/api': '/upload', // Cambia /api por /upload para el servidor destino
