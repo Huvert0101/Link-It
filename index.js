@@ -12,24 +12,20 @@ import express from 'express'
 import { conn } from './db.js'
 const app = express();
 //settings
+app.use(cors());
 app.use('/api', createProxyMiddleware({
   target: 'http://linkit1.duckdns.org/',
   changeOrigin: true,
   pathRewrite: {
     '^/api': '/upload'
   },
+  logLevel:'debug',
+  secure: false,
   // Importante: Dile al proxy que no intente parsear el body
   onProxyReq: (proxyReq, req, res) => {
-    // Si usaste algún body-parser antes, este código intenta "reparar" la petición
-    if (req.body) {
-      const bodyData = JSON.stringify(req.body);
-      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
-      proxyReq.write(bodyData);
-    }
   }
 }));
 
-app.use(cors());
 app.set('port', process.env.PORT || 3000);
 //static files;
 const {json} = bodyParser;
