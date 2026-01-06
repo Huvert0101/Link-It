@@ -4,7 +4,6 @@ import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-const {json} = bodyParser;
 import cors from 'cors';
 const storage = multer.diskStorage({
     destination: 'public/files/',
@@ -22,7 +21,23 @@ const app = express();
 //settings
 app.use(cors());
 app.set('port', process.env.PORT || 3000);
+
+const uploadProxy = createProxyMiddleware({
+    target: 'http://linkit1.duckdns.org',
+    changeOrigin: true,
+    pathRewrite: {
+        '^/api': '/upload', 
+    },
+    proxyTimeout: 600000, 
+    timeout: 600000,
+    logLevel: 'debug'
+});
+
+// Aplicar el proxy específicamente en /api
+app.use('/api', uploadProxy);
+
 //static files;
+const {json} = bodyParser;
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -96,24 +111,6 @@ async function getBackgrounds(user){
     return res
 }
 
-const uploadProxy = createProxyMiddleware({
-  // 1. Target solo el dominio (sin /upload al final)
-  target: 'http://linkit1.duckdns.org', 
-  changeOrigin: true,
-  pathRewrite: {
-    '^/api': '/upload', // Transforma /api en /upload
-  },
-  // IMPORTANTE: Para archivos, NO uses JSON.stringify en onProxyReq
-  // ya que los archivos NO son JSON, son binarios (Buffer/Stream)
-  onProxyReq: (proxyReq, req, res) => {
-    // Si no has usado body-parser antes, no necesitas re-escribir el body aquí.
-    // El proxy pasará el stream del archivo automáticamente.
-  },
-  proxyTimeout: 600000, // 10 minutos (mejor para archivos)
-  timeout: 600000,
-});
-// El frontend hará el POST a: https://tu-servidor.com/api
-app.use('/api', uploadProxy);
 
 // Routes
 app.get('/welcome', (req, res)=>{
