@@ -15,16 +15,18 @@ const app = express();
 app.use(cors());
 app.set('port', process.env.PORT || 3000);
 
-const uploadProxy = createProxyMiddleware({
-    target: 'http://linkit1.duckdns.org',
-    changeOrigin: true,
-    pathRewrite: {
-        '^/api': '/upload', 
-    },
-    proxyTimeout: 600000, 
-    timeout: 600000,
-    logLevel: 'debug'
-});
+app.use('/api', createProxyMiddleware({
+  target: 'http://linkit1.duckdns.org/',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api': '/upload'
+  },
+  onProxyReq: (proxyReq, req, res) => {
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    }
+  }
+}));
 
 // Aplicar el proxy específicamente en /api
 app.use('/api', uploadProxy);
@@ -266,16 +268,16 @@ const server = app.listen(app.get('port'), ()=> {
 });
 import {Server} from 'socket.io'
 const io = new Server(server);
-app.post('/upload', upload.single('file'), function(req, res, next){
-    insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
-    io.sockets.emit('getFiles', {
-        message: 'files/' + req.file.originalname,
-        type: 'file',
-        user: req.body.user,
-        folder:req.body.folder
-    });
-    res.redirect("/");
-});
+//app.post('/upload', upload.single('file'), function(req, res, next){
+//    insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
+//    io.sockets.emit('getFiles', {
+//        message: 'files/' + req.file.originalname,
+//        type: 'file',
+//        user: req.body.user,
+//        folder:req.body.folder
+//    });
+//    res.redirect("/");
+//});
 app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
     res.redirect("/");
