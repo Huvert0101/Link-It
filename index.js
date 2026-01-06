@@ -96,18 +96,28 @@ async function getBackgrounds(user){
     return res
 }
 
-const apiProxy = createProxyMiddleware({
-  target: 'http://linkit1.duckdns.org/upload', // La URL original (HTTP)
+const uploadProxy = createProxyMiddleware({
+  target: 'http://linkit1.duckdns.org',
   changeOrigin: true,
   pathRewrite: {
-    '^/api': '', // Limpia el prefijo antes de enviarlo al destino
+    '^/api': '/upload', // Cambia /api por /upload para el servidor destino
   },
-  // Esto asegura que si el destino devuelve una redirección, no rompa el flujo
-  followRedirects: true,
+  // Aumentar el límite de tamaño si el archivo es pesado
+  onProxyReq: (proxyReq, req, res) => {
+    // Si usas algún middleware de body-parser antes, esto es vital
+    if (req.body && Object.keys(req.body).length) {
+      const bodyData = JSON.stringify(req.body);
+      proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      proxyReq.write(bodyData);
+    }
+  },
+  // Configuración para evitar timeouts en archivos grandes
+  proxyTimeout: 60000, // 1 minuto
+  timeout: 60000,
 });
 
-// El cliente llamará a: https://tu-servidor-seguro.com/api-externa/data
-app.use('/api', apiProxy);
+// El frontend hará el POST a: https://tu-servidor.com/api
+app.use('/api', uploadProxy);
 
 // Routes
 app.get('/welcome', (req, res)=>{
