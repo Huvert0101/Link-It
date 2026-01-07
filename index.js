@@ -285,7 +285,6 @@ app.post('/upload', upload.single('file'), async function(req, res, next){
         if (!req.file) {
             return res.status(400).send('No se subió ningún archivo.');
         }
-        // Crear el formulario para reenviar al servidor remoto
         const form = new FormData();
         form.append('file', req.file.buffer, {
             filename: req.file.originalname,
@@ -303,9 +302,28 @@ app.post('/upload', upload.single('file'), async function(req, res, next){
         res.status(500).send('Error al reenviar el archivo al servidor remoto.');
     }
 });
-app.post('/uploadBg', upload.single('bg_src'), function(req, res, next){
+app.post('/uploadBg', upload.single('bg_src'), async function(req, res, next){
     insertBg(req.body.user, 'files/' + req.file.originalname);
-    res.redirect("/");
+    try {
+        if (!req.file) {
+            return res.status(400).send('No se subió ningún archivo.');
+        }
+        const form = new FormData();
+        form.append('file', req.file.buffer, {
+            filename: req.file.originalname,
+            contentType: req.file.mimetype,
+        });
+        console.log('Reenviando archivo a MX Linux...');
+        const response = await axios.post('http://linkit1.duckdns.org/upload', form, {
+            headers: {
+                ...form.getHeaders(),
+            },
+        });
+        res.status(response.status).send(response.data);
+    } catch (error) {
+        console.error('Error en el proxy:', error.message);
+        res.status(500).send('Error al reenviar el archivo al servidor remoto.');
+    }
 })
 app.post('/getBackgrounds',jsonParser,async(req, res) => {
     console.log(req.body.user);
