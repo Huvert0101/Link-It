@@ -61,7 +61,7 @@ let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
-const API_URL = "https://huvert01.pythonanywhere.com";
+const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
 let minWin = false;
 let minPlugin = true;
@@ -808,7 +808,7 @@ function addToDom(data) {
     let extension = data.message.split('.').pop();
     let msg = data.message.substring(6);
     if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg")
-      output.innerHTML += `<img class='rounded-4' src='${data.message}'>`;
+      output.innerHTML += `<img class='rounded-4' src='${API_URL}/${data.message}'>`;
     if(extension == "docx" || extension == "doc")
       output.innerHTML += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
     else output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
