@@ -610,7 +610,7 @@ btnCustomize.onclick = () => {
         bgImg.setAttribute("draggable","false");
         bgImg.src = bg.bg_src;
         backgroundsCont.appendChild(bgImg);
-        bgImg.onclick = () => document.body.style.backgroundImage = "url('" + bg.bg_src + "')";
+        bgImg.onclick = () => document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
       });
       fetchedBgs = true;
     }); 
@@ -656,7 +656,7 @@ async function postBg(file){
   bgImg.setAttribute("draggable","false");
   bgImg.src = "files/"+file.name;
   backgroundsCont.appendChild(bgImg);
-  bgImg.onclick = () => document.body.style.backgroundImage = "url('" + "files/"+file.name + "')";
+  bgImg.onclick = () => document.body.style.backgroundImage = "url('api/" + "files/"+file.name + "')";
 }
 selectBg.onclick = async(event) => {
   event.preventDefault();
