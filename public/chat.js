@@ -127,11 +127,11 @@ btnPlayer.onclick = async () => {
           if(!songs.includes(song)) songs.push(song);
           const button = document.createElement("button");
           console.log(song)
-          button.textContent = song.name;
-          button.setAttribute("id", song.name);
+          button.textContent = song;
+          button.setAttribute("id", song);
           button.onclick = () => {
             if(audio != null && !audio.paused) audio.pause();
-            audio = new Audio("api/files/" + song.name);
+            audio = new Audio("api/files/" + song);
             audio.volume = parseFloat(genVolumeBar.value);
             audio.play();
             audio.addEventListener("loadedmetadata", () => {
