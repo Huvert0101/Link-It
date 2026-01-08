@@ -121,9 +121,7 @@ btnPlayer.onclick = async () => {
       const mp3Files = await response.json();
       console.log(mp3Files);
       if(mp3Files.length > 0){
-        if(!audio){
-          currentSongTitle.innerText = "Select a song";
-        }
+        if(!audio) currentSongTitle.innerText = "Select a song";
         playlist.innerHTML = "";
         mp3Files.forEach(song => {
           if(!songs.includes(song)) songs.push(song);
@@ -154,7 +152,6 @@ btnPlayer.onclick = async () => {
                 let nextSong = songs[songInd] || songs[0];
                 let tmpBtn = document.getElementById(nextSong);
                 tmpBtn.click();
-
               }else{
                 button.classList.remove("active-song");
                 let songInd = songs.indexOf(song);
@@ -809,8 +806,6 @@ function addToDom(data) {
   if(data.type == "file") {
     let extension = data.message.split('.').pop();
     let msg = data.message.substring(6);
-    if(extension == "png" || extension == "jpg" || extension == "webp" || extension == "jpeg")
-      output.innerHTML += `<img class='rounded-4' src='api/${data.message}'>`;
     if(extension == "docx" || extension == "doc")
       output.innerHTML += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
     else output.innerHTML += `<div class='linkCont'><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
