@@ -203,16 +203,11 @@ app.get('/getMusic', async (req, res) => {
     const flaskUrl = 'http://linkit1.duckdns.org/getMusic';
     try {
         const response = await axios.get(flaskUrl);
-        const songs = response.data.map(fileName => {
-            return {
-                name: fileName,
-                url: `/api/files/${fileName}`
-            };
-        });
-        res.json(songs);
+        const songUrls = response.data.map(fileName => `/api/view/${fileName}`);
+        res.json(songUrls);
     } catch (err) {
-        console.error('Error al obtener música de Flask:', err.message);
-        res.status(500).json({ error: 'No se pudo conectar con el servidor de música local' });
+        console.error('Error al obtener música:', err.message);
+        res.status(500).json([]); // Devolvemos lista vacía en caso de error para no romper el JS del cliente
     }
 });
 app.post('/addfriend', jsonParser, async(req, res) => {
