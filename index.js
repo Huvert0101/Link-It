@@ -193,12 +193,29 @@ app.get('/api/files/:filename', async (req, res) => {
     }
 });
 app.get('/getMusic', async (req, res) => {
-    const musicPath = path.join(__dirname, 'public', 'files');
+    //const musicPath = path.join(__dirname, 'public', 'files');
+    //try {
+    //    const mp3Files = await getMp3Files(musicPath);
+    //    res.json(mp3Files);
+    //} catch (err) {
+    //    res.status(500).json({ error: err });
+    //}
+    const flaskBackendUrl = 'http://linkit1.duckdns.org/getMusic';
     try {
-        const mp3Files = await getMp3Files(musicPath);
-        res.json(mp3Files);
+        const response = await axios.get(flaskBackendUrl);
+        const songsWithProxyUrls = response.data.map(song => {
+            return {
+                ...song,
+                proxyUrl: `/api/view/${song.fileName}` 
+            };
+        });
+        res.json(songsWithProxyUrls);
     } catch (err) {
-        res.status(500).json({ error: err });
+        console.error('Error al conectar con Flask:', err.message);
+        res.status(500).json({ 
+            error: 'No se pudo obtener la lista de música del servidor local',
+            details: err.message 
+        });
     }
 });
 app.post('/addfriend', jsonParser, async(req, res) => {
