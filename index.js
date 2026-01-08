@@ -206,7 +206,7 @@ app.get('/getMusic', async (req, res) => {
         const songs = response.data.map(fileName => {
             return {
                 name: fileName,
-                url: `/api/view/${fileName}`
+                url: `/api/files/${fileName}`
             };
         });
         res.json(songs);
