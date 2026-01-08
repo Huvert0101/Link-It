@@ -203,7 +203,7 @@ app.get('/getMusic', async (req, res) => {
     const flaskUrl = 'http://linkit1.duckdns.org/getMusic';
     try {
         const response = await axios.get(flaskUrl);
-        const songUrls = response.data.map(fileName => `/api/view/${fileName}`);
+        const songUrls = response.data.map(fileName => `${fileName}`);
         res.json(songUrls);
     } catch (err) {
         console.error('Error al obtener música:', err.message);
