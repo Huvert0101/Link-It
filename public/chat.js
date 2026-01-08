@@ -654,7 +654,7 @@ async function postBg(file){
   const bgImg = document.createElement("img");
   bgImg.setAttribute("class","bg-item");
   bgImg.setAttribute("draggable","false");
-  bgImg.src = "files/"+file.name;
+  bgImg.src = "api/files/"+file.name;
   backgroundsCont.appendChild(bgImg);
   bgImg.onclick = () => document.body.style.backgroundImage = "url('api/" + "files/"+file.name + "')";
 }
