@@ -121,7 +121,9 @@ btnPlayer.onclick = async () => {
       const mp3Files = await response.json();
       console.log(mp3Files);
       if(mp3Files.length > 0){
-        currentSongTitle.innerText = "Select a song";
+        if(!audio){
+          currentSongTitle.innerText = "Select a song";
+        }
         playlist.innerHTML = "";
         mp3Files.forEach(song => {
           if(!songs.includes(song)) songs.push(song);
@@ -711,7 +713,6 @@ message.addEventListener('paste', (e) => {
     const file = item.getAsFile();
     if(!file) return
     let newFile;
-
     switch (file.type) {
       case 'application/pdf':
         newFile = new File([file], "File"+Date.now()+".pdf", { type: file.type });
