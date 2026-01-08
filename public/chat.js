@@ -126,6 +126,7 @@ btnPlayer.onclick = async () => {
         mp3Files.forEach(song => {
           if(!songs.includes(song)) songs.push(song);
           const button = document.createElement("button");
+          console.log(song)
           button.textContent = song;
           button.setAttribute("id", song);
           button.onclick = () => {
