@@ -608,7 +608,7 @@ btnCustomize.onclick = () => {
         const bgImg = document.createElement("img");
         bgImg.setAttribute("class","bg-item");
         bgImg.setAttribute("draggable","false");
-        bgImg.src = bg.bg_src;
+        bgImg.src = "api/"+bg.bg_src;
         backgroundsCont.appendChild(bgImg);
         bgImg.onclick = () => document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
       });
