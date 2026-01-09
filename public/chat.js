@@ -623,7 +623,7 @@ btnCustomize.onclick = () => {
         backgroundsCont.appendChild(bgImg);
         bgImg.onclick = () => {
           fetch(URL+"changeCurrentBg",{
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({user: newUser})
           });
           getCurrentBg();
