@@ -341,6 +341,7 @@ app.post('/getBackgrounds',jsonParser,async(req, res) => {
     res.json(await getBackgrounds(req.body.user))
 });
 app.post('/getCurrentBg',jsonParser, async(req, res) => {
+    console.log("Obteniendo background activo para usuario:",req.body.user);
     res.json(await getCurrentBg(req.body.user));
 });
 async function getMessages(user, folder){//maybe parameter: folder
