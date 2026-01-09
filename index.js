@@ -97,10 +97,11 @@ function getMp3Files(musicFolder) {
 }
 async function getBackgrounds(user){
     const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user = '"+user+"'");
-    return res
+    return res;
 }
 async function getCurrentBg(user){
     const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user ='"+user+"' AND active=1");
+    return res;
 }
 
 // Routes
