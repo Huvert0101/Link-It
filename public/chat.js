@@ -538,9 +538,7 @@ fetch(URL+"getCurrentBg",{
   headers: {"Content-Type": "application/json"}
 }).then(res =>res.json()).then(bgs=>{
   console.log(bgs);
-  //bgs.forEach(bg => {
-  //  document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
-  //});
+  document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
 }); 
 
 btnFriends.onclick = async() => {
