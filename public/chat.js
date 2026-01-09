@@ -623,15 +623,14 @@ btnCustomize.onclick = () => {
         backgroundsCont.appendChild(bgImg);
         bgImg.onclick = () => {
           fetch(URL+"changeCurrentBg",{
+            headers: {"Content-Type": "application/json"},
             method: 'PUT',
             body: JSON.stringify({user: newUser})
-          }).then(response => {
-            console.log(response.status);
-            console.log(response);
+          }).then(response => response.json()).then(response =>{
             console.log(response.changedRows);
             getCurrentBg();
+            document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
           });
-          document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
         }
       });
       fetchedBgs = true;
