@@ -540,8 +540,8 @@ function getCurrentBg(){
   }).then(res =>res.json()).then(bgs=>{
     if(typeof bgs[0].src !== "undefined"){
       console.log("aplicando background:", bgs[0].bg_src);
-      document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
     }
+    document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
   }); 
 }
 getCurrentBg();
