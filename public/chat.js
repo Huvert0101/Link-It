@@ -532,14 +532,16 @@ btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
 let activeBgData = {user: newUser}
-fetch(URL+"getCurrentBg",{
-  method: 'post',
-  body: JSON.stringify(activeBgData),
-  headers: {"Content-Type": "application/json"}
-}).then(res =>res.json()).then(bgs=>{
-  console.log(bgs);
-  document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
-}); 
+function getCurrentBg(){
+  fetch(URL+"getCurrentBg",{
+    method: 'post',
+    body: JSON.stringify(activeBgData),
+    headers: {"Content-Type": "application/json"}
+  }).then(res =>res.json()).then(bgs=>{
+    document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
+  }); 
+}
+getCurrentBg();
 
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
@@ -619,7 +621,14 @@ btnCustomize.onclick = () => {
         bgImg.setAttribute("draggable","false");
         bgImg.src = "api/"+bg.bg_src;
         backgroundsCont.appendChild(bgImg);
-        bgImg.onclick = () => document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
+        bgImg.onclick = () => {
+          fetch(URL+"changeCurrentBg",{
+            method: 'POST',
+            body: JSON.stringify(bg)
+          });
+          getCurrentBg();
+          document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
+        }
       });
       fetchedBgs = true;
     }); 
