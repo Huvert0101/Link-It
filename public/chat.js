@@ -625,8 +625,11 @@ btnCustomize.onclick = () => {
           fetch(URL+"changeCurrentBg",{
             method: 'PUT',
             body: JSON.stringify({user: newUser})
+          }).then(response => {
+            console.log(response.status);
+            console.log(response);
+            getCurrentBg();
           });
-          getCurrentBg();
           document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
         }
       });
