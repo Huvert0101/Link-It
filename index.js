@@ -15,6 +15,9 @@ const app = express();
 //settings
 app.use(cors());
 
+app.use(compression({
+    brotli: {enabled: true, zlib: {}}
+}));
 app.set('port', process.env.PORT || 3000);
 //static files;
 const {json} = bodyParser;
@@ -289,6 +292,7 @@ const server = app.listen(app.get('port'), ()=> {
     console.log('Server on port', app.get('port'));
 });
 import {Server} from 'socket.io'
+import compression from 'compression';
 const io = new Server(server);
 app.post('/upload', upload.single('file'), async function(req, res, next){
     insertMessage('files/' + req.file.originalname, "file", req.body.user, req.body.folder);
