@@ -99,7 +99,9 @@ async function getBackgrounds(user){
     const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user = '"+user+"'");
     return res
 }
-
+async function getCurrentBg(user){
+    const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user ='"+user+"' AND active=1");
+}
 
 // Routes
 app.get('/welcome', (req, res)=>{
@@ -337,7 +339,10 @@ app.post('/uploadBg', upload.single('bg_src'), async function(req, res, next){
 app.post('/getBackgrounds',jsonParser,async(req, res) => {
     console.log(req.body.user);
     res.json(await getBackgrounds(req.body.user))
-})
+});
+app.post('/getCurrentBg',jsonParser, async(req, res) => {
+    res.json(await getCurrentBg(req.body.user));
+});
 async function getMessages(user, folder){//maybe parameter: folder
     const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' ORDER BY id DESC LIMIT 13");
     io.sockets.emit('getMessages', res);

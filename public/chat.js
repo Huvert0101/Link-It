@@ -531,6 +531,16 @@ const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
+let activeBgData = {user: newUser}
+fetch(URL+"getCurrentBg",{
+  method: 'post',
+  body: JSON.stringify(activeBgData),
+  headers: {"Content-Type": "application/json"}
+}).then(res =>res.json()).then(bgs=>{
+  bgs.forEach(bg => {
+    document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
+  });
+}); 
 
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
