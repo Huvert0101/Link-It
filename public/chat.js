@@ -624,7 +624,7 @@ btnCustomize.onclick = () => {
         bgImg.onclick = () => {
           fetch(URL+"changeCurrentBg",{
             method: 'POST',
-            body: JSON.stringify(bg)
+            body: JSON.stringify({user: newUser})
           });
           getCurrentBg();
           document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
