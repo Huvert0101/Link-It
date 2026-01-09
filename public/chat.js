@@ -538,7 +538,7 @@ function getCurrentBg(){
     body: JSON.stringify(activeBgData),
     headers: {"Content-Type": "application/json"}
   }).then(res =>res.json()).then(bgs=>{
-    document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
+    if(bgs[0].src) document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
   }); 
 }
 getCurrentBg();
