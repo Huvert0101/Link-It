@@ -628,6 +628,7 @@ btnCustomize.onclick = () => {
           }).then(response => {
             console.log(response.status);
             console.log(response);
+            console.log(response.changedRows);
             getCurrentBg();
           });
           document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
