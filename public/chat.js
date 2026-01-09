@@ -534,11 +534,11 @@ socket.emit('getUser', { user: newUser });
 let activeBgData = {user: newUser}
 function getCurrentBg(){
   fetch(URL+"getCurrentBg",{
-    method: 'post',
+    method: 'POST',
     body: JSON.stringify(activeBgData),
     headers: {"Content-Type": "application/json"}
   }).then(res =>res.json()).then(bgs=>{
-    if(bgs[0].src) document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
+    if(typeof bgs[0].src !== "undefined") document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
   }); 
 }
 getCurrentBg();
@@ -625,7 +625,7 @@ btnCustomize.onclick = () => {
           fetch(URL+"changeCurrentBg",{
             headers: {"Content-Type": "application/json"},
             method: 'PUT',
-            body: JSON.stringify({user: newUser})
+            body: JSON.stringify({user: newUser, bg_src: bg.bg_src})
           }).then(response => response.json()).then(response =>{
             console.log(response.changedRows);
             getCurrentBg();

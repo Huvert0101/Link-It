@@ -103,9 +103,10 @@ async function getCurrentBg(user){
     const [res] = await conn.query("SELECT bg_src from backgrounds WHERE user ='"+user+"' AND active=1");
     return res;
 }
-async function changeCurrentBg(user){
+async function changeCurrentBg(user, bg){
     const [res] = await conn.query("UPDATE backgrounds SET active=0 WHERE user ='"+user+"' AND active=1");
-    return res;
+    const [res2] = await conn.query("UPDATE backgrounds SET active=1 WHERE user ='"+user+"' AND bg_src='"+bg+"'");
+    return res, res2;
 }
 
 // Routes
@@ -350,7 +351,7 @@ app.post('/getCurrentBg',jsonParser, async(req, res) => {
     res.json(await getCurrentBg(req.body.user));
 });
 app.put('/changeCurrentBg', jsonParser, async(req,res) => {
-    res.json(await changeCurrentBg(req.body.user));
+    res.json(await changeCurrentBg(req.body.user, req.body.bg_src));
 });
 async function getMessages(user, folder){//maybe parameter: folder
     const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"' ORDER BY id DESC LIMIT 13");
