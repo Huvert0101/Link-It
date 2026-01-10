@@ -287,7 +287,30 @@ app.post('/test',jsonParser, (req, res)=>{
             }
         });
     }
-})
+});
+app.use((req, res, next) => {
+  res.header("Access-Control-Expose-Headers", "Content-Disposition");
+  next();
+});
+app.post('/downloadYtMusic', async(req,res)=> {
+    const { videoUrl } = req.query;
+    const flaskUrl = `http://linkit1.duckdns.org/download-yt-music?url=${encodeURIComponent(videoUrl)}`;
+    try {
+        const response = await axios({
+            method: 'get',
+            url: flaskUrl,
+            responseType: 'stream'
+        });
+        let fileName = response.headers['x-file-name'] || 'music.mp3';
+        const safeFileName = encodeURIComponent(fileName);
+        res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${safeFileName}`);
+        res.setHeader('Content-Type', 'audio/mpeg');
+        response.data.pipe(res);
+    } catch (err) {
+        console.error('Error al descargar:', err.message);
+        res.status(500).send('Error en el servidor de descarga local.');
+    }
+});
 //start the server
 const server = app.listen(app.get('port'), ()=> {
     console.log('Server on port', app.get('port'));

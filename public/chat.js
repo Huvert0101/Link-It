@@ -539,7 +539,7 @@ function getCurrentBg(){
     headers: {"Content-Type": "application/json"}
   }).then(res =>res.json()).then(bgs=>{
     if(typeof bgs[0].bg_src !== "undefined") document.body.style.backgroundImage = "url('api/"+ bgs[0].bg_src + "')";
-  }); 
+  });
 }
 getCurrentBg();
 
@@ -832,7 +832,13 @@ function addToDom(data) {
     else output.innerHTML += `<div class='linkCont'><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
   }else {
     let isLink = data.message.slice(0, 5);
-    if(isLink == "https" || isLink == "https:") output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+    if(isLink == "https" || isLink == "http:"){
+      if(data.message.includes("youtube.com") || data.message.includes("youtu.be")){
+        output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="ytDL('${data.message}')" class='bx  bx-arrow-to-bottom-stroke' style='color:#ffffff; opacity:0.7'></i><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+      }else{
+        output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+      }
+    } 
     else output.innerHTML += `<div class='linkCont'><p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
@@ -844,25 +850,35 @@ function addBtnFolder() {
   folderList.insertBefore(node, null);
 }
 function ytDL(link){
-  formData = new FormData();
-  formData.append("url", link);
-  fetch(API_URL+"/download",{
-    method: "POST",
-    body: formData
-  }).then(response => {
-    if (response.ok) return response.blob(); // Recibimos el archivo como un binario (blob)
-    throw new Error('Error en la descarga');
-  }).then(blob => {
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "musica.mp3"; // Nombre sugerido
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  })
-  .catch(error => console.error("Hubo un fallo:", error));
-  console.log(link);
+  const downloadUrl = `/downloadYtMusic?videoUrl=${encodeURIComponent(link)}`;
+    fetch(downloadUrl, {
+        method: "GET"
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Error en la descarga');
+        const disposition = response.headers.get('Content-Disposition');
+        let fileName = "musica.mp3"; // Nombre por defecto
+        if (disposition && disposition.includes("filename*=UTF-8''")) {
+            fileName = decodeURIComponent(disposition.split("filename*=UTF-8''")[1]);
+        }
+        return response.blob().then(blob => ({ blob, fileName }));
+    })
+    .then(({ blob, fileName }) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = fileName; // Aquí se aplica el nombre del video de YouTube
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url); 
+        a.remove();
+    })
+    .catch(error => {
+        console.error("Hubo un fallo en la descarga:", error);
+        alert("No se pudo descargar la canción. Revisa la consola.");
+    });
+    console.log("Iniciando descarga de:", link);
 }
 
 socket.on('chat:message', (data) => {
