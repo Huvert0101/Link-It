@@ -294,6 +294,7 @@ app.use((req, res, next) => {
 });
 app.post('/downloadYtMusic', async(req,res)=> {
     const { videoUrl } = req.query;
+    console.log(videoUrl);
     const flaskUrl = `http://linkit1.duckdns.org/download-yt-music?url=${encodeURIComponent(videoUrl)}`;
     try {
         const response = await axios({
@@ -305,6 +306,7 @@ app.post('/downloadYtMusic', async(req,res)=> {
         const safeFileName = encodeURIComponent(fileName);
         res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${safeFileName}`);
         res.setHeader('Content-Type', 'audio/mpeg');
+        console.log(safeFileName)
         response.data.pipe(res);
     } catch (err) {
         console.error('Error al descargar:', err.message);
