@@ -292,7 +292,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Expose-Headers", "Content-Disposition");
   next();
 });
-app.post('/downloadYtMusic', async(req,res)=> {
+app.get('/downloadYtMusic', async(req,res)=> {
     const { videoUrl } = req.query;
     console.log(videoUrl);
     const flaskUrl = `http://linkit1.duckdns.org/download-yt-music?url=${encodeURIComponent(videoUrl)}`;
