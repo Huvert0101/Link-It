@@ -608,6 +608,7 @@ btnFriends.onclick = async() => {
       folderDiv.appendChild(folderTitle);
       folderDiv.appendChild(icon);
       friendList.appendChild(folderDiv);
+      searchBar.value = "";
     });
   }
 }
@@ -936,8 +937,9 @@ socket.on('getFolders', (data)=>{
 
 socket.on('getMessagesFol', (data)=>{
   output.innerHTML = ''
+  console.log(data);
   if(data.length == 0) return;
-  if(data[0].folder == currentFolder && !output.hasChildNodes()) data.forEach(el => addToDom(el))
+  if(data[0].folder == currentFolder && data[0].user==newUser && !output.hasChildNodes()) data.forEach(el => addToDom(el))
 });
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
