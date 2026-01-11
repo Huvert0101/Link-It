@@ -401,7 +401,11 @@ async function getMessagesFol(user, folder){//maybe parameter: folder
         io.sockets.emit('getMessagesFol', res);
     }else{
         const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"'");
-        io.sockets.emit('getMessagesFol', res);
+        if (!res || res.length === 0) {
+            io.sockets.emit('getMessagesFol', { user: user });
+        } else {
+            io.sockets.emit('getMessagesFol', res);
+        }
     }
 }
 async function getFolderFilesFromCloud(user, folder){
