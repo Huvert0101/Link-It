@@ -40,7 +40,7 @@ async function insertMessage(message, type, user, folder){
     const sql = "INSERT INTO messages(message, type, user, folder) VALUES(?, ?, ?, ?)";
     const values = [message, type, user, folder];
     try {
-    await connection.query(sql, values);
+    await conn.query(sql, values);
     } catch (err) {
         console.error("Error al insertar:", err);
     }
