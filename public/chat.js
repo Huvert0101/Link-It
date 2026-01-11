@@ -512,7 +512,7 @@ closeUpload.onclick = (e)=>{
 }
 btnFile.onclick = ()=> uploadFile.style.display = "flex";
 document.body.addEventListener("dragenter", ()=> {
-  uploadFile.style.classList.add("draggingFile");
+  uploadFile.classList.add("draggingFile");
   uploadFile.style.display = "flex";
 });
 
@@ -719,7 +719,7 @@ function showFiles () {
 }
 
 dropArea.addEventListener('drop', (e) => {
-  uploadFile.style.classList.remove("draggingFile");
+  uploadFile.classList.remove("draggingFile");
   e.preventDefault();
   const files = e.dataTransfer.files;
   inputFile.files = files;
