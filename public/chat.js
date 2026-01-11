@@ -938,7 +938,7 @@ socket.on('getFolders', (data)=>{
 socket.on('getMessagesFol', (data)=>{
   console.log(data);
   if (!data || !data[0]?.folder?.includes("friend") && data[0]?.user == newUser) output.innerHTML = '';
-  //if(data.length == 0) return;
+  if(data.length == 0){output.innerHTML=''; return};
   if(data[0].folder == currentFolder && !output.hasChildNodes()) data.forEach(el => addToDom(el))
 });
 function displayFolderMenu(folder){
