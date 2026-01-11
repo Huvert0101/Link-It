@@ -590,7 +590,10 @@ btnFriends.onclick = async() => {
       },
       body: JSON.stringify(data) 
     }).then(res => {
+      console.log("friend response:",res);
       if(res.status == 404) alert("User doesn't exists :c");
+      //get the friend folder name
+      else alert("Creando amigo en la lista");
     });
   }
 }
