@@ -864,7 +864,7 @@ function addToDom(data) {
     else output.innerHTML += `<div class='linkCont'><p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
-  setTimeout(() => clearInterval(interval), 2500);
+  setTimeout(() => clearInterval(interval), 1500);
 }
 
 function addBtnFolder() {
