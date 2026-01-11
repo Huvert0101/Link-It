@@ -238,6 +238,7 @@ app.post('/addfriend', jsonParser, async(req, res) => {
     createFolder(user,folderName);
     createFolder(friend,folderName);
     console.log(await getFoldersFriends(user));
+    res.json({folderName: folderName})
    }else{
     res.sendStatus(404);
    }
