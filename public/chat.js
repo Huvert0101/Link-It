@@ -594,6 +594,20 @@ btnFriends.onclick = async() => {
       if(res.status==200) return res.json();
     }).then(data=>{
       console.log(data.folderName);
+      let friendName = data.folderName.replace('friend', '');
+      friendName = friendName.replace(newUser, '');
+      const folderDiv = document.createElement('div');
+      folderDiv.className = 'folder';
+      const folderTitle = document.createElement('span');
+      folderTitle.className = 'folder-title';
+      folderTitle.id = data.folderName;
+      folderTitle.textContent = friendName;
+      const icon = document.createElement('i');
+      icon.className = 'bx bx-dots-horizontal-rounded';
+      icon.style.color = '#ffffff';
+      folderDiv.appendChild(folderTitle);
+      folderDiv.appendChild(icon);
+      friendList.appendChild(folderDiv);
     });
   }
 }
