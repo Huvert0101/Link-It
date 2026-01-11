@@ -37,7 +37,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: multer.memoryStorage() });
 // SQL
 async function insertMessage(message, type, user, folder){
-    await conn.query("INSERT INTO messages(message, type, user, folder) VALUES('"+ message +"', '"+ type +"', '" + user + "', '" + folder + "')");
+    const sql = "INSERT INTO messages(message, type, user, folder) VALUES(?, ?, ?, ?)";
+    const values = [message, type, user, folder];
+    try {
+    await connection.query(sql, values);
+    } catch (err) {
+        console.error("Error al insertar:", err);
+    }
 }
 async function insertBg(user, bg_src){
     await conn.query("INSERT INTO backgrounds(user,bg_src) VALUES('"+ user +"', '"+bg_src +"')");
