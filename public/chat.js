@@ -511,7 +511,10 @@ closeUpload.onclick = (e)=>{
   uploadFile.style.display = "none";
 }
 btnFile.onclick = ()=> uploadFile.style.display = "flex";
-document.body.addEventListener("dragenter", ()=> uploadFile.style.display = "flex");
+document.body.addEventListener("dragenter", ()=> {
+  uploadFile.style.classList.add("draggingFile");
+  uploadFile.style.display = "flex";
+});
 
 // Back-end functions
 function getCookie(cname) {
@@ -716,6 +719,7 @@ function showFiles () {
 }
 
 dropArea.addEventListener('drop', (e) => {
+  uploadFile.style.classList.remove("draggingFile");
   e.preventDefault();
   const files = e.dataTransfer.files;
   inputFile.files = files;

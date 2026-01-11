@@ -14,6 +14,11 @@
     display: contents;
 	margin-right: auto;
 }
+.draggingFile{
+    height: 80%;
+    width: 80%;
+    top: 41%;
+}
 .ck-content {
 	font-family: 'Lato';
 	line-height: 1.6;
