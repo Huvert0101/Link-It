@@ -394,6 +394,7 @@ async function getMessages(user, folder){//maybe parameter: folder
     io.sockets.emit('getMessages', res);
 }
 async function getMessagesFol(user, folder){//maybe parameter: folder
+    console.log("Folder al clickear back:",folder)
     if(user == ''){
         const [res] = await conn.query("SELECT * FROM messages WHERE folder = '"+folder+"'");
         io.sockets.emit('getMessagesFol', res);
