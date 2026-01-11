@@ -939,7 +939,7 @@ socket.on('getMessagesFol', (data)=>{
   console.log(data);
   if (!data ||data.length==0 || !data[0]?.folder?.includes("friend") && data[0]?.user == newUser) output.innerHTML = '';
   if(data?.user== newUser){output.innerHTML=''; return};
-  if(data[0].folder == currentFolder && data[0].user==newUser && !output.hasChildNodes()) data.forEach(el => addToDom(el))
+  if(data[0].folder == currentFolder && !output.hasChildNodes()) data.forEach(el => addToDom(el))
 });
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
