@@ -199,8 +199,8 @@
         const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
         openEditor();
         const document = await convertFromUrl(docxPath);
-        //newEditor.setData(document);
-        //contentEdit.innerHTML = document;
+        newEditor.setData(document);
+        contentEdit.innerHTML = document;
     }
     </script>
 </body>
