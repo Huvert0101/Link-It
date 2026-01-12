@@ -214,6 +214,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 }
 iframe{
     border-width: 0;
+    background: white;
 }
 .window-top{
     gap: 4px;
