@@ -462,41 +462,34 @@ function loadDoc(url){
     btnIframe.style.opacity = 0.7;
   }
 
-  var iframe = document.createElement('iframe');
+  let iframe = document.createElement('iframe');
   iframe.src = "https://docs.google.com/gview?url=www-linkit-2baa3535.koyeb.app/api/"+url+"&embedded=true";
-  iframeUrl.value = '';
   document.getElementById('window-title').innerText = iframe.src;
   iframe.width = '100%';
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeForm.style.display = "none";
-  iframe.onload = () => iframeCont.style.display = "block";
+  //iframe.onload = () => iframeCont.style.display = "block";
+  iframeCont.style.display = "block";
   newWindowIcon.onclick = () => iframeForm.style.display = "block";
   windowTop.onmousedown = function(e) {
     e.preventDefault();
     iframeCont.style.cursor = "grabbing";
-    // Obtener la posición inicial del ratón
     mouseX = e.clientX;
     mouseY = e.clientY;
-    // Adjuntar los eventos para mover el div y soltarlo
     document.onmousemove = elementDrag;
     document.onmouseup = closeDragElement;
   };
-  // Función que se ejecuta mientras se arrastra el div
   function elementDrag(e) {
     e.preventDefault();
-    // Calcular el nuevo desplazamiento del ratón
     offsetX = mouseX - e.clientX;
     offsetY = mouseY - e.clientY;
-    // Actualizar la posición inicial del ratón
     mouseX = e.clientX;
     mouseY = e.clientY;
-    // Establecer la nueva posición del div
     iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
     iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
   }
   function closeDragElement() {
-    // Desconectar los eventos de movimiento y soltar
     iframeCont.style.cursor = "grab";
     document.onmousemove = null;
     document.onmouseup = null;
