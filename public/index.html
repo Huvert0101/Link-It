@@ -195,13 +195,6 @@
     }});
 
     btnCloseEditor.onclick = async() => closeEditor(); 
-    async function loadDoc(filePath){
-        const docxPath = "https://www-linkit-2baa3535.koyeb.app/" + filePath;
-        openEditor();
-        const document = await convertFromUrl(docxPath);
-        newEditor.setData(document);
-        contentEdit.innerHTML = document;
-    }
     </script>
 </body>
 </html>
