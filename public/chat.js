@@ -104,7 +104,8 @@ btnPlayer.onclick = async () => {
       plugin.style.width = "l00%";
       plugin.style.height = "90%";
     }else{
-      leftPanel.style.width = "48w";
+      leftPanel.style.width = "49vw";
+      console.log(leftPanel.style.width);
     }
     plugin.style.scale = 1;
     plugin.style.position = "relative";
@@ -119,14 +120,12 @@ btnPlayer.onclick = async () => {
         throw new Error(`Error: ${response.statusText}`);
       }
       const mp3Files = await response.json();
-      console.log(mp3Files);
       if(mp3Files.length > 0){
         if(!audio) currentSongTitle.innerText = "Select a song";
         playlist.innerHTML = "";
         mp3Files.forEach(song => {
           if(!songs.includes(song)) songs.push(song);
           const button = document.createElement("button");
-          console.log(song)
           button.textContent = song;
           button.setAttribute("id", song);
           button.onclick = () => {
@@ -680,7 +679,6 @@ btnFriends.onclick = async() => {
       if(res.status == 404) alert("User doesn't exists :c");
       if(res.status==200) return res.json();
     }).then(data=>{
-      console.log(data.folderName);
       let friendName = data.folderName.replace('friend', '');
       friendName = friendName.replace(newUser, '');
       const folderDiv = document.createElement('div');
@@ -735,7 +733,6 @@ btnCustomize.onclick = () => {
             method: 'PUT',
             body: JSON.stringify({user: newUser, bg_src: bg.bg_src})
           }).then(response => response.json()).then(response =>{
-            console.log(response.changedRows);
             getCurrentBg();
             document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
           });
@@ -772,10 +769,7 @@ async function postBg(file){
     }, onUploadProgress(e){
       const porcentage = Math.round((e.loaded * 100)/e.total);
       if(porcentage <90) porcentageBar.innerText = porcentage + "%";
-      if(porcentage == 100){
-        console.log("bg succesfully sended, waiting for save...");
-        fileSelectBg.value = '';
-      }
+      if(porcentage == 100) fileSelectBg.value = '';
     }
   });
   porcentageBar.innerText = "0%";
@@ -987,13 +981,11 @@ function ytDL(link){
         console.error("Hubo un fallo en la descarga:", error);
         alert("No se pudo descargar la canción. Revisa la consola.");
     });
-    console.log("Iniciando descarga de:", link);
 }
 
 socket.on('chat:message', (data) => {
   setTimeout(() => output.scrollTop=output.scrollHeight, 50);
   message.value = '';
-  console.log(data);
   if(data.folder.startsWith("friend") && data.folder == currentFolder) {addToDom(data)}
   else{if(data.user == newUser && data.folder == currentFolder) addToDom(data)}
 });
@@ -1023,7 +1015,6 @@ socket.on('getFolders', (data)=>{
 });
 
 socket.on('getMessagesFol', (data)=>{
-  console.log(data);
   if (!data ||data.length==0 || !data[0]?.folder?.includes("friend") && data[0]?.user == newUser) output.innerHTML = '';
   if(data?.user== newUser){output.innerHTML=''; return};
   if(data[0].folder == currentFolder && !output.hasChildNodes()){
@@ -1045,7 +1036,6 @@ function displayFolderMenu(folder){
     folderMenuContEl.classList.add("activeMenu");
     folderMenuContEl.style.setProperty("display", "flex", "important");
   }
-  console.log(folderMenuCont);
 }
 async function delFol(folder){
   const data = {folderName: folder, user: newUser};
