@@ -400,12 +400,12 @@ btnCreateDoc.onclick = ()=> {
     right.style.width = "25%";
     mainCont.style.gap = "0px";
     openedApps--;
-    if(openedApps == 2) leftPanel.style.width = "40vw";
+    if(openedApps == 2) leftPanel.style.width = "45vw";
     if(openedApps == 1) leftPanel.style.width = "73%";
     return;
   };
   openedApps++;
-  if(openedApps == 2) leftPanel.style.width = "40vw";
+  if(openedApps == 2) leftPanel.style.width = "45vw";
   if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
