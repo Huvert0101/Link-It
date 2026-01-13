@@ -403,7 +403,7 @@ btnCreateDoc.onclick = ()=> {
     return;
   };
   openedApps++;
-  if(openedApps == 2) leftPanel.style.width = "22vw";
+  if(openedApps == 2) leftPanel.style.width = "40vw";
   if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
