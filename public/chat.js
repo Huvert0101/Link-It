@@ -56,6 +56,7 @@ let btnPrevSong = document.querySelector(".bx-skip-previous");
 let middlePane = document.querySelector(".middle");
 let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
+let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let foldersPluginPos = "right";
@@ -99,6 +100,7 @@ let audio = null;
 let lastPlayerBtn = null;
 btnPlayer.onclick = async () => {
   if(minPlugin){
+    openedApps++;
     if(window.innerWidth < 600){
       leftPanel.style.display = "none";
       plugin.style.width = "l00%";
@@ -203,6 +205,7 @@ btnPlayer.onclick = async () => {
         playlist.innerHTML = "<p>No music has been found :c<br>Upload mp3 files.</p>";
       }
   }else{
+    openedApps--;
     plugin.style.scale = 0;
     plugin.style.zIndex = -2;
     setTimeout(() => { plugin.style.position = "absolute"; leftPanel.style.width = "73%";}, 100);
@@ -396,8 +399,12 @@ btnCreateDoc.onclick = ()=> {
     inputMsgBar.style.width = "91%";
     right.style.width = "25%";
     mainCont.style.gap = "0px";
+    openedApps--;
     return;
   };
+  openedApps++;
+  if(openedApps == 2) leftPanel.style.width = "22vw";
+  if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
   middlePane.style.zIndex = 1;
