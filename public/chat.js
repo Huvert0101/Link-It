@@ -104,7 +104,7 @@ btnPlayer.onclick = async () => {
       plugin.style.width = "l00%";
       plugin.style.height = "90%";
     }else{
-      leftPanel.style.width = "59%";
+      leftPanel.style.width = "48w";
     }
     plugin.style.scale = 1;
     plugin.style.position = "relative";
