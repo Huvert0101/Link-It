@@ -449,9 +449,5 @@ io.on('connection', (socket) => {
         io.sockets.emit('getFolders', result)
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
+    socket.on('disconnect', () => {connectedUsers--; io.sockets.emit('updateConnectedUsers', connectedUsers);})
 });
-io.on('disconnect', (socket)=>{
-    connectedUsers--;
-    io.sockets.emit('updateConnectedUsers', connectedUsers);
-})
-
