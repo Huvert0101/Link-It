@@ -428,7 +428,7 @@ io.on('connection', (socket) => {
     console.log("Socket connected!")
     socket.on('getUser', (user)=>{
         connectedUsers++;
-        io.socket.emit('updateConnectedUsers', connectedUsers);
+        io.sockets.emit('updateConnectedUsers', connectedUsers);
         getMessages(user.user, "main");
         getFolders(user.user).then(result =>{
 	    console.log(result);
