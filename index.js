@@ -450,4 +450,8 @@ io.on('connection', (socket) => {
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
 });
+io.on('disconnect', (socket)=>{
+    connectedUsers--;
+    io.sockets.emit('updateConnectedUsers', connectedUsers);
+})
 
