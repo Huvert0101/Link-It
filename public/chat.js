@@ -629,6 +629,9 @@ const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 
 socket.emit('getUser', { user: newUser });
+socket.on('updateConnectedUsers', (connectedUsers)=>{
+  console.log("usuarios conectados:", connectedUsers);
+})
 let activeBgData = {user: newUser}
 function getCurrentBg(){
   fetch(URL+"getCurrentBg",{

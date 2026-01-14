@@ -423,9 +423,12 @@ app.post('/getFolderFilesFromCloud', jsonParser, async(req,res)=>{
     res.json(filesFromCloud)
 })
 //websockets
+let connectedUsers = 0;
 io.on('connection', (socket) => {
     console.log("Socket connected!")
     socket.on('getUser', (user)=>{
+        connectedUsers++;
+        io.socket.emit('updateConnectedUsers', connectedUsers);
         getMessages(user.user, "main");
         getFolders(user.user).then(result =>{
 	    console.log(result);
