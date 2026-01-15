@@ -1049,7 +1049,7 @@ socket.on('updateActiveUsers', (activeUserList)=>{
   console.log(btnFriends.style.display);
   if(btnFriends.style.display == "none"){
     console.log("panel amigos abierto");
-    let friendListEl = document.querySelectorAll(".folder-list");
+    let friendListEl = document.querySelectorAll(".folder-title");
     friendListEl.forEach(friendEl=>{
       console.log(friendEl);
       console.log(friendEl.innerText);
