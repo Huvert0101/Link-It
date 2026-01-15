@@ -423,10 +423,13 @@ app.post('/getFolderFilesFromCloud', jsonParser, async(req,res)=>{
 })
 //websockets
 let connectedUsers = 0;
+let activeUsersList = [];
 io.on('connection', (socket) => {
     console.log("Socket connected!")
     socket.on('getUser', (user)=>{
         connectedUsers++;
+        activeUsersList.push(user.user);
+        console.log(activeUsersList);
         io.sockets.emit('updateConnectedUsers', connectedUsers);
         getMessages(user.user, "main");
         getFolders(user.user).then(result =>{
@@ -448,5 +451,5 @@ io.on('connection', (socket) => {
         io.sockets.emit('getFolders', result)
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
-    socket.on('disconnect', () => {connectedUsers--; io.sockets.emit('updateConnectedUsers', connectedUsers);})
+    socket.on('disconnect', () => {connectedUsers--; io.sockets.emit('updateConnectedUsers', connectedUsers);});
 });
