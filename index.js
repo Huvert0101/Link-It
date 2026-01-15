@@ -460,8 +460,11 @@ io.on('connection', (socket) => {
         io.sockets.emit('updateConnectedUsers', connectedUsers);
         let i = 0;
         for (let obj of activeUsersList) {
+            console.log(activeUsersList);
             if(obj.socketId == socket.id) activeUsersList.splice(0,i); 
+            console.log(obj.socketId == socket.id);
             i++;
+            console.log(activeUsersList);
         }
         console.log("user socket disconnect id:", socket.id);
         console.log("actual active user list:", activeUsersList);
