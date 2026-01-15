@@ -1046,13 +1046,15 @@ socket.on('getMessagesFol', (data)=>{
 });
 socket.on('updateActiveUsers', (activeUserList)=>{
   console.log(activeUserList);
-  if(!btnFriends.style.display == "block"){
+  console.log(btnFriends.style.display);
+  if(btnFriends.style.display == "none"){
     console.log("panel amigos abierto");
     let friendListEl = document.querySelectorAll(".folder-list");
     friendListEl.forEach(friendEl=>{
       console.log(friendEl.innerText);
     });
-  }else{
+  }
+  if(btnFriends.style.display == "block"){
     console.log("panel amigos cerrado");
   }
 });
