@@ -1046,6 +1046,15 @@ socket.on('getMessagesFol', (data)=>{
 });
 socket.on('updateActiveUsers', (activeUserList)=>{
   console.log(activeUserList);
+  if(btnFriends.style.display == "block"){
+    console.log("panel amigos abierto");
+    let friendListEl = document.querySelectorAll(".folder-list");
+    friendListEl.forEach(friendEl=>{
+      console.log(friendEl.innerText);
+    })
+  }else{
+    console.log("panel amigos cerrado");
+  }
 });
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
