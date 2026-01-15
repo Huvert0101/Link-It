@@ -56,6 +56,7 @@ let btnPrevSong = document.querySelector(".bx-skip-previous");
 let middlePane = document.querySelector(".middle");
 let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
+let notch = document.querySelector(".notch");
 let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
@@ -965,16 +966,19 @@ function addBtnFolder() {
   folderList.insertBefore(node, null);
 }
 function ytDL(link){
+  let toast = document.createElement("span");
+  toast.innerText = "Downloading 1 song...";
+  notch.appendChild(toast);
   const downloadUrl = `/downloadYtMusic?videoUrl=${encodeURIComponent(link)}`;
     fetch(downloadUrl, {
-        method: "GET"
+      method: "GET"
     })
     .then(response => {
         if (!response.ok) throw new Error('Error en la descarga');
         const disposition = response.headers.get('Content-Disposition');
         let fileName = "musica.mp3"; // Nombre por defecto
         if (disposition && disposition.includes("filename*=UTF-8''")) {
-            fileName = decodeURIComponent(disposition.split("filename*=UTF-8''")[1]);
+          fileName = decodeURIComponent(disposition.split("filename*=UTF-8''")[1]);
         }
         return response.blob().then(blob => ({ blob, fileName }));
     })
