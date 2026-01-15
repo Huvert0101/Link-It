@@ -198,13 +198,12 @@ app.get('/api/files/:filename', async (req, res) => {
         const response = await axios({
             method: 'get',
             url: targetUrl,
-            responseType: 'stream' // Importante para no saturar la RAM
+            responseType: 'arraybuffer' // Importante para no saturar la RAM
         });
         // Pasamos los headers de tipo de archivo (image/png, video/mp4, etc.)
         res.setHeader('Content-Type', response.headers['content-type']);
-        // "Pipe": lo que va llegando de tu casa se va enviando al cliente
-        response.data.pipe(res);
-
+        res.setHeader('Content-Length', response.headers['content-length']);
+        res.send(response.data);
     } catch (error) {
         console.error('Error al visualizar archivo:', error.message);
         res.status(404).send('Archivo no encontrado o servidor local offline.');
