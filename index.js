@@ -458,6 +458,12 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         connectedUsers--;
         io.sockets.emit('updateConnectedUsers', connectedUsers);
+        let i = 0;
+        for (let obj of activeUsersList) {
+            if(obj.socketId == socket.id) activeUsersList.pop[i]; 
+            i++;
+        }
         console.log("user socket disconnect id:", socket.id);
+        console.log("actual active user list:", activeUsersList);
     });
 });
