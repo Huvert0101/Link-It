@@ -428,7 +428,11 @@ io.on('connection', (socket) => {
     console.log("Socket connected!")
     socket.on('getUser', (user)=>{
         connectedUsers++;
-        activeUsersList.push(user.user);
+        socketUser = {
+            user: user.name,
+            socketId: socket.id
+        }
+        activeUsersList.push(socketUser);
         console.log(activeUsersList);
         io.sockets.emit('updateConnectedUsers', connectedUsers);
         getMessages(user.user, "main");
@@ -451,5 +455,9 @@ io.on('connection', (socket) => {
         io.sockets.emit('getFolders', result)
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
-    socket.on('disconnect', () => {connectedUsers--; io.sockets.emit('updateConnectedUsers', connectedUsers);});
+    socket.on('disconnect', () => {
+        connectedUsers--;
+        io.sockets.emit('updateConnectedUsers', connectedUsers);
+        console.log("user socket disconnect id:", socket.id);
+    });
 });
