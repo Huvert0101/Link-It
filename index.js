@@ -461,7 +461,7 @@ io.on('connection', (socket) => {
         let i = 0;
         for (let obj of activeUsersList) {
             console.log(activeUsersList);
-            if(obj.socketId == socket.id) activeUsersList.splice(0,i); 
+            if(obj.socketId == socket.id) activeUsersList.splice(i,1); 
             console.log(obj.socketId == socket.id);
             i++;
             console.log(activeUsersList);
