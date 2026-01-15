@@ -1048,10 +1048,10 @@ socket.on('updateActiveUsers', (activeUserList)=>{
   console.log(activeUserList);
   console.log(btnFriends.style.display);
   if(btnFriends.style.display == "none"){
-    console.log("panel amigos abierto");
+    let friendList = [];
     let friendListEl = document.querySelectorAll(".folder-title");
     friendListEl.forEach(friendEl=>{
-      console.log(friendEl);
+      friendList.push(friendEl.innerText);
       console.log(friendEl.innerText);
     });
   }
