@@ -429,7 +429,7 @@ io.on('connection', (socket) => {
     socket.on('getUser', (user)=>{
         connectedUsers++;
         let socketUser = {
-            user: user.name,
+            user: user.user,
             socketId: socket.id
         }
         activeUsersList.push(socketUser);
