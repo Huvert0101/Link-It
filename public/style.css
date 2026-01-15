@@ -4,8 +4,10 @@
 @media print {
 	body {
 		margin: 0 !important;
-        overflow: hidden;
 	}
+}
+body{
+    overflow: hidden;
 }
 .main-container {
 	--ckeditor5-preview-height: 700px;
