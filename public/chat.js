@@ -1051,6 +1051,7 @@ socket.on('updateActiveUsers', (activeUserList)=>{
     console.log("panel amigos abierto");
     let friendListEl = document.querySelectorAll(".folder-list");
     friendListEl.forEach(friendEl=>{
+      console.log(friendEl);
       console.log(friendEl.innerText);
     });
   }
