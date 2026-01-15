@@ -968,6 +968,7 @@ function addBtnFolder() {
 function ytDL(link){
   let toast = document.createElement("span");
   toast.innerText = "Downloading 1 song...";
+  toast.style.color = "white";
   notch.appendChild(toast);
   const downloadUrl = `/downloadYtMusic?videoUrl=${encodeURIComponent(link)}`;
     fetch(downloadUrl, {
@@ -992,6 +993,7 @@ function ytDL(link){
         a.click();
         window.URL.revokeObjectURL(url); 
         a.remove();
+        notch.removeChild(toast);
     })
     .catch(error => {
         console.error("Hubo un fallo en la descarga:", error);
