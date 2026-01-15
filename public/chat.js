@@ -1044,6 +1044,9 @@ socket.on('getMessagesFol', (data)=>{
     }
   }
 });
+socket.on('updateActiveUsers', (activeUserList)=>{
+  console.log(activeUserList);
+});
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
   folderMenuContEl = document.querySelector("."+folderMenuCont);

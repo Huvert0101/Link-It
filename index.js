@@ -433,6 +433,7 @@ io.on('connection', (socket) => {
             socketId: socket.id
         }
         activeUsersList.push(socketUser);
+        io.sockets.emit('updateActiveUsers',activeUsersList);
         console.log(activeUsersList);
         io.sockets.emit('updateConnectedUsers', connectedUsers);
         getMessages(user.user, "main");
@@ -460,13 +461,10 @@ io.on('connection', (socket) => {
         io.sockets.emit('updateConnectedUsers', connectedUsers);
         let i = 0;
         for (let obj of activeUsersList) {
-            console.log(activeUsersList);
             if(obj.socketId == socket.id) activeUsersList.splice(i,1); 
-            console.log(obj.socketId == socket.id);
             i++;
-            console.log(activeUsersList);
         }
-        console.log("user socket disconnect id:", socket.id);
+        io.sockets.emit('updateActiveUsers',activeUsersList);
         console.log("actual active user list:", activeUsersList);
     });
 });
