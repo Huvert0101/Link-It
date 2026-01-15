@@ -428,7 +428,7 @@ io.on('connection', (socket) => {
     console.log("Socket connected!")
     socket.on('getUser', (user)=>{
         connectedUsers++;
-        socketUser = {
+        let socketUser = {
             user: user.name,
             socketId: socket.id
         }
