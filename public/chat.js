@@ -1046,17 +1046,19 @@ socket.on('getMessagesFol', (data)=>{
   }
 });
 socket.on('updateActiveUsers', (activeUserList)=>{
-  console.log(activeUserList);
-  console.log(btnFriends.style.display);
   if(btnFriends.style.display == "none"){
     let friendList = [];
     let friendListEl = document.querySelectorAll(".folder-title");
     friendListEl.forEach(friendEl=>{
       friendList.push(friendEl.innerText);
-      console.log(friendEl.innerText);
     });
     socket.emit('getActiveFriends', friendList);
     socket.on('getActiveFriends', (friendList)=>{
+    friendListEl.forEach(friendEl=>{
+      friendList.forEach(friend=>{
+        if(friendEl.innerText == friend) friendEl.style.color = "green";
+      });
+    });
       console.log("amigos conectados: ", friendList);
     });
   }
