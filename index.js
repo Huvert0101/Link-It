@@ -466,6 +466,7 @@ io.on('connection', (socket) => {
             });
             i++;
         }
+        console.log("active friends:", activeFriendListRes);
         io.sockets.emit('getActiveUsers', activeFriendListRes);
     });
     socket.on('disconnect', () => {
