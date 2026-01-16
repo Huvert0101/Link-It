@@ -1057,6 +1057,7 @@ socket.on('updateActiveUsers', (activeUserList)=>{
     friendListEl.forEach(friendEl=>{
       friendList.forEach(friend=>{
         if(friendEl.innerText == friend) friendEl.style.color = "green";
+        else friendEl.style.color = "white";
       });
     });
       console.log("amigos conectados: ", friendList);
