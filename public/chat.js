@@ -1055,6 +1055,7 @@ socket.on('updateActiveUsers', (activeUserList)=>{
     socket.emit('getActiveFriends', friendList);
     socket.on('getActiveFriends', (friendList)=>{
     friendListEl.forEach(friendEl=>{
+      if(friendList.length == 0) friendEl.style.color = "white";
       friendList.forEach(friend=>{
         if(friendEl.innerText == friend) friendEl.style.color = "green";
         else friendEl.style.color = "white";
