@@ -460,7 +460,6 @@ io.on('connection', (socket) => {
         let activeFriendListRes = [];
         let i = 0;
         for (let obj of activeUsersList) {
-            if(obj.socketId == socket.id) activeUsersList.splice(i,1); 
             friendList.forEach(friend=> {
                 if(activeUsersList[i].user == friend) activeFriendListRes.push(friend);
             });
