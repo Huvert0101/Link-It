@@ -996,6 +996,7 @@ function ytDL(link){
         notch.removeChild(toast);
     })
     .catch(error => {
+        notch.removeChild(toast);
         console.error("Hubo un fallo en la descarga:", error);
         alert("No se pudo descargar la canción. Revisa la consola.");
     });
