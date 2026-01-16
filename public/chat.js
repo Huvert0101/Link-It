@@ -1054,6 +1054,10 @@ socket.on('updateActiveUsers', (activeUserList)=>{
       friendList.push(friendEl.innerText);
       console.log(friendEl.innerText);
     });
+    socket.emit('getActiveFriends', friendList);
+    socket.on('getActiveFriends', (friendList)=>{
+      console.log("amigos conectados: ", friendList);
+    });
   }
   if(btnFriends.style.display == "block"){
     console.log("panel amigos cerrado");

@@ -456,6 +456,18 @@ io.on('connection', (socket) => {
         io.sockets.emit('getFolders', result)
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
+    socket.on('getActiveUsers', (friendList)=>{
+        let activeFriendListRes = [];
+        let i = 0;
+        for (let obj of activeUsersList) {
+            if(obj.socketId == socket.id) activeUsersList.splice(i,1); 
+            friendList.forEach(friend=> {
+                if(activeUsersList[i].user == friend) activeFriendListRes.push(friend);
+            });
+            i++;
+        }
+        io.sockets.emit('getActiveUsers', activeFriendListRes);
+    });
     socket.on('disconnect', () => {
         connectedUsers--;
         io.sockets.emit('updateConnectedUsers', connectedUsers);
