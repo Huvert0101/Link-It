@@ -647,19 +647,16 @@ getCurrentBg();
 function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
-  friendListEl.forEach(friendEl=>{
-    friendList.push(friendEl.innerText);
-  });
+  friendListEl.forEach(friendEl=> friendList.push(friendEl.innerText));
   socket.emit('getActiveFriends', friendList);
   socket.on('getActiveFriends', (friendList)=>{
-  friendListEl.forEach(friendEl=>{
-    if(friendList.length == 0) friendEl.style.color = "white";
-    friendList.forEach(friend=>{
-      if(friendEl.innerText == friend) friendEl.style.color = "green";
-      else friendEl.style.color = "white";
+    friendListEl.forEach(friendEl=>{
+      if(friendList.length == 0) friendEl.style.color = "white";
+      friendList.forEach(friend=>{
+        if(friendEl.innerText == friend) friendEl.style.color = "green";
+        else friendEl.style.color = "white";
+      });
     });
-  });
-    console.log("amigos conectados: ", friendList);
   });
 }
 btnFriends.onclick = async() => {
@@ -1063,14 +1060,7 @@ socket.on('getMessagesFol', (data)=>{
     }
   }
 });
-socket.on('updateActiveUsers', (activeUserList)=>{
-  if(btnFriends.style.display == "none"){
-    getActiveFriends();
-  }
-  if(btnFriends.style.display == "block"){
-    console.log("panel amigos cerrado");
-  }
-});
+socket.on('updateActiveUsers', (activeUserList)=>{if(btnFriends.style.display == "none") getActiveFriends();});
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
   folderMenuContEl = document.querySelector("."+folderMenuCont);
