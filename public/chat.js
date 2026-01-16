@@ -644,7 +644,24 @@ function getCurrentBg(){
   });
 }
 getCurrentBg();
-
+function getActiveFriends(){
+  let friendList = [];
+  let friendListEl = document.querySelectorAll(".folder-title");
+  friendListEl.forEach(friendEl=>{
+    friendList.push(friendEl.innerText);
+  });
+  socket.emit('getActiveFriends', friendList);
+  socket.on('getActiveFriends', (friendList)=>{
+  friendListEl.forEach(friendEl=>{
+    if(friendList.length == 0) friendEl.style.color = "white";
+    friendList.forEach(friend=>{
+      if(friendEl.innerText == friend) friendEl.style.color = "green";
+      else friendEl.style.color = "white";
+    });
+  });
+    console.log("amigos conectados: ", friendList);
+  });
+}
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
   btnFriends.style.display = "none";
@@ -709,6 +726,7 @@ btnFriends.onclick = async() => {
       searchBar.value = "";
     });
   }
+  getActiveFriends();
 }
 btnFolders.onclick = () => {
   btnFriends.style.display = "block";
@@ -1047,22 +1065,7 @@ socket.on('getMessagesFol', (data)=>{
 });
 socket.on('updateActiveUsers', (activeUserList)=>{
   if(btnFriends.style.display == "none"){
-    let friendList = [];
-    let friendListEl = document.querySelectorAll(".folder-title");
-    friendListEl.forEach(friendEl=>{
-      friendList.push(friendEl.innerText);
-    });
-    socket.emit('getActiveFriends', friendList);
-    socket.on('getActiveFriends', (friendList)=>{
-    friendListEl.forEach(friendEl=>{
-      if(friendList.length == 0) friendEl.style.color = "white";
-      friendList.forEach(friend=>{
-        if(friendEl.innerText == friend) friendEl.style.color = "green";
-        else friendEl.style.color = "white";
-      });
-    });
-      console.log("amigos conectados: ", friendList);
-    });
+    getActiveFriends();
   }
   if(btnFriends.style.display == "block"){
     console.log("panel amigos cerrado");
