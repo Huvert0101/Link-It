@@ -456,7 +456,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('getFolders', result)
     }));
     socket.on('changedFolder', (data)=> getMessagesFol(data.user, data.folder));
-    socket.on('getActiveUsers', (friendList)=>{
+    socket.on('getActiveFriends', (friendList)=>{
         let activeFriendListRes = [];
         let i = 0;
         for (let obj of activeUsersList) {
@@ -467,7 +467,7 @@ io.on('connection', (socket) => {
             i++;
         }
         console.log("active friends:", activeFriendListRes);
-        io.sockets.emit('getActiveUsers', activeFriendListRes);
+        io.sockets.emit('getActiveFriends', activeFriendListRes);
     });
     socket.on('disconnect', () => {
         connectedUsers--;
