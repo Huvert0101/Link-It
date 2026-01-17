@@ -900,7 +900,7 @@ let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
   let folderEl = document.getElementById(folder);
-  folderNameTop.innertText = folderEl.innerText;
+  folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   folderEl = document.getElementById(folder);
@@ -915,7 +915,7 @@ folderList.onclick = (event)=>{
 friendList.onclick = (event)=>{
   let folder = event.target.id;
   let folderEl = document.getElementById(folder);
-  folderNameTop.innertText = folderEl.innerText;
+  folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   if(folder == 'searchBar') return;
