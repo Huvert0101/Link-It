@@ -902,11 +902,10 @@ folderList.onclick = (event)=>{
   let folder = event.target.id;
   let btnCreateCall = document.querySelector(".bx-phone");
   if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
-  let folderEl = document.getElementById(folder);
+  folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
-  folderEl = document.getElementById(folder);
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
@@ -921,9 +920,8 @@ friendList.onclick = (event)=>{
   if(folder == 'addFolder'){ addFolder(); return}
   if(folder == 'searchBar') return;
   if(folder == 'btnAddFriend') return;
-  let folderEl = document.getElementById(folder);
-  folderNameTop.innerText = folderEl.innerText;
   folderEl = document.getElementById(folder);
+  folderNameTop.innerText = folderEl.innerText;
   let btnCreateCall = document.querySelector(".bx-phone");
   if(!btnCreateCall){
     let btnCreateCall = document.createElement("i");
