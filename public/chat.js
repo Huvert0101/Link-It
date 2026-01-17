@@ -924,11 +924,14 @@ friendList.onclick = (event)=>{
   let folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
   folderEl = document.getElementById(folder);
-  let btnCreateCall = document.createElement("i");
-  btnCreateCall.classList.add("bx");
-  btnCreateCall.classList.add("bx-phone");
-  btnCreateCall.style.color = "white";
-  msgPanelTop.appendChild(btnCreateCall);
+  let btnCreateCall = document.querySelector(".bx-phone");
+  if(!btnCreateCall){
+    let btnCreateCall = document.createElement("i");
+    btnCreateCall.classList.add("bx");
+    btnCreateCall.classList.add("bx-phone");
+    btnCreateCall.style.color = "white";
+    msgPanelTop.appendChild(btnCreateCall);
+  }
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
