@@ -81,8 +81,9 @@ btnIframe.onclick = () => {
     btnIframe.style.opacity = 1;
     document.querySelector(".iframeCont").style.display = "block";
   }else{
-    console.log(iframeForm.style.display);
-    if(iframeForm.style.display == "none"){
+    iframeFormStyles = window.getComputedStyle(iframeForm);
+    console.log(iframeFormStyles.display);
+    if(iframeFormStyles.display == "none"){
       console.log("hola1");
       iframeForm.style.display = "block";
       btnIframe.style.opacity = 1;
