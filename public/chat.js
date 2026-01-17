@@ -81,13 +81,13 @@ btnIframe.onclick = () => {
     btnIframe.style.opacity = 1;
     document.querySelector(".iframeCont").style.display = "block";
   }else{
-    if(!iframeForm.style.display == "none"){
+    if(iframeForm.style.display == "none"){
       iframeForm.style.display = "block";
       btnIframe.style.opacity = 1;
       iframeUrl.focus();
     }else{
       iframeForm.style.display = "none";
-      btnIframe.style.opacity = 0;
+      btnIframe.style.opacity = 0.7;
     }
   }
 }
