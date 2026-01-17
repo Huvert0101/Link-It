@@ -575,7 +575,7 @@ input[type="range"]::-webkit-slider-thumb {
     overflow-y: scroll;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    height: 88.5%;
+    height: 89%;
     background-color: rgba(0, 0, 0, 0.5);
     margin-bottom: 6px;
 }
