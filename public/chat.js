@@ -404,12 +404,12 @@ btnCreateDoc.onclick = ()=> {
     right.style.width = "25%";
     mainCont.style.gap = "0px";
     openedApps--;
-    if(openedApps == 2) leftPanel.style.width = "50vw";
+    if(openedApps == 2) leftPanel.style.width = "28vw";
     if(openedApps == 1) leftPanel.style.width = "73%";
     return;
   };
   openedApps++;
-  if(openedApps == 2) leftPanel.style.width = "50vw";
+  if(openedApps == 2) leftPanel.style.width = "28vw";
   if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
   middlePane.style.position = "relative"; 
@@ -418,7 +418,7 @@ btnCreateDoc.onclick = ()=> {
   middlePane.style.opacity = 1;
   inputMsgBar.style.width = "87%";
   right.style.width = "35%";
-  mainCont.style.gap = "10px";
+  mainCont.style.gap = "3px";
 };
 function loadDoc(url){
   const iframeCont = document.createElement("div");
