@@ -941,6 +941,9 @@ friendList.onclick = (event)=>{
 
 btnBack.onclick = () => {
   currentFolder = 'main';
+  folderNameTop = "main";
+  let btnCreateCall = document.querySelector(".bx-phone");
+  msgPanelTop.removeChild(btnCreateCall);
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
   folderEl.parentElement.classList.remove('currentFolder');
   btnBack.style.visibility = 'hidden';
