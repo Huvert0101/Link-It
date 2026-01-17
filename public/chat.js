@@ -69,6 +69,7 @@ let minWin = false;
 let minPlugin = true;
 let playerLoaded = false;
 let currentFolder = "main";
+let folderNameTop = document.getElementById("folderNameTop");
 let genVolumeBar = document.getElementById("genVolumeBar");
 
 // Front-end functions
@@ -404,13 +405,11 @@ btnCreateDoc.onclick = ()=> {
     right.style.width = "25%";
     mainCont.style.gap = "0px";
     openedApps--;
-    console.log("apps abiertas: ",openedApps);
     if(openedApps == 2) leftPanel.style.width = "28vw";
     if(openedApps == 1) leftPanel.style.width = "49vw";
     return;
   };
   openedApps++;
-  console.log("apps abiertas2: ",openedApps);
   if(openedApps == 2) leftPanel.style.width = "28vw";
   if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
@@ -900,6 +899,8 @@ let lastFolder;
 let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
+  let folderEl = document.getElementById(folder);
+  folderNameTop.innertText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   folderEl = document.getElementById(folder);
@@ -913,6 +914,8 @@ folderList.onclick = (event)=>{
 }
 friendList.onclick = (event)=>{
   let folder = event.target.id;
+  let folderEl = document.getElementById(folder);
+  folderNameTop.innertText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
   if(folder == 'searchBar') return;
