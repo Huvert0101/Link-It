@@ -511,7 +511,7 @@ function loadDoc(url){
   }
 }
 btnGo.onclick = () => {
-  if(iframeForm.value == "") btnIframe.style.opacity = 0.7;
+  if(iframeUrl.value == "") btnIframe.style.opacity = 0.7;
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
   const newWindowIcon = document.createElement("i");
