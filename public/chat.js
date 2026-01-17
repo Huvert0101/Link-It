@@ -901,7 +901,7 @@ let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
   let btnCreateCall = document.querySelector(".bx-phone");
-  msgPanelTop.removeChild(btnCreateCall);
+  if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   let folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
