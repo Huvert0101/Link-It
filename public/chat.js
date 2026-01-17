@@ -81,9 +81,14 @@ btnIframe.onclick = () => {
     btnIframe.style.opacity = 1;
     document.querySelector(".iframeCont").style.display = "block";
   }else{
-    iframeForm.style.display = "block";
-    btnIframe.style.opacity = 1;
-    iframeUrl.focus();
+    if(!iframeForm.style.display == "none"){
+      iframeForm.style.display = "block";
+      btnIframe.style.opacity = 1;
+      iframeUrl.focus();
+    }else{
+      iframeForm.style.display = "none";
+      btnIframe.style.opacity = 0;
+    }
   }
 }
 loopedSong = false;
