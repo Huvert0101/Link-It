@@ -511,6 +511,7 @@ function loadDoc(url){
   }
 }
 btnGo.onclick = () => {
+  btnIframe.style.opacity = 0.7;
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
   const newWindowIcon = document.createElement("i");
