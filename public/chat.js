@@ -57,6 +57,7 @@ let middlePane = document.querySelector(".middle");
 let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
 let notch = document.querySelector(".notch");
+let msgPanelTop= document.querySelector(".msgPanelTop");
 let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
@@ -899,6 +900,8 @@ let lastFolder;
 let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
+  let btnCreateCall = document.querySelector(".bx-phone");
+  msgPanelTop.removeChild(btnCreateCall);
   let folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
@@ -925,6 +928,7 @@ friendList.onclick = (event)=>{
   btnCreateCall.classList.add("bx");
   btnCreateCall.classList.add("bx-phone");
   btnCreateCall.style.color = "white";
+  msgPanelTop.appendChild(btnCreateCall);
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
