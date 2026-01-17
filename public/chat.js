@@ -404,11 +404,13 @@ btnCreateDoc.onclick = ()=> {
     right.style.width = "25%";
     mainCont.style.gap = "0px";
     openedApps--;
+    console.log("apps abiertas: ",openedApps);
     if(openedApps == 2) leftPanel.style.width = "28vw";
-    if(openedApps == 1) leftPanel.style.width = "73%";
+    if(openedApps == 1) leftPanel.style.width = "49vw";
     return;
   };
   openedApps++;
+  console.log("apps abiertas2: ",openedApps);
   if(openedApps == 2) leftPanel.style.width = "28vw";
   if(openedApps == 1) leftPanel.style.width = "48vw";
   btnCreateDoc.classList.add("clicked");
