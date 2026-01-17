@@ -1091,11 +1091,7 @@ async function delMessage(msg,folder){
       const link = document.querySelector(`a[href*='${msg}']`);
       if (link) link.remove();
       const parrafos = document.querySelectorAll('p');
-      parrafos.forEach(p => {
-        if (p.textContent.includes(msg)) {
-          p.remove();
-        }
-      });
+      parrafos.forEach(p => {if (p.textContent.includes(msg)) p.remove();});
     }else console.log(res);
   });
 }
