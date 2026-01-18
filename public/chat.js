@@ -656,6 +656,7 @@ function getActiveFriends(){
   friendListEl.forEach(friendEl=> friendList.push(friendEl.innerText));
   socket.emit('getActiveFriends', friendList);
   socket.on('getActiveFriends', (friendList)=>{
+    console.log(friendList);
     friendListEl.forEach(friendEl=>{
       if(friendList.length == 0) friendEl.style.color = "white";
       friendList.forEach(friend=>{
