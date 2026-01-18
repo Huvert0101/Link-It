@@ -654,6 +654,7 @@ function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
   friendListEl.forEach(friendEl=> friendList.push(friendEl.innerText));
+  console.log(friendList);
   socket.emit('getActiveFriends', friendList);
   socket.on('getActiveFriends', (friendList)=>{
     console.log(friendList);
