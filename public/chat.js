@@ -664,7 +664,6 @@ function getActiveFriends(){
         console.log(friendEl.innerText,friend);
         console.log(friendEl.innerText == friend);
         if(friendEl.innerText == friend) friendEl.style.color = "green";
-        else friendEl.style.color = "white";
       });
     });
   });
