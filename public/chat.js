@@ -659,12 +659,15 @@ function getActiveFriends(){
   socket.on('getActiveFriends', (friendList)=>{
     console.log(friendList);
     friendListEl.forEach(friendEl=>{
+      let found = false;
       if(friendList.length == 0) friendEl.style.color = "white";
       friendList.forEach(friend=>{
         console.log(friendEl.innerText,friend);
         console.log(friendEl.innerText == friend);
-        if(friendEl.innerText == friend) {friendEl.style.color = "green"; return}
-        friendEl.style.color = "white";
+        if(!found){
+          if(friendEl.innerText == friend){friendEl.style.color = "green"; found = true;}
+          else friendEl.style.color = "white";
+        }else return;
       });
     });
   });
