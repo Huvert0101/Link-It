@@ -814,8 +814,8 @@ async function postBg(file){
     const optimizedUrl = dataR.secure_url.replace('/upload/', '/upload/f_avif,q_auto/');
     const imageRes = await fetch(optimizedUrl);
     const imageBlob = await imageRes.blob();
-    const avifFile = new File([imageBlob], newFileName, { type: 'image/avif' });
     const newFileName = file.name.split('.').slice(0, -1).join('.') + ".avif";
+    const avifFile = new File([imageBlob], newFileName, { type: 'image/avif' });
     console.log("URL del background optimizado:", optimizedUrl);
   const data = new FormData();
   data.append("bg_src", avifFile, newFileName);
