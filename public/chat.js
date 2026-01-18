@@ -943,7 +943,7 @@ btnBack.onclick = () => {
   currentFolder = 'main';
   folderNameTop.innerText = "main";
   let btnCreateCall = document.querySelector(".bx-phone");
-  msgPanelTop.removeChild(btnCreateCall);
+  if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
   folderEl.parentElement.classList.remove('currentFolder');
   btnBack.style.visibility = 'hidden';
