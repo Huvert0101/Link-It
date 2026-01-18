@@ -661,6 +661,8 @@ function getActiveFriends(){
     friendListEl.forEach(friendEl=>{
       if(friendList.length == 0) friendEl.style.color = "white";
       friendList.forEach(friend=>{
+        console.log(friendEl.innerText);
+        console.log(friend);
         if(friendEl.innerText == friend) friendEl.style.color = "green";
         else friendEl.style.color = "white";
       });
