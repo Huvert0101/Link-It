@@ -663,7 +663,8 @@ function getActiveFriends(){
       friendList.forEach(friend=>{
         console.log(friendEl.innerText,friend);
         console.log(friendEl.innerText == friend);
-        if(friendEl.innerText == friend) friendEl.style.color = "green";
+        if(friendEl.innerText == friend) {friendEl.style.color = "green"; return}
+        friendEl.style.color = "white";
       });
     });
   });
