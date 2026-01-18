@@ -807,6 +807,7 @@ async function postBg(file){
 
   const formData1 = new FormData();
   formData1.append("file",file);
+  formData1.append("upload_preset", "avifopt");
   try {
     const response = await fetch(`https://api.cloudinary.com/v1_1/dsbxfhcdd/upload`, {
       method: 'POST',
