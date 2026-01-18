@@ -801,14 +801,10 @@ async function postFile(file) {
 }
 async function postBg(file){
   progressCont.style.display = "flex";
-  const data = new FormData();
-  data.append("bg_src", file);
-  data.append("user", newUser);
 
   const formData1 = new FormData();
   formData1.append("file",file);
   formData1.append("upload_preset", "avifopt");
-  try {
     const response = await fetch(`https://api.cloudinary.com/v1_1/dsbxfhcdd/upload`, {
       method: 'POST',
       body: formData1
@@ -816,11 +812,13 @@ async function postBg(file){
     const dataR = await response.json();
     const avifUrl = dataR.secure_url.replace(/\.[^/.]+$/, ".avif");
     const optimizedUrl = dataR.secure_url.replace('/upload/', '/upload/f_avif,q_auto/');
+    const imageRes = await fetch(optimizedUrl);
+    const imageBlob = await imageRes.blob();
+    const newFileName = file.name.split('.').slice(0, -1).join('.') + ".avif";
     console.log("URL del background optimizado:", optimizedUrl);
-    return optimizedUrl;
-  } catch (error) {
-    console.error("Error al subir a la API:", error);
-  }
+  const data = new FormData();
+  data.append("bg_src", imageBlob, newFileName);
+  data.append("user", newUser);
   
   await axios.post('/uploadBg', data, {
     headers: {
