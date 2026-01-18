@@ -433,6 +433,7 @@ io.on('connection', (socket) => {
             socketId: socket.id
         }
         activeUsersList.push(socketUser);
+        console.log("usuarios Conectados:", activeUsersList);
         io.sockets.emit('updateActiveUsers',activeUsersList);
         console.log(activeUsersList);
         io.sockets.emit('updateConnectedUsers', connectedUsers);
