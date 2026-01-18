@@ -941,7 +941,7 @@ friendList.onclick = (event)=>{
 
 btnBack.onclick = () => {
   currentFolder = 'main';
-  folderNameTop.innerText = "main";
+  folderNameTop.innerText = "Main";
   let btnCreateCall = document.querySelector(".bx-phone");
   if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
