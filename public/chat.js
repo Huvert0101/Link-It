@@ -811,7 +811,7 @@ async function postBg(file){
     });
     const dataR = await response.json();
     const avifUrl = dataR.secure_url.replace(/\.[^/.]+$/, ".avif");
-    const optimizedUrl = dataR.secure_url.replace('/upload/', '/upload/f_avif,q_auto/');
+    const optimizedUrl = dataR.secure_url.replace('/upload/', '/upload/f_avif,q_auto:low/');
     const imageRes = await fetch(optimizedUrl);
     const imageBlob = await imageRes.blob();
     const newFileName = file.name.split('.').slice(0, -1).join('.') + ".avif";
