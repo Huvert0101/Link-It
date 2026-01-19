@@ -815,10 +815,11 @@ async function postBg(file){
     const imageRes = await fetch(optimizedUrl);
     const imageBlob = await imageRes.blob();
     const newFileName = file.name.split('.').slice(0, -1).join('.') + ".avif";
+    console.log(newFileName);
     const avifFile = new File([imageBlob], newFileName, { type: 'image/avif' });
     console.log("URL del background optimizado:", optimizedUrl);
   const data = new FormData();
-  data.append("bg_src", avifFile, newFileName);
+  data.append("bg_src", avifFile);
   data.append("user", newUser);
   
   await axios.post('/uploadBg', data, {
