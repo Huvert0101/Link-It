@@ -1080,7 +1080,7 @@ socket.on('chat:message', (data) => {
 
 socket.on('createdFolder', (data)=>{
   if(data.user == newUser){ folderList.innerHTML += `<div class='folder'>
-  <span class='folder-title' id='${data.folderName}'>${data.folderName}</span></div>`;
+  <span class='folder-title' id='${data.folderName}'>${data.folderName}</span><i onclick="displayFolderMenu('${data.folderName}')" class='bx bx-dots-horizontal-rounded' style='color:#ffffff'></i><div class='folderMenuCont ${data.folderName}MenuCont'><i onclick="delFol('${data.folderName}')" class='bx  bx-trash' style='color:#ffffff'></i><i class='bx  bx-forward-big' style='color:#ffffff'></i></div></div>`;
   addBtnFolder() }
 });
 
