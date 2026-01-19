@@ -815,9 +815,7 @@ async function postBg(file){
     const imageRes = await fetch(optimizedUrl);
     const imageBlob = await imageRes.blob();
     const newFileName = file.name.split('.').slice(0, -1).join('.') + ".avif";
-    console.log(newFileName);
     const avifFile = new File([imageBlob], newFileName, { type: 'image/avif' });
-    console.log("URL del background optimizado:", optimizedUrl);
   const data = new FormData();
   data.append("bg_src", avifFile);
   data.append("user", newUser);
@@ -838,7 +836,17 @@ async function postBg(file){
   bgImg.setAttribute("draggable","false");
   bgImg.src = "api/files/"+newFileName;
   backgroundsCont.appendChild(bgImg);
-  bgImg.onclick = () => document.body.style.backgroundImage = "url('api/" + "files/"+newFileName+"')";
+  bgImg.onclick = () => {
+    fetch(URL+"changeCurrentBg",{
+      headers: {"Content-Type": "application/json"},
+      method: 'PUT',
+      body: JSON.stringify({user: newUser, bg_src: bg.bg_src})
+    }).then(response => response.json()).then(response =>{
+      getCurrentBg();
+      document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
+    });
+    document.body.style.backgroundImage = "url('api/" + "files/"+newFileName+"')";
+  }
 }
 selectBg.onclick = async(event) => {
   event.preventDefault();
