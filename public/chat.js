@@ -836,9 +836,9 @@ async function postBg(file){
   const bgImg = document.createElement("img");
   bgImg.setAttribute("class","bg-item");
   bgImg.setAttribute("draggable","false");
-  bgImg.src = "api/files/"+file.name;
+  bgImg.src = "api/files/"+newFileName;
   backgroundsCont.appendChild(bgImg);
-  bgImg.onclick = () => document.body.style.backgroundImage = "url('api/" + "files/"+file.name + "')";
+  bgImg.onclick = () => document.body.style.backgroundImage = "url('api/" + "files/"+newFileName+"')";
 }
 selectBg.onclick = async(event) => {
   event.preventDefault();
