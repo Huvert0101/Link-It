@@ -929,14 +929,14 @@ input[type="range"]::-webkit-slider-thumb {
   }
   .left{
     width: 100%;
+    height: 90%;
+    margin-top: 38px;
   }
   .display{
     margin-left: 2px;
     width: 99%;
-    margin-top: 5vh;
+    margin-top: 0vh;
     height: 88vh;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
   }
   .display a{
     max-width: 90vw;
