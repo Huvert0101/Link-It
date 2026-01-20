@@ -587,7 +587,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .messagebar{
     width: 100%;
-    border-radius: 3m;
+    border-radius: 3em;
     height: 6.5%;
     background-color: black;
     opacity: 0.5;
