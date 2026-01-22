@@ -183,14 +183,6 @@
         console.error("Error durante la conversión:", error.response?.data || error);
     }
     };
-    var newEditor;
-    const mEditor = new MediumEditor('#editable', {
-    toolbar: {
-      buttons: ['bold', 'italic', 'underline', 'anchor']
-    },
-    placeholder: {
-      text: 'Escribe algo increíble...'
-    }});
     btnCloseEditor.onclick = async() => closeEditor(); 
     </script>
 </body>
