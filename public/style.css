@@ -811,9 +811,6 @@ input[type="range"]::-webkit-slider-thumb {
     overflow: hidden;
     color: mediumslateblue;
 }
-.display a:hover{
-    background-color: #ffffff1a;
-}
 .dropArea {
     width: 100%;
     height: 100%;
