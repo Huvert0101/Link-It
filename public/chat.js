@@ -1106,7 +1106,7 @@ socket.on('getMessagesFol', (data)=>{
   if (!data ||data.length==0 || !data[0]?.folder?.includes("friend") && data[0]?.user == newUser) output.innerHTML = '';
   if(data?.user== newUser){output.innerHTML=''; return};
   if(data[0].folder == currentFolder && !output.hasChildNodes()){
-    if(!data[0].folder.includes("friend") && data[0].user == newUser){
+    if(!data[0].folder.includes("friend") && data[0].user == newUser && data[0].folder == currentFolder){
       data.forEach(el => addToDom(el));
       output.innerHTML = htmlCont;
       htmlCont = "";
