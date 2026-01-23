@@ -1103,29 +1103,22 @@ socket.on('getFolders', (data)=>{
 });
 
 socket.on('getMessagesFol', (data)=>{
-// 1. Manejo de errores inicial (Early Return)
-if (!data || (Array.isArray(data) && data.length === 0)) {
-    output.innerHTML = '';
-    return;
-}
-
-// Normalizamos: nos aseguramos de trabajar con el primer elemento si es un array
-const firstItem = Array.isArray(data) ? data[0] : data;
-
-// 2. Lógica de limpieza según usuario
-if (firstItem.user === newUser) {
-    output.innerHTML = '';
-    // Si no es carpeta de amigos, detenemos aquí
-    if (!firstItem.folder?.includes("friend")) return;
-}
-
-// 3. Lógica de renderizado unificada
-if (firstItem.folder === currentFolder && !output.hasChildNodes()) {
-    // No importa si es "friend" o no, si cumple la carpeta, renderizamos
-    data.forEach(el => addToDom(el));
-    output.innerHTML = htmlCont;
-    htmlCont = ""; 
-}});
+  console.log(data);
+  if (!data||data.length===0||(!data[0]?.folder?.includes("friend") && data[0]?.user === newUser))output.innerHTML='';
+  if(data?.user== newUser){output.innerHTML=''; return};
+  if(data[0]?.folder == currentFolder && !output.hasChildNodes()){
+    if(!data[0].folder.includes("friend") && data[0].user == newUser && data[0].folder == currentFolder){
+      data.forEach(el => addToDom(el));
+      output.innerHTML = htmlCont;
+      htmlCont = "";
+    }
+    if(data[0].folder.includes("friend") && data[0].folder == currentFolder){
+      data.forEach(el => addToDom(el));
+      output.innerHTML = htmlCont;
+      htmlCont = "";
+    }
+  }
+});
 socket.on('updateActiveUsers', (activeUserList)=>{if(btnFriends.style.display == "none") getActiveFriends();});
 function displayFolderMenu(folder){
   folderMenuCont = folder+"MenuCont";
