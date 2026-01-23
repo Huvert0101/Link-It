@@ -1014,7 +1014,7 @@ function addToDom(data) {
     let msg = data.message.substring(6);
     if(extension == "docx" || extension == "doc")
       htmlCont += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
-    else htmlCont += `<div class='linkCont'><p style='word-break: break-word'><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span></p><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+    else htmlCont += `<div class='linkCont'><p><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span></p><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "http:"){
