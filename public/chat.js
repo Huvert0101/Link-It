@@ -1019,7 +1019,7 @@ function addToDom(data) {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "http:"){
       if(data.message.includes("youtube.com") || data.message.includes("youtu.be")){
-        htmlCont += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="ytDL('${data.message}')" class='bx  bx-arrow-to-bottom-stroke' style='color:#ffffff; opacity:0.7'></i><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+        htmlCont += `<div class='linkCont'><p><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span></p><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="ytDL('${data.message}')" class='bx  bx-arrow-to-bottom-stroke' style='color:#ffffff; opacity:0.7'></i><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
       }else{
         htmlCont += `<div class='linkCont'><p><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span></p><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
       }
