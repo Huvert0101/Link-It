@@ -139,6 +139,9 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 .linkCont p{
     margin: 6px;
 }
+.linkCont p:empty{
+    margin:0;
+}
 .friendUserMsg{
     color: red;
 }
