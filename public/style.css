@@ -139,10 +139,7 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
 .linkCont p{
     margin: 6px;
 }
-.linkCont p:empty{
-    margin:0;
-}
-.friendUserMsg:not(:has(span, b, i)) .linkCont p {
+.linkCont p:has(> .friendUserMsg:empty) {
   margin: 0;
 }
 .friendUserMsg{
