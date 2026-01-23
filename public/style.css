@@ -136,6 +136,9 @@ a[href="https://www.froala.com/wysiwyg-editor?k=u"]{
  color: white;
  opacity: 0.7;
 }
+.linkCont p{
+    margin: 6px;
+}
 .customizeCont{
     z-index: 6;
     margin-top: 33px;
