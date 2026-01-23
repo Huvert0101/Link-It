@@ -1024,7 +1024,7 @@ function addToDom(data) {
         htmlCont += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
       }
     } 
-    else htmlCont += `<div class='linkCont'><p style='word-break: break-all'><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}${data.message}</span></p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
+    else htmlCont += `<div class='linkCont'><p style='word-break: break-all'><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span>${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
   setTimeout(() => clearInterval(interval), 1500);
