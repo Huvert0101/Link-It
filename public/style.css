@@ -562,7 +562,6 @@ input[type="range"]::-webkit-slider-thumb {
     white-space: normal;
     color: white;
     padding: 5px 10px;
-    margin: 6px;
     border-radius: 10px;
     cursor: pointer;
 }
@@ -808,6 +807,7 @@ input[type="range"]::-webkit-slider-thumb {
     width: 100%;
     color: mediumslateblue;
     text-overflow: ellipsis;
+    margin: 6px;
     overflow: hidden;
     color: mediumslateblue;
 }
@@ -888,6 +888,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .linkCont {
   display: flex;
+  align-items: center;
   position: relative;
 }
 .linkCont:hover{
