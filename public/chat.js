@@ -1007,24 +1007,24 @@ formFolder.onsubmit = (e) => {
   inputFolder.value = '';
   formFolder.style.display = 'none';
 }
-
+let htmlCont = "";
 function addToDom(data) {
   if(data.type == "file") {
     let extension = data.message.split('.').pop();
     let msg = data.message.substring(6);
     if(extension == "docx" || extension == "doc")
-      output.innerHTML += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
-    else output.innerHTML += `<div class='linkCont'><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+      htmlCont += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
+    else htmlCont += `<div class='linkCont'><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
   }else {
     let isLink = data.message.slice(0, 5);
     if(isLink == "https" || isLink == "http:"){
       if(data.message.includes("youtube.com") || data.message.includes("youtu.be")){
-        output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="ytDL('${data.message}')" class='bx  bx-arrow-to-bottom-stroke' style='color:#ffffff; opacity:0.7'></i><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+        htmlCont += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="ytDL('${data.message}')" class='bx  bx-arrow-to-bottom-stroke' style='color:#ffffff; opacity:0.7'></i><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
       }else{
-        output.innerHTML += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
+        htmlCont += `<div class='linkCont'><a target='_blank' href='${data.message}'>${data.message}</a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
       }
     } 
-    else output.innerHTML += `<div class='linkCont'><p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
+    else htmlCont += `<div class='linkCont'><p style='word-break: break-all'>${data.user === newUser ? '' : data.user+':'}${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
   const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
   setTimeout(() => clearInterval(interval), 1500);
@@ -1108,6 +1108,7 @@ socket.on('getMessagesFol', (data)=>{
   if(data[0].folder == currentFolder && !output.hasChildNodes()){
     if(!data[0].folder.includes("friend") && data[0].user == newUser){
       data.forEach(el => addToDom(el));
+      output.innerHTML = htmlCont;
     }
     if(data[0].folder.includes("friend") && data[0].folder == currentFolder){
       data.forEach(el => addToDom(el));
