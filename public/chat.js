@@ -664,7 +664,13 @@ const iceConfiguration = {
 };
 let peer;
 async function startCall() {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const stream = await navigator.mediaDevices.getUserMedia({
+  audio: {
+    echoCancellation: true, // Cancela el eco de tus bocinas
+    noiseSuppression: true, // Reduce el ruido de fondo básico
+    autoGainControl: true   // Ajusta el volumen automáticamente
+  }
+  });
   // AQUÍ agregamos la configuración de los servidores
   peer = new RTCPeerConnection(iceConfiguration);
   stream.getTracks().forEach(track => peer.addTrack(track, stream));
