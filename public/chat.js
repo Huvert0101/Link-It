@@ -484,80 +484,32 @@ const iceConfiguration = {
   ]
 };
 let peer;
-let isInitializing = false; // Bandera para evitar doble inicialización
-
 async function startCall() {
-  if (isInitializing) return; 
-  isInitializing = true;
-
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const audioContext = new AudioContext();
-  const source = audioContext.createMediaStreamSource(stream);
-  const destination = audioContext.createMediaStreamDestination();
-
-  // Filtros para mejorar el audio sin librerías externas
-  const highPass = audioContext.createBiquadFilter();
-  highPass.type = "highpass";
-  highPass.frequency.value = 150; 
-
-  const lowPass = audioContext.createBiquadFilter();
-  lowPass.type = "lowpass";
-  lowPass.frequency.value = 3000; 
-
-  source.connect(highPass);
-  highPass.connect(lowPass);
-  lowPass.connect(destination);
-
-  const processedStream = destination.stream;
-
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+      autoGainControl: true
+    }
+  });
   peer = new RTCPeerConnection(iceConfiguration);
-
-  // Manejo de candidatos ICE (indispensable para que conecte)
-  peer.onicecandidate = (e) => {
-    if (e.candidate) socket.emit('ice-candidate', e.candidate);
-  };
-
-  processedStream.getTracks().forEach(track => peer.addTrack(track, processedStream));
-
-  peer.ontrack = (e) => { 
-    document.getElementById('remoteAudio').srcObject = e.streams[0]; 
-  };
-
-  isInitializing = false;
-  return peer; // Devolvemos la instancia creada
+  stream.getTracks().forEach(track =>peer.addTrack(track, stream));
+  peer.ontrack = (e) => {document.getElementById('remoteAudio').srcObject = e.streams[0];};
+  peer.onicecandidate = (e) => {if (e.candidate) socket.emit('ice-candidate', e.candidate);};
+  const offer = await peer.createOffer();
+  await peer.setLocalDescription(offer);
+  socket.emit('offer', offer);
 }
-
-// --- EVENTOS DE SOCKET CORREGIDOS ---
-
 socket.on('offer', async (offer) => {
-  // Esperamos a que la inicialización termine si no existe el peer
-  if (!peer) {
-    await startCall();
-  }
-  await peer.setRemoteDescription(new RTCSessionDescription(offer));
+  if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
+  await peer.setRemoteDescription(offer);
   const answer = await peer.createAnswer();
   await peer.setLocalDescription(answer);
   socket.emit('answer', answer);
 });
+socket.on('answer', (answer) => peer.setRemoteDescription(answer));
+socket.on('ice-candidate', (candidate) => peer.addIceCandidate(candidate));
 
-socket.on('answer', async (answer) => {
-  // Verificación de seguridad para el error que te salía
-  if (peer) {
-    await peer.setRemoteDescription(new RTCSessionDescription(answer));
-  } else {
-    console.error("Llegó una respuesta pero el Peer no está listo.");
-  }
-});
-
-socket.on('ice-candidate', async (candidate) => {
-  try {
-    if (peer && peer.remoteDescription) {
-      await peer.addIceCandidate(new RTCIceCandidate(candidate));
-    }
-  } catch (e) {
-    console.error("Error añadiendo ICE candidate", e);
-  }
-});
 function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
