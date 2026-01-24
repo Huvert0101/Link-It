@@ -486,20 +486,30 @@ const iceConfiguration = {
 let peer;
 async function startCall() {
   const stream = await navigator.mediaDevices.getUserMedia({
-  audio: {
-    echoCancellation: true, // Cancela el eco de tus bocinas
-    noiseSuppression: true, // Reduce el ruido de fondo básico
-    autoGainControl: true   // Ajusta el volumen automáticamente
-  }
-  });
-  // AQUÍ agregamos la configuración de los servidores
-  peer = new RTCPeerConnection(iceConfiguration);
-  stream.getTracks().forEach(track => peer.addTrack(track, stream));
-  peer.ontrack = (e) => document.getElementById('remoteAudio').srcObject = e.streams[0];
-  peer.onicecandidate = (e) => {
-    if (e.candidate) {
-      socket.emit('ice-candidate', e.candidate);
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+      autoGainControl: true
     }
+  });
+  peer = new RTCPeerConnection(iceConfiguration);
+  const audioContext = new AudioContext();
+  await audioContext.resume();
+  const source = audioContext.createMediaStreamSource(stream);
+  const highPassFilter = audioContext.createBiquadFilter();
+  highPassFilter.type = "highpass";
+  highPassFilter.frequency.value = 120;
+  const destination = audioContext.createMediaStreamDestination();
+  source.connect(highPassFilter);
+  highPassFilter.connect(destination);
+  destination.stream.getTracks().forEach(track =>
+    peer.addTrack(track, destination.stream)
+  );
+  peer.ontrack = (e) => {
+    document.getElementById('remoteAudio').srcObject = e.streams[0];
+  };
+  peer.onicecandidate = (e) => {
+    if (e.candidate) socket.emit('ice-candidate', e.candidate);
   };
   const offer = await peer.createOffer();
   await peer.setLocalDescription(offer);
@@ -512,7 +522,6 @@ socket.on('offer', async (offer) => {
   await peer.setLocalDescription(answer);
   socket.emit('answer', answer);
 });
-
 socket.on('answer', (answer) => peer.setRemoteDescription(answer));
 socket.on('ice-candidate', (candidate) => peer.addIceCandidate(candidate));
 
@@ -520,16 +529,12 @@ function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
   friendListEl.forEach(friendEl=> friendList.push(friendEl.innerText));
-  console.log(friendList);
   socket.emit('getActiveFriends', friendList);
   socket.on('getActiveFriends', (friendList)=>{
-    console.log(friendList);
     friendListEl.forEach(friendEl=>{
       let found = false;
       if(friendList.length == 0) friendEl.style.color = "white";
       friendList.forEach(friend=>{
-        console.log(friendEl.innerText,friend);
-        console.log(friendEl.innerText == friend);
         if(!found){
           if(friendEl.innerText == friend){friendEl.style.color = "green"; found = true;}
           else friendEl.style.color = "white";
