@@ -1072,8 +1072,7 @@ function addToDom(data) {
     } 
     else htmlCont += `<div class='linkCont'><p style='word-break: break-word'><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span>${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
-  const interval = setInterval(() => output.scrollTop=output.scrollHeight, 50);
-  setTimeout(() => clearInterval(interval), 1500);
+  output.scrollTop=output.scrollHeight;
 }
 
 function addBtnFolder() {
