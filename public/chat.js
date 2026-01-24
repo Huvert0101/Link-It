@@ -662,7 +662,7 @@ const iceConfiguration = {
     }
   ]
 };
-
+let peer;
 async function startCall() {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   
