@@ -663,23 +663,55 @@ const iceConfiguration = {
   ]
 };
 let peer;
+let audioCtx;
 async function startCall() {
-  const stream = await navigator.mediaDevices.getUserMedia({
+  const rawStream = await navigator.mediaDevices.getUserMedia({
   audio: {
     echoCancellation: true, // Cancela el eco de tus bocinas
     noiseSuppression: true, // Reduce el ruido de fondo básico
     autoGainControl: true   // Ajusta el volumen automáticamente
   }
   });
-  // AQUÍ agregamos la configuración de los servidores
-  peer = new RTCPeerConnection(iceConfiguration);
-  stream.getTracks().forEach(track => peer.addTrack(track, stream));
-  peer.ontrack = (e) => document.getElementById('remoteAudio').srcObject = e.streams[0];
-  peer.onicecandidate = (e) => {
-    if (e.candidate) {
-      socket.emit('ice-candidate', e.candidate);
-    }
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const source = audioCtx.createMediaStreamSource(rawStream);
+  
+  // Filtro para eliminar ruidos graves (hum de electricidad, motores)
+  const highPass = audioCtx.createBiquadFilter();
+  highPass.type = "highpass";
+  highPass.frequency.value = 150; 
+
+  // Puerta de ruido (Noise Gate)
+  const gate = audioCtx.createDynamicsCompressor();
+  gate.threshold.value = -45; // Ajusta esto según el ruido de tu casa
+  gate.ratio.value = 20;
+  gate.attack.value = 0.005;
+  gate.release.value = 0.25;
+
+  const destination = audioCtx.createMediaStreamDestination();
+  
+  // Conectar: Micrófono -> Filtro -> Puerta -> Destino Final
+  source.connect(highPass);
+  highPass.connect(gate);
+  gate.connect(destination);
+
+  // 3. INTEGRACIÓN CON WEBRTC
+  const cleanStream = destination.stream; // Este es el audio ya limpio
+  
+  peer = new RTCPeerConnection({
+    iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+  });
+  
+  // Enviar el audio LIMPIO al otro usuario
+  cleanStream.getTracks().forEach(track => peer.addTrack(track, cleanStream));
+
+  // Recibir el audio del otro
+  peer.ontrack = (e) => {
+    document.getElementById('remoteAudio').srcObject = e.streams[0];
   };
+
+  // Lógica de señalización (igual que antes)
+  peer.onicecandidate = (e) => e.candidate && socket.emit('ice-candidate', e.candidate);
+  
   const offer = await peer.createOffer();
   await peer.setLocalDescription(offer);
   socket.emit('offer', offer);
