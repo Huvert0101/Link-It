@@ -650,6 +650,39 @@ function getCurrentBg(){
   });
 }
 getCurrentBg();
+
+// Configuración con servidores STUN gratuitos de Google
+const iceConfiguration = {
+  iceServers: [
+    {
+      urls: [
+        'stun:stun1.l.google.com:19302',
+        'stun:stun2.l.google.com:19302'
+      ]
+    }
+  ]
+};
+
+async function startCall() {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  
+  // AQUÍ agregamos la configuración de los servidores
+  peer = new RTCPeerConnection(iceConfiguration);
+  
+  stream.getTracks().forEach(track => peer.addTrack(track, stream));
+  peer.ontrack = (e) => document.getElementById('remoteAudio').srcObject = e.streams[0];
+
+  peer.onicecandidate = (e) => {
+    if (e.candidate) {
+      socket.emit('ice-candidate', e.candidate);
+    }
+  };
+  
+  const offer = await peer.createOffer();
+  await peer.setLocalDescription(offer);
+  socket.emit('offer', offer);
+}
+
 function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
@@ -961,6 +994,7 @@ friendList.onclick = (event)=>{
     btnCreateCall.classList.add("bx");
     btnCreateCall.classList.add("bx-phone");
     btnCreateCall.style.color = "white";
+    btnCreateCall.onclick = ()=> startCall();
     msgPanelTop.appendChild(btnCreateCall);
   }
   if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");

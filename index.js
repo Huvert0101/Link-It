@@ -469,6 +469,19 @@ io.on('connection', (socket) => {
         console.log("active friends:", activeFriendListRes);
         io.sockets.emit('getActiveFriends', activeFriendListRes);
     });
+
+    socket.on('offer', (data) => {
+        socket.broadcast.emit('offer', data); 
+    });
+    // Usuario B responde con su "identidad" técnica
+    socket.on('answer', (data) => {
+        socket.broadcast.emit('answer', data);
+    });
+    // Ambos intercambian sus direcciones IP públicas (Candidatos ICE)
+    socket.on('ice-candidate', (data) => {
+        socket.broadcast.emit('ice-candidate', data);
+    });
+
     socket.on('disconnect', () => {
         connectedUsers--;
         io.sockets.emit('updateConnectedUsers', connectedUsers);
