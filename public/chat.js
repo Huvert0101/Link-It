@@ -1120,7 +1120,7 @@ function ytDL(link){
 socket.on('chat:message', (data) => {
   setTimeout(() => output.scrollTop=output.scrollHeight, 50);
   if(data.folder.startsWith("friend") && data.folder == currentFolder) {addToDom(data); output.innerHTML += htmlCont; htmlCont="";message.value='';}
-  else{if(data.user == newUser && data.folder == currentFolder) addToDom(data);output.innerHTML += htmlCont; htmlCont="";message.value='';}; 
+  else{if(data.user == newUser && data.folder == currentFolder) {addToDom(data);output.innerHTML += htmlCont; htmlCont="";message.value='';}}; 
 });
 
 socket.on('createdFolder', (data)=>{
