@@ -1157,7 +1157,7 @@ socket.on('getMessagesFol', (data)=>{
       htmlCont = "";
     }
     if(data[0].folder.includes("friend") && data[0].folder == currentFolder){
-      data.forEach(el => addToDom(el));
+      for (let i = 0; i < data.length; i++) {addToDom(data[i]);}
       output.innerHTML = htmlCont;
       htmlCont = "";
     }
