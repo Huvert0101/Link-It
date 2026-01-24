@@ -72,7 +72,6 @@ let playerLoaded = false;
 let currentFolder = "main";
 let folderNameTop = document.getElementById("folderNameTop");
 let genVolumeBar = document.getElementById("genVolumeBar");
-import RNNoise from "/rnnoise/rnnoise.js";
 
 // Front-end functions
 btnMenu.onclick = () => {
@@ -486,27 +485,20 @@ const iceConfiguration = {
 };
 let peer;
 async function startCall() {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: {
+      echoCancellation: true,
+      noiseSuppression: true,
+      autoGainControl: true
+    }
+  });
   peer = new RTCPeerConnection(iceConfiguration);
-  peer.ontrack = (e) => {
-    document.getElementById("remoteAudio").srcObject = e.streams[0];
-  };
-  peer.onicecandidate = (e) => {
-    if (e.candidate) socket.emit("ice-candidate", e.candidate);
-  };
-  const audioContext = new AudioContext({ sampleRate: 48000 });
-  await audioContext.audioWorklet.addModule("/rnnoise/rnnoise-worklet.js");
-  const rnnoise = await RNNoise.create(audioContext.sampleRate);
-  const source = audioContext.createMediaStreamSource(stream);
-  const rnnoiseNode = new AudioWorkletNode(audioContext,"rnnoise-worklet",{processorOptions: { rnnoise }});
-  const destination = audioContext.createMediaStreamDestination();
-  source.connect(rnnoiseNode).connect(destination);
-  destination.stream.getTracks().forEach(track =>
-    peer.addTrack(track, destination.stream)
-  );
+  stream.getTracks().forEach(track =>peer.addTrack(track, stream));
+  peer.ontrack = (e) => {document.getElementById('remoteAudio').srcObject = e.streams[0];};
+  peer.onicecandidate = (e) => {if (e.candidate) socket.emit('ice-candidate', e.candidate);};
   const offer = await peer.createOffer();
   await peer.setLocalDescription(offer);
-  socket.emit("offer", offer);
+  socket.emit('offer', offer);
 }
 socket.on('offer', async (offer) => {
   if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
