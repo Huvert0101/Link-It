@@ -1134,7 +1134,7 @@ let cont = 0;
 let fetchedFolders = false;
 socket.on('getMessages', (data) => {
   message.value = '';
-  if(cont == 0){ cont++; data.forEach(el => addToDom(el)); }
+  if(cont == 0){ cont++; data.forEach(el => addToDom(el));output.innerHTML = htmlCont; htmlCont='';}
 });
 
 socket.on('getFolders', (data)=>{
