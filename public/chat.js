@@ -228,7 +228,7 @@ genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
   if(audio!=null) audio.volume = newVolume;
 });
-function createIframeWindow(site){
+function createIframeWindow(site,isDoc){
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
   const newWindowIcon = document.createElement("i");
@@ -246,19 +246,8 @@ function createIframeWindow(site){
   windowAction.addEventListener('click', function() {
     clicks++;
     if (clicks === 1) {
-      timer = setTimeout(() => {
-        minWin = true;
-        iframeCont.style.display = "none";
-        btnIframe.style.opacity = 0.7;
-        clicks = 0; // Resetea el contador
-      }, 250); // 300ms es un tiempo común para diferenciar
-    } else {
-      clearTimeout(timer);
-      minWin = false;
-      document.body.removeChild(iframeCont);
-      btnIframe.style.opacity = 0.7;
-      clicks = 0;
-    }
+      timer=setTimeout(()=>{minWin=true;iframeCont.style.display="none";btnIframe.style.opacity=0.7;clicks=0;},250); // 300ms es un tiempo común para diferenciar
+    }else{clearTimeout(timer);minWin=false;document.body.removeChild(iframeCont);btnIframe.style.opacity=0.7;clicks=0;}
   });
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
@@ -282,7 +271,8 @@ function createIframeWindow(site){
     btnIframe.style.opacity = 0.7;
   }
   var iframe = document.createElement('iframe');
-  iframe.src = site;
+  if(isDoc) iframe.src = "https://docs.google.com/gview?url=www-linkit-2baa3535.koyeb.app/api/"+site+"&embedded=true";
+  else iframe.src = site;
   iframeUrl.value = '';
   document.getElementById('window-title').innerText = iframe.src;
   iframe.width = '100%';
@@ -314,7 +304,6 @@ function createIframeWindow(site){
     document.onmouseup = null;
   }
 }
-
 // EVENTS TO DRAGGABLE PLUGINS
 let nuevoDiv = null;
 function checkCollision(element1, element2) {
@@ -330,81 +319,80 @@ function checkCollision(element1, element2) {
   );
 }
 function isMouseInsideElement(mouseX, mouseY, element) {
-    if (!element) return false;
-    const rect = element.getBoundingClientRect();
-    // Comprueba si las coordenadas del mouse están dentro del rectángulo del elemento
-    return mouseX >= rect.left &&
-           mouseX <= rect.right &&
-           mouseY >= rect.top &&
-           mouseY <= rect.bottom;
+  if (!element) return false;
+  const rect = element.getBoundingClientRect();
+  // Comprueba si las coordenadas del mouse están dentro del rectángulo del elemento
+  return mouseX >= rect.left &&
+         mouseX <= rect.right &&
+         mouseY >= rect.top &&
+         mouseY <= rect.bottom;
 }
 tempBarra = null;
 document.querySelectorAll('.draggablePlugin').forEach(barra => {
-    tempBarra = barra;
-    barra.addEventListener('mousedown', (e) => {
-      ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
-      if(ventanaActiva.classList.contains("top-content")) ventanaActiva = ventanaActiva.parentElement;
-      const rect = ventanaActiva.getBoundingClientRect();
-      ventanaActiva.style.width = rect.width + 'px';
-      ventanaActiva.style.height = rect.height + 'px';
-      if (getComputedStyle(ventanaActiva).position !== 'absolute') {
-        ventanaActiva.style.position = 'absolute';
-        ventanaActiva.style.left = rect.left + window.scrollX + 'px';
-        ventanaActiva.style.top = rect.top + window.scrollY + 'px';
-      }
-      if(ventanaActiva.classList.contains("right")){
-        if(foldersPluginPos == "right"){
-          nuevoDiv = document.createElement('div');
-          // Copiar width y height
-          nuevoDiv.style.width = rect.width + 'px';
-          nuevoDiv.style.height = rect.height + 'px';
-          // (Opcional) darle estilo para que lo veas
-          nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
-          nuevoDiv.style.border = '1px dashed blue';
-          // Insertarlo como último hijo del contenedor .main
-          document.querySelector('.main').prepend(nuevoDiv);
-          foldersPluginPos = "left";
-        }else{
-          nuevoDiv = document.createElement('div');
-          nuevoDiv.style.width = rect.width + 'px';
-          nuevoDiv.style.height = rect.height + 'px';
-          nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
-          nuevoDiv.style.border = '1px dashed blue';
-          document.querySelector('.main').appendChild(nuevoDiv);
-          foldersPluginPos = "right";
-        }
-      }
-      ventanaActiva.style.position = "absolute";
-      offsetX = e.clientX - ventanaActiva.offsetLeft;
-      offsetY = e.clientY - ventanaActiva.offsetTop;
-      barra.style.setProperty('cursor','grabbing','important');
-    });
-  });
-
-  // Mover solo el div activo
-  document.addEventListener('mousemove', (e) => {
-    if(ventanaActiva) {
-      ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
-      ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
+  tempBarra = barra;
+  barra.addEventListener('mousedown', (e) => {
+    ventanaActiva = barra.parentElement;  // El div padre es el que se mueve
+    if(ventanaActiva.classList.contains("top-content")) ventanaActiva = ventanaActiva.parentElement;
+    const rect = ventanaActiva.getBoundingClientRect();
+    ventanaActiva.style.width = rect.width + 'px';
+    ventanaActiva.style.height = rect.height + 'px';
+    if (getComputedStyle(ventanaActiva).position !== 'absolute') {
+      ventanaActiva.style.position = 'absolute';
+      ventanaActiva.style.left = rect.left + window.scrollX + 'px';
+      ventanaActiva.style.top = rect.top + window.scrollY + 'px';
     }
-  });
-  // Detener movimiento
-  document.addEventListener('mouseup', (e) => {
-    tempBarra.style.setProperty('cursor','grab','important');
-    if(ventanaActiva){
-      ventanaActiva.style.position = "relative";
-      ventanaActiva.style.left = 0;
-      ventanaActiva.style.top = 0;
-      const currentMouseX = e.clientX;
-      const currentMouseY = e.clientY;
-      if(isMouseInsideElement(currentMouseX,currentMouseY,nuevoDiv)){
-        if(foldersPluginPos == "left") document.querySelector('.main').prepend(ventanaActiva);
-        else document.querySelector('.main').appendChild(ventanaActiva);
+    if(ventanaActiva.classList.contains("right")){
+      if(foldersPluginPos == "right"){
+        nuevoDiv = document.createElement('div');
+        // Copiar width y height
+        nuevoDiv.style.width = rect.width + 'px';
+        nuevoDiv.style.height = rect.height + 'px';
+        // (Opcional) darle estilo para que lo veas
+        nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
+        nuevoDiv.style.border = '1px dashed blue';
+        // Insertarlo como último hijo del contenedor .main
+        document.querySelector('.main').prepend(nuevoDiv);
+        foldersPluginPos = "left";
+      }else{
+        nuevoDiv = document.createElement('div');
+        nuevoDiv.style.width = rect.width + 'px';
+        nuevoDiv.style.height = rect.height + 'px';
+        nuevoDiv.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';
+        nuevoDiv.style.border = '1px dashed blue';
+        document.querySelector('.main').appendChild(nuevoDiv);
+        foldersPluginPos = "right";
       }
-      nuevoDiv.remove();
-      ventanaActiva = null;
     }
+    ventanaActiva.style.position = "absolute";
+    offsetX = e.clientX - ventanaActiva.offsetLeft;
+    offsetY = e.clientY - ventanaActiva.offsetTop;
+    barra.style.setProperty('cursor','grabbing','important');
   });
+});
+// Mover solo el div activo
+document.addEventListener('mousemove', (e) => {
+  if(ventanaActiva) {
+    ventanaActiva.style.left = (e.clientX - offsetX) + 'px';
+    ventanaActiva.style.top = (e.clientY - offsetY) + 'px';
+  }
+});
+// Detener movimiento
+document.addEventListener('mouseup', (e) => {
+  tempBarra.style.setProperty('cursor','grab','important');
+  if(ventanaActiva){
+    ventanaActiva.style.position = "relative";
+    ventanaActiva.style.left = 0;
+    ventanaActiva.style.top = 0;
+    const currentMouseX = e.clientX;
+    const currentMouseY = e.clientY;
+    if(isMouseInsideElement(currentMouseX,currentMouseY,nuevoDiv)){
+      if(foldersPluginPos == "left") document.querySelector('.main').prepend(ventanaActiva);
+      else document.querySelector('.main').appendChild(ventanaActiva);
+    }
+    nuevoDiv.remove();
+    ventanaActiva = null;
+  }
+});
 
 btnCreateDoc.onclick = ()=> {
   if(btnCreateDoc.classList.contains("clicked")){
@@ -522,7 +510,7 @@ function loadDoc(url){
 }
 btnGo.onclick = () => {
   if(iframeUrl.value == "") btnIframe.style.opacity = 0.7;
-  createIframeWindow(iframeUrl.value);
+  createIframeWindow(iframeUrl.value, false);
 }
 overlay.onclick = () => {
   menu.style.display = 'none';
@@ -979,7 +967,7 @@ function addToDom(data) {
     let extension = data.message.split('.').pop();
     let msg = data.message.substring(6);
     if(extension == "docx" || extension == "doc")
-      htmlCont += `<button class='fileBtn' onclick='loadDoc("${data.message}")' name='${data.message}'>${msg}</button>`;
+      htmlCont += `<button class='fileBtn' onclick='createIframeWindow("${data.message}",true)' name='${data.message}'>${msg}</button>`;
     else htmlCont += `<div class='linkCont'><p><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span></p><a target='_blank' href='api/${data.message}'><button class='fileBtn'>${msg}</button></a><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`;
   }else {
     let isLink = data.message.slice(0, 5);
