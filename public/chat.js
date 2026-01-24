@@ -1072,7 +1072,6 @@ function addToDom(data) {
     } 
     else htmlCont += `<div class='linkCont'><p style='word-break: break-word'><span class='friendUserMsg'>${data.user === newUser ? '' : data.user+':'}</span>${data.message}</p><div class='msgMenuCont'><i onclick="delMessage('${data.message}','${data.folder}')" class='bx bx-trash' style='opacity:0.7'></i></div></div>`; 
   }
-  output.scrollTop=output.scrollHeight;
 }
 
 function addBtnFolder() {
@@ -1133,7 +1132,7 @@ let cont = 0;
 let fetchedFolders = false;
 socket.on('getMessages', (data) => {
   message.value = '';
-  if(cont == 0){ cont++; data.forEach(el => addToDom(el));output.innerHTML = htmlCont; htmlCont='';}
+  if(cont == 0){ cont++; data.forEach(el => addToDom(el));output.innerHTML = htmlCont; htmlCont='';output.scrollTop=output.scrollHeight;}
 });
 
 socket.on('getFolders', (data)=>{
@@ -1154,11 +1153,13 @@ socket.on('getMessagesFol', (data)=>{
       for (let i = 0; i < data.length; i++) {addToDom(data[i]);}
       output.innerHTML = htmlCont;
       htmlCont = "";
+      output.scrollTop=output.scrollHeight;
     }
     if(data[0].folder.includes("friend") && data[0].folder == currentFolder){
       for (let i = 0; i < data.length; i++) {addToDom(data[i]);}
       output.innerHTML = htmlCont;
       htmlCont = "";
+      output.scrollTop=output.scrollHeight;
     }
   }
 });
