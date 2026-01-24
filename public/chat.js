@@ -239,6 +239,27 @@ function createIframeWindow(site){
   const windowTitle = document.createElement("span");
   windowTitle.id = "window-title";
   windowTitle.innerText = "Window Title";
+  const windowAction = document.createElement("button");
+  windowAction.id = "windowAction";
+  let timer;
+  let clicks = 0;
+  windowAction.addEventListener('click', function() {
+    clicks++;
+    if (clicks === 1) {
+      timer = setTimeout(() => {
+        minWin = true;
+        iframeCont.style.display = "none";
+        btnIframe.style.opacity = 0.7;
+        clicks = 0; // Resetea el contador
+      }, 250); // 300ms es un tiempo común para diferenciar
+    } else {
+      clearTimeout(timer);
+      minWin = false;
+      document.body.removeChild(iframeCont);
+      btnIframe.style.opacity = 0.7;
+      clicks = 0;
+    }
+  });
   const minWindowIcon = document.createElement("i");
   minWindowIcon.className = "bx bx-minus";
   minWindowIcon.id = "minWindow";
@@ -246,8 +267,7 @@ function createIframeWindow(site){
   btnCloseWindowIcon.className = "bx bx-x";
   btnCloseWindowIcon.id = "btnCloseWindow";
   windowTop.appendChild(windowTitle);
-  windowTop.appendChild(minWindowIcon);
-  windowTop.appendChild(btnCloseWindowIcon);
+  windowTop.appendChild(windowAction);
   iframeCont.appendChild(newWindowIcon);
   iframeCont.appendChild(windowTop);
   document.body.appendChild(iframeCont);
@@ -269,33 +289,25 @@ function createIframeWindow(site){
   iframe.height = '100%';
   iframeCont.appendChild(iframe);
   iframeForm.style.display = "none";
-  iframe.onload = () => { iframeCont.style.display = "block"; }
-  newWindowIcon.onclick = () => { iframeForm.style.display = "block"; }
+  iframe.onload = () => iframeCont.style.display = "block";
+  newWindowIcon.onclick = () => iframeForm.style.display = "block";
   windowTop.onmousedown = function(e) {
     e.preventDefault();
     iframeCont.style.cursor = "grabbing";
-    // Obtener la posición inicial del ratón
     mouseX = e.clientX;
     mouseY = e.clientY;
-    // Adjuntar los eventos para mover el div y soltarlo
     document.onmousemove = elementDrag;
     document.onmouseup = closeDragElement;
   };
-
-  // Función que se ejecuta mientras se arrastra el div
   function elementDrag(e) {
     e.preventDefault();
-    // Calcular el nuevo desplazamiento del ratón
     offsetX = mouseX - e.clientX;
     offsetY = mouseY - e.clientY;
-    // Actualizar la posición inicial del ratón
     mouseX = e.clientX;
     mouseY = e.clientY;
-    // Establecer la nueva posición del div
     iframeCont.style.top = (iframeCont.offsetTop - offsetY) + "px";
     iframeCont.style.left = (iframeCont.offsetLeft - offsetX) + "px";
   }
-  // Función que se ejecuta cuando se suelta el div
   function closeDragElement() {
     iframeCont.style.cursor = "grab";
     document.onmousemove = null;
