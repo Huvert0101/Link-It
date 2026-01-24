@@ -665,23 +665,29 @@ const iceConfiguration = {
 let peer;
 async function startCall() {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  
   // AQUÍ agregamos la configuración de los servidores
   peer = new RTCPeerConnection(iceConfiguration);
-  
   stream.getTracks().forEach(track => peer.addTrack(track, stream));
   peer.ontrack = (e) => document.getElementById('remoteAudio').srcObject = e.streams[0];
-
   peer.onicecandidate = (e) => {
     if (e.candidate) {
       socket.emit('ice-candidate', e.candidate);
     }
   };
-  
   const offer = await peer.createOffer();
   await peer.setLocalDescription(offer);
   socket.emit('offer', offer);
 }
+socket.on('offer', async (offer) => {
+  if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
+  await peer.setRemoteDescription(offer);
+  const answer = await peer.createAnswer();
+  await peer.setLocalDescription(answer);
+  socket.emit('answer', answer);
+});
+
+socket.on('answer', (answer) => peer.setRemoteDescription(answer));
+socket.on('ice-candidate', (candidate) => peer.addIceCandidate(candidate));
 
 function getActiveFriends(){
   let friendList = [];
