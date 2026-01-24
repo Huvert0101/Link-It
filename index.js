@@ -401,7 +401,7 @@ async function getMessagesFol(user, folder){//maybe parameter: folder
     }else{
         const [res] = await conn.query("SELECT * FROM messages WHERE user = '"+user+"' AND folder = '"+folder+"'");
         if (!res || res.length === 0) {
-            io.sockets.emit('getMessagesFol', { user: user });
+            io.sockets.emit('getMessagesFol', { user: user, folder:folder });
         } else {
             io.sockets.emit('getMessagesFol', res);
         }

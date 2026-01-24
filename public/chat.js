@@ -968,7 +968,7 @@ socket.on('getFolders', (data)=>{
 
 socket.on('getMessagesFol', (data)=>{
   if (!data||data.length===0||(!data[0]?.folder?.includes("friend") && data[0]?.user === newUser && data[0].folder==currentFolder))output.innerHTML='';
-  if(data?.user== newUser){output.innerHTML=''; return};
+  if(data?.user== newUser && data?.folder == currentFolder){output.innerHTML=''; return};
   if(data[0]?.folder == currentFolder && !output.hasChildNodes()){
     if(!data[0].folder.includes("friend") && data[0].user == newUser && data[0].folder == currentFolder){
       for (let i = 0; i < data.length; i++) {addToDom(data[i]);}
