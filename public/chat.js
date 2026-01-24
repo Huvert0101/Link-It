@@ -486,34 +486,109 @@ const iceConfiguration = {
 let peer;
 async function startCall() {
   const stream = await navigator.mediaDevices.getUserMedia({
-    audio: {
-      echoCancellation: true,
-      noiseSuppression: true,
-      autoGainControl: true
-    }
-  });
-  peer = new RTCPeerConnection(iceConfiguration);
-  const audioContext = new AudioContext();
-  await audioContext.resume();
-  const source = audioContext.createMediaStreamSource(stream);
-  const highPassFilter = audioContext.createBiquadFilter();
-  highPassFilter.type = "highpass";
-  highPassFilter.frequency.value = 120;
-  const destination = audioContext.createMediaStreamDestination();
-  source.connect(highPassFilter);
-  highPassFilter.connect(destination);
-  destination.stream.getTracks().forEach(track =>
-    peer.addTrack(track, destination.stream)
-  );
-  peer.ontrack = (e) => {
-    document.getElementById('remoteAudio').srcObject = e.streams[0];
-  };
-  peer.onicecandidate = (e) => {
-    if (e.candidate) socket.emit('ice-candidate', e.candidate);
-  };
-  const offer = await peer.createOffer();
-  await peer.setLocalDescription(offer);
-  socket.emit('offer', offer);
+audio: {
+echoCancellation: true,
+noiseSuppression: true,
+autoGainControl: true
+}
+});
+
+
+// 2️⃣ PeerConnection
+peer = new RTCPeerConnection(iceConfiguration);
+
+
+peer.ontrack = (e) => {
+document.getElementById('remoteAudio').srcObject = e.streams[0];
+};
+
+
+peer.onicecandidate = (e) => {
+if (e.candidate) socket.emit('ice-candidate', e.candidate);
+};
+
+
+// 3️⃣ AudioContext
+const audioContext = new AudioContext();
+await audioContext.resume();
+
+
+const source = audioContext.createMediaStreamSource(stream);
+
+
+// 4️⃣ Filtro pasa-altos (quita ruidos graves)
+const highPassFilter = audioContext.createBiquadFilter();
+highPassFilter.type = "highpass";
+highPassFilter.frequency.value = 120;
+
+
+// 5️⃣ Compresor (estabiliza voz)
+const compressor = audioContext.createDynamicsCompressor();
+compressor.threshold.value = -50;
+compressor.knee.value = 40;
+compressor.ratio.value = 12;
+compressor.attack.value = 0;
+compressor.release.value = 0.25;
+
+
+// 6️⃣ Analizador para detectar voz
+const analyser = audioContext.createAnalyser();
+analyser.fftSize = 2048;
+const data = new Uint8Array(analyser.fftSize);
+
+
+// 7️⃣ Noise gate (silencia fondo)
+const gate = audioContext.createGain();
+gate.gain.value = 0;
+
+
+// 8️⃣ Salida
+const destination = audioContext.createMediaStreamDestination();
+
+
+// 🔗 Cadena de audio (ORDEN IMPORTANTE)
+source
+.connect(highPassFilter)
+.connect(compressor)
+.connect(analyser)
+.connect(gate)
+.connect(destination);
+
+
+// 9️⃣ Detector de voz
+function detectVoice() {
+analyser.getByteTimeDomainData(data);
+
+
+let sum = 0;
+for (let i = 0; i < data.length; i++) {
+const v = (data[i] - 128) / 128;
+sum += v * v;
+}
+
+
+const rms = Math.sqrt(sum / data.length);
+
+
+// 🔧 AJUSTA ESTE VALOR SI ES NECESARIO
+gate.gain.value = rms > 0.015 ? 1 : 0;
+
+
+requestAnimationFrame(detectVoice);
+}
+detectVoice();
+
+
+// 🔟 Enviar SOLO audio procesado
+destination.stream.getTracks().forEach(track =>
+peer.addTrack(track, destination.stream)
+);
+
+
+// 1️⃣1️⃣ WebRTC signaling
+const offer = await peer.createOffer();
+await peer.setLocalDescription(offer);
+socket.emit('offer', offer);
 }
 socket.on('offer', async (offer) => {
   if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
