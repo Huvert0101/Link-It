@@ -516,7 +516,7 @@ async function startCall() {
   socket.emit('offer', offer);
 }
 socket.on('offer', async (offer) => {
-  alert("llamada entrante");
+  console.log("llamada entrante");
   if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
   await peer.setRemoteDescription(offer);
   const answer = await peer.createAnswer();
