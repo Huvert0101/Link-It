@@ -484,48 +484,129 @@ const iceConfiguration = {
   ]
 };
 let peer;
-async function startCall() {
-  let micIcon = document.createElement("i");
-  micIcon.classList.add("bx","bx-microphone");
-  micIcon.style.color = "white";
-  notch.insertBefore(micIcon, notch.children[notch.children.length-2]);
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: {
-      echoCancellation: true,
-      noiseSuppression: true,
-      autoGainControl: true
-    }
-  });
-  micIcon.onclick = ()=>{
-    const audioTrack = stream.getAudioTracks()[0];
-    audioTrack.enabled = !audioTrack.enabled;
-    if(audioTrack.enabled){
-      micIcon.classList.replace("bx-microphone-slash", "bx-microphone");
-      micIcon.style.opacity = "1";
-    }else{
-      micIcon.classList.replace("bx-microphone", "bx-microphone-slash");
-      micIcon.style.opacity = "0.7";
-    }
-  }
-  peer = new RTCPeerConnection(iceConfiguration);
-  stream.getTracks().forEach(track =>peer.addTrack(track, stream));
-  peer.ontrack = (e) => {document.getElementById('remoteAudio').srcObject = e.streams[0];};
-  peer.onicecandidate = (e) => {if (e.candidate) socket.emit('ice-candidate', e.candidate);};
-  const offer = await peer.createOffer();
-  await peer.setLocalDescription(offer);
-  socket.emit('offer', offer);
-}
-socket.on('offer', async (offer) => {
-  console.log("llamada entrante");
-  if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
-  await peer.setRemoteDescription(offer);
-  const answer = await peer.createAnswer();
-  await peer.setLocalDescription(answer);
-  socket.emit('answer', answer);
-});
-socket.on('answer', (answer) => peer.setRemoteDescription(answer));
-socket.on('ice-candidate', (candidate) => peer.addIceCandidate(candidate));
+let localStream;
+let incomingOffer = null; // Variable temporal para guardar la oferta
 
+// Elementos de la UI
+const modal = document.getElementById('incomingCallModal');
+const btnAccept = document.getElementById('btnAccept');
+const btnReject = document.getElementById('btnReject');
+
+// --- FUNCIONES COMUNES ---
+
+// Función auxiliar para obtener micrófono y crear el peer
+async function getMediaAndSetupPeer() {
+    // 1. Obtener audio
+    localStream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+    });
+
+    // Crear icono de micrófono (tu lógica visual)
+    createMicIconUI(); 
+
+    // 2. Crear conexión Peer
+    peer = new RTCPeerConnection(iceConfiguration);
+
+    // 3. Añadir tracks locales al peer
+    localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
+
+    // 4. Configurar eventos del Peer
+    peer.ontrack = (e) => {
+        const remoteAudio = document.getElementById('remoteAudio');
+        if (remoteAudio.srcObject !== e.streams[0]) {
+            remoteAudio.srcObject = e.streams[0];
+            remoteAudio.play(); // Asegurar reproducción
+        }
+    };
+
+    peer.onicecandidate = (e) => {
+        if (e.candidate) socket.emit('ice-candidate', e.candidate);
+    };
+}
+
+// Tu lógica visual del icono (separada para limpieza)
+function createMicIconUI() {
+    let micIcon = document.createElement("i");
+    micIcon.classList.add("bx", "bx-microphone");
+    micIcon.style.color = "white";
+    notch.insertBefore(micIcon, notch.children[notch.children.length - 2]);
+
+    micIcon.onclick = () => {
+        const audioTrack = localStream.getAudioTracks()[0];
+        audioTrack.enabled = !audioTrack.enabled;
+        if (audioTrack.enabled) {
+            micIcon.classList.replace("bx-microphone-slash", "bx-microphone");
+            micIcon.style.opacity = "1";
+        } else {
+            micIcon.classList.replace("bx-microphone", "bx-microphone-slash");
+            micIcon.style.opacity = "0.7";
+        }
+    }
+}
+
+// --- LÓGICA DEL LLAMANTE (CALLER) ---
+
+// Esta función se ejecuta cuando TU presionas el botón de llamar
+async function startCall() {
+    await getMediaAndSetupPeer(); // Configura mic y peer
+    const offer = await peer.createOffer();
+    await peer.setLocalDescription(offer);
+    socket.emit('offer', offer);
+    console.log("Llamada iniciada, esperando respuesta...");
+}
+
+// --- LÓGICA DEL RECEPTOR (CALLEE) ---
+
+// 1. Recibir la oferta (NO contestar, solo mostrar UI)
+socket.on('offer', (offer) => {
+    console.log("Oferta recibida, mostrando modal...");
+    incomingOffer = offer; // Guardamos la oferta en memoria
+    
+    // Mostrar el modal de aceptar/rechazar
+    modal.style.display = 'block';
+});
+
+// 2. Acción de ACEPTAR llamada
+btnAccept.onclick = async () => {
+    modal.style.display = 'none'; // Ocultar modal
+    
+    if (!incomingOffer) return;
+
+    // AQUI comienza el proceso técnico de contestar
+    await getMediaAndSetupPeer(); // El receptor también necesita activar su mic y peer
+    
+    await peer.setRemoteDescription(incomingOffer);
+    const answer = await peer.createAnswer();
+    await peer.setLocalDescription(answer);
+    
+    socket.emit('answer', answer);
+    incomingOffer = null; // Limpiar variable
+};
+
+// 3. Acción de RECHAZAR llamada
+btnReject.onclick = () => {
+    modal.style.display = 'none';
+    incomingOffer = null;
+    // Opcional: Emitir un evento para avisar al otro que rechazaste
+    // socket.emit('call-rejected'); 
+};
+
+// --- RESTO DE EVENTOS ---
+
+socket.on('answer', async (answer) => {
+    if(!peer) return;
+    await peer.setRemoteDescription(answer);
+});
+
+socket.on('ice-candidate', async (candidate) => {
+    if (peer) {
+        try {
+            await peer.addIceCandidate(candidate);
+        } catch (e) {
+            console.error('Error adding received ice candidate', e);
+        }
+    }
+});
 function getActiveFriends(){
   let friendList = [];
   let friendListEl = document.querySelectorAll(".folder-title");
