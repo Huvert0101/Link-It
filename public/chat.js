@@ -488,6 +488,7 @@ async function startCall() {
   let micIcon = document.createElement("i");
   micIcon.classList.add("bx","bx-microphone");
   micIcon.style.color = "white";
+  micIcon.style.opacity="0.7";
   notch.insertBefore(micIcon, notch.lastElementChild);
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: {
@@ -499,6 +500,13 @@ async function startCall() {
   micIcon.onclick = ()=>{
     const audioTrack = stream.getAudioTracks()[0];
     audioTrack.enabled = !audioTrack.enabled;
+    if(audioTrack.enabled){
+      micIcon.classList.replace("bx-microphone-slash", "bx-microphone");
+      micIcon.style.opacity = "1";
+    }else{
+      micIcon.classList.replace("bx-microphone", "bx-microphone-slash");
+      micIcon.style.opacity = "0.7";
+    }
   }
   peer = new RTCPeerConnection(iceConfiguration);
   stream.getTracks().forEach(track =>peer.addTrack(track, stream));
