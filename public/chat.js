@@ -529,35 +529,30 @@ async function getMediaAndSetupPeer() {
 }
 
 function createMicIconUI() {
-    // Si ya existe el icono, no crearlo de nuevo
-    if (document.querySelector(".bx-microphone")) return;
-
-    let micIcon = document.createElement("i");
-    micIcon.classList.add("bx", "bx-microphone");
-    micIcon.style.color = "white";
-    // Ajusta 'notch' según tu estructura HTML
-    const notch = document.getElementById("notch"); 
-    if(notch) notch.insertBefore(micIcon, notch.children[notch.children.length - 2]);
-
-    micIcon.onclick = () => {
-        const audioTrack = localStream.getAudioTracks()[0];
-        audioTrack.enabled = !audioTrack.enabled;
-        micIcon.classList.toggle("bx-microphone");
-        micIcon.classList.toggle("bx-microphone-slash");
-        micIcon.style.opacity = audioTrack.enabled ? "1" : "0.7";
-    };
+  if (document.querySelector(".bx-microphone")) return;
+  let micIcon = document.createElement("i");
+  micIcon.classList.add("bx", "bx-microphone");
+  micIcon.style.color = "white";
+  if(notch) notch.insertBefore(micIcon, notch.children[notch.children.length - 2]);
+  micIcon.onclick = () => {
+    const audioTrack = localStream.getAudioTracks()[0];
+    audioTrack.enabled = !audioTrack.enabled;
+    micIcon.classList.toggle("bx-microphone");
+    micIcon.classList.toggle("bx-microphone-slash");
+    micIcon.style.opacity = audioTrack.enabled ? "1" : "0.7";
+  };
 }
 
 async function processIceQueue() {
-    console.log("Procesando cola de candidatos ICE...", iceCandidateQueue.length);
-    while (iceCandidateQueue.length > 0) {
-        const candidate = iceCandidateQueue.shift();
-        try {
-            await peer.addIceCandidate(candidate);
-        } catch (e) {
-            console.error("Error al añadir candidato de la cola:", e);
-        }
+  console.log("Procesando cola de candidatos ICE...", iceCandidateQueue.length);
+  while (iceCandidateQueue.length > 0) {
+    const candidate = iceCandidateQueue.shift();
+    try {
+      await peer.addIceCandidate(candidate);
+    } catch (e) {
+      console.error("Error al añadir candidato de la cola:", e);
     }
+  }
 }
 
 // --- FLUJO DE LLAMADA (EMISOR) ---
@@ -565,22 +560,15 @@ async function processIceQueue() {
 async function startCall() {
     console.log("Iniciando llamada...");
     await getMediaAndSetupPeer();
-    
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
     socket.emit('offer', offer);
 }
-
-// --- EVENTOS DE SOCKET (RECEPTOR Y CONTROL) ---
-
-// 1. Alguien nos está llamando
 socket.on('offer', (offer) => {
     console.log("Oferta recibida. Esperando a que el usuario acepte...");
     incomingOffer = offer;
     modal.style.display = 'block'; // Mostramos el modal de Aceptar/Rechazar
 });
-
-// 2. Al hacer clic en ACEPTAR
 btnAccept.onclick = async () => {
     modal.style.display = 'none';
     if (!incomingOffer) return;
