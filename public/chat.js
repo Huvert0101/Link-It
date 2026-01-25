@@ -593,18 +593,45 @@ btnReject.onclick = () => {
 
 // --- RESTO DE EVENTOS ---
 
+let iceCandidateQueue = [];
+
 socket.on('answer', async (answer) => {
-    if(!peer) return;
-    await peer.setRemoteDescription(answer);
+    console.log("Respuesta recibida. Conectando...");
+    if (!peer) return;
+
+    try {
+        await peer.setRemoteDescription(answer);
+        
+        // AHORA que ya tenemos la descripción remota, procesamos la cola de candidatos
+        while (iceCandidateQueue.length > 0) {
+            const candidate = iceCandidateQueue.shift(); // Sacar el primero
+            try {
+                await peer.addIceCandidate(candidate);
+                console.log("Candidato ICE de la cola agregado.");
+            } catch (e) {
+                console.error("Error agregando candidato de la cola:", e);
+            }
+        }
+    } catch (err) {
+        console.error("Error al establecer RemoteDescription:", err);
+    }
 });
 
 socket.on('ice-candidate', async (candidate) => {
-    if (peer) {
+    if (!peer) return;
+
+    // Si ya tenemos descripción remota, agregamos directo
+    if (peer.remoteDescription) {
         try {
             await peer.addIceCandidate(candidate);
+            console.log("Candidato ICE agregado directo.");
         } catch (e) {
-            console.error('Error adding received ice candidate', e);
+            console.error("Error agregando candidato ICE:", e);
         }
+    } else {
+        // Si NO tenemos descripción remota, guardamos en la cola para después
+        console.log("Candidato ICE recibido antes de la respuesta. Guardando en cola...");
+        iceCandidateQueue.push(candidate);
     }
 });
 function getActiveFriends(){
