@@ -485,152 +485,146 @@ const iceConfiguration = {
 };
 let peer;
 let localStream;
-let incomingOffer = null; // Variable temporal para guardar la oferta
+let incomingOffer = null;
+let iceCandidateQueue = [];
 
-// Elementos de la UI
+// Elementos de la UI (Asegúrate de que existan en tu HTML)
 const modal = document.getElementById('incomingCallModal');
 const btnAccept = document.getElementById('btnAccept');
 const btnReject = document.getElementById('btnReject');
 
-// --- FUNCIONES COMUNES ---
+// --- FUNCIONES DE APOYO ---
 
-// Función auxiliar para obtener micrófono y crear el peer
 async function getMediaAndSetupPeer() {
-    // 1. Obtener audio
+    // Obtener audio del micrófono
     localStream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
     });
 
-    // Crear icono de micrófono (tu lógica visual)
+    // Tu lógica visual del icono de micrófono
     createMicIconUI(); 
 
-    // 2. Crear conexión Peer
+    // Crear la conexión RTCPeerConnection
     peer = new RTCPeerConnection(iceConfiguration);
 
-    // 3. Añadir tracks locales al peer
+    // Añadir tracks de audio al peer
     localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
 
-    // 4. Configurar eventos del Peer
+    // Cuando recibimos el audio del otro
     peer.ontrack = (e) => {
+        console.log("¡Track remoto recibido!");
         const remoteAudio = document.getElementById('remoteAudio');
         if (remoteAudio.srcObject !== e.streams[0]) {
             remoteAudio.srcObject = e.streams[0];
-            remoteAudio.play(); // Asegurar reproducción
+            remoteAudio.play().catch(err => console.warn("Error en autoplay:", err));
         }
     };
 
+    // Cuando el navegador genera un candidato de red (ICE)
     peer.onicecandidate = (e) => {
-        if (e.candidate) socket.emit('ice-candidate', e.candidate);
+        if (e.candidate) {
+            socket.emit('ice-candidate', e.candidate);
+        }
     };
 }
 
-// Tu lógica visual del icono (separada para limpieza)
 function createMicIconUI() {
+    // Si ya existe el icono, no crearlo de nuevo
+    if (document.querySelector(".bx-microphone")) return;
+
     let micIcon = document.createElement("i");
     micIcon.classList.add("bx", "bx-microphone");
     micIcon.style.color = "white";
-    notch.insertBefore(micIcon, notch.children[notch.children.length - 2]);
+    // Ajusta 'notch' según tu estructura HTML
+    const notch = document.getElementById("notch"); 
+    if(notch) notch.insertBefore(micIcon, notch.children[notch.children.length - 2]);
 
     micIcon.onclick = () => {
         const audioTrack = localStream.getAudioTracks()[0];
         audioTrack.enabled = !audioTrack.enabled;
-        if (audioTrack.enabled) {
-            micIcon.classList.replace("bx-microphone-slash", "bx-microphone");
-            micIcon.style.opacity = "1";
-        } else {
-            micIcon.classList.replace("bx-microphone", "bx-microphone-slash");
-            micIcon.style.opacity = "0.7";
+        micIcon.classList.toggle("bx-microphone");
+        micIcon.classList.toggle("bx-microphone-slash");
+        micIcon.style.opacity = audioTrack.enabled ? "1" : "0.7";
+    };
+}
+
+async function processIceQueue() {
+    console.log("Procesando cola de candidatos ICE...", iceCandidateQueue.length);
+    while (iceCandidateQueue.length > 0) {
+        const candidate = iceCandidateQueue.shift();
+        try {
+            await peer.addIceCandidate(candidate);
+        } catch (e) {
+            console.error("Error al añadir candidato de la cola:", e);
         }
     }
 }
 
-// --- LÓGICA DEL LLAMANTE (CALLER) ---
+// --- FLUJO DE LLAMADA (EMISOR) ---
 
-// Esta función se ejecuta cuando TU presionas el botón de llamar
 async function startCall() {
-    await getMediaAndSetupPeer(); // Configura mic y peer
+    console.log("Iniciando llamada...");
+    await getMediaAndSetupPeer();
+    
     const offer = await peer.createOffer();
     await peer.setLocalDescription(offer);
     socket.emit('offer', offer);
-    console.log("Llamada iniciada, esperando respuesta...");
 }
 
-// --- LÓGICA DEL RECEPTOR (CALLEE) ---
+// --- EVENTOS DE SOCKET (RECEPTOR Y CONTROL) ---
 
-// 1. Recibir la oferta (NO contestar, solo mostrar UI)
+// 1. Alguien nos está llamando
 socket.on('offer', (offer) => {
-    console.log("Oferta recibida, mostrando modal...");
-    incomingOffer = offer; // Guardamos la oferta en memoria
-    
-    // Mostrar el modal de aceptar/rechazar
-    modal.style.display = 'block';
+    console.log("Oferta recibida. Esperando a que el usuario acepte...");
+    incomingOffer = offer;
+    modal.style.display = 'block'; // Mostramos el modal de Aceptar/Rechazar
 });
 
-// 2. Acción de ACEPTAR llamada
+// 2. Al hacer clic en ACEPTAR
 btnAccept.onclick = async () => {
-    modal.style.display = 'none'; // Ocultar modal
-    
+    modal.style.display = 'none';
     if (!incomingOffer) return;
 
-    // AQUI comienza el proceso técnico de contestar
-    await getMediaAndSetupPeer(); // El receptor también necesita activar su mic y peer
+    await getMediaAndSetupPeer();
     
     await peer.setRemoteDescription(incomingOffer);
     const answer = await peer.createAnswer();
     await peer.setLocalDescription(answer);
     
     socket.emit('answer', answer);
-    incomingOffer = null; // Limpiar variable
+    
+    // IMPORTANTE: Una vez que tenemos RemoteDescription, procesamos los candidatos guardados
+    await processIceQueue();
+    incomingOffer = null;
 };
 
-// 3. Acción de RECHAZAR llamada
+// 3. Al hacer clic en RECHAZAR
 btnReject.onclick = () => {
     modal.style.display = 'none';
     incomingOffer = null;
-    // Opcional: Emitir un evento para avisar al otro que rechazaste
-    // socket.emit('call-rejected'); 
+    iceCandidateQueue = [];
+    console.log("Llamada rechazada.");
 };
 
-// --- RESTO DE EVENTOS ---
-
-let iceCandidateQueue = [];
-
+// 4. El emisor recibe la respuesta del receptor
 socket.on('answer', async (answer) => {
-    console.log("Respuesta recibida. Conectando...");
+    console.log("Respuesta recibida.");
     if (!peer) return;
-
-    try {
-        await peer.setRemoteDescription(answer);
-        
-        // AHORA que ya tenemos la descripción remota, procesamos la cola de candidatos
-        while (iceCandidateQueue.length > 0) {
-            const candidate = iceCandidateQueue.shift(); // Sacar el primero
-            try {
-                await peer.addIceCandidate(candidate);
-                console.log("Candidato ICE de la cola agregado.");
-            } catch (e) {
-                console.error("Error agregando candidato de la cola:", e);
-            }
-        }
-    } catch (err) {
-        console.error("Error al establecer RemoteDescription:", err);
-    }
+    await peer.setRemoteDescription(answer);
+    await processIceQueue();
 });
 
+// 5. Gestión de candidatos ICE
 socket.on('ice-candidate', async (candidate) => {
-    if (!peer) return;
-
-    // Si ya tenemos descripción remota, agregamos directo
-    if (peer.remoteDescription) {
+    if (peer && peer.remoteDescription) {
+        // Si el peer está listo, lo añadimos de inmediato
         try {
             await peer.addIceCandidate(candidate);
-            console.log("Candidato ICE agregado directo.");
         } catch (e) {
-            console.error("Error agregando candidato ICE:", e);
+            console.error("Error añadiendo candidato:", e);
         }
     } else {
-        // Si NO tenemos descripción remota, guardamos en la cola para después
-        console.log("Candidato ICE recibido antes de la respuesta. Guardando en cola...");
+        // Si no está listo (está el modal abierto), lo guardamos
         iceCandidateQueue.push(candidate);
     }
 });
