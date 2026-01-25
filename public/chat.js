@@ -485,6 +485,10 @@ const iceConfiguration = {
 };
 let peer;
 async function startCall() {
+  let micIcon = document.createElement("i");
+  micIcon.classList.add("bx","bx-microphone");
+  micIcon.style.color = "white";
+  notch.insertBefore(micIcon, notch.lastElementChild);
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: true,
@@ -492,6 +496,10 @@ async function startCall() {
       autoGainControl: true
     }
   });
+  micIcon.onclick = ()=>{
+    const audioTrack = stream.getAudioTracks()[0];
+    audioTrack.enabled = !audioTrack.enabled;
+  }
   peer = new RTCPeerConnection(iceConfiguration);
   stream.getTracks().forEach(track =>peer.addTrack(track, stream));
   peer.ontrack = (e) => {document.getElementById('remoteAudio').srcObject = e.streams[0];};
