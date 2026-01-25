@@ -953,7 +953,7 @@ socket.on('createdFolder', (data)=>{
   addBtnFolder() }
 });
 
-socket.on('getFiles', (files)=>{ if(files.user == newUser && files.folder==currentFolder){addToDom(files);output.innerHTML+=htmlCont;htmlCont='';}});
+socket.on('getFiles', (files)=>{ if(files.user == newUser && files.folder==currentFolder){addToDom(files);output.innerHTML+=htmlCont;htmlCont='';output.scrollTop=output.scrollHeight;}});
 let cont = 0;
 let fetchedFolders = false;
 socket.on('getMessages', (data) => {
