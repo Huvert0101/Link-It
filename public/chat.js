@@ -488,46 +488,30 @@ let localStream;
 let incomingOffer = null;
 let iceCandidateQueue = [];
 
-// Elementos de la UI (Asegúrate de que existan en tu HTML)
 const modal = document.getElementById('incomingCallModal');
 const btnAccept = document.getElementById('btnAccept');
 const btnReject = document.getElementById('btnReject');
-
-// --- FUNCIONES DE APOYO ---
-
 async function getMediaAndSetupPeer() {
-    // Obtener audio del micrófono
-    localStream = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
-    });
-
-    // Tu lógica visual del icono de micrófono
-    createMicIconUI(); 
-
-    // Crear la conexión RTCPeerConnection
-    peer = new RTCPeerConnection(iceConfiguration);
-
-    // Añadir tracks de audio al peer
-    localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
-
-    // Cuando recibimos el audio del otro
-    peer.ontrack = (e) => {
-        console.log("¡Track remoto recibido!");
-        const remoteAudio = document.getElementById('remoteAudio');
-        if (remoteAudio.srcObject !== e.streams[0]) {
-            remoteAudio.srcObject = e.streams[0];
-            remoteAudio.play().catch(err => console.warn("Error en autoplay:", err));
-        }
-    };
-
-    // Cuando el navegador genera un candidato de red (ICE)
-    peer.onicecandidate = (e) => {
-        if (e.candidate) {
-            socket.emit('ice-candidate', e.candidate);
-        }
-    };
+  localStream = await navigator.mediaDevices.getUserMedia({
+    audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+  });
+  createMicIconUI(); 
+  peer = new RTCPeerConnection(iceConfiguration);
+  localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
+  peer.ontrack = (e) => {
+    console.log("¡Track remoto recibido!");
+    const remoteAudio = document.getElementById('remoteAudio');
+    if (remoteAudio.srcObject !== e.streams[0]) {
+      remoteAudio.srcObject = e.streams[0];
+      remoteAudio.play().catch(err => console.warn("Error en autoplay:", err));
+    }
+  };
+  peer.onicecandidate = (e) => {
+    if (e.candidate) {
+      socket.emit('ice-candidate', e.candidate);
+    }
+  };
 }
-
 function createMicIconUI() {
   if (document.querySelector(".bx-microphone")) return;
   let micIcon = document.createElement("i");
@@ -542,7 +526,6 @@ function createMicIconUI() {
     micIcon.style.opacity = audioTrack.enabled ? "1" : "0.7";
   };
 }
-
 async function processIceQueue() {
   console.log("Procesando cola de candidatos ICE...", iceCandidateQueue.length);
   while (iceCandidateQueue.length > 0) {
@@ -554,67 +537,51 @@ async function processIceQueue() {
     }
   }
 }
-
-// --- FLUJO DE LLAMADA (EMISOR) ---
-
 async function startCall() {
-    console.log("Iniciando llamada...");
-    await getMediaAndSetupPeer();
-    const offer = await peer.createOffer();
-    await peer.setLocalDescription(offer);
-    socket.emit('offer', offer);
+  console.log("Iniciando llamada...");
+  await getMediaAndSetupPeer();
+  const offer = await peer.createOffer();
+  await peer.setLocalDescription(offer);
+  socket.emit('offer', offer);
 }
 socket.on('offer', (offer) => {
-    console.log("Oferta recibida. Esperando a que el usuario acepte...");
-    incomingOffer = offer;
-    modal.style.display = 'block'; // Mostramos el modal de Aceptar/Rechazar
+  console.log("Oferta recibida. Esperando a que el usuario acepte...");
+  incomingOffer = offer;
+  modal.style.display = 'block'; // Mostramos el modal de Aceptar/Rechazar
 });
 btnAccept.onclick = async () => {
-    modal.style.display = 'none';
-    if (!incomingOffer) return;
-
-    await getMediaAndSetupPeer();
-    
-    await peer.setRemoteDescription(incomingOffer);
-    const answer = await peer.createAnswer();
-    await peer.setLocalDescription(answer);
-    
-    socket.emit('answer', answer);
-    
-    // IMPORTANTE: Una vez que tenemos RemoteDescription, procesamos los candidatos guardados
-    await processIceQueue();
-    incomingOffer = null;
+  modal.style.display = 'none';
+  if (!incomingOffer) return;
+  await getMediaAndSetupPeer();
+  await peer.setRemoteDescription(incomingOffer);
+  const answer = await peer.createAnswer();
+  await peer.setLocalDescription(answer);
+  socket.emit('answer', answer);
+  await processIceQueue();
+  incomingOffer = null;
 };
-
-// 3. Al hacer clic en RECHAZAR
 btnReject.onclick = () => {
-    modal.style.display = 'none';
-    incomingOffer = null;
-    iceCandidateQueue = [];
-    console.log("Llamada rechazada.");
+  modal.style.display = 'none';
+  incomingOffer = null;
+  iceCandidateQueue = [];
+  console.log("Llamada rechazada.");
 };
-
-// 4. El emisor recibe la respuesta del receptor
 socket.on('answer', async (answer) => {
-    console.log("Respuesta recibida.");
-    if (!peer) return;
-    await peer.setRemoteDescription(answer);
-    await processIceQueue();
+  console.log("Respuesta recibida.");
+  if (!peer) return;
+  await peer.setRemoteDescription(answer);
+  await processIceQueue();
 });
-
-// 5. Gestión de candidatos ICE
 socket.on('ice-candidate', async (candidate) => {
-    if (peer && peer.remoteDescription) {
-        // Si el peer está listo, lo añadimos de inmediato
-        try {
-            await peer.addIceCandidate(candidate);
-        } catch (e) {
-            console.error("Error añadiendo candidato:", e);
-        }
-    } else {
-        // Si no está listo (está el modal abierto), lo guardamos
-        iceCandidateQueue.push(candidate);
+  if (peer && peer.remoteDescription) {
+    try {
+      await peer.addIceCandidate(candidate);
+    } catch (e) {
+       console.error("Error añadiendo candidato:", e);
     }
+  } else {
+    iceCandidateQueue.push(candidate);
+  }
 });
 function getActiveFriends(){
   let friendList = [];
