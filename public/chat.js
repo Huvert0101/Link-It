@@ -516,6 +516,7 @@ async function startCall() {
   socket.emit('offer', offer);
 }
 socket.on('offer', async (offer) => {
+  alert("llamada entrante");
   if (!peer) startCall(); // Si recibes oferta y no has iniciado, inicia
   await peer.setRemoteDescription(offer);
   const answer = await peer.createAnswer();
@@ -935,9 +936,8 @@ function ytDL(link){
         notch.removeChild(toast);
     })
     .catch(error => {
-        notch.removeChild(toast);
-        console.error("Hubo un fallo en la descarga:", error);
-        alert("No se pudo descargar la canción. Revisa la consola.");
+      notch.removeChild(toast);
+      alert("No se pudo descargar la canción.");
     });
 }
 
