@@ -488,8 +488,7 @@ async function startCall() {
   let micIcon = document.createElement("i");
   micIcon.classList.add("bx","bx-microphone");
   micIcon.style.color = "white";
-  micIcon.style.opacity="0.7";
-  notch.insertBefore(micIcon, notch.lastElementChild);
+  notch.insertBefore(micIcon, notch.children[notch.children.length-2]);
   const stream = await navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: true,
