@@ -866,7 +866,7 @@ let lastFolder;
 let folderEl;
 folderList.onclick = (event)=>{
   let folder = event.target.id;
-  let btnCreateCall = document.querySelector(".bx-phone");
+  let btnCreateCall = document.getElementById("btnStartCall");
   if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
@@ -893,6 +893,7 @@ friendList.onclick = (event)=>{
     let btnCreateCall = document.createElement("i");
     btnCreateCall.classList.add("bx");
     btnCreateCall.classList.add("bx-phone");
+    btnCreateCall.id = "btnStartCall";
     btnCreateCall.style.color = "white";
     btnCreateCall.onclick = ()=> startCall();
     msgPanelTop.appendChild(btnCreateCall);
