@@ -902,6 +902,22 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     font-size: 30px!important;
 }
+#incomingCallModal{
+    background: rgba(0, 0, 0, 0.7)!important;
+    border: 1px solid lightgreen!important;
+}
+#btnAccept{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background: green;
+}
+#btnReject{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    background: red;
+}
 @media only screen and (max-width: 768px) {
   .msgPanelTop{
     margin-left: 2px;
