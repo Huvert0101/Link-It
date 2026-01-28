@@ -611,7 +611,8 @@ btnFriends.onclick = async() => {
   rightPanelTitle.innerText = "Friends";
   folderList.style.display = "none";
   friendsCont.style.display = "flex";
-  //while (friendsCont.children.length > 1) div.removeChild(div.children[1]);
+  console.log("content div: ",div);
+  while (friendsCont.children.length > 1) div.removeChild(div.children[1]);
   const response = await fetch(URL+'getFriends', {
     method: 'POST',
     headers: {
