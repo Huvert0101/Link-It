@@ -906,6 +906,9 @@ input[type="range"]::-webkit-slider-thumb {
     background: rgba(0, 0, 0, 0.7)!important;
     border: 1px solid lightgreen!important;
 }
+#incomingCallModal p{
+    margin-bottom: 7px;
+}
 #btnAccept{
     font-size: 20px;
     padding: 10px;
