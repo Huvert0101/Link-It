@@ -542,11 +542,15 @@ async function startCall() {
   await getMediaAndSetupPeer();
   const offer = await peer.createOffer();
   await peer.setLocalDescription(offer);
-  socket.emit('offer', offer);
+  let dataCall = {offer:offer,caller:newUser}
+  socket.emit('offer', dataCall);
 }
-socket.on('offer', (offer) => {
+let callerH3 = document.getElementById("caller");
+socket.on('offer', (dataCall) => {
   console.log("Oferta recibida. Esperando a que el usuario acepte...");
-  incomingOffer = offer;
+  incomingOffer = dataCall.offer;
+  let caller = dataCall.caller;
+  callerH3.innerText = caller;
   modal.style.display = 'block'; // Mostramos el modal de Aceptar/Rechazar
 });
 btnAccept.onclick = async () => {
