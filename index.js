@@ -461,13 +461,11 @@ io.on('connection', (socket) => {
         let activeFriendListRes = [];
         let i = 0;
         for (let obj of activeUsersList) {
-            friendList.forEach(friend=> {
-                if(activeUsersList[i].user == friend) activeFriendListRes.push(friend);
-            });
+            activeFriendListRes.push(obj.user);
             i++;
         }
         console.log("active friends:", activeFriendListRes);
-        io.sockets.emit('getActiveFriends', activeUsersList);
+        io.sockets.emit('getActiveFriends', activeFriendListRes);
     });
 
     socket.on('offer', (data) => {
