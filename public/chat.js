@@ -888,7 +888,7 @@ friendList.onclick = (event)=>{
   if(folder == 'btnAddFriend') return;
   folderEl = document.getElementById(folder);
   folderNameTop.innerText = folderEl.innerText;
-  let btnCreateCall = document.querySelector(".bx-phone");
+  let btnCreateCall = document.getElementById("btnStartCall");
   if(!btnCreateCall){
     let btnCreateCall = document.createElement("i");
     btnCreateCall.classList.add("bx");
@@ -910,7 +910,7 @@ friendList.onclick = (event)=>{
 btnBack.onclick = () => {
   currentFolder = 'main';
   folderNameTop.innerText = "Main";
-  let btnCreateCall = document.querySelector(".bx-phone");
+  let btnCreateCall = document.getElementById("btnStartCall");
   if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
   folderEl.parentElement.classList.remove('currentFolder');
