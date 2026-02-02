@@ -878,7 +878,7 @@ folderList.onclick = (event)=>{
   folderNameTop.innerText = folderEl.innerText;
   if(folder == 'inputFolder' || folder == '') return;
   if(folder == 'addFolder'){ addFolder(); return}
-  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
+  if(lastFolder != undefined && lastFolder !="" && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
