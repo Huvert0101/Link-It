@@ -637,8 +637,10 @@ btnFriends.onclick = async() => {
     folderDiv.appendChild(icon);
     friendList.appendChild(folderDiv);
   });
-  console.log(lastFolder.parentElement);
-  console.log(lastFolder.parentElement.classList);
+  if(lastFolder){
+    console.log(lastFolder.parentElement);
+    console.log(lastFolder.parentElement.classList);
+  }
   btnAddFriend.onclick = () => {
     let data = {
       friendUser: searchBar.value,
