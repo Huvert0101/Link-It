@@ -638,6 +638,7 @@ btnFriends.onclick = async() => {
     friendList.appendChild(folderDiv);
   });
   if(lastFolder){
+    if(lastFolder == "") return
     let reloadSelectedFol = document.getElementById(lastFolder.id);
     reloadSelectedFol.parentElement.classList.add("currentFolder");
   }
@@ -922,7 +923,10 @@ btnBack.onclick = () => {
   let btnCreateCall = document.getElementById("btnStartCall");
   if(btnCreateCall) msgPanelTop.removeChild(btnCreateCall);
   socket.emit('changedFolder', { folder: currentFolder, user: newUser });
-  if(lastFolder) document.getElementById(lastFolder.id).parentElement.classList.remove("currentFolder");
+  if(lastFolder){
+    document.getElementById(lastFolder.id).parentElement.classList.remove("currentFolder");
+    lastFolder = "";
+  } 
   folderEl.parentElement.classList.remove('currentFolder');
   btnBack.style.visibility = 'hidden';
 }
