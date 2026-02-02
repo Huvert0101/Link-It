@@ -639,6 +639,8 @@ btnFriends.onclick = async() => {
   });
   if(lastFolder){
     console.log(lastFolder.parentElement);
+    let reloadSelectedFol = document.getElementById(lastFolder.id);
+    reloadSelectedFol.parentElement.classList.add("currentFolder");
     console.log(lastFolder.parentElement.classList);
   }
   btnAddFriend.onclick = () => {
