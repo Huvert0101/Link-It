@@ -638,10 +638,8 @@ btnFriends.onclick = async() => {
     friendList.appendChild(folderDiv);
   });
   if(lastFolder){
-    console.log(lastFolder.parentElement);
     let reloadSelectedFol = document.getElementById(lastFolder.id);
     reloadSelectedFol.parentElement.classList.add("currentFolder");
-    console.log(lastFolder.parentElement.classList);
   }
   btnAddFriend.onclick = () => {
     let data = {
@@ -905,7 +903,11 @@ friendList.onclick = (event)=>{
     btnCreateCall.onclick = ()=> startCall();
     msgPanelTop.appendChild(btnCreateCall);
   }
-  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) lastFolder.parentElement.classList.remove("currentFolder");
+  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) {
+    let changeLastFolSelected = document.getElementById(lastFolder.id);
+    changeLastFolSelected.parentElement.classList.remove("currentFolder");
+    lastFolder.parentElement.classList.remove("currentFolder");
+  }
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
   socket.emit('changedFolder', { folder: currentFolder, user: ''});
