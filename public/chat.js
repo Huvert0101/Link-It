@@ -904,10 +904,14 @@ friendList.onclick = (event)=>{
     btnCreateCall.onclick = ()=> startCall();
     msgPanelTop.appendChild(btnCreateCall);
   }
-  if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) {
-    let changeLastFolSelected = document.getElementById(lastFolder.id);
-    changeLastFolSelected.parentElement.classList.remove("currentFolder");
-    lastFolder.parentElement.classList.remove("currentFolder");
+  if(lastFolder){
+    if(lastFolder != ""){
+      if(lastFolder != undefined && lastFolder.parentElement.classList.contains('currentFolder')) {
+        let changeLastFolSelected = document.getElementById(lastFolder.id);
+        changeLastFolSelected.parentElement.classList.remove("currentFolder");
+        lastFolder.parentElement.classList.remove("currentFolder");
+      }
+    }
   }
   folderEl.parentElement.classList.add("currentFolder");
   currentFolder = folder;
