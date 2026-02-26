@@ -622,14 +622,14 @@ btnFriends.onclick = async() => {
   if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
   const friends = await response.json();
   const fragment = document.createDocumentFragment();
-  friends.forEach(friend=> {
-    let friendName = friend.folder.replace('friend', '');
+  for(i=0; i<friends.length; i++{
+    let friendName = friends[i].folder.replace('friend', '');
     friendName = friendName.replace(newUser, '');
     const folderDiv = document.createElement('div');
     folderDiv.className = 'folder';
     const folderTitle = document.createElement('span');
     folderTitle.className = 'folder-title';
-    folderTitle.id = friend.folder;
+    folderTitle.id = friends[i].folder;
     folderTitle.textContent = friendName;
     const icon = document.createElement('i');
     icon.className = 'bx bx-dots-horizontal-rounded';
@@ -637,7 +637,7 @@ btnFriends.onclick = async() => {
     folderDiv.appendChild(folderTitle);
     folderDiv.appendChild(icon);
     fragment.appendChild(folderDiv);
-  });
+  }
   friendList.appendChild(fragment);
   if(lastFolder){
     if(lastFolder == "") return
