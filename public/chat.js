@@ -621,6 +621,7 @@ btnFriends.onclick = async() => {
   });
   if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
   const friends = await response.json();
+  const fragment = document.createDocumentFragment();
   friends.forEach(friend=> {
     let friendName = friend.folder.replace('friend', '');
     friendName = friendName.replace(newUser, '');
@@ -635,8 +636,9 @@ btnFriends.onclick = async() => {
     icon.style.color = '#ffffff';
     folderDiv.appendChild(folderTitle);
     folderDiv.appendChild(icon);
-    friendList.appendChild(folderDiv);
+    fragment.appendChild(folderDiv);
   });
+  friendList.appenChild(fragment);
   if(lastFolder){
     if(lastFolder == "") return
     let reloadSelectedFol = document.getElementById(lastFolder.id);
