@@ -638,7 +638,7 @@ btnFriends.onclick = async() => {
     folderDiv.appendChild(icon);
     fragment.appendChild(folderDiv);
   });
-  friendList.appenChild(fragment);
+  friendList.appendChild(fragment);
   if(lastFolder){
     if(lastFolder == "") return
     let reloadSelectedFol = document.getElementById(lastFolder.id);
