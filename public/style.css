@@ -590,6 +590,16 @@ input[type="range"]::-webkit-slider-thumb {
 .display::-webkit-scrollbar {
   width: 0.01px; /* Ancho de la barra de desplazamiento */
 }
+.textareas{
+    min-height: 40px;
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+    overflow-y: hidden;
+    resize: none;
+    box-sizing: border-box;
+    transition: height 0.1s ease;
+}
 .messagebar{
     width: 100%;
     border-radius: 3em;
