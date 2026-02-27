@@ -622,7 +622,7 @@ btnFriends.onclick = async() => {
   if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
   const friends = await response.json();
   const fragment = document.createDocumentFragment();
-  for(i=0; i<friends.length; i++){
+  for(let i=0; i<friends.length; i++){
     let friendName = friends[i].folder.replace('friend', '');
     friendName = friendName.replace(newUser, '');
     const folderDiv = document.createElement('div');

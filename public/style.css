@@ -580,7 +580,7 @@ input[type="range"]::-webkit-slider-thumb {
     overflow-y: scroll;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    height: 89%;
+    height: 89vh;
     background-color: rgba(0, 0, 0, 0.5);
     margin-bottom: 6px;
 }
@@ -593,7 +593,7 @@ input[type="range"]::-webkit-slider-thumb {
 .messagebar{
     width: 100%;
     border-radius: 3em;
-    height: 6.5%;
+    height: 3em;
     background-color: black;
     opacity: 0.5;
     display: flex;
