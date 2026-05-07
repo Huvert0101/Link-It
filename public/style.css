@@ -9,6 +9,14 @@
 body{
     overflow: hidden;
 }
+.modalContainer{
+  display:  none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
 .msgPanelTop{
     padding-left: 20px;
     background: black;

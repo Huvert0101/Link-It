@@ -61,6 +61,7 @@ let msgPanelTop= document.querySelector(".msgPanelTop");
 let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
+let modalContainer = document.getElementByid("modalContainer");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
@@ -953,6 +954,10 @@ addEventListener('keydown', function(e){
       user: newUser,
       folder: currentFolder
     });
+  }
+  if (event.ctrlKey && event.key === 'Enter') {
+    console.log("Abriendo writing panel");
+    modalContainer.style.display = "flex";
   }
 });
 
