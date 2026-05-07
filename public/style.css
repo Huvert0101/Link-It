@@ -9,7 +9,7 @@
 body{
     overflow: hidden;
 }
-.modalContainer{
+#modalContainer{
   display:  none;
   position: fixed;
   top: 0;
