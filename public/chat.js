@@ -62,6 +62,7 @@ let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let modalContainer = document.getElementById("modalContainer");
+let closeModalContainer = document.getElementById("closeModalContainer");
 let foldersPluginPos = "right";
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
@@ -960,6 +961,10 @@ addEventListener('keydown', function(e){
     modalContainer.style.display = "flex";
   }
 });
+
+closeModalContainer.onclick = ()=>{
+  modalContainer.style.display = "none";
+}
 
 formFolder.onsubmit = (e) => {
   e.preventDefault();
