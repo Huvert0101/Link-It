@@ -49,9 +49,14 @@ body{
   padding: 5px;
   border-radius: 10px;
 }
+#socialpostform div{
+  display: flex;
+}
 #socialpostform textarea{
   padding: 5px;
   border-radius: 10px;
+  width: 264px;
+  height: 100px;
 }
 #socialpostform button{
   padding: 5px;
