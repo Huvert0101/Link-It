@@ -101,7 +101,9 @@ btnIframe.onclick = () => {
 
 btnPublicSection.onclick = ()=>{
 	plugin2.style.scale = 1;
+	plugin2.style.position = "relative";
 }
+
 
 loopedSong = false;
 btnLoopSong.onclick = () =>{
