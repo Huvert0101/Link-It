@@ -628,7 +628,7 @@ function getActiveFriends(){
 }
 
 btnPost.onclick = ()=> {
-  socket.emit('newPost', {uploader: newUser, title:btnTitle.value, desc:btnDesc.value});
+  socket.emit('newPost', {uploader: newUser, title:postTitle.value, desc:postDesc.value});
 }
 socket.on('newPostRes', (post)=>{
   divPost = document.createElement("div");
