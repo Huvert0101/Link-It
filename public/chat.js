@@ -104,7 +104,7 @@ btnPublicSection.onclick = ()=>{
   if(publicOpened){
     publicOpened = false;
 	  plugin2.style.scale = 0;
-	  plugin2.style.position = "absolute";
+    setTimeout(() => {plugin2.style.position = "absolute";}, 100);
   }else{
     publicOpened = true;
 	  plugin2.style.scale = 1;
