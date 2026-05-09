@@ -99,11 +99,18 @@ btnIframe.onclick = () => {
   }
 }
 
+let publicOpened = false;
 btnPublicSection.onclick = ()=>{
-	plugin2.style.scale = 1;
-	plugin2.style.position = "relative";
+  if(publicOpened){
+    publicOpened = false;
+	  plugin2.style.scale = 0;
+	  plugin2.style.position = "absolute";
+  }else{
+    publicOpened = true;
+	  plugin2.style.scale = 1;
+	  plugin2.style.position = "relative";
+  }
 }
-
 
 loopedSong = false;
 btnLoopSong.onclick = () =>{
