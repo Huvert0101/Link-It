@@ -33,6 +33,7 @@ let btnNewWindow = document.getElementById("newWindow");
 let btnProfile = document.querySelector(".btnProfile");
 let btnPlayer = document.querySelector(".bxs-music");
 let plugin = document.querySelector(".plugin");
+let plugin2 = document.querySelector(".plugin2");
 let playlist = document.querySelector(".playlist");
 let currentSongTitle = document.getElementById("currentSongTitle");
 let friendsCont = document.querySelector(".friends-cont");
@@ -64,6 +65,7 @@ let btnLoopSong = document.querySelector(".bx-rotate-ccw");
 let modalContainer = document.getElementById("modalContainer");
 let closeModalContainer = document.getElementById("closeModalContainer");
 let foldersPluginPos = "right";
+let btnPublicSection = document.getElementById("btnPublicSection");
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
@@ -96,6 +98,11 @@ btnIframe.onclick = () => {
     }
   }
 }
+
+btnPublicSection.onclick = ()=>{
+	plugin2.style.scale = 1;
+}
+
 loopedSong = false;
 btnLoopSong.onclick = () =>{
   if(loopedSong){
