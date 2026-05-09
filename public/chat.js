@@ -638,7 +638,6 @@ socket.on('newPostRes', (post)=>{
   spanDesc = document.createElement("span");
   spanTitle = document.createElement("span");
   spanTitle.innerText = post.title;
-  spanTitle = document.createElement("span");
   spanDesc.innerText = post.desc;
   divPost.appendChild(spanUploader);
   divPost.appendChild(spanTitle);
