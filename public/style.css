@@ -422,8 +422,10 @@ fr-btn-grp{
     transition: all ease 0.1s;
 }
 .plugin2{
-    align-items: center;
+    display: flex;
     flex-direction: column;
+    gap: 15px;
+    align-items: center;
     scale: 0;
     z-index: -2;
     position: absolute;
@@ -442,6 +444,7 @@ fr-btn-grp{
   border: 1px solid white;
   border-radius: 20px;
   padding: 10px;
+  width: 100%;
 }
 #uploader{
   font-weight: bold;
