@@ -67,6 +67,8 @@ let closeModalContainer = document.getElementById("closeModalContainer");
 let foldersPluginPos = "right";
 let btnPublicSection = document.getElementById("btnPublicSection");
 let btnPost = document.getElementById("btnPost");
+let postTitle = document.getElementById("postTitle");
+let postDesc = document.getElementById("postDesc");
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
@@ -626,9 +628,23 @@ function getActiveFriends(){
 }
 
 btnPost.onclick = ()=> {
-  console.log(document.getElementById("postTitle").value);
-  console.log(document.getElementById("postDesc").value);
+  socket.emit('newPost', {uploader: newUser, title:btnTitle.value, desc:btnDesc.value});
 }
+socket.on('newPostRes', (post)=>{
+  divPost = document.createElement("div");
+  spanUploader = document.createElement("span");
+  spanUploader.id = "uploader";
+  spanUploader.innerText = post.uploader;
+  spanDesc = document.createElement("span");
+  spanTitle = document.createElement("span");
+  spanTitle.innerText = post.title;
+  spanTitle = document.createElement("span");
+  spanDesc.innerText = post.desc;
+  divPost.appendChild(spanUploader);
+  divPost.appendChild(spanTitle);
+  divPost.appendChild(spanDesc);
+  plugin2.appendChild(divPost);
+});
 
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";

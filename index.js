@@ -467,6 +467,9 @@ io.on('connection', (socket) => {
         console.log("active friends:", activeFriendListRes);
         io.sockets.emit('getActiveFriends', activeFriendListRes);
     });
+    socket.on('newPost', (post)=>{
+      socket.emit('newPostRes', post);
+    });
 
     socket.on('offer', (data) => {
         socket.broadcast.emit('offer', data); 
