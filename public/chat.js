@@ -66,6 +66,7 @@ let modalContainer = document.getElementById("modalContainer");
 let closeModalContainer = document.getElementById("closeModalContainer");
 let foldersPluginPos = "right";
 let btnPublicSection = document.getElementById("btnPublicSection");
+let btnPost = document.getElementById("btnPost");
 let leftPanel = document.querySelector(".left");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
@@ -77,7 +78,7 @@ let currentFolder = "main";
 let folderNameTop = document.getElementById("folderNameTop");
 let genVolumeBar = document.getElementById("genVolumeBar");
 
-// Front-end functions
+// Front-end functionkks
 btnMenu.onclick = () => {
   overlay.style.display = 'block';
   menu.style.display = 'block';
@@ -623,6 +624,12 @@ function getActiveFriends(){
     });
   });
 }
+
+btnPost.onclick = ()=> {
+  console.log(document.getElementById("postTitle").value);
+  console.log(document.getElementById("postDesc").value);
+}
+
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
   btnFriends.style.display = "none";
