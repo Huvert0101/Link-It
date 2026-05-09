@@ -436,6 +436,24 @@ fr-btn-grp{
     margin: 0 5px;
     transition: all ease 0.1s;
 }
+.plugin2 span{
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 3%;
+}
+.plugin2 div{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 10px;
+}
+#uploader{
+  font-weight: bold;
+  font-size: 20px;
+}
+}
 .player{
     width: 100%;
     height: 34%;
