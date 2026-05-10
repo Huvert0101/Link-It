@@ -468,7 +468,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('getActiveFriends', activeFriendListRes);
     });
     socket.on('newPost', (post)=>{
-      socket.emit('newPostRes', post);
+      io.emit('newPostRes', post);
       console.log(post.uploader);
       console.log(post.title);
       console.log(post.desc);
