@@ -469,6 +469,9 @@ io.on('connection', (socket) => {
     });
     socket.on('newPost', (post)=>{
       socket.emit('newPostRes', post);
+      console.log(post.uploader);
+      console.log(post.title);
+      console.log(post.desc);
     });
 
     socket.on('offer', (data) => {

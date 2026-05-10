@@ -632,6 +632,9 @@ btnPost.onclick = ()=> {
   modalContainer.style.display = "none";
 }
 socket.on('newPostRes', (post)=>{
+  console.log(post.uploader);
+  console.log(post.title);
+  console.log(post.desc);
   divPost = document.createElement("div");
   spanUploader = document.createElement("span");
   spanUploader.id = "uploader";
