@@ -439,6 +439,9 @@ fr-btn-grp{
     transition: all ease 0.1s;
     overflow-y: scroll;
 }
+.plugin2::-webkit-scrollbar {
+  width: 0.01px; /* Ancho de la barra de desplazamiento */
+}
 .plugin2 div{
   display: flex;
   flex-direction: column;
