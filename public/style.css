@@ -437,6 +437,7 @@ fr-btn-grp{
     opacity: 0.5;
     margin: 0 5px;
     transition: all ease 0.1s;
+    overflow-y: scroll;
 }
 .plugin2 div{
   display: flex;
