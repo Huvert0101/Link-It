@@ -826,10 +826,10 @@ async function postBg(file){
     fetch(URL+"changeCurrentBg",{
       headers: {"Content-Type": "application/json"},
       method: 'PUT',
-      body: JSON.stringify({user: newUser, bg_src: bg.bg_src})
+      body: JSON.stringify({user: newUser, bg_src: "files/"+newFileName})
     }).then(response => response.json()).then(response =>{
       getCurrentBg();
-      document.body.style.backgroundImage = "url('api/"+ bg.bg_src + "')";
+      document.body.style.backgroundImage = "url('api/"+ "files/"+newFileName + "')";
     });
     document.body.style.backgroundImage = "url('api/" + "files/"+newFileName+"')";
   }
