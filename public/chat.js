@@ -59,6 +59,7 @@ let inputMsgBar = document.getElementById("input");
 let mainCont = document.querySelector(".main");
 let notch = document.querySelector(".notch");
 let msgPanelTop= document.querySelector(".msgPanelTop");
+let btnGames = document.getElementById("btnGames");
 let openedApps = 0;
 const right = document.querySelector('.right');
 let btnLoopSong = document.querySelector(".bx-rotate-ccw");
@@ -251,6 +252,7 @@ genVolumeBar.addEventListener('input', function() {
   const newVolume = parseFloat(genVolumeBar.value);
   if(audio!=null) audio.volume = newVolume;
 });
+
 function createIframeWindow(site,isDoc){
   const iframeCont = document.createElement("div");
   iframeCont.className = "iframeCont";
@@ -326,6 +328,10 @@ function createIframeWindow(site,isDoc){
     document.onmousemove = null;
     document.onmouseup = null;
   }
+}
+
+btnGames.onclick = ()=>{
+  creteIframeWidnow("https://arcade-por-rendo.vercel.app/", false);
 }
 // EVENTS TO DRAGGABLE PLUGINS
 let nuevoDiv = null;
