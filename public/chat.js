@@ -331,7 +331,7 @@ function createIframeWindow(site,isDoc){
 }
 
 btnGames.onclick = ()=>{
-  creteIframeWidnow("https://arcade-por-rendo.vercel.app/", false);
+  createIframeWindow("https://arcade-por-rendo.vercel.app/", false);
 }
 // EVENTS TO DRAGGABLE PLUGINS
 let nuevoDiv = null;
