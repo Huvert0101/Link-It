@@ -13,7 +13,7 @@
     "dev": "nodemon index.js"
   },
   "author": "Huvert01",
-  "license": "ISC",
+  "license": "No license",
   "dependencies": {
     "axios": "^1.16.0",
     "body-parser": "^2.2.2",
