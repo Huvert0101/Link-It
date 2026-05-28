@@ -1,0 +1,24 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Construir y levantar con Docker Compose
+        run: |
+          docker compose up --build -d
+          
+      - name: Verificar que los contenedores estén sanos
+        run: |
+          sleep 15
+          docker ps
+          docker inspect link_it_app --format='{{.State.Running}}' | grep true
