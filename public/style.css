@@ -312,6 +312,15 @@ iframe{
   left: 50vw;
   top: 50vh;
   background: black;
+  padding: 1vw;
+}
+.preferencesColumnLeft{
+  display: flex;
+  flex-direction: column;
+}
+.preferencesColumnRight{
+  display: flex;
+  flex-direction: column;
 }
 #newWindow{
     padding: 2px;
