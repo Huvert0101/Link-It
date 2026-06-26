@@ -657,6 +657,10 @@ socket.on('newPostRes', (post)=>{
   plugin2.appendChild(divPost);
 });
 
+btnProfile.onclick = () => {
+	console.log("It's Working...");
+}
+
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
   btnFriends.style.display = "none";
