@@ -71,6 +71,7 @@ let btnPost = document.getElementById("btnPost");
 let postTitle = document.getElementById("postTitle");
 let postDesc = document.getElementById("postDesc");
 let leftPanel = document.querySelector(".left");
+let preferencesUser = document.getElementById("preferencesUser");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -484,6 +485,7 @@ let username = getCookie("username");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
+preferencesUser.innerText = newUser;
 
 socket.emit('getUser', { user: newUser });
 socket.on('updateConnectedUsers', (connectedUsers)=>{
@@ -658,7 +660,7 @@ socket.on('newPostRes', (post)=>{
 });
 
 btnProfile.onclick = () => {
-	console.log("It's Working...");
+  console.log("It's Working...");
 }
 
 btnFriends.onclick = async() => {

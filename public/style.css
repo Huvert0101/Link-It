@@ -304,6 +304,15 @@ iframe{
     font-size: 16px;
     color: rgba(255, 255, 255, 0.95);
 }
+.preferencesContainer{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50vw;
+  top: 50vh;
+  background: black;
+}
 #newWindow{
     padding: 2px;
     border-radius: 50%;
