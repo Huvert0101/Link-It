@@ -666,7 +666,6 @@ btnProfile.onclick = () => {
   }else{
     preferencesContainer.style.display = "none";
   }
-  console.log("It's Working...");
 }
 
 btnFriends.onclick = async() => {
