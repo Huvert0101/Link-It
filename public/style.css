@@ -314,6 +314,8 @@ iframe{
   background: black;
   padding: 1vw;
   border-radius: 1vw;
+  color: white;
+  font-size: 2vw;
 }
 .preferencesColumnLeft{
   display: flex;
