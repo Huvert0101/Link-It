@@ -661,7 +661,7 @@ socket.on('newPostRes', (post)=>{
 });
 
 btnProfile.onclick = () => {
-  if(preferencesContainer.style.display == "none"){
+  if(preferencesContainer.style.display == "none" or preferencesContainer.style.display == ""){
     preferencesContainer.style.display = "flex";
   }else{
     preferencesContainer.style.display = "none";
