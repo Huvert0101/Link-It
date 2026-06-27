@@ -313,6 +313,7 @@ iframe{
   top: 50vh;
   background: black;
   padding: 1vw;
+  border-radius: 1vw;
 }
 .preferencesColumnLeft{
   display: flex;
