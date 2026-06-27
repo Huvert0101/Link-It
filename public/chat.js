@@ -72,6 +72,7 @@ let postTitle = document.getElementById("postTitle");
 let postDesc = document.getElementById("postDesc");
 let leftPanel = document.querySelector(".left");
 let preferencesUser = document.getElementById("preferencesUser");
+let preferencesContainer = document.querySelector(".preferencesContainer");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -660,6 +661,11 @@ socket.on('newPostRes', (post)=>{
 });
 
 btnProfile.onclick = () => {
+  if(preferencesContainer.style == "none"){
+    preferencesContainer.style.display = "flex";
+  }else{
+    preferencesContainer.style.display = "none";
+  }
   console.log("It's Working...");
 }
 

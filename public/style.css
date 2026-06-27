@@ -305,7 +305,7 @@ iframe{
     color: rgba(255, 255, 255, 0.95);
 }
 .preferencesContainer{
-  display: flex;
+  display: none;
   flex-direction: row;
   position: absolute;
   transform: translate(-50%, -50%);
@@ -315,7 +315,12 @@ iframe{
   padding: 1vw;
   border-radius: 1vw;
   color: white;
-  font-size: 1vw;
+  font-size: 2em;
+}
+.preferencesContainer button{
+  background: none;
+  border: none;
+  color: white;
 }
 .preferencesColumnLeft{
   display: flex;
