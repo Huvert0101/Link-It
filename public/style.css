@@ -327,6 +327,10 @@ iframe{
   color: white;
   font-size: 1.3em;
   padding: 10px;
+  transition: all ease 0.3s;
+}
+.preferencesContainer button:hover{
+  background: #0d0d0d;
 }
 .preferencesColumnLeft{
   display: flex;
