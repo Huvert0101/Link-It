@@ -335,6 +335,7 @@ iframe{
 .preferencesColumnLeft{
   display: flex;
   flex-direction: column;
+  border-right: 1px solid white;
 }
 .preferencesColumnRight{
   display: flex;
