@@ -677,7 +677,7 @@ btnPrPanels.onclick = () =>{
     btnPrPanels.classList.add("activePreference");
     lastPr.classList.remove("activePreference");
     lastPr = btnPrPanels;
-    preferencesDispay.innerHTML = '';
+    preferencesDisplay.innerHTML = '';
   }
 }
 btnPrAccount.click();
