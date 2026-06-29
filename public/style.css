@@ -61,6 +61,12 @@ body{
 #socialpostform button{
   padding: 5px;
 }
+#preferencesDisplay{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .msgPanelTop{
     padding-left: 20px;
     background: black;

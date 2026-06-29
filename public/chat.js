@@ -75,6 +75,7 @@ let preferencesUser = document.getElementById("preferencesUser");
 let preferencesContainer = document.querySelector(".preferencesContainer");
 let btnPrAccount = document.getElementById("prAccount");
 let btnPrPanels = document.getElementById("prPanels");
+let preferencesDisplay = document.getElementById("preferencesDisplay");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -677,6 +678,16 @@ btnPrPanels.onclick = () =>{
     lastPr.classList.remove("activePreference");
     lastPr = btnPrPanels;
   }
+}
+btnPrAccount.click();
+btnPrAccount.onclick = () =>{
+  if(btnPrAccount.classList.contains("activePreference")) return;
+  lastPr.classList.remove("activePreference");
+  lastPr = btnPrAccount;
+  preferencesDisplay.innerHTML = '';
+  let spanUser = document.createElement("span");
+  spanUser.innerText = "User: "+newUser;
+  preferencesDisplay.appendChild(spanUser);
 }
 
 btnFriends.onclick = async() => {
