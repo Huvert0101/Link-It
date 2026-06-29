@@ -328,9 +328,10 @@ iframe{
   padding: 10px;
   transition: all ease 0.3s;
   border-radius: 20px;
+  background: black;
 }
 .preferencesContainer button:hover{
-  background: #0d0d0d;
+  background: #0d0d0d!important;
 }
 .preferencesColumnLeft{
   display: flex;
@@ -342,7 +343,7 @@ iframe{
   flex-direction: column;
 }
 .activePreference{
-  background: #0d0d0d;
+  background: #0d0d0d!important;
 }
 #newWindow{
     padding: 2px;
