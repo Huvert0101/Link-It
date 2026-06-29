@@ -318,13 +318,14 @@ iframe{
   font-size: 1.6em;
 }
 .preferencesContainer h3{
+  font-size: 1.4em;
   padding: 10px;
 }
 .preferencesContainer button{
   background: none;
   border: none;
   color: white;
-  font-size: 1.6em;
+  font-size: 1.3em;
   padding: 10px;
 }
 .preferencesColumnLeft{
