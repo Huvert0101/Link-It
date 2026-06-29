@@ -73,6 +73,8 @@ let postDesc = document.getElementById("postDesc");
 let leftPanel = document.querySelector(".left");
 let preferencesUser = document.getElementById("preferencesUser");
 let preferencesContainer = document.querySelector(".preferencesContainer");
+let btnPrAccount = document.getElementById("prAccount");
+let btnPrPanels = document.getElementById("prPanels");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -665,6 +667,15 @@ btnProfile.onclick = () => {
     preferencesContainer.style.display = "flex";
   }else{
     preferencesContainer.style.display = "none";
+  }
+}
+let lastPr = btnPrAccount;
+btnPrPanels.onclick = () =>{
+  if(btnPrPanels.classList.contains("activePreference")) return;
+  else{
+    btnPrPanels.classList.add("activePreference");
+    lastPr.classList.remove("activePreference");
+    lastPr = btnPrPanels;
   }
 }
 
