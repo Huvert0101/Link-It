@@ -677,11 +677,13 @@ btnPrPanels.onclick = () =>{
     btnPrPanels.classList.add("activePreference");
     lastPr.classList.remove("activePreference");
     lastPr = btnPrPanels;
+    preferencesDispay.innerHTML = '';
   }
 }
 btnPrAccount.click();
 btnPrAccount.onclick = () =>{
   if(btnPrAccount.classList.contains("activePreference")) return;
+  btnPrAccount.classList.add("activePreference");
   lastPr.classList.remove("activePreference");
   lastPr = btnPrAccount;
   preferencesDisplay.innerHTML = '';
