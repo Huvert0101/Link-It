@@ -698,7 +698,7 @@ btnPrPanels.onclick = () =>{
     preferencesDisplay.appendChild(subTitle);
     preferencesDisplay.appendChild(div);
     inputRangeOpacityAll.oninput = () =>{
-      leftPanel.style.opacity = inputRangeOpacity.value;
+      leftPanel.style.opacity = inputRangeOpacityAll.value;
       console.log(inputRangeOpacityAll.value);
     }
   }
