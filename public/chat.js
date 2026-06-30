@@ -680,6 +680,8 @@ btnPrPanels.onclick = () =>{
     lastPr = btnPrPanels;
     preferencesDisplay.innerHTML = '';
     preferencesTitle.innerText = "Panels";
+    let subTitle = document.createElement("h3");
+    subTitle.innerText = "Opacity";
   }
 }
 btnPrAccount.click();
