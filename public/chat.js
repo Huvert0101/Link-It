@@ -712,8 +712,10 @@ btnPrAccount.onclick = () =>{
   preferencesTitle.innerText = "Account";
 }
 
-inputRangeOpacityAll.onChange = () =>{
-  console.log(inputRangeOpacityAll.value);
+if(inputRangeOpacityAll != "undefined"){
+  inputRangeOpacityAll.onChange = () =>{
+    console.log(inputRangeOpacityAll.value);
+  }
 }
 
 btnFriends.onclick = async() => {
