@@ -712,8 +712,8 @@ btnPrAccount.onclick = () =>{
   preferencesTitle.innerText = "Account";
 }
 
-if(inputRangeOpacityAll != "undefined"){
-  inputRangeOpacityAll.onChange = () =>{
+if(inputRangeOpacityAll){
+  inputRangeOpacityAll.oninput= () =>{
     console.log(inputRangeOpacityAll.value);
   }
 }
