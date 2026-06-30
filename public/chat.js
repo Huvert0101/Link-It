@@ -77,6 +77,7 @@ let btnPrAccount = document.getElementById("prAccount");
 let btnPrPanels = document.getElementById("prPanels");
 let preferencesDisplay = document.getElementById("preferencesDisplay");
 let preferencesTitle = document.getElementById("preferencesTitle");
+let inputRangeOpacityAll = document.getElementById("inputRangeOpacityAll");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -680,16 +681,18 @@ btnPrPanels.onclick = () =>{
     lastPr = btnPrPanels;
     preferencesDisplay.innerHTML = '';
     preferencesTitle.innerText = "Panels";
-    let subTitle = document.createElement("h5");
+    let subTitle = document.createElement("h4");
     subTitle.innerText = "Opacity";
     let div = document.createElement("div");
     let label = document.createElement("span");
     label.innerText = "All panels";
     let inputRangeAll = document.createElement("input");
+    inputRangeAll.id = "inputRangeOpacityAll";
     inputRangeAll.type = "range";
     inputRangeAll.min = "0";
-    inputRangeAll.max= "1";
-    inputRangeAll.step= "0.01";
+    inputRangeAll.max = "1";
+    inputRangeAll.step = "0.01";
+    inputRangeAll.value = "0.5";
     div.appendChild(label);	
     div.appendChild(inputRangeAll);	
     preferencesDisplay.appendChild(subTitle);
@@ -707,6 +710,10 @@ btnPrAccount.onclick = () =>{
   spanUser.innerText = "User: "+newUser;
   preferencesDisplay.appendChild(spanUser);
   preferencesTitle.innerText = "Account";
+}
+
+inputRangeOpacityAll.onChange = () =>{
+  console.log(inputRangeOpacityAll.value);
 }
 
 btnFriends.onclick = async() => {
