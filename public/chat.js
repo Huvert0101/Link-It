@@ -693,13 +693,16 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.max = "1";
     inputRangeOpacityAll.step = "0.01";
     inputRangeOpacityAll.value = "0.5";
+    let opacityInfoLabel = document.createElement("span");
     div.appendChild(label);	
     div.appendChild(inputRangeOpacityAll);	
+    div.appendChild(opacityInfoLabel);
     preferencesDisplay.appendChild(subTitle);
     preferencesDisplay.appendChild(div);
     inputRangeOpacityAll.oninput = () =>{
       leftPanel.style.opacity = inputRangeOpacityAll.value;
-      menu.style.opacity = inputRangeOpacityAll.value;
+      opacityInfoLabel.innerText = inputRangeOpacityAll.value;
+      menu.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
   }
