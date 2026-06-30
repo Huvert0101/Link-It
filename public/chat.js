@@ -697,6 +697,9 @@ btnPrPanels.onclick = () =>{
     div.appendChild(inputRangeOpacityAll);	
     preferencesDisplay.appendChild(subTitle);
     preferencesDisplay.appendChild(div);
+    inputRangeOpacityAll.oninput = () =>{
+      console.log(inputRangeOpacityAll.value);
+    }
   }
 }
 btnPrAccount.click();
@@ -710,12 +713,6 @@ btnPrAccount.onclick = () =>{
   spanUser.innerText = "User: "+newUser;
   preferencesDisplay.appendChild(spanUser);
   preferencesTitle.innerText = "Account";
-}
-
-if(inputRangeOpacityAll){
-  inputRangeOpacityAll.oninput= () =>{
-    console.log(inputRangeOpacityAll.value);
-  }
 }
 
 btnFriends.onclick = async() => {
