@@ -680,9 +680,20 @@ btnPrPanels.onclick = () =>{
     lastPr = btnPrPanels;
     preferencesDisplay.innerHTML = '';
     preferencesTitle.innerText = "Panels";
-    let subTitle = document.createElement("h3");
+    let subTitle = document.createElement("h5");
     subTitle.innerText = "Opacity";
+    let div = document.createElement("div");
+    let label = document.createElement("span");
+    label.innerText = "All panels";
+    let inputRangeAll = document.createElement("input");
+    inputRangeAll.type = "range";
+    inputRangeAll.min = "0";
+    inputRangeAll.max= "1";
+    inputRangeAll.step= "0.01";
+    div.appendChild(label);	
+    div.appendChild(inputRangeAll);	
     preferencesDisplay.appendChild(subTitle);
+    preferencesDisplay.appendChild(div);
   }
 }
 btnPrAccount.click();
