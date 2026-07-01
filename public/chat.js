@@ -702,7 +702,7 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.oninput = () =>{
       menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
-      leftPanel.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
+      output.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
   }
