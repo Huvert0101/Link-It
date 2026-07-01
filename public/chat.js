@@ -695,6 +695,7 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.step = "0.01";
     inputRangeOpacityAll.value = "0.5";
     let opacityInfoLabel = document.createElement("span");
+    opacityInfoLabel.innerText = "0.5";
     div.appendChild(label);	
     div.appendChild(inputRangeOpacityAll);	
     div.appendChild(opacityInfoLabel);
@@ -704,6 +705,7 @@ btnPrPanels.onclick = () =>{
       menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
       msgPanelTop.style.opacity = inputRangeOpacityAll.value;
+      plugin2.style.opacity = inputRangeOpacityAll.value;
       msgBar.style.opacity = inputRangeOpacityAll.value;
       plugin.style.opacity = inputRangeOpacityAll.value;
       output.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
