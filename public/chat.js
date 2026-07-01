@@ -705,6 +705,7 @@ btnPrPanels.onclick = () =>{
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
       msgPanelTop.style.opacity = inputRangeOpacityAll.value;
       msgBar.style.opacity = inputRangeOpacityAll.value;
+      plugin.style.opacity = inputRangeOpacityAll.value;
       output.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
