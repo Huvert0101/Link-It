@@ -700,9 +700,9 @@ btnPrPanels.onclick = () =>{
     preferencesDisplay.appendChild(subTitle);
     preferencesDisplay.appendChild(div);
     inputRangeOpacityAll.oninput = () =>{
-      leftPanel.style.opacity = inputRangeOpacityAll.value;
+      menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
-      menu.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
+      leftPanel.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
   }
