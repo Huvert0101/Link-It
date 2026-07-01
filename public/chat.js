@@ -673,6 +673,7 @@ btnProfile.onclick = () => {
   }
 }
 let lastPr = btnPrAccount;
+let lastOpacity = 0.5;
 let inputRangeOpacityAll;
 btnPrPanels.onclick = () =>{
   if(btnPrPanels.classList.contains("activePreference")) return;
@@ -693,15 +694,16 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.min = "0";
     inputRangeOpacityAll.max = "1";
     inputRangeOpacityAll.step = "0.01";
-    inputRangeOpacityAll.value = "0.5";
+    inputRangeOpacityAll.value = lastOpacity;
     let opacityInfoLabel = document.createElement("span");
-    opacityInfoLabel.innerText = "0.5";
+    opacityInfoLabel.innerText = lastOpacity;
     div.appendChild(label);	
     div.appendChild(inputRangeOpacityAll);	
     div.appendChild(opacityInfoLabel);
     preferencesDisplay.appendChild(subTitle);
     preferencesDisplay.appendChild(div);
     inputRangeOpacityAll.oninput = () =>{
+      lastOpacity = inputRangeOpacityAll.value;
       menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
       msgPanelTop.style.opacity = inputRangeOpacityAll.value;
