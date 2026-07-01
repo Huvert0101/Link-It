@@ -703,8 +703,8 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.oninput = () =>{
       menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
-      msgPanelTop.innerText = inputRangeOpacityAll.value;
-      msgBar.innerText = inputRangeOpacityAll.value;
+      msgPanelTop.style.opacity = inputRangeOpacityAll.value;
+      msgBar.style.opacity = inputRangeOpacityAll.value;
       output.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
