@@ -318,6 +318,7 @@ iframe{
   transform: translate(-50%, -50%);
   left: 50vw;
   top: 25vh;
+  width: 50vw;
   background: black;
   padding: 1vw;
   border-radius: 1vw;
@@ -347,6 +348,7 @@ iframe{
 }
 .preferencesColumnRight{
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 .activePreference{
