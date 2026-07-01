@@ -726,6 +726,8 @@ btnPrAccount.onclick = () =>{
   spanUser.innerText = "User: "+newUser;
   let logoutDiv = document.createElement("div");
   logoutDiv.style.width = "100%";
+  logoutDiv.style.display = "flex";
+  logoutDiv.style.justifyContent = "end";
   let logoutIcon = document.createElement("i");
   logoutIcon.classList.add("bx", "bx-arrow-out-right-square-half");
   logoutIcon.style.color = "#ffffff";
