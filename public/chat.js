@@ -724,7 +724,18 @@ btnPrAccount.onclick = () =>{
   preferencesDisplay.innerHTML = '';
   let spanUser = document.createElement("span");
   spanUser.innerText = "User: "+newUser;
+  let logoutDiv = document.createElement("div");
+  logoutDiv.style.width = "100%";
+  let logoutIcon = document.createElement("i");
+  logoutIcon.classlist.add("bx", "bx-arrow-out-right-square-half");
+  logoutIcon.style.color = "#ffffff";
+  let logoutLink = document.createElement("a");
+  logoutLink.href = "/logout";
+  logoutLink.appendChild(logoutIcon);
+  logoutLink.style.textAlign = "center";
+  logoutDiv.appendChild(logoutLink);
   preferencesDisplay.appendChild(spanUser);
+  preferencesDisplay.appendChild(logoutDiv);
   preferencesTitle.innerText = "Account";
 }
 
