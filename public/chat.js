@@ -77,6 +77,7 @@ let btnPrAccount = document.getElementById("prAccount");
 let btnPrPanels = document.getElementById("prPanels");
 let preferencesDisplay = document.getElementById("preferencesDisplay");
 let preferencesTitle = document.getElementById("preferencesTitle");
+let msgBar = document.querySelector(".messagebar");
 const URL = window.location;
 const API_URL = "http://linkit1.duckdns.org";
 let ventanaActiva = null;
@@ -702,6 +703,8 @@ btnPrPanels.onclick = () =>{
     inputRangeOpacityAll.oninput = () =>{
       menu.style.opacity = inputRangeOpacityAll.value;
       opacityInfoLabel.innerText = inputRangeOpacityAll.value;
+      msgPanelTop.innerText = inputRangeOpacityAll.value;
+      msgBar.innerText = inputRangeOpacityAll.value;
       output.style.backgroundColor = `rgba(0, 0, 0, ${inputRangeOpacityAll.value})`;
       console.log(inputRangeOpacityAll.value);
     }
