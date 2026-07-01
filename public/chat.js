@@ -715,7 +715,6 @@ btnPrPanels.onclick = () =>{
     }
   }
 }
-btnPrAccount.click();
 btnPrAccount.onclick = () =>{
   if(btnPrAccount.classList.contains("activePreference")) return;
   btnPrAccount.classList.add("activePreference");
@@ -740,7 +739,7 @@ btnPrAccount.onclick = () =>{
   preferencesDisplay.appendChild(logoutDiv);
   preferencesTitle.innerText = "Account";
 }
-
+btnPrAccount.click();
 btnFriends.onclick = async() => {
   btnFolders.style.display = "block";
   btnFriends.style.display = "none";
