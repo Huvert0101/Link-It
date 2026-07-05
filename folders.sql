@@ -26,3 +26,13 @@ create table backgrounds(
     bg_src varchar(200) NOT NULL,
     active tinyint NOT NULL
 );
+
+CREATE TABLE posts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user varchar(200) NOT NULL, 
+    title VARCHAR(255) NULL,
+    descr TEXT NULL,
+    metadata JSON NULL, 
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT chk_contenido CHECK (title IS NOT NULL OR descr IS NOT NULL)
+);

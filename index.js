@@ -71,6 +71,10 @@ async function createFolder(usr, folderName){
     const [res] = await conn.query("INSERT INTO folders(user, folder) VALUES('"+usr+"', '"+folderName+"')");
     return res;
 }
+async function createPublicPost(usr, title, desc){
+    const [res] = await conn.query("INSERT INTO posts(user, title, desc) VALUES('"+usr+"', '"+title+"', '"+desc+"')")");
+  return res;
+}
 async function delFol(usr, folderName){
     const [res] = await conn.query("DELETE FROM folders WHERE user ='" + usr + "' AND folder ='" + folderName + "'");
     //delete the messages form that folder as well
@@ -469,6 +473,7 @@ io.on('connection', (socket) => {
     });
     socket.on('newPost', (post)=>{
       io.emit('newPostRes', post);
+      createPublicPost(post.uploader, post.title, post.desc);
       console.log(post.uploader);
       console.log(post.title);
       console.log(post.desc);
