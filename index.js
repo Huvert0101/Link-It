@@ -72,7 +72,7 @@ async function createFolder(usr, folderName){
     return res;
 }
 async function createPublicPost(usr, title, desc){
-    const [res] = await conn.query("INSERT INTO posts(user, title, desc) VALUES('"+usr+"', '"+title+"', '"+desc+"')")");
+    const [res] = await conn.query("INSERT INTO posts(user, title, desc) VALUES('"+usr+"', '"+title+"', '"+desc+"')");
   return res;
 }
 async function delFol(usr, folderName){
