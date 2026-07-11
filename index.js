@@ -160,7 +160,7 @@ app.post('/login', (req, res)=>{
                 res.cookie("username", newUser,{maxAge: 1500000000});
                 res.cookie("password", newPassword, {maxAge: 1500000000});
                 const payload = {
-                  username: newUser;
+                  username: newUser
                 };
                 const token = jwt.sign(payload, SECRET_KEY, {expiresIn: '7d'});
                 res.cookie("mi_token", token, { maxAge: 150000000, httpOnly:true});
