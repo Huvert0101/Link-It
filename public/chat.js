@@ -501,7 +501,9 @@ let username = getCookie("username");
 let token = getCookie("mi_token");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
+console.log("token obtenido: "+token);
 token = token.replace(/\+|%20/g, " ");
+console.log("token curado: "+token);
 btnProfile.innerHTML = newUser;
 preferencesUser.innerText = newUser;
 
