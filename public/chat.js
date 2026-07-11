@@ -121,7 +121,7 @@ btnPublicSection.onclick = async ()=>{
   }else{
     publicOpened = true;
     if(!beenOpened){
-      const reponse = await fetch('/getPosts',{
+      const response = await fetch('/getPosts',{
         headers:{'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'}
       }); 
       const posts = await response.json();
