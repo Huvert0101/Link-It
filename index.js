@@ -12,6 +12,7 @@ import express from 'express'
 import compression from 'compression';
 import { conn } from './db.js'
 import FormData from 'form-data';
+import jwt from 'jsonwebtoken';
 const app = express();
 //settings
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(compression({
     brotli: {enabled: true, zlib: {}}
 }));
 app.set('port', process.env.PORT || 3000);
+SECRET_KEY = process.env.SECRET_KEY;
 //static files;
 const {json} = bodyParser;
 app.use(express.static(path.join(__dirname,'public')));
@@ -157,6 +159,11 @@ app.post('/login', (req, res)=>{
             if(newUser == result[0].user && newPassword == result[0].password){
                 res.cookie("username", newUser,{maxAge: 1500000000});
                 res.cookie("password", newPassword, {maxAge: 1500000000});
+                const payload = {
+                  username: newUser;
+                };
+                const token = jwt.sign(payload, SECRET_KEY, {expiresIn: '7d'});
+                res.cookie("mi_token", token, { maxAge: 150000000, httpOnly:true});
                 res.redirect("/");
             }else
                 res.send("User or password are incorrect");
@@ -212,6 +219,26 @@ app.get('/api/files/:filename', async (req, res) => {
         console.error('Error al visualizar archivo:', error.message);
         res.status(404).send('Archivo no encontrado o servidor local offline.');
     }
+});
+function verifyToken (req, res, next) {
+  const authHeader = req.headers['authorization'];
+  if(!authHeader){
+    return res.status(403).json({error: 'Access denied, no token sent'});
+  }
+  const token = authHeader.split(' ')[1];
+  jwt.verify(token, SECRET_KEY, (err, decodedData)=>{
+    if(err){
+      return res.status(401).json({error: "Invalid or expired Token"});
+    }
+    req.usuario = decodedData;
+    console.log("User: "+req.usuario.username+" has requested posts");
+    next();
+  })
+
+}
+app.get('/getPosts', verifyToken, async (req, res) => {
+  const [data] = await conn.query("SELECT * FROM posts;");
+  res.json(data);
 });
 app.get('/getMusic', async (req, res) => {
     //const musicPath = path.join(__dirname, 'public', 'files');

@@ -111,7 +111,8 @@ btnIframe.onclick = () => {
 }
 
 let publicOpened = false;
-btnPublicSection.onclick = ()=>{
+let beenOpened = false;
+btnPublicSection.onclick = async ()=>{
   if(publicOpened){
     publicOpened = false;
 	  plugin2.style.scale = 0;
@@ -119,6 +120,14 @@ btnPublicSection.onclick = ()=>{
     setTimeout(() => {plugin2.style.position = "absolute";}, 100);
   }else{
     publicOpened = true;
+    if(!beenOpened){
+      const reponse = await fetch('/getPosts',{
+        headers:{'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'}
+      }); 
+      const posts = await response.json();
+      console.log(posts);
+    }
+    beenOpened = true;
 	  plugin2.style.scale = 1;
     plugin2.style.zIndex = 1;
 	  plugin2.style.position = "relative";
@@ -488,8 +497,10 @@ function getCookie(cname) {
 }
 
 let username = getCookie("username");
+let token = getCookie("mi_token");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
+token = token.replace(/\+|%20/g, " ");
 btnProfile.innerHTML = newUser;
 preferencesUser.innerText = newUser;
 
