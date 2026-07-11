@@ -21,7 +21,7 @@ app.use(compression({
     brotli: {enabled: true, zlib: {}}
 }));
 app.set('port', process.env.PORT || 3000);
-SECRET_KEY = process.env.SECRET_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 //static files;
 const {json} = bodyParser;
 app.use(express.static(path.join(__dirname,'public')));
