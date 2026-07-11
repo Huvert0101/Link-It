@@ -177,6 +177,7 @@ async function getFoldersFriends(user){
 app.get('/logout', (req, res)=>{
     res.clearCookie("username");
     res.clearCookie("password");
+    res.clearCookie("mi_token");
     res.redirect("/");
 });
 app.post('/delFol', jsonParser, (req, res)=>{
