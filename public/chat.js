@@ -127,6 +127,23 @@ btnPublicSection.onclick = async ()=>{
       }); 
       const posts = await response.json();
       console.log(posts);
+      for(let i=0; i<posts.length; i++){
+        let postDiv = document.createElement("div");
+        let uploaderSpan = document.createElement("span");
+        let titleSpan = document.createElement("span");
+        let descrSpan = document.createElement("span");
+        uploaderSpan.innerText = posts[i].user;
+        uploaderSpan.id = "uploader";
+        titleSpan.innerText = posts[i].title;
+        descrSpan.innerText = posts[i].descr;
+        postDiv.appendChild(uploaderSpan);
+        postDiv.appendChild(titleSpan);
+        postDiv.appendChild(descrSpan);
+        plugin2.appendChild(postDiv);
+        console.log(posts[i].user);
+        console.log(posts[i].title);
+        console.log(posts[i].descr);
+      }
     }
     beenOpened = true;
 	  plugin2.style.scale = 1;
@@ -501,9 +518,7 @@ let username = getCookie("username");
 let token = getCookie("mi_token");
 if(username == '') window.location.href = '/welcome';
 const newUser = username.replace(/\+|%20/g, " ");
-console.log("token obtenido: "+token);
 token = token.replace(/\+|%20/g, " ");
-console.log("token curado: "+token);
 btnProfile.innerHTML = newUser;
 preferencesUser.innerText = newUser;
 
