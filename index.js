@@ -163,7 +163,7 @@ app.post('/login', (req, res)=>{
                   username: newUser
                 };
                 const token = jwt.sign(payload, SECRET_KEY, {expiresIn: '7d'});
-                res.cookie("mi_token", token, { maxAge: 150000000, httpOnly:true});
+                res.cookie("mi_token", token, { maxAge: 150000000, httpOnly:false});
                 res.redirect("/");
             }else
                 res.send("User or password are incorrect");
